@@ -1,3 +1,6 @@
+---
+layout: none
+---
 <!doctype html>
 <html lang="en">
 <head>
@@ -15,9 +18,6 @@
     footer{margin-top:2rem;color:#666;font-size:.9rem}
   </style>
 </head>
----
-layout: none
----
 <body>
   <div class="container">
     <header>
@@ -37,8 +37,9 @@ layout: none
       <h2>Get involved / Join waiting list</h2>
       <p>We collect email addresses from interested users. Click the button below to open our sign-up form.</p>
 
-  <!-- The button label and form URL are provided via _config.yml (site.site_link and site.form_url) -->
-  <a class="form-link" href="{{ site.form_url }}" target="_blank" rel="noopener">Open sign-up form — {{ site.site_link }}</a>
+  <!-- The button label and form URL are provided via _config.yml (site.site_link and site.form_url).
+    The label falls back to site.title or stugs.github.io if site.site_link is not set. -->
+  <a class="form-link" href="{{ site.form_url }}" target="_blank" rel="noopener">Open sign-up form — {{ site.site_link | default: site.title | default: "stugs.github.io" }}</a>
 
       <p style="margin-top:.75rem;color:#444;font-size:.95rem">Prefer to embed the form here? Replace the link above with your form's embed iframe (instructions in README).</p>
     </section>

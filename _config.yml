@@ -1,4 +1,5 @@
 # Site configuration for GitHub Pages (Jekyll)
 # Edit these values to change the button label and the form link
 title: stugs
+site_link: "stugs.github.io"
 form_url: "https://forms.gle/53nCaub9a3BynUGRA"
