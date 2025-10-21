@@ -37,6 +37,11 @@ Customization
 
 - Edit the About text in `index.html` (the paragraph with id `about-text`).
 - Replace the site title in the HTML <title> and header.
+- Change the button label and form link in `_config.yml`:
+   - `site_link` — short label appended to the button (default: `stugs.com`).
+   - `form_url` — the Google Form share URL or other sign-up link.
+
+If you prefer `stugs.io` instead of `stugs.com`, open `_config.yml` and change `site_link: "stugs.com"` to `site_link: "stugs.io"`.
 
 Need help?
 

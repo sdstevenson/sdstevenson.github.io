@@ -15,6 +15,9 @@
     footer{margin-top:2rem;color:#666;font-size:.9rem}
   </style>
 </head>
+---
+layout: none
+---
 <body>
   <div class="container">
     <header>
@@ -34,8 +37,8 @@
       <h2>Get involved / Join waiting list</h2>
       <p>We collect email addresses from interested users. Click the button below to open our sign-up form.</p>
 
-      <!-- Replace the href with your Google Form URL (or keep as placeholder) -->
-      <a class="form-link" href="https://forms.gle/REPLACE_WITH_YOUR_GOOGLE_FORM" target="_blank" rel="noopener">Open sign-up form</a>
+  <!-- The button label and form URL are provided via _config.yml (site.site_link and site.form_url) -->
+  <a class="form-link" href="{{ site.form_url }}" target="_blank" rel="noopener">Open sign-up form — {{ site.site_link }}</a>
 
       <p style="margin-top:.75rem;color:#444;font-size:.95rem">Prefer to embed the form here? Replace the link above with your form's embed iframe (instructions in README).</p>
     </section>
