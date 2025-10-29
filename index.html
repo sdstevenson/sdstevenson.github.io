@@ -6,45 +6,49 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Sttugs — Autonomous Hangar Management</title>
   <style>
-    body {font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; padding:2rem; color:#111}
+    body {font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; padding:2rem; color:#111; background:#fff}
     .container {max-width:760px; margin:0 auto}
     header {display:flex; align-items:center; gap:1rem}
     h1 {margin:0}
-    p.lead {color:#444}
-    .card {background:#f9f9fb;border:1px solid #eee;padding:1rem;border-radius:8px;margin-top:1rem}
-    .form-link {display:inline-block;margin-top:1rem;padding:.6rem 1rem;background:#0066cc;color:white;border-radius:6px;text-decoration:none}
+    .tagline {margin-left:auto;color:#666;font-weight:600}
+    p.lead {color:#333;margin-top:.6rem}
+    .card {background:#f7f7fb;border:1px solid #e8e8ee;padding:1rem;border-radius:10px;margin-top:1rem}
+    .form-link, .schedule-link {display:inline-block;margin-top:1rem;padding:.6rem 1rem;background:#005bb5;color:white;border-radius:8px;text-decoration:none;font-weight:600}
+    .form-link:hover, .schedule-link:hover {background:#004494}
     footer{margin-top:2rem;color:#666;font-size:.9rem}
+    .muted {color:#666}
+    .small {font-size:.95rem}
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <h1>Stugs</h1>
-      <div style="margin-left:auto;color:#888">Autonomous hangar management</div>
+      <h1>Sttugs</h1>
+      <div class="tagline">Autonomous hangar management</div>
     </header>
 
-    <p class="lead">Improving FBO operations by auto-stacking aircraft and optimizing hangar flow.</p>
+    <p class="lead small">Automated hangar stacking that saves time, reduces costs, and minimizes collision risk for FBOs and aircraft owners.</p>
 
     <section class="card" id="about">
       <h2>About</h2>
-      <p id="about-text">We build a fully autonomous hangar management system that safely and efficiently stores and retrieves aircraft in FBO hangars.
-        This system greatly reduces hangar operation costs by reducing hangar stacking time, maximizing space utilization, and eliminating collision risk.</p>
+      <p id="about-text" class="small">Stugs builds an autonomous hangar management system that optimizes aircraft placement and moves aircraft using fully autonomous robotic tugs. The system lowers operating costs by increasing usable hangar capacity and eliminating the risk of collisions.</p>
     </section>
 
     <section class="card" id="schedule" style="margin-top:1rem">
-      <h2>Schedule a time to meet.</h2>
-      <p>Click the button below to schedule some time to discuss how this solution can be used in your hangar operations.</p>
-      <a class="form-link" href="https://calendar.app.google/tNyik6SakFDN7dRP6" target="_blank" rel="noopener">Open scheduling page</a>
+      <h2>Schedule a meeting</h2>
+      <p class="small">Discuss how Sttugs can optimize your hangar operations. Click below to pick a time.</p>
+      <a class="schedule-link" href="https://calendar.app.google/tNyik6SakFDN7dRP6" target="_blank" rel="noopener">Open scheduling page</a>
     </section>
 
-    <!-- <section class="card" id="contact" style="margin-top:1rem">
-      <h2>Get involved / Join waiting list</h2>
-      <p>We collect email addresses from interested users. Click the button below to open our sign-up form.</p>
-      <a class="form-link" href="https://forms.gle/53nCaub9a3BynUGRA" target="_blank" rel="noopener">Open sign-up form</a>
-    </section> -->
+    <section class="card" id="contact" style="margin-top:1rem">
+      <h2>Join the waiting list</h2>
+      <p class="small">Interested in early access or pilots? Provide your email and we'll keep you updated.</p>
+      <a class="form-link" href="https://forms.gle/53nCaub9a3BynUGRA" target="_blank" rel="noopener">Join waiting list</a>
+      <p class="small" style="margin-top:.5rem">Prefer to contact directly? Email Samir: <a href="mailto:samir.stevenson@sttugs.com">samir.stevenson@sttugs.com</a></p>
+    </section>
 
     <footer>
-      <p><span id="year"></span> Stugs • Built for FBO efficiency</p>
+      <p><span id="year"></span> Sttugs • Built for FBO efficiency</p>
     </footer>
   </div>
 
