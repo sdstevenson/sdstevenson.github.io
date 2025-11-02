@@ -8,6 +8,8 @@
   <style>
     body {font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; padding:2rem; color:#111; background:#fff}
     .container {max-width:760px; margin:0 auto}
+    .layout {display:grid; grid-template-columns: 1fr 360px; gap:2rem; align-items:start}
+    @media (max-width:1000px){ .layout{grid-template-columns:1fr} .roi-panel{order:99} }
     header {display:flex; align-items:center; gap:1rem}
     h1 {margin:0}
     .tagline {margin-left:auto;color:#666;font-weight:600}
@@ -22,6 +24,7 @@
 </head>
 <body>
   <div class="container">
+    <!-- header and short lead sit above the two-column layout -->
     <header>
       <h1>Sttugs</h1>
       <div class="tagline">Autonomous hangar management</div>
@@ -29,22 +32,77 @@
 
     <p class="lead small">Automated hangar stacking that saves time, reduces costs, and minimizes collision risk for FBOs and aircraft owners.</p>
 
-    <section class="card" id="about">
-      <h2>About</h2>
-      <p id="about-text" class="small">Stugs builds an autonomous hangar management system that optimizes aircraft placement and moves aircraft using fully autonomous robotic tugs. The system lowers operating costs by increasing usable hangar capacity and eliminating the risk of collisions.</p>
-    </section>
+    <div class="layout">
+      <main class="main">
+        <section class="card" id="about">
+          <h2>About</h2>
+          <p id="about-text" class="small">Stugs builds an autonomous hangar management system that optimizes aircraft placement and moves aircraft using fully autonomous robotic tugs. The system lowers operating costs by increasing usable hangar capacity and eliminating the risk of collisions.</p>
+        </section>
 
-    <section class="card" id="schedule" style="margin-top:1rem">
-      <h2>Schedule a meeting</h2>
-      <p class="small">Discuss how Sttugs can optimize your hangar operations. Click below to pick a time.</p>
-      <a class="schedule-link" href="https://calendar.app.google/tNyik6SakFDN7dRP6" target="_blank" rel="noopener">Open scheduling page</a>
-    </section>
+        <section class="card" id="schedule" style="margin-top:1rem">
+          <h2>Schedule a meeting</h2>
+          <p class="small">Discuss how Sttugs can optimize your hangar operations. Click below to pick a time.</p>
+          <a class="schedule-link" href="https://calendar.app.google/tNyik6SakFDN7dRP6" target="_blank" rel="noopener">Open scheduling page</a>
+        </section>
 
-    <section class="card" id="contact" style="margin-top:1rem">
-      <h2>Join the waiting list</h2>
-      <p class="small">Interested in early access or pilots? Provide your email and we'll keep you updated.</p>
-  <a class="form-link" href="https://forms.gle/53nCaub9a3BynUGRA" target="_blank" rel="noopener">Join waiting list</a>
-    </section>
+        <section class="card" id="contact" style="margin-top:1rem">
+          <h2>Join the waiting list</h2>
+          <p class="small">Interested in early access or pilots? Provide your email and we'll keep you updated.</p>
+          <a class="form-link" href="https://forms.gle/53nCaub9a3BynUGRA" target="_blank" rel="noopener">Join waiting list</a>
+        </section>
+      </main>
+
+      <aside class="roi-panel card" aria-labelledby="roi-title">
+        <h2 id="roi-title">Your ROI</h2>
+        <div id="roi-value" style="font-size:1.6rem;font-weight:700;color:#0a7b2a;margin-bottom:.5rem">$0</div>
+        <div class="small muted" style="margin-bottom:1rem">Estimated annual benefit</div>
+
+        <div style="margin-bottom:1rem">
+          <label class="small">Hangar sqft: <strong id="hangarSqftLabel">40000</strong></label>
+          <input id="hangarSqft" type="range" min="1000" max="200000" step="1000" value="40000">
+        </div>
+
+        <div style="margin-bottom:1rem">
+          <label class="small">Current utilization %: <strong id="currentUtilLabel">110</strong></label>
+          <input id="currentUtil" type="range" min="80" max="140" step="1" value="110">
+        </div>
+
+        <div style="margin-bottom:1rem">
+          <label class="small">Utilization boost %: <strong id="utilBoostLabel">5</strong></label>
+          <input id="utilBoost" type="range" min="0" max="50" step="1" value="5">
+        </div>
+
+        <div style="margin-bottom:1rem">
+          <label class="small">Tenant rate (monthly $/sqft): <strong id="tenantRateLabel">1.50</strong></label>
+          <input id="tenantRate" type="range" min="0" max="10" step="0.1" value="1.5">
+        </div>
+
+        <hr>
+
+        <div style="margin-bottom:1rem">
+          <label class="small">People per stack: <strong id="peopleLabel">3</strong></label>
+          <input id="peoplePerStack" type="range" min="1" max="5" step="1" value="3">
+        </div>
+
+        <div style="margin-bottom:1rem">
+          <label class="small">Wage per hour ($): <strong id="wageLabel">25</strong></label>
+          <input id="wagePerHour" type="range" min="10" max="100" step="1" value="25">
+        </div>
+
+        <div style="margin-bottom:1rem">
+          <label class="small">Hours spent stacking per day: <strong id="timeLabel">4</strong></label>
+          <input id="timePerStack" type="range" min="0" max="12" step="0.5" value="4">
+        </div>
+
+        <hr>
+
+        <div class="small" style="margin-top:.5rem">Breakdown</div>
+        <ul class="small" id="breakdown" style="padding-left:1rem">
+          <li>Annual labor savings: <strong id="laborSaving">$0</strong></li>
+          <li>Annual additional revenue: <strong id="revenueGain">$0</strong></li>
+        </ul>
+      </aside>
+    </div>
 
     <footer>
       <p><span id="year"></span> Sttugs • Built for FBO efficiency</p>
@@ -52,7 +110,66 @@
   </div>
 
   <script>
+    // Year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Elements
+    const elems = {
+      hangarSqft: document.getElementById('hangarSqft'),
+      hangarSqftLabel: document.getElementById('hangarSqftLabel'),
+      currentUtil: document.getElementById('currentUtil'),
+      currentUtilLabel: document.getElementById('currentUtilLabel'),
+      utilBoost: document.getElementById('utilBoost'),
+      utilBoostLabel: document.getElementById('utilBoostLabel'),
+      tenantRate: document.getElementById('tenantRate'),
+      tenantRateLabel: document.getElementById('tenantRateLabel'),
+      peoplePerStack: document.getElementById('peoplePerStack'),
+      peopleLabel: document.getElementById('peopleLabel'),
+      wagePerHour: document.getElementById('wagePerHour'),
+      wageLabel: document.getElementById('wageLabel'),
+      timePerStack: document.getElementById('timePerStack'),
+      timeLabel: document.getElementById('timeLabel')
+    };
+
+    function fmt(n){ return '$' + n.toLocaleString(undefined,{maximumFractionDigits:0}); }
+
+    function update(){
+      const sqft = Number(elems.hangarSqft.value);
+      const curUtil = Number(elems.currentUtil.value);
+      const boost = Number(elems.utilBoost.value);
+      const tenant = Number(elems.tenantRate.value);
+      const people = Number(elems.peoplePerStack.value);
+      const wage = Number(elems.wagePerHour.value);
+      const hoursPerDay = Number(elems.timePerStack.value);
+      const days = 365;
+
+      elems.hangarSqftLabel.textContent = sqft.toLocaleString();
+      elems.currentUtilLabel.textContent = curUtil;
+      elems.utilBoostLabel.textContent = boost;
+      elems.tenantRateLabel.textContent = Number(tenant).toFixed(2);
+      elems.peopleLabel.textContent = people;
+      elems.wageLabel.textContent = wage;
+      elems.timeLabel.textContent = hoursPerDay;
+
+      // Labor savings: labor cost per year (people * wage * hours/day * days)
+      const annualLabor = people * wage * hoursPerDay * days;
+
+      // Revenue gain from utilization increase (allow >100%)
+      const newUtil = curUtil + boost;
+      const utilIncrease = Math.max(0, newUtil - curUtil) / 100; // fraction
+      const annualRevenue = sqft * utilIncrease * tenant * 12;
+
+      const total = Math.round(annualLabor + annualRevenue);
+
+      document.getElementById('laborSaving').textContent = fmt(Math.round(annualLabor));
+      document.getElementById('revenueGain').textContent = fmt(Math.round(annualRevenue));
+      document.getElementById('roi-value').textContent = fmt(total);
+    }
+
+    // wire events
+    Object.values(elems).forEach(el => { if(el && el.tagName === 'INPUT') el.addEventListener('input', update); });
+    // initial update
+    update();
   </script>
 </body>
 </html>
