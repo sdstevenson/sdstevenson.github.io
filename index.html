@@ -20,6 +20,23 @@
     footer{margin-top:2rem;color:#666;font-size:.9rem;text-align:center}
     .muted {color:#666}
     .small {font-size:.95rem}
+    /* fixed-width numeric input boxes to avoid layout shift when values change
+      use character-based width so boxes don't take more space than needed */
+    .numbox{width:6ch;min-width:48px;box-sizing:border-box;padding:2px 6px;font-family:menlo,monospace;font-size:0.92rem;text-align:right;border-radius:4px;border:1px solid #d0d0d8}
+    .numbox.small{width:4.2ch;min-width:36px}
+    .numbox.medium{width:6ch;min-width:45px}
+    .numbox.large{width:10ch;min-width:80px}
+    .numbox.xsmall{width:3ch;min-width:28px}
+    /* hide native number input spinners (Chrome, Edge, Safari, Firefox) */
+    input[type=number].numbox::-webkit-outer-spin-button,
+    input[type=number].numbox::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type=number].numbox {
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
   </style>
 </head>
 <body>
@@ -58,39 +75,34 @@
         <div class="small muted" style="margin-bottom:1rem">Estimated annual benefit</div>
 
         <div style="margin-bottom:1rem">
-          <label class="small">Hangar sqft: <strong id="hangarSqftLabel">40000</strong></label>
+          <label class="small">Hangar sqft: <input id="hangarSqftInput" class="numbox large" type="number" min="1000" max="200000" step="1000" value="40000"></label>
           <input id="hangarSqft" type="range" min="1000" max="200000" step="1000" value="40000">
         </div>
 
         <div style="margin-bottom:1rem">
-          <label class="small">Current utilization %: <strong id="currentUtilLabel">110</strong></label>
-          <input id="currentUtil" type="range" min="80" max="140" step="1" value="110">
+          <label class="small">Utilization boost %: <input id="utilBoostInput" class="numbox small" type="number" min="0" max="50" step="1" value="8"></label>
+          <input id="utilBoost" type="range" min="0" max="50" step="1" value="8">
         </div>
 
         <div style="margin-bottom:1rem">
-          <label class="small">Utilization boost %: <strong id="utilBoostLabel">5</strong></label>
-          <input id="utilBoost" type="range" min="0" max="50" step="1" value="5">
-        </div>
-
-        <div style="margin-bottom:1rem">
-          <label class="small">Tenant rate (monthly $/sqft): <strong id="tenantRateLabel">1.50</strong></label>
-          <input id="tenantRate" type="range" min="0" max="10" step="0.1" value="1.5">
+          <label class="small">Tenant rate (monthly $/sqft): <input id="tenantRateInput" class="numbox large" type="number" min="0" max="100" step="0.01" value="2.00"></label>
+          <input id="tenantRate" type="range" min="0" max="10" step="0.1" value="2.0">
         </div>
 
         <hr>
 
         <div style="margin-bottom:1rem">
-          <label class="small">People per stack: <strong id="peopleLabel">3</strong></label>
+          <label class="small">People per stack: <input id="peopleInput" class="numbox small" type="number" min="1" max="99" step="1" value="25"></label>
           <input id="peoplePerStack" type="range" min="1" max="5" step="1" value="3">
         </div>
 
         <div style="margin-bottom:1rem">
-          <label class="small">Wage per hour ($): <strong id="wageLabel">25</strong></label>
-          <input id="wagePerHour" type="range" min="10" max="100" step="1" value="25">
+          <label class="small">Wage per hour ($): <input id="wageInput" class="numbox small" type="number" min="0" max="99" step="1" value="25"></label>
+          <input id="wagePerHour" type="range" min="10" max="99" step="1" value="25">
         </div>
 
         <div style="margin-bottom:1rem">
-          <label class="small">Hours spent stacking per day: <strong id="timeLabel">4</strong></label>
+          <label class="small">Hours spent stacking per day: <input id="timeInput" class="numbox medium" type="number" min="0" max="12" step="0.5" value="4"></label>
           <input id="timePerStack" type="range" min="0" max="12" step="0.5" value="4">
         </div>
 
@@ -113,29 +125,27 @@
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Elements
+    // Elements (sliders + editable number inputs)
     const elems = {
       hangarSqft: document.getElementById('hangarSqft'),
-      hangarSqftLabel: document.getElementById('hangarSqftLabel'),
-      currentUtil: document.getElementById('currentUtil'),
-      currentUtilLabel: document.getElementById('currentUtilLabel'),
+      hangarSqftInput: document.getElementById('hangarSqftInput'),
+      // currentUtil removed
       utilBoost: document.getElementById('utilBoost'),
-      utilBoostLabel: document.getElementById('utilBoostLabel'),
+      utilBoostInput: document.getElementById('utilBoostInput'),
       tenantRate: document.getElementById('tenantRate'),
-      tenantRateLabel: document.getElementById('tenantRateLabel'),
+      tenantRateInput: document.getElementById('tenantRateInput'),
       peoplePerStack: document.getElementById('peoplePerStack'),
-      peopleLabel: document.getElementById('peopleLabel'),
+      peopleInput: document.getElementById('peopleInput'),
       wagePerHour: document.getElementById('wagePerHour'),
-      wageLabel: document.getElementById('wageLabel'),
+      wageInput: document.getElementById('wageInput'),
       timePerStack: document.getElementById('timePerStack'),
-      timeLabel: document.getElementById('timeLabel')
+      timeInput: document.getElementById('timeInput')
     };
 
     function fmt(n){ return '$' + n.toLocaleString(undefined,{maximumFractionDigits:0}); }
 
     function update(){
       const sqft = Number(elems.hangarSqft.value);
-      const curUtil = Number(elems.currentUtil.value);
       const boost = Number(elems.utilBoost.value);
       const tenant = Number(elems.tenantRate.value);
       const people = Number(elems.peoplePerStack.value);
@@ -143,20 +153,19 @@
       const hoursPerDay = Number(elems.timePerStack.value);
       const days = 365;
 
-      elems.hangarSqftLabel.textContent = sqft.toLocaleString();
-      elems.currentUtilLabel.textContent = curUtil;
-      elems.utilBoostLabel.textContent = boost;
-      elems.tenantRateLabel.textContent = Number(tenant).toFixed(2);
-      elems.peopleLabel.textContent = people;
-      elems.wageLabel.textContent = wage;
-      elems.timeLabel.textContent = hoursPerDay;
+      // sync number inputs with slider values (or input-only fields)
+      if(elems.hangarSqftInput) elems.hangarSqftInput.value = sqft;
+      if(elems.utilBoostInput) elems.utilBoostInput.value = boost;
+      if(elems.tenantRateInput) elems.tenantRateInput.value = Number(tenant).toFixed(2);
+      if(elems.peopleInput) elems.peopleInput.value = people;
+      if(elems.wageInput) elems.wageInput.value = wage;
+      if(elems.timeInput) elems.timeInput.value = Number(hoursPerDay).toFixed(1);
 
       // Labor savings: labor cost per year (people * wage * hours/day * days)
       const annualLabor = people * wage * hoursPerDay * days;
 
-      // Revenue gain from utilization increase (allow >100%)
-      const newUtil = curUtil + boost;
-      const utilIncrease = Math.max(0, newUtil - curUtil) / 100; // fraction
+      // Revenue gain from utilization boost (fraction)
+      const utilIncrease = Math.max(0, boost) / 100; // fraction
       const annualRevenue = sqft * utilIncrease * tenant * 12;
 
       const total = Math.round(annualLabor + annualRevenue);
@@ -166,8 +175,42 @@
       document.getElementById('roi-value').textContent = fmt(total);
     }
 
-    // wire events
-    Object.values(elems).forEach(el => { if(el && el.tagName === 'INPUT') el.addEventListener('input', update); });
+    // wire slider <-> number input pairs so either control updates the other
+    const pairs = [
+      ['hangarSqft','hangarSqftInput'],
+      ['utilBoost','utilBoostInput'],
+      ['tenantRate','tenantRateInput'],
+      ['peoplePerStack','peopleInput'],
+      ['wagePerHour','wageInput'],
+      ['timePerStack','timeInput']
+    ];
+
+    pairs.forEach(([s,i]) => {
+      const slider = document.getElementById(s);
+      const input = document.getElementById(i);
+      if(!slider || !input) return;
+      // for the hours/day pair, always show one decimal place in the input (e.g. 10 -> 10.0)
+      if(s === 'timePerStack'){
+        slider.addEventListener('input', () => { input.value = Number(slider.value).toFixed(1); update(); });
+      } else {
+        slider.addEventListener('input', () => { input.value = slider.value; update(); });
+      }
+      input.addEventListener('input', () => {
+        let v = Number(input.value);
+        if(isNaN(v)) return;
+        const min = Number(slider.min || -Infinity);
+        const max = Number(slider.max || Infinity);
+        if(v < min) v = min;
+        if(v > max) v = max;
+        slider.value = v;
+        update();
+      });
+      // initialize input to slider's current value; format hours/day with one decimal
+      if(s === 'timePerStack') input.value = Number(slider.value).toFixed(1); else input.value = slider.value;
+    });
+
+  // no input-only currentUtil field
+
     // initial update
     update();
   </script>
