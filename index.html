@@ -91,7 +91,7 @@
         </div>
 
         <div style="margin-bottom:1rem">
-          <label class="small">Tenant rate (monthly $/sqft): <input id="tenantRateInput" class="numbox large" type="number" min="0" max="100" step="0.01" value="2.00"></label>
+          <label class="small">Tenant rate (monthly $/sqft): <input id="tenantRateInput" class="numbox large" type="number" min="0" max="10" step="0.01" value="2.00"></label>
           <input id="tenantRate" type="range" min="0" max="10" step="0.1" value="2.0">
         </div>
 
@@ -99,7 +99,7 @@
 
         <div style="margin-bottom:1rem">
           <label class="small">People per stack: <input id="peopleInput" class="numbox small" type="number" min="1" max="99" step="1" value="25"></label>
-          <input id="peoplePerStack" type="range" min="1" max="5" step="1" value="3">
+          <input id="peoplePerStack" type="range" min="1" max="8" step="1" value="5">
         </div>
 
         <div style="margin-bottom:1rem">
@@ -195,20 +195,30 @@
       const slider = document.getElementById(s);
       const input = document.getElementById(i);
       if(!slider || !input) return;
-      // for the hours/day pair, always show one decimal place in the input (e.g. 10 -> 10.0)
+      // slider -> input (live)
       if(s === 'timePerStack'){
         slider.addEventListener('input', () => { input.value = Number(slider.value).toFixed(1); update(); });
       } else {
         slider.addEventListener('input', () => { input.value = slider.value; update(); });
       }
-      input.addEventListener('input', () => {
+      // input -> slider: use 'change' so users can type freely without mid-typing clamping
+      input.addEventListener('change', () => {
         let v = Number(input.value);
         if(isNaN(v)) return;
+        // clamp to slider bounds
         const min = Number(slider.min || -Infinity);
         const max = Number(slider.max || Infinity);
         if(v < min) v = min;
         if(v > max) v = max;
-        slider.value = v;
+        // for time, ensure slider gets a numeric value matching step (one decimal)
+        if(s === 'timePerStack'){
+          v = Math.round(v * 2) / 2; // align to 0.5 step
+          slider.value = v;
+          input.value = Number(v).toFixed(1);
+        } else {
+          slider.value = v;
+          input.value = v;
+        }
         update();
       });
       // initialize input to slider's current value; format hours/day with one decimal
