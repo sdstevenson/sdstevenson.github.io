@@ -22,9 +22,9 @@
     }
 
     body {font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; padding:2rem; color:var(--text); background:var(--bg)}
-    .container {max-width:760px; margin:0 auto}
-    .layout {display:grid; grid-template-columns: 1fr 360px; gap:2rem; align-items:start}
-    @media (max-width:1000px){ .layout{grid-template-columns:1fr} .roi-panel{order:99} }
+  .container {max-width:1100px; margin:0 auto}
+  .layout {display:grid; grid-template-columns: 500px 500px; gap:2rem; align-items:start}
+  @media (max-width:1200px){ .layout{grid-template-columns:1fr} .roi-panel{order:99} }
     /* header is a centered hero area; theme toggle positioned top-right */
     header {position:relative;display:flex;flex-direction:column;align-items:center;gap:.25rem;padding-top:.6rem}
     h1 {margin:0}
@@ -50,6 +50,10 @@
   .demo-form .error{color:#e05555;font-size:.85rem;margin-top:6px;display:none}
   .primary-cta{display:block;margin-top:.6rem;padding:.9rem 1rem;border-radius:8px;background:#000;color:#fff;border:0;font-weight:700;cursor:pointer}
   .primary-cta[disabled]{opacity:.6;cursor:not-allowed}
+  /* inline success message shown next to the form */
+  .demo-success-inline{display:none;color:var(--success);margin-top:.6rem;font-weight:700;text-align:center}
+  /* inline success message shown next to the form */
+  .demo-success-inline{display:none;color:var(--success);margin-top:.6rem;font-weight:700;text-align:center}
   footer{margin-top:2rem;color:var(--muted);font-size:.9rem;text-align:center}
   .muted {color:var(--muted)}
     .small {font-size:.95rem}
@@ -121,8 +125,8 @@
             </div>
 
             <button type="submit" class="primary-cta">Schedule My Demo</button>
-            <div id="demoSuccess" class="small" style="display:none;margin-top:.6rem;color:var(--success)">Thanks — we'll be in touch soon.</div>
           </form>
+          <div id="demoSuccessInline" class="small demo-success-inline">Thanks — we'll be in touch soon.</div>
         </section>
       </main>
 
@@ -242,7 +246,9 @@
             // fire-and-forget POST; response is opaque due to no-cors but form will receive it
             fetch(gformUrl, { method: 'POST', mode: 'no-cors', body: fd })
               .finally(() => {
-                document.getElementById('demoSuccess').style.display = 'block';
+                // show the inline success message attached to the form
+                const inline = document.getElementById('demoSuccessInline');
+                if(inline) inline.style.display = 'block';
                 demoForm.querySelector('button[type=submit]').disabled = true;
               });
           }
