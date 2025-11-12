@@ -7,25 +7,14 @@
   <title>Sttugs — Autonomous Hangar Stacking</title>
   <style>
     /* color system using CSS variables to support light/dark themes */
+    /* Single-theme (dark) site variables */
     :root{
-      --bg: #ffffff;
-      --text: #111111;
-      --muted: #666666;
-      --card-bg: #f7f7fb;
-      --card-border: #e8e8ee;
-      --accent: #005bb5;
-      --accent-hover: #004494;
-      --input-bg: #ffffff;
-      --input-border: #d0d0d8;
-      --success: #0a7b2a;
-    }
-    [data-theme="dark"]{
       --bg: #0b0f12;
       --text: #e6eef6;
       --muted: #9aa6b2;
       --card-bg: #071017;
       --card-border: #12202a;
-      --accent: #3da0ff;
+      --accent: #c6aa58;
       --accent-hover: #2b8fe6;
       --input-bg: #071017;
       --input-border: #21343b;
@@ -36,9 +25,18 @@
     .container {max-width:760px; margin:0 auto}
     .layout {display:grid; grid-template-columns: 1fr 360px; gap:2rem; align-items:start}
     @media (max-width:1000px){ .layout{grid-template-columns:1fr} .roi-panel{order:99} }
-    header {display:flex; align-items:center; gap:1rem}
+    /* header is a centered hero area; theme toggle positioned top-right */
+    header {position:relative;display:flex;flex-direction:column;align-items:center;gap:.25rem;padding-top:.6rem}
     h1 {margin:0}
-  .tagline {margin-left:auto;color:var(--muted);font-weight:600}
+    /* remove previous floated tagline style (no longer used) */
+    .tagline{display:none}
+
+  /* tighten spacing and add a small centered separator under the title */
+  .hero-title{font-size:2.1rem;font-weight:800;margin-top:0.15rem}
+  .hero-subtitle{font-size:1.75rem;font-weight:800;text-align:center;color:var(--accent);margin-top:.4rem;margin-bottom:0.25rem;position:relative}
+  .hero-subtitle::after{content:'';display:block;width:44px;height:3px;background:var(--accent);margin:6px auto 0;border-radius:2px;opacity:0.95}
+    .hero-desc{font-size:1rem;font-weight:400;text-align:center;color:var(--muted);max-width:760px}
+  /* no theme toggle — site is dark-only */
     p.lead {color:#333;margin-top:.6rem}
   .card {background:var(--card-bg);border:1px solid var(--card-border);padding:1rem;border-radius:10px;margin-top:1rem}
   .form-link, .schedule-link {display:inline-block;margin-top:1rem;padding:.6rem 1rem;background:var(--accent);color:white;border-radius:8px;text-decoration:none;font-weight:600}
@@ -71,9 +69,9 @@
   <div class="container">
     <!-- header and short lead sit above the two-column layout -->
     <header>
-      <h1>Sttugs</h1>
-      <div class="tagline">Autonomous hangar management</div>
-      <button id="themeToggle" aria-label="Toggle theme" title="Toggle theme" style="margin-left:12px;padding:.35rem .6rem;border-radius:8px;border:1px solid var(--card-border);background:transparent;color:var(--text);cursor:pointer">☾</button>
+      <h1 class="hero-subtitle">Sttugs</h1>
+      <div class="hero-title">Hangar management, reimagined.</div>
+      <div class="hero-desc">Intelligent stacking software and automated aircraft tugs stack hangers with zero human intervention.</div>
     </header>
 
     <div class="layout">
