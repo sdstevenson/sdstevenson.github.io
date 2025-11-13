@@ -14,6 +14,10 @@
       --muted: #9aa6b2;
       --card-bg: #071017;
       --card-border: #12202a;
+      --card-bg-light: #0f1920;
+      --card-bg-dark: #041014;
+      --feature-bg: #e9f3f8; /* light blue-ish grey */
+      --feature-text: #04202a;
       --accent: #c6aa58;
       --accent-hover: #2b8fe6;
       --input-bg: #071017;
@@ -22,11 +26,13 @@
     }
 
     body {font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; padding:2rem; color:var(--text); background:var(--bg)}
-  .container {max-width:1100px; margin:0 auto}
-  .layout {display:grid; grid-template-columns: 500px 500px; gap:2rem; align-items:start}
+  .container {max-width:1000px; margin:0 auto}
+  /* keep columns equal width and vertically center content so the form sits centered with the ROI panel */
+  .layout {display:grid; grid-template-columns: 500px 500px; gap:2rem; align-items:center}
   @media (max-width:1200px){ .layout{grid-template-columns:1fr} .roi-panel{order:99} }
-    /* header is a centered hero area; theme toggle positioned top-right */
-    header {position:relative;display:flex;flex-direction:column;align-items:center;gap:.25rem;padding-top:.6rem}
+  /* header is a centered hero area; theme toggle positioned top-right */
+  /* shorten the hero so users don't need to scroll as far to reach the next section */
+  header {position:relative;display:flex;flex-direction:column;align-items:center;gap:.25rem;padding-top:.6rem;min-height:70vh;justify-content:center}
     h1 {margin:0}
     /* remove previous floated tagline style (no longer used) */
     .tagline{display:none}
@@ -52,11 +58,38 @@
   .primary-cta[disabled]{opacity:.6;cursor:not-allowed}
   /* inline success message shown next to the form */
   .demo-success-inline{display:none;color:var(--success);margin-top:.6rem;font-weight:700;text-align:center}
-  /* inline success message shown next to the form */
-  .demo-success-inline{display:none;color:var(--success);margin-top:.6rem;font-weight:700;text-align:center}
+  /* modifiers for highlighted sections: light and dark variants */
+  .centered-section{max-width:980px;margin:2rem auto;padding:1.25rem}
+  .card.light{background:var(--card-bg-light);border:1px solid rgba(255,255,255,0.04)}
+  .card.dark{background:var(--card-bg-dark);border:1px solid rgba(0,0,0,0.35)}
+
+  /* spacing for main layout so it sits clearly below the hero */
+  .layout{margin-top:1rem}
+
+  /* feature area: light background that holds the form + ROI */
+  .feature-area{background:var(--feature-bg);color:var(--feature-text);padding:2rem;border-radius:12px;margin:0.75rem auto;max-width:980px}
+  .feature-area .layout{margin:0 auto}
+  /* make the two columns inside the feature area fluid so they never overflow the container */
+  .feature-area .layout{grid-template-columns:1fr 1fr;gap:2rem;align-items:center}
+  /* allow children to shrink (prevents content from forcing horizontal overflow) */
+  .feature-area .main, .feature-area .roi-panel{min-width:0}
+  .feature-area .card{background:#ffffff;color:var(--feature-text);border:1px solid rgba(0,0,0,0.06)}
+  .feature-area .input-with-icon{border-color:rgba(0,0,0,0.06);background:transparent}
+  .feature-area .input-with-icon input{color:var(--feature-text)}
+  .feature-area .numbox{background:#f6fbfd;color:var(--feature-text);border:1px solid rgba(0,0,0,0.08)}
+
+  /* sticky brand bar (hidden until user scrolls past the hero) */
+  #stickyBrand{position:fixed;left:0;right:0;top:0;transform:translateY(-100%);transition:transform .28s ease,opacity .2s;z-index:1400;opacity:0}
+  #stickyBrand.visible{transform:translateY(0);opacity:1}
+  #stickyBrand .sticky-inner{height:56px;display:flex;align-items:center;justify-content:center;gap:12px;font-weight:700;color:var(--text);background:linear-gradient(180deg,rgba(7,16,23,0.95),rgba(7,16,23,0.9));border-bottom:1px solid rgba(255,255,255,0.03)}
+  #stickyBrand .brand{color:var(--accent);margin-right:6px}
+  #stickyBrand .moto{color:var(--muted);font-weight:600}
   footer{margin-top:2rem;color:var(--muted);font-size:.9rem;text-align:center}
   .muted {color:var(--muted)}
     .small {font-size:.95rem}
+    /* slightly larger, readable list for benefits section */
+    .benefits-list{font-size:1.05rem;margin:0.4rem 0;padding-left:1.15rem;line-height:1.45}
+    .benefits-list li{margin-bottom:0.6rem}
     /* fixed-width numeric input boxes to avoid layout shift when values change
       use character-based width so boxes don't take more space than needed */
   .numbox{width:6ch;min-width:48px;box-sizing:border-box;padding:2px 6px;font-family:menlo,monospace;font-size:0.92rem;text-align:right;border-radius:4px;border:1px solid var(--input-border);background:var(--input-bg);color:var(--text)}
@@ -79,6 +112,10 @@
   </style>
 </head>
 <body>
+  <!-- Sticky brand bar that appears after scrolling past the hero -->
+  <div id="stickyBrand" aria-hidden="true">
+    <div class="sticky-inner"><strong class="brand">Sttugs</strong><span class="moto">Hangar management, reimagined.</span></div>
+  </div>
   <div class="container">
     <!-- header and short lead sit above the two-column layout -->
     <header>
@@ -87,11 +124,12 @@
       <div class="hero-desc">Intelligent stacking software and autonomous tugs stack hangers with zero human intervention.</div>
     </header>
 
-    <div class="layout">
+    <section class="feature-area">
+      <div class="layout">
       <main class="main">
         <section class="card" id="contact" style="margin-top:1rem">
           <h2>Get Started Today</h2>
-          <p class="small">Schedule a personalized demo with our team</p>
+          <p class="small">See how this system can transform your operations</p>
 
           <form id="demoForm" class="demo-form" novalidate>
             <div class="field">
@@ -124,7 +162,7 @@
               <div class="error" data-for="demo-contact">Please enter your email or phone #</div>
             </div>
 
-            <button type="submit" class="primary-cta">Schedule My Demo</button>
+            <button type="submit" class="primary-cta">Schedule a Call</button>
           </form>
           <div id="demoSuccessInline" class="small demo-success-inline">Thanks — we'll be in touch soon.</div>
         </section>
@@ -175,18 +213,24 @@
           <li>Annual additional revenue: <strong id="revenueGain">$0</strong></li>
         </ul>
       </aside>
-    </div>
-
-    <!-- About moved below the ROI calculator and CTA sections (full-width, centered) -->
-    <section class="card" id="about" style="margin-top:1.25rem;text-align:center">
-      <h2>About</h2>
-      <p id="about-text" class="small" style="max-width:760px;margin:0.4rem auto;">
-        We are building an automated hangar management system using autonomous aircraft tugs to perfectly park aircraft in your hangar every time.
-      </p>
-      <p class="small" style="max-width:760px;margin:0.4rem auto;">
-        Using a complex grid of cameras and smart algorithms, our system finds the optimal placement for each aircraft and parks them, maximizing profits by increasing useable hangar capacity and reducing labor costs.
-      </p>
+      </div>
     </section>
+
+    <!-- New highlighted sections: light then dark to visually separate content blocks -->
+    <section id="highlight-1" class="card light centered-section">
+      <h2>Strategic Benefits.</h2>
+        <ul class="benefits-list">
+          <li><strong>Performance Optimization:</strong> Our intelligent, autonomous system significantly improves facility throughput by optimizing aircraft positioning.</li>
+          <li><strong>Systemic Risk Mitigation:</strong> The autonomous towing eliminates human error and hangar rash, directly reducing liability and expensive unplanned maintenance costs.</li>
+          <li><strong>Labor Strategy:</strong> Automation frees up your ground staff from complex towing maneuvers, allowing them to focus on higher value tasks.</li>
+        </ul>
+    </section>
+
+    <!-- <section id="highlight-2" class="card dark centered-section">
+      <h2>Ready to see it in action?</h2>
+      <p class="small" style="margin:0.4rem 0;">Book a personalized demo and we’ll walk through the ROI estimate for your facility.</p>
+      <p style="margin-top:.6rem"><a class="form-link" href="#contact">Schedule a demo</a></p>
+    </section> -->
 
     <footer>
       <p><span id="year"></span> Sttugs • Built for FBO efficiency</p>
@@ -223,6 +267,22 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       initTheme();
+
+      // sticky brand bar: show when the hero title text scrolls past
+      const sticky = document.getElementById('stickyBrand');
+      const heroTitle = document.querySelector('.hero-title');
+      function updateSticky(){
+        if(!sticky) return;
+        // prefer the hero title as the trigger; fall back to the header if missing
+        const trigger = heroTitle || document.querySelector('header');
+        if(!trigger) return;
+        const rect = trigger.getBoundingClientRect();
+        // show sticky when the trigger element's bottom has moved above the viewport
+        if(rect.bottom <= 0) sticky.classList.add('visible'); else sticky.classList.remove('visible');
+      }
+      // update on load and scroll
+      updateSticky();
+      window.addEventListener('scroll', updateSticky, {passive:true});
 
       // demo form handling
       const demoForm = document.getElementById('demoForm');
