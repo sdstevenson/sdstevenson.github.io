@@ -61,7 +61,9 @@
   .input-with-icon svg{width:18px;height:18px;flex:0 0 18px;fill:var(--muted)}
   .input-with-icon input{flex:1;border:0;background:transparent;color:var(--text);padding-left:.6rem;font-size:1.05rem}
   .demo-form .error{color:#e05555;font-size:.85rem;margin-top:6px;display:none}
-  .primary-cta{display:block;margin-top:.6rem;padding:.9rem 1rem;border-radius:8px;background:#000;color:#fff;border:0;font-weight:700;cursor:pointer}
+  .primary-cta{display:inline-block;margin-top:.6rem;padding:0.95rem 1.25rem;border-radius:10px;background:var(--accent);color:#041014;border:0;font-weight:800;cursor:pointer;font-size:1.05rem}
+  /* hover: slightly darker gold derived from --accent for a subtle, same-family effect */
+  .primary-cta:hover{background:#9a7f30;color:#fff}
   .primary-cta[disabled]{opacity:.6;cursor:not-allowed}
   /* inline success message shown next to the form */
   .demo-success-inline{display:none;color:var(--success);margin-top:.6rem;font-weight:700;text-align:center}
@@ -229,7 +231,7 @@
               <div class="error" data-for="demo-contact">Please enter your email or phone #</div>
             </div>
 
-            <button type="submit" class="primary-cta">Schedule a Call</button>
+            <button type="submit" class="primary-cta">Contact Our Team</button>
           </form>
           <div id="demoSuccessInline" class="small demo-success-inline">Thanks — we'll be in touch soon.</div>
         </section>
