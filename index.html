@@ -18,6 +18,10 @@
       --card-bg-dark: #041014;
       --feature-bg: #e9f3f8; /* light blue-ish grey */
       --feature-text: #04202a;
+  /* accents for three-col highlights (slightly more saturated to pop) */
+  --problem-color: #6b7b84; /* slightly deeper slate */
+  --solution-color: #3f8fb0; /* stronger steel blue */
+  --result-color: #6fa886; /* fresher sage green */
       --accent: #c6aa58;
       --accent-hover: #2b8fe6;
       --input-bg: #071017;
@@ -25,8 +29,11 @@
       --success: #4cd07a;
     }
 
-    body {font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; padding:2rem; color:var(--text); background:var(--bg)}
-  .container {max-width:1000px; margin:0 auto}
+  /* set a slightly larger root font so rem-based sizes scale up across the main screen */
+  html { font-size:18px }
+  body {font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; padding:2rem; color:var(--text); background:var(--bg)}
+  /* widen the main page container to give content more room */
+  .container {max-width:1200px; margin:0 auto}
   /* keep columns equal width and vertically center content so the form sits centered with the ROI panel */
   .layout {display:grid; grid-template-columns: 500px 500px; gap:2rem; align-items:center}
   @media (max-width:1200px){ .layout{grid-template-columns:1fr} .roi-panel{order:99} }
@@ -38,10 +45,10 @@
     .tagline{display:none}
 
   /* tighten spacing and add a small centered separator under the title */
-  .hero-title{font-size:2.1rem;font-weight:800;margin-top:0.15rem}
-  .hero-subtitle{font-size:1.75rem;font-weight:800;text-align:center;color:var(--accent);margin-top:.4rem;margin-bottom:0.25rem;position:relative}
+  .hero-title{font-size:2.6rem;font-weight:800;margin-top:0.15rem}
+  .hero-subtitle{font-size:2.0rem;font-weight:800;text-align:center;color:var(--accent);margin-top:.4rem;margin-bottom:0.25rem;position:relative}
   .hero-subtitle::after{content:'';display:block;width:44px;height:3px;background:var(--accent);margin:6px auto 0;border-radius:2px;opacity:0.95}
-    .hero-desc{font-size:1rem;font-weight:400;text-align:center;color:var(--muted);max-width:760px}
+    .hero-desc{font-size:1.15rem;font-weight:400;text-align:center;color:var(--muted);max-width:760px}
   /* no theme toggle — site is dark-only */
     p.lead {color:#333;margin-top:.6rem}
   .card {background:var(--card-bg);border:1px solid var(--card-border);padding:1rem;border-radius:10px;margin-top:1rem}
@@ -52,14 +59,15 @@
   .demo-form .field{display:flex;flex-direction:column}
   .input-with-icon{display:flex;align-items:center;border:1px solid var(--accent);padding:.7rem;border-radius:8px;background:transparent}
   .input-with-icon svg{width:18px;height:18px;flex:0 0 18px;fill:var(--muted)}
-  .input-with-icon input{flex:1;border:0;background:transparent;color:var(--text);padding-left:.6rem;font-size:1rem}
+  .input-with-icon input{flex:1;border:0;background:transparent;color:var(--text);padding-left:.6rem;font-size:1.05rem}
   .demo-form .error{color:#e05555;font-size:.85rem;margin-top:6px;display:none}
   .primary-cta{display:block;margin-top:.6rem;padding:.9rem 1rem;border-radius:8px;background:#000;color:#fff;border:0;font-weight:700;cursor:pointer}
   .primary-cta[disabled]{opacity:.6;cursor:not-allowed}
   /* inline success message shown next to the form */
   .demo-success-inline{display:none;color:var(--success);margin-top:.6rem;font-weight:700;text-align:center}
   /* modifiers for highlighted sections: light and dark variants */
-  .centered-section{max-width:980px;margin:2rem auto;padding:1.25rem}
+  /* make centered sections wider so they stand out more */
+    .centered-section{max-width:1120px;margin:2rem auto;padding:1.25rem}
   .card.light{background:var(--card-bg-light);border:1px solid rgba(255,255,255,0.04)}
   .card.dark{background:var(--card-bg-dark);border:1px solid rgba(0,0,0,0.35)}
 
@@ -67,16 +75,40 @@
   .layout{margin-top:1rem}
 
   /* feature area: light background that holds the form + ROI */
-  .feature-area{background:var(--feature-bg);color:var(--feature-text);padding:2rem;border-radius:12px;margin:0.75rem auto;max-width:980px}
+  /* feature area uses a light background but inner cards will be dark for contrast */
+    .feature-area{background:var(--card-bg-dark);color:var(--text);padding:2rem;border-radius:12px;margin:0.75rem auto;max-width:1120px}
   .feature-area .layout{margin:0 auto}
   /* make the two columns inside the feature area fluid so they never overflow the container */
   .feature-area .layout{grid-template-columns:1fr 1fr;gap:2rem;align-items:center}
   /* allow children to shrink (prevents content from forcing horizontal overflow) */
   .feature-area .main, .feature-area .roi-panel{min-width:0}
-  .feature-area .card{background:#ffffff;color:var(--feature-text);border:1px solid rgba(0,0,0,0.06)}
-  .feature-area .input-with-icon{border-color:rgba(0,0,0,0.06);background:transparent}
-  .feature-area .input-with-icon input{color:var(--feature-text)}
-  .feature-area .numbox{background:#f6fbfd;color:var(--feature-text);border:1px solid rgba(0,0,0,0.08)}
+  /* make the inner cards darker again for the form + ROI while keeping the outer feature bg light */
+  .feature-area .card{background:var(--card-bg);color:var(--text);border:1px solid var(--card-border)}
+  .feature-area .input-with-icon{border-color:var(--input-border);background:var(--input-bg)}
+  .feature-area .input-with-icon input{color:var(--text)}
+  .feature-area .numbox{background:var(--input-bg);color:var(--text);border:1px solid var(--input-border)}
+
+  /* three-column summary placed above the feature area */
+  /* three-column summary placed above the feature area (wider and more prominent) */
+  .three-cols{max-width:1120px;margin:0.5rem auto 1rem;background:var(--feature-bg);color:var(--feature-text);padding:1.5rem;border-radius:12px}
+  .three-cols .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+  @media (max-width:900px){ .three-cols .grid{grid-template-columns:1fr} }
+  /* panel styling to help each column pop */
+  .three-cols .grid > div{background:rgba(0,0,0,0.02);padding:1.1rem;border-radius:8px;box-shadow:0 6px 24px rgba(2,6,8,0.08);border-left:6px solid var(--accent)}
+  .three-cols .grid > div:nth-child(1){border-left-color:var(--problem-color)}
+  .three-cols .grid > div:nth-child(2){border-left-color:var(--solution-color)}
+  .three-cols .grid > div:nth-child(3){border-left-color:var(--result-color)}
+  .three-cols .col-icon{width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center}
+  .three-cols .hgroup{display:flex;align-items:center;gap:10px}
+  .three-cols .grid > div:nth-child(1) .col-icon svg{fill:var(--problem-color)}
+  .three-cols .grid > div:nth-child(2) .col-icon svg{fill:var(--solution-color)}
+  .three-cols .grid > div:nth-child(3) .col-icon svg{fill:var(--result-color)}
+  .three-cols h4{margin:0 0 .6rem;font-size:1.32rem}
+  .three-cols p{margin:0 0 1rem;font-size:1.22rem;line-height:1.65}
+  .three-cols .grid > div h4 strong{color:var(--text)}
+  .three-cols .grid > div:nth-child(1) h4 strong{color:var(--problem-color)}
+  .three-cols .grid > div:nth-child(2) h4 strong{color:var(--solution-color)}
+  .three-cols .grid > div:nth-child(3) h4 strong{color:var(--result-color)}
 
   /* sticky brand bar (hidden until user scrolls past the hero) */
   #stickyBrand{position:fixed;left:0;right:0;top:0;transform:translateY(-100%);transition:transform .28s ease,opacity .2s;z-index:1400;opacity:0}
@@ -88,11 +120,11 @@
   .muted {color:var(--muted)}
     .small {font-size:.95rem}
     /* slightly larger, readable list for benefits section */
-    .benefits-list{font-size:1.05rem;margin:0.4rem 0;padding-left:1.15rem;line-height:1.45}
+  .benefits-list{font-size:1.15rem;margin:0.4rem 0;padding-left:1.15rem;line-height:1.45}
     .benefits-list li{margin-bottom:0.6rem}
     /* fixed-width numeric input boxes to avoid layout shift when values change
       use character-based width so boxes don't take more space than needed */
-  .numbox{width:6ch;min-width:48px;box-sizing:border-box;padding:2px 6px;font-family:menlo,monospace;font-size:0.92rem;text-align:right;border-radius:4px;border:1px solid var(--input-border);background:var(--input-bg);color:var(--text)}
+  .numbox{width:6ch;min-width:48px;box-sizing:border-box;padding:2px 6px;font-family:menlo,monospace;font-size:1rem;text-align:right;border-radius:4px;border:1px solid var(--input-border);background:var(--input-bg);color:var(--text)}
   .numbox.small{width:4.2ch;min-width:36px}
   .numbox.medium{width:6ch;min-width:45px}
   .numbox.large{width:10ch;min-width:80px}
@@ -123,6 +155,41 @@
       <div class="hero-title">Hangar management, reimagined.</div>
       <div class="hero-desc">Intelligent stacking software and autonomous tugs stack hangers with zero human intervention.</div>
     </header>
+
+    <!-- Three-column problem/solution/result summary (light feature background) -->
+    <section class="three-cols" aria-labelledby="three-title">
+      <div class="grid">
+        <div>
+          <h4 class="hgroup"><span class="col-icon" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg></span><strong>The Problem:</strong> High Risk &amp; Labor Costs</h4>
+          <p>Hangar stacking is a slow, labor-intensive process that is prone to costly human errors.</p>
+
+          <h4 class="hgroup"><span class="col-icon" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 1L3 5v6c0 5 3.8 9.7 9 11 5.2-1.3 9-6 9-11V5l-9-4zM10 14l-3-3 1.4-1.4L10 11.2l5.6-5.6L17 7l-7 7z"/></svg></span><strong>Our Solution:</strong> Zero Collisions</h4>
+          <p>Our system brings the risk of collisions down to zero and reduces operational costs from damages.<br></br></p>
+
+          <h4 class="hgroup"><span class="col-icon" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l2.9 6.3L21 9.3l-5 4.2L17.8 21 12 17.8 6.2 21 7 13.5 2 9.3l6.1-1L12 2z"/></svg></span><strong>The Result:</strong> Lower Costs</h4>
+        </div>
+
+        <div>
+          <h4 class="hgroup"><span class="col-icon" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h7v7H3V3zm0 11h7v7H3v-7zm11-11h7v7h-7V3zm0 11h7v7h-7v-7z"/></svg></span><strong>The Problem:</strong> Wasted Space</h4>
+          <p>Non-optimal placements mean you can't service as many aircraft, which cuts into your profits.</p>
+
+          <h4 class="hgroup"><span class="col-icon" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h8v2H5v6H3V3zm18 0v8h-2V5h-6V3h8zM3 21v-8h2v6h6v2H3zm18 0h-8v-2h6v-6h2v8z"/></svg></span><strong>Our Solution:</strong> Maximize Capacity</h4>
+          <p>Our algorithms find optimized placements to increase the number of aircraft thet can fit into your hangar.<br></br></p>
+
+          <h4 class="hgroup"><span class="col-icon" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.3L18.2 21l-1.6-7 5.4-4.6-7.2-.6L12 2 9.2 8.8 2 9.4l5.4 4.6L5.8 21z"/></svg></span><strong>The Result:</strong> Higher Revenue</h4>
+        </div>
+
+        <div>
+          <h4 class="hgroup"><span class="col-icon" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4zm0 2c-2.7 0-8 1.3-8 4v2h16v-2c0-2.7-5.3-4-8-4z"/></svg></span><strong>The Problem:</strong> Poor Service</h4>
+          <p>Your team is tied up with complex towing tasks.<br></br></p>
+
+          <h4 class="hgroup"><span class="col-icon" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 11l3 3L22 4l-1.4-1.4L12 12.2 10.4 10.6 9 12z"/></svg></span><strong>Our Solution:</strong> Increase Efficiency</h4>
+          <p>Our fully autonomous tugs remove manual labor from hangar stacking, freeing up your staff for customer-facing tasks.</p>
+
+          <h4 class="hgroup"><span class="col-icon" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.3L18.2 21l-1.6-7 5.4-4.6-7.2-.6L12 2 9.2 8.8 2 9.4l5.4 4.6L5.8 21z"/></svg></span><strong>The Result:</strong> Better Service</h4>
+        </div>
+      </div>
+    </section>
 
     <section class="feature-area">
       <div class="layout">
@@ -216,15 +283,14 @@
       </div>
     </section>
 
-    <!-- New highlighted sections: light then dark to visually separate content blocks -->
-    <section id="highlight-1" class="card light centered-section">
+    <!-- <section id="highlight-1" class="card light centered-section">
       <h2>Strategic Benefits.</h2>
         <ul class="benefits-list">
           <li><strong>Performance Optimization:</strong> Our intelligent, autonomous system significantly improves facility throughput by optimizing aircraft positioning.</li>
           <li><strong>Systemic Risk Mitigation:</strong> Autonomous tugs eliminates human error and hangar rash with towing operations, directly reducing liability and expensive unplanned maintenance costs.</li>
           <li><strong>Labor Strategy:</strong> Automation frees up your ground staff from complex towing maneuvers, allowing them to focus on higher value tasks.</li>
         </ul>
-    </section>
+    </section> -->
 
     <!-- <section id="highlight-2" class="card dark centered-section">
       <h2>Ready to see it in action?</h2>
