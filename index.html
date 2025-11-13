@@ -143,6 +143,26 @@
     }
     /* range accent color */
     input[type=range]{accent-color:var(--accent)}
+
+    /* glowing focus styles for inputs to match ROI controls' visual treatment */
+    /* highlight the input wrapper when a child receives focus (outer glow only) */
+    .input-with-icon:focus-within{
+      border-color: var(--accent);
+      box-shadow: 0 6px 20px rgba(198,170,88,0.10), 0 0 0 6px rgba(198,170,88,0.06);
+    }
+    /* remove native outline for inner controls so only the outer wrapper shows the glow */
+    .input-with-icon input:focus,
+    .numbox:focus,
+    input[type="range"]:focus {
+      outline: none;
+      box-shadow: none;
+    }
+    /* accessible glow for keyboard users on standalone controls (number/range) */
+    .numbox:focus-visible,
+    input[type="range"]:focus-visible {
+      border-color: var(--accent);
+      box-shadow: 0 6px 20px rgba(198,170,88,0.10), 0 0 0 6px rgba(198,170,88,0.06);
+    }
   </style>
 </head>
 <body>
