@@ -215,11 +215,23 @@
     <section class="feature-area">
       <div class="layout">
       <main class="main">
-        <section class="card" id="contact" style="margin-top:1rem">
-          <h2>Get Started Today</h2>
-          <p class="small">See how this system can transform your operations</p>
+        <!-- contact form moved to a centered section at the bottom; placeholder kept to preserve layout -->
+        <section class="card" id="contact" style="margin-top:1rem;display:none" aria-hidden="true"></section>
+      </main>
 
-          <form id="demoForm" class="demo-form" novalidate>
+      <!-- ROI panel moved to a sliding drawer (see bottom of document). Placeholder kept for layout symmetry. -->
+      <div aria-hidden="true" class="roi-placeholder" style="display:none"></div>
+      </div>
+    </section>
+
+    <!-- Centered contact form placed near the bottom for visibility -->
+    <section id="contact-cta" class="centered-section">
+      <div class="card" style="max-width:760px;margin:0 auto;text-align:center;">
+        <h2>Get Started Today</h2>
+        <p class="small">See how this system can transform your operations</p>
+
+        <form id="demoForm" class="demo-form" novalidate style="margin-top:.6rem;display:flex;flex-direction:column;gap:.9rem;align-items:center;">
+          <div style="width:100%;max-width:640px;">
             <div class="field">
               <label class="visually-hidden" for="demo-name">Your Name</label>
               <div class="input-with-icon">
@@ -250,57 +262,12 @@
               <div class="error" data-for="demo-contact">Please enter your email or phone #</div>
             </div>
 
-            <button type="submit" class="primary-cta">Contact Our Team</button>
-          </form>
-          <div id="demoSuccessInline" class="small demo-success-inline">Thanks — we'll be in touch soon.</div>
-        </section>
-      </main>
-
-      <aside class="roi-panel card" aria-labelledby="roi-title">
-        <h2 id="roi-title">Your ROI</h2>
-        <div id="roi-value" style="font-size:1.6rem;font-weight:700;color:var(--success);margin-bottom:.5rem">$0</div>
-        <div class="small muted" style="margin-bottom:1rem">Estimated annual benefit</div>
-
-        <div style="margin-bottom:1rem">
-          <label class="small">Hangar sqft: <input id="hangarSqftInput" class="numbox large" type="number" min="1000" max="200000" step="1000" value="40000"></label>
-          <input id="hangarSqft" type="range" min="1000" max="200000" step="1000" value="40000">
-        </div>
-
-        <div style="margin-bottom:1rem">
-          <label class="small">Utilization boost %: <input id="utilBoostInput" class="numbox small" type="number" min="0" max="50" step="1" value="8"></label>
-          <input id="utilBoost" type="range" min="0" max="50" step="1" value="8">
-        </div>
-
-        <div style="margin-bottom:1rem">
-          <label class="small">Tenant rate (monthly $/sqft): <input id="tenantRateInput" class="numbox large" type="number" min="0" max="10" step="0.01" value="2.00"></label>
-          <input id="tenantRate" type="range" min="0" max="10" step="0.1" value="2.0">
-        </div>
-
-        <hr>
-
-        <div style="margin-bottom:1rem">
-          <label class="small">People per stack: <input id="peopleInput" class="numbox small" type="number" min="1" max="99" step="1" value="25"></label>
-          <input id="peoplePerStack" type="range" min="1" max="8" step="1" value="5">
-        </div>
-
-        <div style="margin-bottom:1rem">
-          <label class="small">Wage per hour ($): <input id="wageInput" class="numbox small" type="number" min="0" max="99" step="1" value="25"></label>
-          <input id="wagePerHour" type="range" min="10" max="99" step="1" value="25">
-        </div>
-
-        <div style="margin-bottom:1rem">
-          <label class="small">Hours spent stacking per day: <input id="timeInput" class="numbox medium" type="number" min="0" max="12" step="0.5" value="4"></label>
-          <input id="timePerStack" type="range" min="0" max="12" step="0.5" value="4">
-        </div>
-
-        <hr>
-
-        <div class="small" style="margin-top:.5rem">Breakdown</div>
-        <ul class="small" id="breakdown" style="padding-left:1rem">
-          <li>Annual labor savings: <strong id="laborSaving">$0</strong></li>
-          <li>Annual additional revenue: <strong id="revenueGain">$0</strong></li>
-        </ul>
-      </aside>
+            <div style="text-align:center;margin-top:.5rem">
+              <button type="submit" class="primary-cta">Contact Our Team</button>
+            </div>
+          </div>
+        </form>
+        <div id="demoSuccessInline" class="small demo-success-inline">Thanks — we'll be in touch soon.</div>
       </div>
     </section>
 
@@ -310,6 +277,8 @@
   </div>
 
   <script>
+    // ROI drawer toggle elements will be initialized after DOMContentLoaded
+    // (drawer markup injected below the main container)
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -362,25 +331,13 @@
       }
     });
 
-    // Elements (sliders + editable number inputs)
-    const elems = {
-      hangarSqft: document.getElementById('hangarSqft'),
-      hangarSqftInput: document.getElementById('hangarSqftInput'),
-      utilBoost: document.getElementById('utilBoost'),
-      utilBoostInput: document.getElementById('utilBoostInput'),
-      tenantRate: document.getElementById('tenantRate'),
-      tenantRateInput: document.getElementById('tenantRateInput'),
-      peoplePerStack: document.getElementById('peoplePerStack'),
-      peopleInput: document.getElementById('peopleInput'),
-      wagePerHour: document.getElementById('wagePerHour'),
-      wageInput: document.getElementById('wageInput'),
-      timePerStack: document.getElementById('timePerStack'),
-      timeInput: document.getElementById('timeInput')
-    };
+    // ROI controls (sliders + editable number inputs) will be initialized once the drawer markup is present
+    let elems = {};
 
     function fmt(n){ return '$' + n.toLocaleString(undefined,{maximumFractionDigits:0}); }
 
     function update(){
+      if(!elems || !elems.hangarSqft) return; // not ready
       const sqft = Number(elems.hangarSqft.value);
       const boost = Number(elems.utilBoost.value);
       const tenant = Number(elems.tenantRate.value);
@@ -406,12 +363,11 @@
 
       const total = Math.round(annualLabor + annualRevenue);
 
-      document.getElementById('laborSaving').textContent = fmt(Math.round(annualLabor));
-      document.getElementById('revenueGain').textContent = fmt(Math.round(annualRevenue));
-      document.getElementById('roi-value').textContent = fmt(total);
+      const laborEl = document.getElementById('laborSaving'); if(laborEl) laborEl.textContent = fmt(Math.round(annualLabor));
+      const revEl = document.getElementById('revenueGain'); if(revEl) revEl.textContent = fmt(Math.round(annualRevenue));
+      const roiEl = document.getElementById('roi-value'); if(roiEl) roiEl.textContent = fmt(total);
     }
 
-    // wire slider <-> number input pairs so either control updates the other
     const pairs = [
       ['hangarSqft','hangarSqftInput'],
       ['utilBoost','utilBoostInput'],
@@ -421,41 +377,148 @@
       ['timePerStack','timeInput']
     ];
 
-    pairs.forEach(([s,i]) => {
-      const slider = document.getElementById(s);
-      const input = document.getElementById(i);
-      if(!slider || !input) return;
-      // slider -> input (live)
-      if(s === 'timePerStack'){
-        slider.addEventListener('input', () => { input.value = Number(slider.value).toFixed(1); update(); });
-      } else {
-        slider.addEventListener('input', () => { input.value = slider.value; update(); });
-      }
-      // input -> slider: use 'change' so users can type freely without mid-typing clamping
-      input.addEventListener('change', () => {
-        let v = Number(input.value);
-        if(isNaN(v)) return;
-        // clamp to slider bounds
-        const min = Number(slider.min || -Infinity);
-        const max = Number(slider.max || Infinity);
-        if(v < min) v = min;
-        if(v > max) v = max;
-        // for time, ensure slider gets a numeric value matching step (one decimal)
+    function initROIControls(){
+      // assign element references (returns false if not present yet)
+      elems = {
+        hangarSqft: document.getElementById('hangarSqft'),
+        hangarSqftInput: document.getElementById('hangarSqftInput'),
+        utilBoost: document.getElementById('utilBoost'),
+        utilBoostInput: document.getElementById('utilBoostInput'),
+        tenantRate: document.getElementById('tenantRate'),
+        tenantRateInput: document.getElementById('tenantRateInput'),
+        peoplePerStack: document.getElementById('peoplePerStack'),
+        peopleInput: document.getElementById('peopleInput'),
+        wagePerHour: document.getElementById('wagePerHour'),
+        wageInput: document.getElementById('wageInput'),
+        timePerStack: document.getElementById('timePerStack'),
+        timeInput: document.getElementById('timeInput')
+      };
+      if(!elems.hangarSqft) return false;
+
+      // wire slider <-> number input pairs so either control updates the other
+      pairs.forEach(([s,i]) => {
+        const slider = document.getElementById(s);
+        const input = document.getElementById(i);
+        if(!slider || !input) return;
+        // slider -> input (live)
         if(s === 'timePerStack'){
-          v = Math.round(v * 2) / 2; // align to 0.5 step
-          slider.value = v;
-          input.value = Number(v).toFixed(1);
+          slider.addEventListener('input', () => { input.value = Number(slider.value).toFixed(1); update(); });
         } else {
-          slider.value = v;
-          input.value = v;
+          slider.addEventListener('input', () => { input.value = slider.value; update(); });
         }
-        update();
+        // input -> slider: use 'change' so users can type freely without mid-typing clamping
+        input.addEventListener('change', () => {
+          let v = Number(input.value);
+          if(isNaN(v)) return;
+          // clamp to slider bounds
+          const min = Number(slider.min || -Infinity);
+          const max = Number(slider.max || Infinity);
+          if(v < min) v = min;
+          if(v > max) v = max;
+          // for time, ensure slider gets a numeric value matching step (one decimal)
+          if(s === 'timePerStack'){
+            v = Math.round(v * 2) / 2; // align to 0.5 step
+            slider.value = v;
+            input.value = Number(v).toFixed(1);
+          } else {
+            slider.value = v;
+            input.value = v;
+          }
+          update();
+        });
+        // initialize input to slider's current value; format hours/day with one decimal
+        if(s === 'timePerStack') input.value = Number(slider.value).toFixed(1); else input.value = slider.value;
       });
-      // initialize input to slider's current value; format hours/day with one decimal
-      if(s === 'timePerStack') input.value = Number(slider.value).toFixed(1); else input.value = slider.value;
-    });
-    // initial update
-    update();
+
+      // initial update
+      update();
+      return true;
+    }
+
+    // --- ROI drawer behavior: tab open/close, overlay, Escape key ---
+    // these elements are added later in the DOM (drawer markup) so wait until they're present
+    function initROIDrawer(){
+      const roiTab = document.getElementById('roiTab');
+      const roiDrawer = document.getElementById('roiDrawer');
+      const roiOverlay = document.getElementById('roiOverlay');
+      if(!roiDrawer || !roiTab || !roiOverlay) return false;
+      function openDrawer(){ roiDrawer.classList.add('open'); roiOverlay.hidden = false; roiTab.setAttribute('aria-expanded','true'); }
+      function closeDrawer(){ roiDrawer.classList.remove('open'); roiOverlay.hidden = true; roiTab.setAttribute('aria-expanded','false'); }
+      if(roiTab) roiTab.addEventListener('click', () => { const open = roiDrawer.classList.contains('open'); (open ? closeDrawer() : openDrawer()); });
+      if(roiOverlay) roiOverlay.addEventListener('click', closeDrawer);
+      // close on Escape
+      document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeDrawer(); });
+      // close button inside drawer
+      const closeBtn = roiDrawer.querySelector('.roi-close'); if(closeBtn) closeBtn.addEventListener('click', closeDrawer);
+      return true;
+    }
+    // try to initialize now; if drawer markup not yet present, try again shortly
+  if(!initROIDrawer()){ setTimeout(initROIDrawer, 300); }
+  if(!initROIControls()){ setTimeout(initROIControls, 300); }
   </script>
+
+  <!-- ROI drawer markup: placed before the end of body so it is part of the document -->
+  <div id="roiOverlay" class="roi-overlay" hidden aria-hidden="true"></div>
+  <button id="roiTab" class="roi-tab" aria-expanded="false" aria-controls="roiDrawer">ROI Calculator</button>
+  <aside id="roiDrawer" class="roi-drawer card" role="dialog" aria-labelledby="roi-title" aria-hidden="true">
+    <div class="roi-drawer-inner">
+      <button class="roi-close" aria-label="Close ROI panel">✕</button>
+      <h2 id="roi-title">Your ROI</h2>
+      <div id="roi-value" style="font-size:1.6rem;font-weight:700;color:var(--success);margin-bottom:.5rem">$0</div>
+      <div class="small muted" style="margin-bottom:1rem">Estimated annual benefit</div>
+
+      <div style="margin-bottom:1rem">
+        <label class="small">Hangar sqft: <input id="hangarSqftInput" class="numbox large" type="number" min="1000" max="200000" step="1000" value="40000"></label>
+        <input id="hangarSqft" type="range" min="1000" max="200000" step="1000" value="40000">
+      </div>
+
+      <div style="margin-bottom:1rem">
+        <label class="small">Utilization boost %: <input id="utilBoostInput" class="numbox small" type="number" min="0" max="50" step="1" value="8"></label>
+        <input id="utilBoost" type="range" min="0" max="50" step="1" value="8">
+      </div>
+
+      <div style="margin-bottom:1rem">
+        <label class="small">Tenant rate (monthly $/sqft): <input id="tenantRateInput" class="numbox large" type="number" min="0" max="10" step="0.01" value="2.00"></label>
+        <input id="tenantRate" type="range" min="0" max="10" step="0.1" value="2.0">
+      </div>
+
+      <hr>
+
+      <div style="margin-bottom:1rem">
+        <label class="small">People per stack: <input id="peopleInput" class="numbox small" type="number" min="1" max="99" step="1" value="25"></label>
+        <input id="peoplePerStack" type="range" min="1" max="8" step="1" value="5">
+      </div>
+
+      <div style="margin-bottom:1rem">
+        <label class="small">Wage per hour ($): <input id="wageInput" class="numbox small" type="number" min="0" max="99" step="1" value="25"></label>
+        <input id="wagePerHour" type="range" min="10" max="99" step="1" value="25">
+      </div>
+
+      <div style="margin-bottom:1rem">
+        <label class="small">Hours spent stacking per day: <input id="timeInput" class="numbox medium" type="number" min="0" max="12" step="0.5" value="4"></label>
+        <input id="timePerStack" type="range" min="0" max="12" step="0.5" value="4">
+      </div>
+
+      <hr>
+
+      <div class="small" style="margin-top:.5rem">Breakdown</div>
+      <ul class="small" id="breakdown" style="padding-left:1rem">
+        <li>Annual labor savings: <strong id="laborSaving">$0</strong></li>
+        <li>Annual additional revenue: <strong id="revenueGain">$0</strong></li>
+      </ul>
+    </div>
+  </aside>
+
+  <style>
+    /* ROI drawer + tab styles */
+  .roi-tab{position:fixed;right:0;top:50%;transform:translateY(-50%) translateX(0);background:var(--accent);color:#041014;border:0;padding:.9rem 1.1rem;border-radius:10px 0 0 10px;font-weight:900;cursor:pointer;z-index:1600;font-size:1.06rem}
+    .roi-overlay{position:fixed;inset:0;background:rgba(2,6,8,0.45);z-index:1550;display:block}
+    .roi-overlay[hidden]{display:none}
+    .roi-drawer{position:fixed;right:0;top:50%;transform:translateY(-50%) translateX(110%);width:380px;max-width:92vw;height:80vh;overflow:auto;padding:1rem 1rem;border-radius:12px 0 0 12px;box-shadow:-8px 24px 64px rgba(2,6,8,0.6);z-index:1605;transition:transform .32s cubic-bezier(.2,.9,.2,1);border:1px solid rgba(0,0,0,0.35);background:var(--card-bg)}
+    .roi-drawer.open{transform:translateY(-50%) translateX(0)}
+    .roi-drawer .roi-drawer-inner{position:relative}
+    .roi-drawer .roi-close{position:absolute;right:8px;top:8px;border:0;background:transparent;color:var(--muted);font-size:1.05rem;cursor:pointer}
+    @media (max-width:900px){ .roi-drawer{width:100%;height:46vh;left:0;right:0;bottom:0;top:auto;transform:translateY(110%);border-radius:12px 12px 0 0} .roi-drawer.open{transform:translateY(0)} .roi-tab{right:12px;top:auto;bottom:12px;transform:none;border-radius:12px}}
+  </style>
 </body>
 </html>
