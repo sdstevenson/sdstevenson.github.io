@@ -2,6 +2,7 @@
 :root{
   --bg: #0b0f12;
   --text: #e6eef6;
+  --ivory: #fbf6e6;
   --muted: #9aa6b2;
   --card-bg: #071017;
   --card-border: #12202a;
@@ -57,7 +58,17 @@ header {position:relative;display:flex;flex-direction:column;align-items:center;
 .feature-area .input-with-icon input{color:var(--text)}
 .feature-area .numbox{background:var(--input-bg);color:var(--text);border:1px solid var(--input-border)}
 .three-cols{max-width:1120px;margin:0.5rem auto 1rem;background:var(--feature-bg);color:var(--feature-text);padding:1.5rem;border-radius:12px}
-.three-cols .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.three-cols{max-width:1120px;margin:0.5rem auto 1rem;background:var(--ivory);color:#041014;padding:1.5rem;border-radius:12px}
+.three-grid{max-width:1120px;margin:0 auto;display:grid;gap:1rem}
+.row-single{background:var(--ivory);padding:1rem;border-radius:8px;border-left:6px solid var(--accent);box-shadow:0 6px 18px rgba(2,6,8,0.06)}
+.row-single .row-title{color:var(--accent);font-weight:900;font-size:1.35rem;margin-bottom:0.5rem;display:flex;align-items:center;gap:.6rem}
+.row-single .row-icon{width:34px;height:34px;flex:0 0 34px;display:inline-flex;align-items:center;justify-content:center;fill:var(--accent)}
+.row-single .row-icon svg{width:100%;height:100%;display:block}
+.row-single ul{margin:0;padding-left:1.25rem;color:#04202a;font-size:1.06rem;line-height:1.6}
+.row-single ul li + li{margin-top:.8rem}
+/* Visual separation for the problem statement */
+.row-single ul li.problem{margin-top:.8rem;padding-top:.6rem;border-top:1px dashed rgba(0,0,0,0.06);color:#041014}
+@media (max-width:900px){ .row-single{padding:0.9rem} }
 @media (max-width:900px){ .three-cols .grid{grid-template-columns:1fr} }
 .three-cols .grid > div{background:rgba(0,0,0,0.02);padding:1.1rem;border-radius:8px;box-shadow:0 6px 24px rgba(2,6,8,0.08);border-left:6px solid var(--accent)}
 .three-cols .grid > div:nth-child(1){border-left-color:var(--problem-color)}
