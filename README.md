@@ -1,1 +1,1 @@
-Stugs — Minimal website for GitHub Pages
+Sttugs.com
