@@ -5,186 +5,35 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Sttugs — Autonomous Hangar Stacking</title>
-  <link rel="icon" href="/sttugs_transparent_background.png" type="image/png" sizes="32x32">
-  <link rel="manifest" href="/favicon/site.webmanifest">
-  <link rel="apple-touch-icon" sizes="192x192" href="/favicon/web-app-manifest-192x192.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/favicon/web-app-manifest-192x192.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="/favicon/web-app-manifest-512x512.png">
+  <link rel="icon" href="sttugs_transparent_background.png" type="image/png" sizes="32x32">
+  <link rel="manifest" href="favicon/site.webmanifest">
+  <link rel="apple-touch-icon" sizes="192x192" href="favicon/web-app-manifest-192x192.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon/web-app-manifest-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="favicon/web-app-manifest-512x512.png">
   <meta name="theme-color" content="#ffffff">
-  <style>
-    /* color system using CSS variables to support light/dark themes */
-    /* Single-theme (dark) site variables */
-    :root{
-      --bg: #0b0f12;
-      --text: #e6eef6;
-      --muted: #9aa6b2;
-      --card-bg: #071017;
-      --card-border: #12202a;
-      --card-bg-light: #0f1920;
-      --card-bg-dark: #041014;
-      --feature-bg: #e9f3f8; /* light blue-ish grey */
-      --feature-text: #04202a;
-  /* accents for three-col highlights (slightly more saturated to pop) */
-  --problem-color: #6b7b84; /* slightly deeper slate */
-  --solution-color: #3f8fb0; /* stronger steel blue */
-  --result-color: #6fa886; /* fresher sage green */
-      --accent: #c6aa58;
-      --accent-hover: #2b8fe6;
-      --input-bg: #071017;
-      --input-border: #21343b;
-      --success: #4cd07a;
-    }
-
-  /* set a slightly larger root font so rem-based sizes scale up across the main screen */
-  html { font-size:18px }
-  body {font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; padding:2rem; color:var(--text); background:var(--bg)}
-  /* widen the main page container to give content more room */
-  .container {max-width:1200px; margin:0 auto}
-  /* keep columns equal width and vertically center content so the form sits centered with the ROI panel */
-  .layout {display:grid; grid-template-columns: 500px 500px; gap:2rem; align-items:center}
-  @media (max-width:1200px){ .layout{grid-template-columns:1fr} .roi-panel{order:99} }
-  /* header is a centered hero area; theme toggle positioned top-right */
-  /* shorten the hero so users don't need to scroll as far to reach the next section */
-  header {position:relative;display:flex;flex-direction:column;align-items:center;gap:.25rem;padding-top:.6rem;min-height:70vh;justify-content:center}
-    h1 {margin:0}
-    /* remove previous floated tagline style (no longer used) */
-    .tagline{display:none}
-
-  /* tighten spacing and add a small centered separator under the title */
-  .hero-title{font-size:2.6rem;font-weight:800;margin-top:0.15rem}
-  .hero-subtitle{font-size:2.0rem;font-weight:800;text-align:center;color:var(--accent);margin-top:.4rem;margin-bottom:0.25rem;position:relative}
-  .hero-subtitle::after{content:'';display:block;width:44px;height:3px;background:var(--accent);margin:6px auto 0;border-radius:2px;opacity:0.95}
-    .hero-desc{font-size:1.15rem;font-weight:400;text-align:center;color:var(--muted);max-width:760px}
-  /* no theme toggle — site is dark-only */
-    p.lead {color:#333;margin-top:.6rem}
-  .card {background:var(--card-bg);border:1px solid var(--card-border);padding:1rem;border-radius:10px;margin-top:1rem}
-  .form-link, .schedule-link {display:inline-block;margin-top:1rem;padding:.6rem 1rem;background:var(--accent);color:white;border-radius:8px;text-decoration:none;font-weight:600}
-  .form-link:hover, .schedule-link:hover {background:var(--accent-hover)}
-  /* demo/form styles */
-  .demo-form{display:flex;flex-direction:column;gap:.85rem;margin-top:.5rem}
-  .demo-form .field{display:flex;flex-direction:column}
-  .input-with-icon{display:flex;align-items:center;border:1px solid var(--accent);padding:.7rem;border-radius:8px;background:transparent}
-  .input-with-icon svg{width:18px;height:18px;flex:0 0 18px;fill:var(--muted)}
-  .input-with-icon input{flex:1;border:0;background:transparent;color:var(--text);padding-left:.6rem;font-size:1.05rem}
-  .demo-form .error{color:#e05555;font-size:.85rem;margin-top:6px;display:none}
-  .primary-cta{display:inline-block;margin-top:.6rem;padding:0.95rem 1.25rem;border-radius:10px;background:var(--accent);color:#041014;border:0;font-weight:800;cursor:pointer;font-size:1.05rem}
-  /* hover: slightly darker gold derived from --accent for a subtle, same-family effect */
-  .primary-cta:hover{background:#9a7f30;color:#fff}
-  .primary-cta[disabled]{opacity:.6;cursor:not-allowed}
-  /* inline success message shown next to the form */
-  .demo-success-inline{display:none;color:var(--success);margin-top:.6rem;font-weight:700;text-align:center}
-  /* modifiers for highlighted sections: light and dark variants */
-  /* make centered sections wider so they stand out more */
-    .centered-section{max-width:1120px;margin:2rem auto;padding:1.25rem}
-  .card.light{background:var(--card-bg-light);border:1px solid rgba(255,255,255,0.04)}
-  .card.dark{background:var(--card-bg-dark);border:1px solid rgba(0,0,0,0.35)}
-
-  /* spacing for main layout so it sits clearly below the hero */
-  .layout{margin-top:1rem}
-
-  /* feature area: light background that holds the form + ROI */
-  /* feature area uses a light background but inner cards will be dark for contrast */
-    .feature-area{background:var(--card-bg-dark);color:var(--text);padding:2rem;border-radius:12px;margin:0.75rem auto;max-width:1120px}
-  .feature-area .layout{margin:0 auto}
-  /* make the two columns inside the feature area fluid so they never overflow the container */
-  .feature-area .layout{grid-template-columns:1fr 1fr;gap:2rem;align-items:center}
-  /* allow children to shrink (prevents content from forcing horizontal overflow) */
-  .feature-area .main, .feature-area .roi-panel{min-width:0}
-  /* make the inner cards darker again for the form + ROI while keeping the outer feature bg light */
-  .feature-area .card{background:var(--card-bg);color:var(--text);border:1px solid var(--card-border)}
-  .feature-area .input-with-icon{border-color:var(--input-border);background:var(--input-bg)}
-  .feature-area .input-with-icon input{color:var(--text)}
-  .feature-area .numbox{background:var(--input-bg);color:var(--text);border:1px solid var(--input-border)}
-
-  /* three-column summary placed above the feature area */
-  /* three-column summary placed above the feature area (wider and more prominent) */
-  .three-cols{max-width:1120px;margin:0.5rem auto 1rem;background:var(--feature-bg);color:var(--feature-text);padding:1.5rem;border-radius:12px}
-  .three-cols .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-  @media (max-width:900px){ .three-cols .grid{grid-template-columns:1fr} }
-  /* panel styling to help each column pop */
-  .three-cols .grid > div{background:rgba(0,0,0,0.02);padding:1.1rem;border-radius:8px;box-shadow:0 6px 24px rgba(2,6,8,0.08);border-left:6px solid var(--accent)}
-  .three-cols .grid > div:nth-child(1){border-left-color:var(--problem-color)}
-  .three-cols .grid > div:nth-child(2){border-left-color:var(--solution-color)}
-  .three-cols .grid > div:nth-child(3){border-left-color:var(--result-color)}
-  .three-cols .col-icon{width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center}
-  .three-cols .hgroup{display:flex;align-items:center;gap:10px}
-  .three-cols .grid > div:nth-child(1) .col-icon svg{fill:var(--problem-color)}
-  .three-cols .grid > div:nth-child(2) .col-icon svg{fill:var(--solution-color)}
-  .three-cols .grid > div:nth-child(3) .col-icon svg{fill:var(--result-color)}
-  .three-cols h4{margin:0 0 .6rem;font-size:1.32rem}
-  .three-cols p{margin:0 0 1rem;font-size:1.22rem;line-height:1.65}
-  .three-cols .grid > div h4 strong{color:var(--text)}
-  .three-cols .grid > div:nth-child(1) h4 strong{color:var(--problem-color)}
-  .three-cols .grid > div:nth-child(2) h4 strong{color:var(--solution-color)}
-  .three-cols .grid > div:nth-child(3) h4 strong{color:var(--result-color)}
-
-  /* sticky brand bar (hidden until user scrolls past the hero) */
-  #stickyBrand{position:fixed;left:0;right:0;top:0;transform:translateY(-100%);transition:transform .28s ease,opacity .2s;z-index:1400;opacity:0}
-  #stickyBrand.visible{transform:translateY(0);opacity:1}
-  #stickyBrand .sticky-inner{height:56px;display:flex;align-items:center;justify-content:center;gap:12px;font-weight:700;color:var(--text);background:linear-gradient(180deg,rgba(7,16,23,0.95),rgba(7,16,23,0.9));border-bottom:1px solid rgba(255,255,255,0.03)}
-  #stickyBrand .brand{color:var(--accent);margin-right:6px}
-  #stickyBrand .moto{color:var(--muted);font-weight:600}
-  footer{margin-top:2rem;color:var(--muted);font-size:.9rem;text-align:center}
-  .muted {color:var(--muted)}
-    .small {font-size:.95rem}
-    /* slightly larger, readable list for benefits section */
-  .benefits-list{font-size:1.15rem;margin:0.4rem 0;padding-left:1.15rem;line-height:1.45}
-    .benefits-list li{margin-bottom:0.6rem}
-    /* fixed-width numeric input boxes to avoid layout shift when values change
-      use character-based width so boxes don't take more space than needed */
-  .numbox{width:6ch;min-width:48px;box-sizing:border-box;padding:2px 6px;font-family:menlo,monospace;font-size:1rem;text-align:right;border-radius:4px;border:1px solid var(--input-border);background:var(--input-bg);color:var(--text)}
-  .numbox.small{width:4.2ch;min-width:36px}
-  .numbox.medium{width:6ch;min-width:45px}
-  .numbox.large{width:10ch;min-width:80px}
-  .numbox.xsmall{width:3ch;min-width:28px}
-    /* hide native number input spinners (Chrome, Edge, Safari, Firefox) */
-    input[type=number].numbox::-webkit-outer-spin-button,
-    input[type=number].numbox::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-    input[type=number].numbox {
-      -moz-appearance: textfield;
-      appearance: textfield;
-    }
-    /* range accent color */
-    input[type=range]{accent-color:var(--accent)}
-
-    /* glowing focus styles for inputs to match ROI controls' visual treatment */
-    /* highlight the input wrapper when a child receives focus (outer glow only) */
-    .input-with-icon:focus-within{
-      border-color: var(--accent);
-      box-shadow: 0 6px 20px rgba(198,170,88,0.10), 0 0 0 6px rgba(198,170,88,0.06);
-    }
-    /* remove native outline for inner controls so only the outer wrapper shows the glow */
-    .input-with-icon input:focus,
-    .numbox:focus,
-    input[type="range"]:focus {
-      outline: none;
-      box-shadow: none;
-    }
-    /* accessible glow for keyboard users on standalone controls (number/range) */
-    .numbox:focus-visible,
-    input[type="range"]:focus-visible {
-      border-color: var(--accent);
-      box-shadow: 0 6px 20px rgba(198,170,88,0.10), 0 0 0 6px rgba(198,170,88,0.06);
-    }
-  </style>
+  <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-  <!-- Sticky brand bar that appears after scrolling past the hero -->
-  <div id="stickyBrand" aria-hidden="true">
-    <div class="sticky-inner"><strong class="brand">Sttugs</strong><span class="moto">Hangar management, reimagined.</span></div>
+  <div id="stickyBrand" aria-hidden="false">
+    <div class="sticky-inner">
+      <div class="left"><a href="index.html" class="brand-link"><strong class="brand">Sttugs</strong></a><span class="moto">Hangar management, reimagined.</span></div>
+      <nav class="sticky-nav" aria-label="Primary">
+        <a href="about.html">About</a>
+        <a href="hardware.html">Hardware</a>
+        <a href="software.html">Software</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="roi.html">ROI Calculator</a>
+      </nav>
+    </div>
   </div>
+
   <div class="container">
-    <!-- header and short lead sit above the two-column layout -->
     <header>
       <h1 class="hero-subtitle">Sttugs</h1>
       <div class="hero-title">Hangar management, reimagined.</div>
       <div class="hero-desc">Intelligent stacking software and autonomous tugs stack hangers with zero human intervention.</div>
     </header>
 
-    <!-- Three-column problem/solution/result summary (light feature background) -->
     <section class="three-cols" aria-labelledby="three-title">
       <div class="grid">
         <div>
@@ -238,17 +87,13 @@
         </ul>
     </section>
 
-    <section class="feature-area">
+    <section class="feature-area" id="feature-area">
       <div class="layout">
       <main class="main">
-  <!-- contact placeholder removed (contact CTA is rendered near the footer in #contact-cta) -->
       </main>
-
-  <!-- ROI panel moved to a sliding drawer (see bottom of document). -->
       </div>
     </section>
 
-    <!-- Centered contact form placed near the bottom for visibility -->
     <section id="contact-cta" class="centered-section">
       <div class="card" style="max-width:760px;margin:0 auto;text-align:center;">
         <h2>Get Started Today</h2>
@@ -259,7 +104,6 @@
             <div class="field">
               <label class="visually-hidden" for="demo-name">Your Name</label>
               <div class="input-with-icon">
-                <!-- person icon -->
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-4 0-7 2-7 4v2h14v-2c0-2-3-4-7-4z"/></svg>
                 <input id="demo-name" name="name" type="text" placeholder="Your Name" required>
               </div>
@@ -269,7 +113,6 @@
             <div class="field">
               <label class="visually-hidden" for="demo-company">Your FBO / Company</label>
               <div class="input-with-icon">
-                <!-- building icon -->
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18v-2H3v2zm2-4h4V7H5v10zm6 0h4V3h-4v14zm6 0h4V11h-4v6z"/></svg>
                 <input id="demo-company" name="company" type="text" placeholder="Your FBO / Company" required>
               </div>
@@ -279,7 +122,6 @@
             <div class="field">
               <label class="visually-hidden" for="demo-contact">Email or phone</label>
               <div class="input-with-icon">
-                <!-- mail icon -->
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 6v12h20V6l-10 7L2 6z"/></svg>
                 <input id="demo-contact" name="contact" type="text" placeholder="Enter your email or phone" required>
               </div>
@@ -300,186 +142,7 @@
     </footer>
   </div>
 
-  <script>
-    // ROI drawer toggle elements will be initialized after DOMContentLoaded
-    // (drawer markup injected below the main container)
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    document.addEventListener('DOMContentLoaded', () => {
-      // sticky brand bar: show when the hero title text scrolls past
-      const sticky = document.getElementById('stickyBrand');
-      const heroTitle = document.querySelector('.hero-title');
-      function updateSticky(){
-        if(!sticky) return;
-        // prefer the hero title as the trigger; fall back to the header if missing
-        const trigger = heroTitle || document.querySelector('header');
-        if(!trigger) return;
-        const rect = trigger.getBoundingClientRect();
-        // show sticky when the trigger element's bottom has moved above the viewport
-        if(rect.bottom <= 0) sticky.classList.add('visible'); else sticky.classList.remove('visible');
-      }
-      // update on load and scroll
-      updateSticky();
-      window.addEventListener('scroll', updateSticky, {passive:true});
-
-      // demo form handling
-      const demoForm = document.getElementById('demoForm');
-      if(demoForm){
-        demoForm.addEventListener('submit', (e) => {
-          e.preventDefault();
-          let valid = true;
-          ['demo-name','demo-company','demo-contact'].forEach(id => {
-            const el = document.getElementById(id);
-            const err = document.querySelector(`.error[data-for="${id}"]`);
-            if(!el || !err) return;
-            if(!el.value.trim()){ err.style.display = 'block'; valid = false; } else { err.style.display = 'none'; }
-          });
-          if(valid){
-            // submit to Google Form (opaque no-cors POST) so responses appear in your Google Form
-            const gformUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSeESQcxH3hDUXmJm-tc7mCYc3_EB9Ef9Iv3A_ha_a9wWfpoYg/formResponse';
-            const fd = new FormData();
-            fd.append('entry.191654158', document.getElementById('demo-name').value.trim());
-            fd.append('entry.1925679811', document.getElementById('demo-company').value.trim());
-            fd.append('entry.878160977', document.getElementById('demo-contact').value.trim());
-            // fire-and-forget POST; response is opaque due to no-cors but form will receive it
-            fetch(gformUrl, { method: 'POST', mode: 'no-cors', body: fd })
-              .finally(() => {
-                // show the inline success message attached to the form
-                const inline = document.getElementById('demoSuccessInline');
-                if(inline) inline.style.display = 'block';
-                demoForm.querySelector('button[type=submit]').disabled = true;
-              });
-          }
-        });
-      }
-    });
-
-    // ROI controls (sliders + editable number inputs) will be initialized once the drawer markup is present
-    let elems = {};
-
-    function fmt(n){ return '$' + n.toLocaleString(undefined,{maximumFractionDigits:0}); }
-
-    function update(){
-      if(!elems || !elems.hangarSqft) return; // not ready
-      const sqft = Number(elems.hangarSqft.value);
-      const boost = Number(elems.utilBoost.value);
-      const tenant = Number(elems.tenantRate.value);
-      const people = Number(elems.peoplePerStack.value);
-      const wage = Number(elems.wagePerHour.value);
-      const hoursPerDay = Number(elems.timePerStack.value);
-      const days = 365;
-
-      // sync number inputs with slider values (or input-only fields)
-      if(elems.hangarSqftInput) elems.hangarSqftInput.value = sqft;
-      if(elems.utilBoostInput) elems.utilBoostInput.value = boost;
-      if(elems.tenantRateInput) elems.tenantRateInput.value = Number(tenant).toFixed(2);
-      if(elems.peopleInput) elems.peopleInput.value = people;
-      if(elems.wageInput) elems.wageInput.value = wage;
-      if(elems.timeInput) elems.timeInput.value = Number(hoursPerDay).toFixed(1);
-
-      // Labor savings: labor cost per year (people * wage * hours/day * days)
-      const annualLabor = people * wage * hoursPerDay * days;
-
-      // Revenue gain from utilization boost (fraction)
-      const utilIncrease = Math.max(0, boost) / 100; // fraction
-      const annualRevenue = sqft * utilIncrease * tenant * 12;
-
-      const total = Math.round(annualLabor + annualRevenue);
-
-      const laborEl = document.getElementById('laborSaving'); if(laborEl) laborEl.textContent = fmt(Math.round(annualLabor));
-      const revEl = document.getElementById('revenueGain'); if(revEl) revEl.textContent = fmt(Math.round(annualRevenue));
-      const roiEl = document.getElementById('roi-value'); if(roiEl) roiEl.textContent = fmt(total);
-    }
-
-    const pairs = [
-      ['hangarSqft','hangarSqftInput'],
-      ['utilBoost','utilBoostInput'],
-      ['tenantRate','tenantRateInput'],
-      ['peoplePerStack','peopleInput'],
-      ['wagePerHour','wageInput'],
-      ['timePerStack','timeInput']
-    ];
-
-    function initROIControls(){
-      // assign element references (returns false if not present yet)
-      elems = {
-        hangarSqft: document.getElementById('hangarSqft'),
-        hangarSqftInput: document.getElementById('hangarSqftInput'),
-        utilBoost: document.getElementById('utilBoost'),
-        utilBoostInput: document.getElementById('utilBoostInput'),
-        tenantRate: document.getElementById('tenantRate'),
-        tenantRateInput: document.getElementById('tenantRateInput'),
-        peoplePerStack: document.getElementById('peoplePerStack'),
-        peopleInput: document.getElementById('peopleInput'),
-        wagePerHour: document.getElementById('wagePerHour'),
-        wageInput: document.getElementById('wageInput'),
-        timePerStack: document.getElementById('timePerStack'),
-        timeInput: document.getElementById('timeInput')
-      };
-      if(!elems.hangarSqft) return false;
-
-      // wire slider <-> number input pairs so either control updates the other
-      pairs.forEach(([s,i]) => {
-        const slider = document.getElementById(s);
-        const input = document.getElementById(i);
-        if(!slider || !input) return;
-        // slider -> input (live)
-        if(s === 'timePerStack'){
-          slider.addEventListener('input', () => { input.value = Number(slider.value).toFixed(1); update(); });
-        } else {
-          slider.addEventListener('input', () => { input.value = slider.value; update(); });
-        }
-        // input -> slider: use 'change' so users can type freely without mid-typing clamping
-        input.addEventListener('change', () => {
-          let v = Number(input.value);
-          if(isNaN(v)) return;
-          // clamp to slider bounds
-          const min = Number(slider.min || -Infinity);
-          const max = Number(slider.max || Infinity);
-          if(v < min) v = min;
-          if(v > max) v = max;
-          // for time, ensure slider gets a numeric value matching step (one decimal)
-          if(s === 'timePerStack'){
-            v = Math.round(v * 2) / 2; // align to 0.5 step
-            slider.value = v;
-            input.value = Number(v).toFixed(1);
-          } else {
-            slider.value = v;
-            input.value = v;
-          }
-          update();
-        });
-        // initialize input to slider's current value; format hours/day with one decimal
-        if(s === 'timePerStack') input.value = Number(slider.value).toFixed(1); else input.value = slider.value;
-      });
-
-      // initial update
-      update();
-      return true;
-    }
-
-    // --- ROI drawer behavior: tab open/close, overlay, Escape key ---
-    // these elements are added later in the DOM (drawer markup) so wait until they're present
-    function initROIDrawer(){
-      const roiTab = document.getElementById('roiTab');
-      const roiDrawer = document.getElementById('roiDrawer');
-      const roiOverlay = document.getElementById('roiOverlay');
-      if(!roiDrawer || !roiTab || !roiOverlay) return false;
-      function openDrawer(){ roiDrawer.classList.add('open'); roiOverlay.hidden = false; roiTab.setAttribute('aria-expanded','true'); }
-      function closeDrawer(){ roiDrawer.classList.remove('open'); roiOverlay.hidden = true; roiTab.setAttribute('aria-expanded','false'); }
-      if(roiTab) roiTab.addEventListener('click', () => { const open = roiDrawer.classList.contains('open'); (open ? closeDrawer() : openDrawer()); });
-      if(roiOverlay) roiOverlay.addEventListener('click', closeDrawer);
-      // close on Escape
-      document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeDrawer(); });
-      // close button inside drawer
-      const closeBtn = roiDrawer.querySelector('.roi-close'); if(closeBtn) closeBtn.addEventListener('click', closeDrawer);
-      return true;
-    }
-    // try to initialize now; if drawer markup not yet present, try again shortly
-  if(!initROIDrawer()){ setTimeout(initROIDrawer, 300); }
-  if(!initROIControls()){ setTimeout(initROIControls, 300); }
-  </script>
+  <script src="assets/site.js"></script>
 
   <!-- ROI drawer markup: placed before the end of body so it is part of the document -->
   <div id="roiOverlay" class="roi-overlay" hidden aria-hidden="true"></div>

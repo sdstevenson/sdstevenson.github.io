@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ROI Calculator — Sttugs</title>
+  <link rel="icon" href="sttugs_transparent_background.png" type="image/png" sizes="32x32">
+  <link rel="manifest" href="favicon/site.webmanifest">
+  <link rel="stylesheet" href="assets/styles.css">
+  <meta name="theme-color" content="#ffffff">
+</head>
+<body class="subpage">
+  <div id="stickyBrand" aria-hidden="false">
+    <div class="sticky-inner">
+      <div class="left"><a href="index.html" class="brand-link"><strong class="brand">Sttugs</strong></a><span class="moto">Hangar management, reimagined.</span></div>
+      <nav class="sticky-nav" aria-label="Primary">
+        <a href="about.html">About</a>
+        <a href="hardware.html">Hardware</a>
+        <a href="software.html">Software</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="roi.html">ROI Calculator</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="container">
+    <header>
+      <h1 class="hero-subtitle">ROI Calculator</h1>
+      <div class="hero-title">Estimate annual benefit</div>
+    </header>
+
+    <section class="centered-section">
+      <div class="card" style="max-width:760px;margin:0 auto;text-align:left;">
+        <h2 id="roi-title">Your ROI</h2>
+        <div id="roi-value" style="font-size:1.6rem;font-weight:700;color:var(--success);margin-bottom:.5rem">$0</div>
+        <div class="small muted" style="margin-bottom:1rem">Estimated annual benefit</div>
+
+        <div style="margin-bottom:1rem">
+          <label class="small">Hangar sqft: <input id="hangarSqftInput" class="numbox large" type="number" min="1000" max="200000" step="1000" value="40000"></label>
+          <input id="hangarSqft" type="range" min="1000" max="200000" step="1000" value="40000">
+        </div>
+
+        <div style="margin-bottom:1rem">
+          <label class="small">Utilization boost %: <input id="utilBoostInput" class="numbox small" type="number" min="0" max="50" step="1" value="8"></label>
+          <input id="utilBoost" type="range" min="0" max="50" step="1" value="8">
+        </div>
+
+        <div style="margin-bottom:1rem">
+          <label class="small">Tenant rate (monthly $/sqft): <input id="tenantRateInput" class="numbox large" type="number" min="0" max="10" step="0.01" value="2.00"></label>
+          <input id="tenantRate" type="range" min="0" max="10" step="0.1" value="2.0">
+        </div>
+
+        <hr>
+
+        <div style="margin-bottom:1rem">
+          <label class="small">People per stack: <input id="peopleInput" class="numbox small" type="number" min="1" max="99" step="1" value="25"></label>
+          <input id="peoplePerStack" type="range" min="1" max="8" step="1" value="5">
+        </div>
+
+        <div style="margin-bottom:1rem">
+          <label class="small">Wage per hour ($): <input id="wageInput" class="numbox small" type="number" min="0" max="99" step="1" value="25"></label>
+          <input id="wagePerHour" type="range" min="10" max="99" step="1" value="25">
+        </div>
+
+        <div style="margin-bottom:1rem">
+          <label class="small">Hours spent stacking per day: <input id="timeInput" class="numbox medium" type="number" min="0" max="12" step="0.5" value="4"></label>
+          <input id="timePerStack" type="range" min="0" max="12" step="0.5" value="4">
+        </div>
+
+        <hr>
+
+        <div class="small" style="margin-top:.5rem">Breakdown</div>
+        <ul class="small" id="breakdown" style="padding-left:1rem">
+          <li>Annual labor savings: <strong id="laborSaving">$0</strong></li>
+          <li>Annual additional revenue: <strong id="revenueGain">$0</strong></li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>
+      <p><span id="year"></span> Sttugs • Built for FBO efficiency</p>
+    </footer>
+  </div>
+
+  <script src="assets/site.js"></script>
+</body>
+</html>

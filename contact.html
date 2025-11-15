@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Contact — Sttugs</title>
+  <link rel="icon" href="sttugs_transparent_background.png" type="image/png" sizes="32x32">
+  <link rel="manifest" href="favicon/site.webmanifest">
+  <link rel="stylesheet" href="assets/styles.css">
+  <meta name="theme-color" content="#ffffff">
+</head>
+<body class="subpage">
+  <div id="stickyBrand" aria-hidden="false">
+    <div class="sticky-inner">
+      <div class="left"><a href="index.html" class="brand-link"><strong class="brand">Sttugs</strong></a><span class="moto">Hangar management, reimagined.</span></div>
+      <nav class="sticky-nav" aria-label="Primary">
+        <a href="about.html">About</a>
+        <a href="hardware.html">Hardware</a>
+        <a href="software.html">Software</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="roi.html">ROI Calculator</a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="container">
+    <header>
+      <h1 class="hero-subtitle">Contact Us</h1>
+      <div class="hero-title">Get in touch with the Sttugs team</div>
+      <div class="hero-desc">Fill out the form below and we'll be in touch.</div>
+    </header>
+
+    <section id="contact-cta" class="centered-section">
+      <div class="card" style="max-width:760px;margin:0 auto;text-align:center;">
+        <h2>Get Started Today</h2>
+        <p class="small">See how this system can transform your operations</p>
+
+        <form id="demoForm" class="demo-form" novalidate style="margin-top:.6rem;display:flex;flex-direction:column;gap:.9rem;align-items:center;">
+          <div style="width:100%;max-width:640px;">
+            <div class="field">
+              <label class="visually-hidden" for="demo-name">Your Name</label>
+              <div class="input-with-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-4 0-7 2-7 4v2h14v-2c0-2-3-4-7-4z"/></svg>
+                <input id="demo-name" name="name" type="text" placeholder="Your Name" required>
+              </div>
+              <div class="error" data-for="demo-name">Please enter your name</div>
+            </div>
+
+            <div class="field">
+              <label class="visually-hidden" for="demo-company">Your FBO / Company</label>
+              <div class="input-with-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18v-2H3v2zm2-4h4V7H5v10zm6 0h4V3h-4v14zm6 0h4V11h-4v6z"/></svg>
+                <input id="demo-company" name="company" type="text" placeholder="Your FBO / Company" required>
+              </div>
+              <div class="error" data-for="demo-company">Please enter the name of your FBO / Company</div>
+            </div>
+
+            <div class="field">
+              <label class="visually-hidden" for="demo-contact">Email or phone</label>
+              <div class="input-with-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 6v12h20V6l-10 7L2 6z"/></svg>
+                <input id="demo-contact" name="contact" type="text" placeholder="Enter your email or phone" required>
+              </div>
+              <div class="error" data-for="demo-contact">Please enter your email or phone #</div>
+            </div>
+
+            <div style="text-align:center;margin-top:.5rem">
+              <button type="submit" class="primary-cta">Contact Our Team</button>
+            </div>
+          </div>
+        </form>
+        <div id="demoSuccessInline" class="small demo-success-inline">Thanks — we'll be in touch soon.</div>
+      </div>
+    </section>
+
+    <footer>
+      <p><span id="year"></span> Sttugs • Built for FBO efficiency</p>
+    </footer>
+  </div>
+
+  <script src="assets/site.js"></script>
+</body>
+</html>

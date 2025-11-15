@@ -1,0 +1,149 @@
+/* Shared site styles extracted from index.html */
+:root{
+  --bg: #0b0f12;
+  --text: #e6eef6;
+  --muted: #9aa6b2;
+  --card-bg: #071017;
+  --card-border: #12202a;
+  --card-bg-light: #0f1920;
+  --card-bg-dark: #041014;
+  --feature-bg: #e9f3f8;
+  --feature-text: #04202a;
+  --problem-color: #6b7b84;
+  --solution-color: #3f8fb0;
+  --result-color: #6fa886;
+  --accent: #c6aa58;
+  --accent-hover: #2b8fe6;
+  --input-bg: #071017;
+  --input-border: #21343b;
+  --success: #4cd07a;
+}
+
+html { font-size:18px }
+body {font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; padding:calc(2rem + 56px) 2rem 2rem 2rem; color:var(--text); background:var(--bg)}
+.container {max-width:1200px; margin:0 auto}
+.layout {display:grid; grid-template-columns: 500px 500px; gap:2rem; align-items:center}
+@media (max-width:1200px){ .layout{grid-template-columns:1fr} .roi-panel{order:99} }
+header {position:relative;display:flex;flex-direction:column;align-items:center;gap:.25rem;padding-top:.6rem;min-height:70vh;justify-content:center}
+  h1 {margin:0}
+  .tagline{display:none}
+.hero-title{font-size:2.6rem;font-weight:800;margin-top:0.15rem}
+.hero-subtitle{font-size:2.0rem;font-weight:800;text-align:center;color:var(--accent);margin-top:.4rem;margin-bottom:0.25rem;position:relative}
+.hero-subtitle::after{content:'';display:block;width:44px;height:3px;background:var(--accent);margin:6px auto 0;border-radius:2px;opacity:0.95}
+.hero-desc{font-size:1.15rem;font-weight:400;text-align:center;color:var(--muted);max-width:760px}
+.card {background:var(--card-bg);border:1px solid var(--card-border);padding:1rem;border-radius:10px;margin-top:1rem}
+.form-link, .schedule-link {display:inline-block;margin-top:1rem;padding:.6rem 1rem;background:var(--accent);color:white;border-radius:8px;text-decoration:none;font-weight:600}
+.form-link:hover, .schedule-link:hover {background:var(--accent-hover)}
+.demo-form{display:flex;flex-direction:column;gap:.85rem;margin-top:.5rem}
+.demo-form .field{display:flex;flex-direction:column}
+.input-with-icon{display:flex;align-items:center;border:1px solid var(--accent);padding:.7rem;border-radius:8px;background:transparent}
+.input-with-icon svg{width:18px;height:18px;flex:0 0 18px;fill:var(--muted)}
+.input-with-icon input{flex:1;border:0;background:transparent;color:var(--text);padding-left:.6rem;font-size:1.05rem}
+.demo-form .error{color:#e05555;font-size:.85rem;margin-top:6px;display:none}
+.primary-cta{display:inline-block;margin-top:.6rem;padding:0.95rem 1.25rem;border-radius:10px;background:var(--accent);color:#041014;border:0;font-weight:800;cursor:pointer;font-size:1.05rem}
+.primary-cta:hover{background:#9a7f30;color:#fff}
+.primary-cta[disabled]{opacity:.6;cursor:not-allowed}
+.demo-success-inline{display:none;color:var(--success);margin-top:.6rem;font-weight:700;text-align:center}
+.centered-section{max-width:1120px;margin:2rem auto;padding:1.25rem}
+.card.light{background:var(--card-bg-light);border:1px solid rgba(255,255,255,0.04)}
+.card.dark{background:var(--card-bg-dark);border:1px solid rgba(0,0,0,0.35)}
+.layout{margin-top:1rem}
+.feature-area{background:var(--card-bg-dark);color:var(--text);padding:2rem;border-radius:12px;margin:0.75rem auto;max-width:1120px}
+.feature-area .layout{margin:0 auto}
+.feature-area .layout{grid-template-columns:1fr 1fr;gap:2rem;align-items:center}
+.feature-area .main, .feature-area .roi-panel{min-width:0}
+.feature-area .card{background:var(--card-bg);color:var(--text);border:1px solid var(--card-border)}
+.feature-area .input-with-icon{border-color:var(--input-border);background:var(--input-bg)}
+.feature-area .input-with-icon input{color:var(--text)}
+.feature-area .numbox{background:var(--input-bg);color:var(--text);border:1px solid var(--input-border)}
+.three-cols{max-width:1120px;margin:0.5rem auto 1rem;background:var(--feature-bg);color:var(--feature-text);padding:1.5rem;border-radius:12px}
+.three-cols .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+@media (max-width:900px){ .three-cols .grid{grid-template-columns:1fr} }
+.three-cols .grid > div{background:rgba(0,0,0,0.02);padding:1.1rem;border-radius:8px;box-shadow:0 6px 24px rgba(2,6,8,0.08);border-left:6px solid var(--accent)}
+.three-cols .grid > div:nth-child(1){border-left-color:var(--problem-color)}
+.three-cols .grid > div:nth-child(2){border-left-color:var(--solution-color)}
+.three-cols .grid > div:nth-child(3){border-left-color:var(--result-color)}
+.three-cols .col-icon{width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center}
+.three-cols .hgroup{display:flex;align-items:center;gap:10px}
+.three-cols .grid > div:nth-child(1) .col-icon svg{fill:var(--problem-color)}
+.three-cols .grid > div:nth-child(2) .col-icon svg{fill:var(--solution-color)}
+.three-cols .grid > div:nth-child(3) .col-icon svg{fill:var(--result-color)}
+.three-cols h4{margin:0 0 .6rem;font-size:1.32rem}
+.three-cols p{margin:0 0 1rem;font-size:1.22rem;line-height:1.65}
+.three-cols .grid > div h4 strong{color:var(--text)}
+.three-cols .grid > div:nth-child(1) h4 strong{color:var(--problem-color)}
+.three-cols .grid > div:nth-child(2) h4 strong{color:var(--solution-color)}
+.three-cols .grid > div:nth-child(3) h4 strong{color:var(--result-color)}
+
+/* sticky brand bar (always visible) */
+#stickyBrand{position:fixed;left:0;right:0;top:0;transform:none;opacity:1;z-index:1400}
+#stickyBrand .sticky-inner{height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-weight:700;color:var(--text);background:linear-gradient(180deg,rgba(7,16,23,0.95),rgba(7,16,23,0.9));border-bottom:1px solid rgba(255,255,255,0.03);padding:0 1rem;box-sizing:border-box}
+#stickyBrand .brand{color:var(--accent);margin-right:6px;font-size:1.05rem}
+/* Make the brand link look like the other sticky buttons (no blue underline) */
+.brand-link{color:inherit;text-decoration:none;display:inline-flex;align-items:center;padding:.15rem .4rem;border-radius:6px}
+.brand-link .brand{color:var(--accent);font-weight:800}
+.brand-link:hover{background:rgba(255,255,255,0.02)}
+.brand-link:focus{outline:none}
+.brand-link:focus-visible{box-shadow:0 0 0 4px rgba(198,170,88,0.12);border-radius:6px}
+#stickyBrand .moto{color:var(--muted);font-weight:600}
+.sticky-nav{display:flex;gap:10px;align-items:center}
+.sticky-nav a{color:var(--text);text-decoration:none;padding:.45rem .7rem;border-radius:8px;font-weight:700}
+.sticky-nav a:hover{background:rgba(255,255,255,0.02)}
+footer{margin-top:2rem;color:var(--muted);font-size:.9rem;text-align:center}
+.muted {color:var(--muted)}
+.small {font-size:.95rem}
+.benefits-list{font-size:1.15rem;margin:0.4rem 0;padding-left:1.15rem;line-height:1.45}
+.benefits-list li{margin-bottom:0.6rem}
+.numbox{width:6ch;min-width:48px;box-sizing:border-box;padding:2px 6px;font-family:menlo,monospace;font-size:1rem;text-align:right;border-radius:4px;border:1px solid var(--input-border);background:var(--input-bg);color:var(--text)}
+.numbox.small{width:4.2ch;min-width:36px}
+.numbox.medium{width:6ch;min-width:45px}
+.numbox.large{width:10ch;min-width:80px}
+.numbox.xsmall{width:3ch;min-width:28px}
+input[type=number].numbox::-webkit-outer-spin-button,
+input[type=number].numbox::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number].numbox {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+input[type=range]{accent-color:var(--accent)}
+.input-with-icon:focus-within{
+  border-color: var(--accent);
+  box-shadow: 0 6px 20px rgba(198,170,88,0.10), 0 0 0 6px rgba(198,170,88,0.06);
+}
+.input-with-icon input:focus,
+.numbox:focus,
+input[type="range"]:focus {
+  outline: none;
+  box-shadow: none;
+}
+.numbox:focus-visible,
+input[type="range"]:focus-visible {
+  border-color: var(--accent);
+  box-shadow: 0 6px 20px rgba(198,170,88,0.10), 0 0 0 6px rgba(198,170,88,0.06);
+}
+
+/* small utility */
+.visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
+
+/* Smaller hero/header for subpages (about, contact, hardware, software, roi) */
+body.subpage header {
+  min-height:16vh;
+  padding-top:.2rem;
+  padding-bottom:.2rem;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+/* Keep the sticky tagline visible (same banner format as main page) */
+body.subpage .hero-title{display:none}
+/* Make the gold accent title slightly larger on subpages and pull it up */
+body.subpage .hero-subtitle{font-size:1.7rem;font-weight:800;color:var(--accent);margin-top:0;margin-bottom:0.15rem}
+body.subpage .hero-desc{font-size:1rem;max-width:700px;margin-top:0.2rem}
+/* Reduce spacing between header and following sections on subpages */
+body.subpage header{margin-bottom:.35rem}
+/* Slightly enlarge brand gold text in sticky bar for better emphasis */
+/* (brand size is set globally above so main and subpages match) */
+
