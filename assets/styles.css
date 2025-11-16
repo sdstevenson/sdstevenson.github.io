@@ -60,6 +60,14 @@ header {position:relative;display:flex;flex-direction:column;align-items:center;
 .three-cols{max-width:1120px;margin:0.5rem auto 1rem;background:var(--feature-bg);color:var(--feature-text);padding:1.5rem;border-radius:12px}
 .three-cols{max-width:1120px;margin:0.5rem auto 1rem;background:var(--ivory);color:#041014;padding:1.5rem;border-radius:12px}
 .three-grid{max-width:1120px;margin:0 auto;display:grid;gap:1rem}
+/* Solutions section: stacked full-width rows with arrows between */
+.solutions-grid{display:grid;grid-template-columns:1fr;gap:0.75rem;max-width:1120px;margin:1rem auto}
+.solutions-row{padding:1rem;border-radius:8px;border-left:6px solid var(--accent);box-shadow:0 6px 18px rgba(2,6,8,0.04);background:var(--card-bg-light)}
+.solutions-row h3{color:var(--accent);font-weight:900;font-size:1.25rem;margin:0 0 .6rem}
+.solutions-row .benefits-list{color:var(--muted);margin:0}
+.solutions-arrow{display:flex;justify-content:center;align-items:center;height:36px}
+.solutions-arrow svg{width:28px;height:28px;stroke:var(--accent);fill:none;stroke-width:2}
+@media (max-width:900px){ .solutions-grid{padding:0 0.5rem} .solutions-row{padding:.9rem} }
 .row-single{background:var(--ivory);padding:1rem;border-radius:8px;border-left:6px solid var(--accent);box-shadow:0 6px 18px rgba(2,6,8,0.06)}
 .row-single .row-title{color:var(--accent);font-weight:900;font-size:1.35rem;margin-bottom:0.5rem;display:flex;align-items:center;gap:.6rem}
 .row-single .row-icon{width:34px;height:34px;flex:0 0 34px;display:inline-flex;align-items:center;justify-content:center;fill:var(--accent)}
@@ -157,4 +165,14 @@ body.subpage .hero-desc{font-size:1rem;max-width:700px;margin-top:0.2rem}
 body.subpage header{margin-bottom:.35rem}
 /* Slightly enlarge brand gold text in sticky bar for better emphasis */
 /* (brand size is set globally above so main and subpages match) */
+
+/* Founder block */
+.founder-row{display:flex;gap:1.25rem;align-items:flex-start}
+.founder-photo{flex:0 0 160px;display:flex;flex-direction:column;align-items:center}
+.founder-photo img{width:160px;height:160px;object-fit:cover;border-radius:8px;border:1px solid rgba(255,255,255,0.04)}
+.founder-caption{margin-top:.5rem;text-align:center}
+.founder-caption .name{font-weight:800;color:var(--text);font-size:1rem}
+.founder-caption .title{font-size:.9rem;color:var(--muted);margin-top:2px}
+.founder-bio{flex:1;color:var(--text);font-size:1.05rem}
+@media (max-width:900px){.founder-row{flex-direction:column;align-items:center}.founder-bio{text-align:center}}
 
