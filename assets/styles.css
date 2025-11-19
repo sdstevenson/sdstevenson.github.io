@@ -18,10 +18,11 @@
   --input-bg: #071017;
   --input-border: #21343b;
   --success: #4cd07a;
+  --logo-url: url('logo_rectangle_2.svg');
 }
 
 html { font-size:18px }
-body {font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; padding:calc(2rem + 56px) 2rem 2rem 2rem; color:var(--text); background:var(--bg)}
+body {font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; padding:calc(2rem + 110px) 2rem 2rem 2rem; color:var(--text); background:var(--bg)}
 .container {max-width:1200px; margin:0 auto}
 .layout {display:grid; grid-template-columns: 500px 500px; gap:2rem; align-items:center}
 @media (max-width:1200px){ .layout{grid-template-columns:1fr} .roi-panel{order:99} }
@@ -96,6 +97,7 @@ header {position:relative;display:flex;flex-direction:column;align-items:center;
 /* sticky brand bar (always visible) */
 #stickyBrand{position:fixed;left:0;right:0;top:0;transform:none;opacity:1;z-index:1400}
 #stickyBrand .sticky-inner{height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-weight:700;color:var(--text);background:linear-gradient(180deg,rgba(7,16,23,0.95),rgba(7,16,23,0.9));border-bottom:1px solid rgba(255,255,255,0.03);padding:0 1rem;box-sizing:border-box}
+#stickyBrand .left{display:flex;align-items:center;gap:8px}
 #stickyBrand .brand{color:var(--accent);margin-right:6px;font-size:1.05rem}
 /* Make the brand link look like the other sticky buttons (no blue underline) */
 .brand-link{color:inherit;text-decoration:none;display:inline-flex;align-items:center;padding:.15rem .4rem;border-radius:6px}
@@ -103,6 +105,7 @@ header {position:relative;display:flex;flex-direction:column;align-items:center;
 .brand-link:hover{background:rgba(255,255,255,0.02)}
 .brand-link:focus{outline:none}
 .brand-link:focus-visible{box-shadow:0 0 0 4px rgba(198,170,88,0.12);border-radius:6px}
+.brand-link .logo{background-image: var(--logo-url); background-size: contain; background-repeat: no-repeat; width: 100px; height: 36px; margin-top: 4px}
 #stickyBrand .moto{color:var(--muted);font-weight:600}
 .sticky-nav{display:flex;gap:10px;align-items:center}
 .sticky-nav a{color:var(--text);text-decoration:none;padding:.45rem .7rem;border-radius:8px;font-weight:700}
