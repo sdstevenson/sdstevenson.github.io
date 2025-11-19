@@ -35,14 +35,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ROI nav link: if present and points to #, allow opening roi tab on same page
-  const roiNav = document.getElementById('roiNav');
-  if(roiNav){
-    roiNav.addEventListener('click', (e) => {
-      // if link is an in-page opener, simulate tab click; otherwise let navigation happen
-      if(roiNav.getAttribute('href') === '#'){
-        e.preventDefault();
-        const roiTabBtn = document.getElementById('roiTab'); if(roiTabBtn) roiTabBtn.click();
+  // Solutions dropdown
+  const dropdownBtn = document.querySelector('.dropdown-btn');
+  const dropdownContent = document.querySelector('.dropdown-content');
+  if(dropdownBtn && dropdownContent){
+    dropdownBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+    });
+    // Close when clicking outside
+    document.addEventListener('click', (e) => {
+      if(!dropdownBtn.contains(e.target) && !dropdownContent.contains(e.target)){
+        dropdownContent.style.display = 'none';
       }
     });
   }
