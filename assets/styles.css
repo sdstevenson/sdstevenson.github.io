@@ -19,6 +19,7 @@
   --input-border: #21343b;
   --success: #4cd07a;
   --logo-url: url('logo_rectangle_2.svg');
+  --img-size: 400px;
 }
 
 html { font-size:18px }
@@ -169,12 +170,12 @@ body.subpage header{margin-bottom:.35rem}
 /* (brand size is set globally above so main and subpages match) */
 
 /* Founder block */
-.founder-row{display:flex;gap:1.25rem;align-items:flex-start}
-.founder-photo{flex:0 0 160px;display:flex;flex-direction:column;align-items:center}
-.founder-photo img{width:160px;height:160px;object-fit:cover;border-radius:8px;border:1px solid rgba(255,255,255,0.04)}
+.founder-row{display:flex;gap:1.25rem;align-items:center}
+.founder-photo{flex:0 0 var(--img-size);display:flex;flex-direction:column;align-items:center}
+.founder-photo img{width:var(--img-size);height:var(--img-size);object-fit:cover;border-radius:8px;border:1px solid rgba(255,255,255,0.04)}
 .founder-caption{margin-top:.5rem;text-align:center}
 .founder-caption .name{font-weight:800;color:var(--text);font-size:1rem}
 .founder-caption .title{font-size:.9rem;color:var(--muted);margin-top:2px}
-.founder-bio{flex:1;color:var(--text);font-size:1.05rem}
+.founder-bio{flex:1;color:var(--text);font-size:1.15rem;line-height:1.45}
 @media (max-width:900px){.founder-row{flex-direction:column;align-items:center}.founder-bio{text-align:center}}
 
