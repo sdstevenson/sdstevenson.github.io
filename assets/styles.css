@@ -105,7 +105,7 @@ header {position:relative;display:flex;flex-direction:column;align-items:center;
 .brand-link:hover{background:rgba(255,255,255,0.02)}
 .brand-link:focus{outline:none}
 .brand-link:focus-visible{box-shadow:0 0 0 4px rgba(198,170,88,0.12);border-radius:6px}
-.brand-link .logo{background-image: var(--logo-url); background-size: contain; background-repeat: no-repeat; width: 100px; height: 36px; margin-top: 4px}
+.brand-link .logo{background-image: var(--logo-url); background-size: contain; background-repeat: no-repeat; width: 100px; height: 36px; margin-top: 10px}
 #stickyBrand .moto{color:var(--muted);font-weight:600}
 .sticky-nav{display:flex;gap:10px;align-items:center}
 .sticky-nav a{color:var(--text);text-decoration:none;padding:.45rem .7rem;border-radius:8px;font-weight:700}
