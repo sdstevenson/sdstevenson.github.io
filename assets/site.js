@@ -72,14 +72,19 @@ document.addEventListener('DOMContentLoaded', () => {
   if(dropdownBtn && dropdownContent){
     dropdownBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      const isOpen = dropdownContent.style.display === 'block';
-      dropdownContent.style.display = isOpen ? 'none' : 'block';
-      dropdownBtn.setAttribute('aria-expanded', !isOpen);
+      const isOpen = dropdownContent.classList.contains('open');
+      if(isOpen){
+        dropdownContent.classList.remove('open');
+        dropdownBtn.setAttribute('aria-expanded', 'false');
+      } else {
+        dropdownContent.classList.add('open');
+        dropdownBtn.setAttribute('aria-expanded', 'true');
+      }
     });
     // Close dropdown when clicking outside (desktop only)
     document.addEventListener('click', (e) => {
       if(window.innerWidth > 900 && !dropdownBtn.contains(e.target) && !dropdownContent.contains(e.target)){
-        dropdownContent.style.display = 'none';
+        dropdownContent.classList.remove('open');
         dropdownBtn.setAttribute('aria-expanded', 'false');
       }
     });
