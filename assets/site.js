@@ -35,18 +35,52 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Hamburger menu toggle
+  const hamburger = document.querySelector('.hamburger');
+  const stickyNav = document.querySelector('.sticky-nav');
+  if(hamburger && stickyNav){
+    hamburger.addEventListener('click', () => {
+      stickyNav.classList.toggle('open');
+      const isOpen = stickyNav.classList.contains('open');
+      hamburger.setAttribute('aria-expanded', isOpen);
+      hamburger.textContent = isOpen ? '✕' : '☰';
+    });
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if(window.innerWidth <= 900 && !hamburger.contains(e.target) && !stickyNav.contains(e.target)){
+        stickyNav.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.textContent = '☰';
+      }
+    });
+    // Close mobile menu when clicking a nav link (but not the dropdown button)
+    const navLinks = stickyNav.querySelectorAll('a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if(window.innerWidth <= 900){
+          stickyNav.classList.remove('open');
+          hamburger.setAttribute('aria-expanded', 'false');
+          hamburger.textContent = '☰';
+        }
+      });
+    });
+  }
+
   // Solutions dropdown
   const dropdownBtn = document.querySelector('.dropdown-btn');
   const dropdownContent = document.querySelector('.dropdown-content');
   if(dropdownBtn && dropdownContent){
     dropdownBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+      const isOpen = dropdownContent.style.display === 'block';
+      dropdownContent.style.display = isOpen ? 'none' : 'block';
+      dropdownBtn.setAttribute('aria-expanded', !isOpen);
     });
-    // Close when clicking outside
+    // Close dropdown when clicking outside (desktop only)
     document.addEventListener('click', (e) => {
-      if(!dropdownBtn.contains(e.target) && !dropdownContent.contains(e.target)){
+      if(window.innerWidth > 900 && !dropdownBtn.contains(e.target) && !dropdownContent.contains(e.target)){
         dropdownContent.style.display = 'none';
+        dropdownBtn.setAttribute('aria-expanded', 'false');
       }
     });
   }
