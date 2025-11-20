@@ -179,4 +179,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if(!initROIDrawer()){ setTimeout(initROIDrawer, 300); }
   if(!initROIControls()){ setTimeout(initROIControls, 300); }
+
+  // FAQ dropdown
+  const faqDropdownBtn = document.querySelector('.faq-dropdown-btn');
+  const faqDropdownContent = document.querySelector('.faq-dropdown-content');
+  const faqDropdownIcon = document.querySelector('.faq-dropdown-icon');
+  if(faqDropdownBtn && faqDropdownContent && faqDropdownIcon){
+    faqDropdownBtn.addEventListener('click', () => {
+      const isOpen = faqDropdownContent.classList.contains('open');
+      if(isOpen){
+        faqDropdownContent.classList.remove('open');
+        faqDropdownBtn.setAttribute('aria-expanded', 'false');
+        faqDropdownIcon.textContent = '+';
+      } else {
+        faqDropdownContent.classList.add('open');
+        faqDropdownBtn.setAttribute('aria-expanded', 'true');
+        faqDropdownIcon.textContent = '−';
+      }
+    });
+  }
 });
