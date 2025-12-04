@@ -35,11 +35,36 @@
   </div>
 
   <div class="container">
-    <header>
+    <header id="hero-header" class="collapsed">
       <h1 class="hero-subtitle">Sttugs</h1>
-      <div class="hero-title">Hangar management, reimagined.</div>
+      <!-- <div class="hero-title">Hangar management, reimagined.</div> -->
       <div class="hero-desc">We're building the future of autonomous hangar stacking, and we're looking for FBO partners to help shape it.</div>
     </header>
+
+    <!-- Video Carousel -->
+    <section id="video-showcase" class="video-showcase">
+      <div class="video-carousel">
+        <button class="carousel-arrow carousel-prev" aria-label="Previous video">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="15 18 9 12 15 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <!-- Video shown on startup -->
+        <div class="video-container">
+          <video id="showcase-video" playsinline muted loop>
+            <source src="./assets/auto_stack_demo.mp4" type="video/mp4">
+          </video>
+          <div class="video-caption">
+            <span class="video-title">Intelligent Auto-Stack</span>
+            <span class="video-desc">Our algorithm finds optimal placements for maximum hangar utilization</span>
+          </div>
+        </div>
+
+        <button class="carousel-arrow carousel-next" aria-label="Next video">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="9 18 15 12 9 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div class="carousel-dots"></div>
+    </section>
 
     <section class="three-cols" aria-labelledby="three-title">
       <div class="three-grid" id="three-title">
