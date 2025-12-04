@@ -198,4 +198,94 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // =====================================================
+  // Video Showcase Carousel
+  // =====================================================
+  
+  const videoShowcase = document.getElementById('video-showcase');
+  
+  if (videoShowcase) {
+    // Video data for the carousel
+    const videos = [
+      // TO DO: Automated Tug
+
+      // Auto Stacking
+      {
+        src: './assets/auto_stack_demo.mp4',
+        title: 'Intelligent Auto-Stack',
+        desc: 'Our algorithm finds optimal placements for maximum hangar utilization'
+      },
+
+      // TO DO: Path Planning
+
+      // Collision Detection
+      {
+        src: './assets/collision_detection_demo_cropped.mp4',
+        title: 'Collision Detection',
+        desc: 'Real-time hazard identification prevents costly hangar rash'
+      },
+    ];
+    
+    let currentVideoIndex = 0;
+    const videoEl = document.getElementById('showcase-video');
+    const videoTitle = videoShowcase.querySelector('.video-title');
+    const videoDesc = videoShowcase.querySelector('.video-desc');
+    const dotsContainer = videoShowcase.querySelector('.carousel-dots');
+    const prevBtn = videoShowcase.querySelector('.carousel-prev');
+    const nextBtn = videoShowcase.querySelector('.carousel-next');
+    
+    // Create dots
+    videos.forEach((_, index) => {
+      const dot = document.createElement('button');
+      dot.className = 'carousel-dot' + (index === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', `Go to video ${index + 1}`);
+      dot.addEventListener('click', () => goToVideo(index));
+      dotsContainer.appendChild(dot);
+    });
+    
+    function updateVideo(index) {
+      const video = videos[index];
+      videoEl.src = video.src;
+      videoEl.load();
+      videoEl.play().catch(() => {}); // Autoplay may be blocked
+      videoTitle.textContent = video.title;
+      videoDesc.textContent = video.desc;
+      
+      // Update dots
+      dotsContainer.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+    }
+    
+    function goToVideo(index) {
+      currentVideoIndex = index;
+      updateVideo(currentVideoIndex);
+    }
+    
+    function nextVideo() {
+      currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+      updateVideo(currentVideoIndex);
+    }
+    
+    function prevVideo() {
+      currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
+      updateVideo(currentVideoIndex);
+    }
+    
+    // Arrow button handlers
+    if (prevBtn) prevBtn.addEventListener('click', prevVideo);
+    if (nextBtn) nextBtn.addEventListener('click', nextVideo);
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') prevVideo();
+      if (e.key === 'ArrowRight') nextVideo();
+    });
+    
+    // Start playing the first video
+    if (videoEl) {
+      videoEl.play().catch(() => {});
+    }
+  }
 });
