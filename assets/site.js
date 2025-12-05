@@ -228,7 +228,9 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
     
     let currentVideoIndex = 0;
+    let isTransitioning = false;
     const videoEl = document.getElementById('showcase-video');
+    const videoContainer = videoShowcase.querySelector('.video-container');
     const videoTitle = videoShowcase.querySelector('.video-title');
     const videoDesc = videoShowcase.querySelector('.video-desc'); 
     const dotsContainer = videoShowcase.querySelector('.carousel-dots');
@@ -244,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
       dotsContainer.appendChild(dot);
     });
     
-    function updateVideo(index) {
+    function updateVideo(index, direction = 'right') {
       const video = videos[index];
       videoEl.src = video.src;
       videoEl.load();
@@ -258,19 +260,53 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
     
+    function transitionToVideo(index, direction) {
+      if (isTransitioning || index === currentVideoIndex) return;
+      isTransitioning = true;
+      
+      // When going right/next: current slides out left, new slides in from right
+      // When going left/prev: current slides out right, new slides in from left
+      const slideOutClass = direction === 'right' ? 'slide-out-left' : 'slide-out-right';
+      const slideInClass = direction === 'right' ? 'slide-in-right' : 'slide-in-left';
+      
+      videoContainer.classList.add(slideOutClass);
+      
+      setTimeout(() => {
+        // Update video content while hidden
+        currentVideoIndex = index;
+        updateVideo(currentVideoIndex, direction);
+        
+        // Disable transition, position off-screen
+        videoContainer.style.transition = 'none';
+        videoContainer.classList.remove(slideOutClass);
+        videoContainer.classList.add(slideInClass);
+        
+        // Force reflow to apply the position instantly
+        void videoContainer.offsetWidth;
+        
+        // Re-enable transition and slide in
+        videoContainer.style.transition = '';
+        videoContainer.classList.remove(slideInClass);
+        
+        setTimeout(() => {
+          isTransitioning = false;
+        }, 300);
+      }, 200);
+    }
+    
     function goToVideo(index) {
-      currentVideoIndex = index;
-      updateVideo(currentVideoIndex);
+      const direction = index > currentVideoIndex ? 'right' : 'left';
+      transitionToVideo(index, direction);
     }
     
     function nextVideo() {
-      currentVideoIndex = (currentVideoIndex + 1) % videos.length;
-      updateVideo(currentVideoIndex);
+      const newIndex = (currentVideoIndex + 1) % videos.length;
+      transitionToVideo(newIndex, 'right');
     }
     
     function prevVideo() {
-      currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
-      updateVideo(currentVideoIndex);
+      const newIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
+      transitionToVideo(newIndex, 'left');
     }
     
     // Arrow button handlers
@@ -282,6 +318,35 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.key === 'ArrowLeft') prevVideo();
       if (e.key === 'ArrowRight') nextVideo();
     });
+    
+    // Track if user manually paused the video
+    let userPaused = false;
+    
+    // Detect user pause/play actions
+    if (videoEl) {
+      videoEl.addEventListener('pause', () => {
+        // Only set userPaused if video didn't end naturally
+        if (videoEl.currentTime < videoEl.duration) {
+          userPaused = true;
+        }
+      });
+      
+      videoEl.addEventListener('play', () => {
+        userPaused = false;
+      });
+    }
+    
+    // Auto-advance to next video when current one ends (with pause)
+    // Only auto-advance if user hasn't paused
+    if (videoEl) {
+      videoEl.addEventListener('ended', () => {
+        if (!userPaused) {
+          setTimeout(() => {
+            nextVideo();
+          }, 1500); // 1.5 second pause before advancing
+        }
+      });
+    }
     
     // Start playing the first video
     if (videoEl) {
