@@ -210,10 +210,9 @@ body.subpage header {
   justify-content:center;
   text-align:center;
 }
-/* Keep the sticky tagline visible (same banner format as main page) */
-body.subpage .hero-title{display:none}
 /* Make the gold accent title slightly larger on subpages and pull it up */
 body.subpage .hero-subtitle{font-size:1.7rem;font-weight:800;color:var(--accent);margin-top:0;margin-bottom:0.15rem}
+body.subpage .hero-title{font-size:1.4rem;margin-top:0.2rem}
 body.subpage .hero-desc{font-size:1rem;max-width:700px;margin-top:0.2rem}
 /* Reduce spacing between header and following sections on subpages */
 body.subpage header{margin-bottom:.35rem}
