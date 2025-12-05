@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Collision Detection
       {
-        src: './assets/collision_detection_demo_cropped.mp4',
+        src: './assets/collision_detection_demo.mp4',
         title: 'Collision Detection',
         desc: 'Real-time hazard identification prevents costly hangar rash'
       },
@@ -230,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentVideoIndex = 0;
     const videoEl = document.getElementById('showcase-video');
     const videoTitle = videoShowcase.querySelector('.video-title');
-    const videoDesc = videoShowcase.querySelector('.video-desc');
+    const videoDesc = videoShowcase.querySelector('.video-desc'); 
     const dotsContainer = videoShowcase.querySelector('.carousel-dots');
     const prevBtn = videoShowcase.querySelector('.carousel-prev');
     const nextBtn = videoShowcase.querySelector('.carousel-next');
