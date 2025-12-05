@@ -61,11 +61,11 @@ header {position:relative;display:flex;flex-direction:column;align-items:center;
 .centered-section{max-width:1120px;margin:2rem auto;padding:1.25rem}
 
 /* Video split layout - two columns with text left, video right */
-.video-split{display:flex;flex-direction:row;gap:2rem;align-items:center}
+.video-split{display:flex;flex-direction:row;gap:2rem;align-items:flex-start}
 .video-split-text{flex:1;min-width:0}
 .video-split-text h2{margin-top:0}
 .video-split-text p{color:var(--muted);line-height:1.6}
-.video-split-video{flex:1.2;min-width:0}
+.video-split-video{flex:1.6;min-width:0}
 .video-split-video video{width:100%;height:auto;border-radius:8px;display:block}
 @media (max-width:900px){
   .video-split{flex-direction:column}
