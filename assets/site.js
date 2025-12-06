@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Collision Detection
       {
-        src: './assets/collision_detection_demo.mp4',
+        src: './assets/collision_detection_demo_sim.mp4',
         title: 'Collision Detection',
         desc: 'Real-time hazard identification prevents costly hangar rash'
       },
