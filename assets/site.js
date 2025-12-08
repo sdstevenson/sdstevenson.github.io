@@ -239,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         faqDropdownContent.classList.add('open');
         faqDropdownBtn.setAttribute('aria-expanded', 'true');
-        faqDropdownIcon.textContent = '−';
+        faqDropdownIcon.textContent = '-';
       }
     });
   }
