@@ -35,6 +35,51 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ROI download form handling
+  const roiDownloadForm = document.getElementById('roiDownloadForm');
+  if(roiDownloadForm){
+    roiDownloadForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let valid = true;
+      const emailEl = document.getElementById('roi-email');
+      const err = document.querySelector('.error[data-for="roi-email"]');
+      if(emailEl && err){
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if(!emailEl.value.trim() || !emailRegex.test(emailEl.value.trim())){
+          err.style.display = 'block';
+          valid = false;
+        } else {
+          err.style.display = 'none';
+        }
+      }
+      if(valid){
+        // Get current ROI values
+        const roiValue = document.getElementById('roi-value')?.textContent || '$0';
+        const laborSaving = document.getElementById('laborSaving')?.textContent || '$0';
+        const revenueGain = document.getElementById('revenueGain')?.textContent || '$0';
+        
+        // Get input values
+        const hangarSqft = document.getElementById('hangarSqftInput')?.value || '0';
+        const utilBoost = document.getElementById('utilBoostInput')?.value || '0';
+        const tenantRate = document.getElementById('tenantRateInput')?.value || '0';
+        const people = document.getElementById('peopleInput')?.value || '0';
+        const wage = document.getElementById('wageInput')?.value || '0';
+        const hours = document.getElementById('timeInput')?.value || '0';
+        
+        const gformUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSeESQcxH3hDUXmJm-tc7mCYc3_EB9Ef9Iv3A_ha_a9wWfpoYg/formResponse';
+        const fd = new FormData();
+        fd.append('entry.191654158', 'ROI Download Request');
+        fd.append('entry.1925679811', `ROI: ${roiValue}, Labor: ${laborSaving}, Revenue: ${revenueGain}`);
+        fd.append('entry.878160977', emailEl.value.trim() + ` | Inputs: ${hangarSqft}sqft, ${utilBoost}% boost, $${tenantRate}/sqft, ${people}ppl, $${wage}/hr, ${hours}hrs/day`);
+        fetch(gformUrl, { method: 'POST', mode: 'no-cors', body: fd })
+          .finally(() => {
+            const inline = document.getElementById('roiDownloadSuccess'); if(inline) inline.style.display = 'block';
+            const btn = roiDownloadForm.querySelector('button[type=submit]'); if(btn) btn.disabled = true;
+          });
+      }
+    });
+  }
+
   // Hamburger menu toggle
   const hamburger = document.querySelector('.hamburger');
   const stickyNav = document.querySelector('.sticky-nav');

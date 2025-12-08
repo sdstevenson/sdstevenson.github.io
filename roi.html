@@ -84,6 +84,28 @@
           <li>Annual labor savings: <strong id="laborSaving">$0</strong></li>
           <li>Annual additional revenue: <strong id="revenueGain">$0</strong></li>
         </ul>
+
+        <hr style="margin-top:1.5rem">
+
+        <div style="margin-top:1rem;text-align:center">
+          <p class="small muted">Want a detailed report of your ROI calculation?</p>
+          <form id="roiDownloadForm" class="demo-form" novalidate style="margin-top:.8rem;display:flex;flex-direction:column;gap:.8rem;align-items:center;">
+            <div style="width:100%;max-width:400px;">
+              <div class="field">
+                <label class="visually-hidden" for="roi-email">Your Email</label>
+                <div class="input-with-icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 6v12h20V6l-10 7L2 6z"/></svg>
+                  <input id="roi-email" name="email" type="email" placeholder="Enter your email" required>
+                </div>
+                <div class="error" data-for="roi-email">Please enter a valid email address</div>
+              </div>
+              <div style="text-align:center;margin-top:.5rem">
+                <button type="submit" class="primary-cta">Get Report</button>
+              </div>
+            </div>
+          </form>
+          <div id="roiDownloadSuccess" class="small demo-success-inline">Thanks! Check your email for your ROI report.</div>
+        </div>
       </div>
     </section>
 
