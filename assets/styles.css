@@ -801,6 +801,9 @@ body.subpage header{margin-bottom:.35rem}
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
 
 .product-level-card:hover {
