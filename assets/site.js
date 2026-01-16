@@ -279,8 +279,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const videoTitle = videoShowcase.querySelector('.video-title');
     const videoDesc = videoShowcase.querySelector('.video-desc'); 
     const dotsContainer = videoShowcase.querySelector('.carousel-dots');
-    const prevBtn = videoShowcase.querySelector('.carousel-prev');
-    const nextBtn = videoShowcase.querySelector('.carousel-next');
     
     // Create dots
     videos.forEach((_, index) => {
@@ -309,10 +307,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (isTransitioning || index === currentVideoIndex) return;
       isTransitioning = true;
       
-      // When going right/next: current slides out left, new slides in from right
-      // When going left/prev: current slides out right, new slides in from left
-      const slideOutClass = direction === 'right' ? 'slide-out-left' : 'slide-out-right';
-      const slideInClass = direction === 'right' ? 'slide-in-right' : 'slide-in-left';
+      // When going down/next: current slides out up, new slides in from down
+      // When going up/prev: current slides out down, new slides in from up
+      const slideOutClass = direction === 'down' ? 'slide-out-up' : 'slide-out-down';
+      const slideInClass = direction === 'down' ? 'slide-in-up' : 'slide-in-down';
       
       videoContainer.classList.add(slideOutClass);
       
@@ -340,28 +338,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function goToVideo(index) {
-      const direction = index > currentVideoIndex ? 'right' : 'left';
+      const direction = index > currentVideoIndex ? 'down' : 'up';
       transitionToVideo(index, direction);
     }
     
     function nextVideo() {
       const newIndex = (currentVideoIndex + 1) % videos.length;
-      transitionToVideo(newIndex, 'right');
+      transitionToVideo(newIndex, 'down');
     }
     
     function prevVideo() {
       const newIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
-      transitionToVideo(newIndex, 'left');
+      transitionToVideo(newIndex, 'up');
     }
-    
-    // Arrow button handlers
-    if (prevBtn) prevBtn.addEventListener('click', prevVideo);
-    if (nextBtn) nextBtn.addEventListener('click', nextVideo);
     
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') prevVideo();
-      if (e.key === 'ArrowRight') nextVideo();
+      if (e.key === 'ArrowUp') prevVideo();
+      if (e.key === 'ArrowDown') nextVideo();
     });
     
     // Track if user manually paused the video
