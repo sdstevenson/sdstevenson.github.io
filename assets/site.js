@@ -398,4 +398,32 @@ document.addEventListener('DOMContentLoaded', () => {
       videoEl.play().catch(() => {});
     }
   }
+
+  // Custom video controls
+  const customVideos = document.querySelectorAll('.custom-video');
+  customVideos.forEach(video => {
+    const container = video.parentElement;
+    const playOverlay = container.querySelector('.video-play-overlay');
+    
+    if (playOverlay) {
+      // Click on overlay or video to toggle play/pause
+      const togglePlayPause = () => {
+        if (video.paused) {
+          video.play();
+          playOverlay.classList.add('hidden');
+        } else {
+          video.pause();
+          playOverlay.classList.remove('hidden');
+        }
+      };
+      
+      playOverlay.addEventListener('click', togglePlayPause);
+      video.addEventListener('click', togglePlayPause);
+      
+      // Show overlay when video ends
+      video.addEventListener('ended', () => {
+        playOverlay.classList.remove('hidden');
+      });
+    }
+  });
 });

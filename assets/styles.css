@@ -86,8 +86,14 @@ body {font-family: var(--font-sans); margin:0; padding:calc(2rem + 110px) 2rem 2
 .video-split-text{width:100%}
 .video-split-text h2{margin-top:0;text-align:left}
 .video-split-text p{color:var(--muted);line-height:1.6;text-align:left;max-width:800px;}
-.video-split-video{width:100%}
+.video-split-video{width:100%;position:relative}
 .video-split-video video{width:100%;height:auto;border-radius:8px;display:block}
+.video-split-video video::-webkit-media-controls{display:none!important}
+.video-split-video video::-webkit-media-controls-enclosure{display:none!important}
+.video-play-overlay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:80px;height:80px;background:rgba(198,170,88,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s ease;z-index:10}
+.video-play-overlay:hover{background:rgba(198,170,88,1);transform:translate(-50%,-50%) scale(1.1)}
+.video-play-overlay.hidden{opacity:0;pointer-events:none}
+.video-play-overlay svg{width:32px;height:32px;fill:#000;margin-left:4px}
 @media (max-width:900px){
   .video-split{flex-direction:column}
   .video-split-video{width:100%}
