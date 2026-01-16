@@ -3,23 +3,23 @@
 
 /* Shared site styles extracted from index.html */
 :root{
-  --bg: #0b0f12;
+  --bg: #000000;
   --text: #e6eef6;
   --ivory: #f7f4e9;
-  --muted: #9aa6b2;
-  --card-bg: #071017;
-  --card-border: #12202a;
-  --card-bg-light: #0f1920;
-  --card-bg-dark: #041014;
-  --feature-bg: #04202a;
+  --muted: #999999;
+  --card-bg: #0a0a0a;
+  --card-border: #1a1a1a;
+  --card-bg-light: #141414;
+  --card-bg-dark: #050505;
+  --feature-bg: #0f0f0f;
   --feature-text: #e9f3f8;
-  --problem-color: #6b7b84;
-  --solution-color: #3f8fb0;
+  --problem-color: #6b6b6b;
+  --solution-color: #5a8a72;
   --result-color: #6fa886;
   --accent: #c6aa58;
   --accent-hover: #2b8fe6;
-  --input-bg: #071017;
-  --input-border: #21343b;
+  --input-bg: #0a0a0a;
+  --input-border: #2a2a2a;
   --success: #4cd07a;
   --logo-url: url('logo_rectangle_2.svg');
   --img-size: 400px;
@@ -101,13 +101,35 @@ header {position:relative;display:flex;flex-direction:column;align-items:center;
   .video-split-text{width:100%}
 }
 
+/* Two-Part Process section */
+.two-part-section{max-width:1200px;margin:3rem auto;padding:0 1rem}
+.two-part-header{text-align:center;margin-bottom:3rem}
+.two-part-title{font-size:2.5rem;font-weight:700;color:#fff;margin:0 0 1rem;line-height:1.2}
+.two-part-subtitle{font-size:1.25rem;color:var(--muted);margin:0}
+.two-part-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}
+.two-part-card{padding:2rem;border-radius:16px;background:rgba(10,10,10,0.8);border:1px solid var(--card-border);display:flex;flex-direction:column;gap:1.5rem}
+.two-part-card-header{display:flex;align-items:center;gap:1rem}
+.two-part-number{width:3rem;height:3rem;border-radius:8px;background:linear-gradient(135deg,var(--accent) 0%,#9a7f30 100%);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.two-part-number span{font-size:1.25rem;font-weight:700;color:#000}
+.two-part-card-title{font-size:1.5rem;font-weight:700;color:#fff;margin:0}
+.two-part-card-desc{font-size:1.0625rem;line-height:1.7;color:var(--muted);margin:0}
+.two-part-card ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.75rem}
+.two-part-card ul li{display:flex;align-items:flex-start;gap:0.75rem;color:var(--muted)}
+.two-part-card ul li::before{content:'•';color:var(--accent);font-size:1.25rem;line-height:1.5;flex-shrink:0}
+@media (max-width:900px){
+  .two-part-title{font-size:1.75rem}
+  .two-part-subtitle{font-size:1rem}
+  .two-part-grid{grid-template-columns:1fr;gap:1.5rem}
+  .two-part-card{padding:1.5rem}
+}
+
 /* How It Works section */
-.how-it-works-section{background:linear-gradient(180deg,var(--bg) 0%,#000 100%);padding:5rem 2rem;margin:2rem 0}
+.how-it-works-section{background:linear-gradient(180deg,#000 0%,#000 100%);padding:5rem 2rem;margin:2rem 0}
 .how-it-works-header{text-align:center;margin-bottom:4rem}
 .how-it-works-title{font-size:2.5rem;font-weight:700;color:#fff;margin:0 0 1rem}
 .how-it-works-subtitle{font-size:1.25rem;color:var(--muted);max-width:48rem;margin:0 auto}
 .how-it-works-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;max-width:1200px;margin:0 auto}
-.how-it-works-card{position:relative;padding:1.5rem;border-radius:12px;background:rgba(24,24,27,0.5);border:1px solid rgba(39,39,42,1);transition:all 0.3s ease}
+.how-it-works-card{position:relative;padding:1.5rem;border-radius:12px;background:rgba(10,10,10,0.8);border:1px solid rgba(26,26,26,1);transition:all 0.3s ease}
 .how-it-works-card::before{content:'';position:absolute;inset:0;border-radius:12px;background:linear-gradient(135deg,rgba(198,170,88,0) 0%,rgba(198,170,88,0) 100%);opacity:0;transition:opacity 0.3s ease;pointer-events:none}
 .how-it-works-card:hover{border-color:rgba(198,170,88,0.5)}
 .how-it-works-card:hover::before{opacity:1;background:linear-gradient(135deg,rgba(198,170,88,0.05) 0%,transparent 100%)}
@@ -124,7 +146,7 @@ header {position:relative;display:flex;flex-direction:column;align-items:center;
 
 /* Complete system section for level 3 */
 .complete-system-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1200px;margin:0 auto}
-.complete-system-card{padding:1.5rem;border-radius:12px;background:rgba(24,24,27,0.5);border:1px solid rgba(39,39,42,1);display:flex;flex-direction:column;gap:1rem}
+.complete-system-card{padding:1.5rem;border-radius:12px;background:rgba(10,10,10,0.8);border:1px solid rgba(26,26,26,1);display:flex;flex-direction:column;gap:1rem}
 .complete-system-card.highlighted{background:linear-gradient(135deg,rgba(198,170,88,0.1) 0%,rgba(198,170,88,0.05) 100%);border-color:rgba(198,170,88,0.3)}
 .complete-system-icon{width:3rem;height:3rem;border-radius:8px;background:linear-gradient(135deg,var(--accent) 0%,#9a7f30 100%);display:flex;align-items:center;justify-content:center}
 .complete-system-number{font-size:1.125rem;font-weight:700;color:#000}
@@ -153,7 +175,7 @@ header {position:relative;display:flex;flex-direction:column;align-items:center;
 .core-values-main-title{font-size:3rem;font-weight:700;color:#fff;margin:0 0 1rem;line-height:1.2}
 .core-values-subtitle{font-size:1.25rem;color:var(--muted);margin:0}
 .core-values-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
-.core-value-card{background:rgba(11,15,18,0.5);border:1px solid var(--card-border);border-radius:16px;padding:2rem;transition:border-color 0.3s ease}
+.core-value-card{background:rgba(5,5,5,0.8);border:1px solid var(--card-border);border-radius:16px;padding:2rem;transition:border-color 0.3s ease}
 .core-value-card:hover{border-color:rgba(198,170,88,0.3)}
 .core-value-card.core-value-wide{grid-column:span 2;margin-bottom:2rem}
 .core-value-icon{width:3rem;height:3rem;background:linear-gradient(135deg,var(--accent) 0%,#9a7f30 100%);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem}

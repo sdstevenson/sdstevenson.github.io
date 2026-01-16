@@ -51,13 +51,58 @@
       <p class="level-description">Intelligent algorithms that first determine optimal aircraft positions to maximize hangar capacity, then generate efficient movement paths for users to follow.</p>
     </header>
 
+    <section class="two-part-section">
+      <div class="two-part-header">
+        <h2 class="two-part-title">Two-Part Optimization Process</h2>
+        <p class="two-part-subtitle">First we optimize placement, then we plan aircraft tow paths</p>
+      </div>
+      <div class="two-part-grid">
+        <div class="two-part-card">
+          <div class="two-part-card-header">
+            <div class="two-part-number">
+              <span>1</span>
+            </div>
+            <h3 class="two-part-card-title">Auto-Stacking</h3>
+          </div>
+          <p class="two-part-card-desc">Our algorithm analyzes aircraft dimensions, hangar geometry, and arrival/departure times to determine the optimal position for each aircraft. 
+                                        The algorithm maximizes capacity while keeping aircraft accessible.</p>
+          <ul>
+            <li>Real-time 3D mapping</li>
+            <li>Aircraft dimension analysis</li>
+            <li>Optimal position calculation</li>
+          </ul>
+        </div>
+        <div class="two-part-card">
+          <div class="two-part-card-header">
+            <div class="two-part-number">
+              <span>2</span>
+            </div>
+            <h3 class="two-part-card-title">Path Planning</h3>
+          </div>
+          <p class="two-part-card-desc">Once optimal positions are determined, the system generates efficient tow paths. 
+                                        The path maintains a safe distance from other aircraft and provides clear visual guidance on your tablet.</p>
+          <ul>
+            <li>Obstacle avoidance algorithms</li>
+            <li>Maintains safe distance during tow</li>
+            <li>Visual path guidance</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="how-it-works-header" style="margin-top: 4rem;">
+      <div class="how-it-works-header">
+        <h2 class="how-it-works-title">See It In Action</h2>
+        <p class="how-it-works-subtitle">Watch how our systems optimizes placement and plans paths</p>
+      </div>
+    </section>
     <section class="card centered-section video-split">
       <div class="video-split-text">
         <h2>AutoStack: Optimizing Hangar Space</h2>
         <p>Watch as our algorithm stacks aircraft and maximizes your hangar space, increasing occupancy and taking the guesswork out of stacking.</p>
       </div>
       <div class="video-split-video">
-        <video autoplay controls muted playsinline poster="assets/auto_stack_demo.mp4">
+        <video controls muted playsinline preload="metadata">
           <source src="./assets/auto_stack_demo.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
@@ -71,7 +116,7 @@
       </div>
       <div class="video-split-video">
         <h2 style="text-align: center;">Coming Soon</h2>
-        <!-- <video autoplay controls muted playsinline poster="assets/auto_stack_demo.mp4">
+        <!-- <video controls muted playsinline preload="metadata">
           <source src="./assets/auto_stack_demo.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video> -->
