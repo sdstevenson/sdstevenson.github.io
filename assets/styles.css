@@ -496,6 +496,21 @@ input[type="range"]:focus-visible {
 .faq-item strong{color:var(--text);display:block;margin-bottom:.5rem;font-size:1.05rem}
 .faq-item p{margin:0;color:var(--muted);line-height:1.6}
 
+/* Tech Features Section */
+.tech-features-section{max-width:1200px;margin:3rem auto;padding:0 1rem}
+.tech-features-header{text-align:center;margin-bottom:4rem}
+.tech-features-title{font-size:2.5rem;font-weight:700;color:var(--text);margin:0 0 1rem}
+.tech-features-subtitle{font-size:1.25rem;color:var(--muted);margin:0}
+.tech-features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.tech-feature-card{padding:1.5rem;border-radius:12px;background:var(--card-bg);border:1px solid var(--card-border);transition:all 0.3s ease}
+.tech-feature-card:hover{border-color:rgba(198,170,88,0.3)}
+.tech-feature-content{display:flex;align-items:flex-start;gap:0.75rem}
+.tech-feature-icon{width:1.5rem;height:1.5rem;border-radius:50%;background:linear-gradient(135deg,var(--accent) 0%,#9a7f30 100%);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:0.25rem}
+.tech-feature-icon svg{width:1rem;height:1rem;stroke:#000;stroke-width:2.5}
+.tech-feature-text{font-size:1rem;font-weight:500;color:var(--text);margin:0;line-height:1.5}
+@media (max-width:900px){.tech-features-title{font-size:2rem}.tech-features-subtitle{font-size:1rem}.tech-features-grid{grid-template-columns:1fr;gap:1rem}.tech-feature-card{padding:1.25rem}}
+@media (min-width:901px) and (max-width:1100px){.tech-features-grid{grid-template-columns:repeat(2,1fr)}}
+
 /* ROI Calculation Section */
 .roi-calculation-section{margin-top:4rem}
 .roi-calculation-container{max-width:900px;margin:0 auto}
