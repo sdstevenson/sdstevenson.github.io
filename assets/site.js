@@ -333,8 +333,8 @@ document.addEventListener('DOMContentLoaded', () => {
         
         setTimeout(() => {
           isTransitioning = false;
-        }, 300);
-      }, 200);
+        }, 600);
+      }, 400);
     }
     
     function goToVideo(index) {

@@ -616,7 +616,7 @@ body.subpage header{margin-bottom:.35rem}
 
 .video-carousel {
   position: relative;
-  overflow: visible;
+  overflow: hidden;
   display: flex;
   align-items: center;
   gap: 2rem;
@@ -625,13 +625,16 @@ body.subpage header{margin-bottom:.35rem}
 .video-container {
   position: relative;
   border-radius: 12px;
-  overflow: hidden;
-  background: var(--bg);
+  overflow: visible;
+  background: transparent;
   border: none;
   box-shadow: none;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  min-height: 300px;
-  aspect-ratio: 16/9;
+  transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1), opacity 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  flex: 1;
 }
 
 .video-container.slide-out-up {
@@ -654,31 +657,30 @@ body.subpage header{margin-bottom:.35rem}
   opacity: 0;
 }
 
+.video-container .video-wrapper {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  min-height: 400px;
+}
+
 .video-container video {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
-  aspect-ratio: 16/9;
   object-fit: cover;
   background: #000;
 }
 
 .video-caption {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 1.5rem 1rem 1rem;
-  background: linear-gradient(transparent, rgba(0,0,0,0.85));
+  position: relative;
+  padding: 0.5rem 0;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  transition: opacity 0.3s ease;
-}
-
-.video-container:hover .video-caption {
-  opacity: 0;
-  pointer-events: none;
+  opacity: 1;
 }
 
 .video-title {
@@ -700,6 +702,7 @@ body.subpage header{margin-bottom:.35rem}
   flex-direction: column;
   gap: 0.75rem;
   flex-shrink: 0;
+  padding-right: 0.5rem;
 }
 
 .carousel-dot {
@@ -745,8 +748,12 @@ body.subpage header{margin-bottom:.35rem}
     border-width: 2px;
   }
   
+  .video-container .video-wrapper {
+    min-height: 250px;
+  }
+  
   .video-caption {
-    padding: 1rem 0.75rem 0.75rem;
+    padding: 0.5rem 0;
   }
   
   .video-title {
