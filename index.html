@@ -16,9 +16,10 @@
 <body>
   <div id="stickyBrand" aria-hidden="false">
     <div class="sticky-inner">
-      <div class="left"><a href="index.html" class="brand-link"><div class="logo"></div></a><span class="moto">Hangar management, reimagined.</span></div>
+      <div class="left"><a href="index.html" class="brand-link"><div class="logo"></div></a></div>
       <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">☰</button>
       <nav class="sticky-nav" aria-label="Primary">
+        <a href="index.html" class="active">Home</a>
         <a href="about.html">About</a>
         <div class="dropdown">
           <button class="dropdown-btn" aria-expanded="false">Solutions</button>
@@ -28,28 +29,26 @@
             <a href="level3.html">Level 3 - Full Autonomy</a>
           </div>
         </div>
-        <a href="contact.html">Contact Us</a>
         <a href="roi.html">ROI Calculator</a>
       </nav>
+      <a href="contact.html" class="cta-button">Get Started</a>
     </div>
   </div>
 
   <div class="container">
-    <header id="hero-header" class="collapsed">
-      <!-- <h1 class="hero-subtitle">Sttugs</h1> -->
-      <div class="logo hero-logo"></div>
-      <!-- <div class="hero-title">Hangar management, reimagined.</div> -->
-      <!-- <div class="hero-desc">We're building the future of autonomous hangar stacking, and we're looking for FBO partners to help shape it.</div> -->
-      <div class="hero-title">Partner with us to build the future of hangar management.</div>
+    <header class="level-hero">
+      <div class="level-icon-logo">
+        <img src="assets/logo.svg" alt="STTUGS Logo" class="logo-image">
+      </div>
+      <h1 class="level-title">STTUGS</h1>
+      <p class="level-subtitle-gold">Autonomous Aircraft Hangar Management</p>
+      <p class="level-description">Parter with us to build the future of hangar management</p>
     </header>
 
+  <div class="container">
     <!-- Video Carousel -->
     <section id="video-showcase" class="video-showcase">
       <div class="video-carousel">
-        <button class="carousel-arrow carousel-prev" aria-label="Previous video">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="15 18 9 12 15 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-
         <!-- Video shown on startup -->
         <div class="video-container">
           <video id="showcase-video" playsinline muted preload="auto" autoplay controls>
@@ -60,53 +59,150 @@
             <span class="video-desc">Our algorithm finds optimal placements for maximum hangar utilization</span>
           </div>
         </div>
-
-        <button class="carousel-arrow carousel-next" aria-label="Next video">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="9 18 15 12 9 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
+        <div class="carousel-dots"></div>
       </div>
-      <div class="carousel-dots"></div>
     </section>
 
-    <section class="three-cols" aria-labelledby="three-title">
-      <div class="three-grid" id="three-title">
-        <div class="row-single">
-          <div class="row-title"><span class="row-icon" aria-hidden="true">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="25 25 550 550">
-              <path d="m73.83,75v91.97c0,1.15,1.39,1.73,2.21.91l27.05-27.05,124.35,124.35c.5.5,1.32.5,1.83,0l34.75-34.75c.5-.5.5-1.32,0-1.83l-124.35-124.35,27.05-27.05c.81-.81.24-2.21-.91-2.21h-91.97" fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="30"/>
-              <path d="m73.83,524.54h91.97c1.15,0,1.73-1.39.91-2.21l-27.05-27.05,124.35-124.35c.5-.5.5-1.32,0-1.83l-34.75-34.75c-.5-.5-1.32-.5-1.83,0l-124.35,124.35-27.05-27.05c-.81-.81-2.21-.24-2.21.91v91.97" fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="30"/>
-              <path d="m525.36,75v91.97c0,1.15-1.39,1.73-2.21.91l-27.05-27.05-124.35,124.35c-.5.5-1.32.5-1.83,0l-34.75-34.75c-.5-.5-.5-1.32,0-1.83l124.35-124.35-27.05-27.05c-.81-.81-.24-2.21.91-2.21h91.97" fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="30"/>
-              <path d="m525.36,525h-91.97c-1.15,0-1.73-1.39-.91-2.21l27.05-27.05-124.35-124.35c-.5-.5-.5-1.32,0-1.83l34.75-34.75c.5-.5,1.32-.5,1.83,0l124.35,124.35,27.05-27.05c.81-.81,2.21-.24,2.21.91v91.97" fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="30"/>
+    <section class="automation-features">
+      <div class="automation-header">
+        <h2>Complete Hangar Automation</h2>
+        <p class="automation-subtitle">Everything you need for safe, efficient, and profitable hangar operations</p>
+      </div>
+      <div class="automation-grid">
+        <div class="automation-card">
+          <div class="automation-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
+              <circle cx="12" cy="13" r="3"></circle>
             </svg>
-          </span>Maximize Hangar Capacity</div>
-          <p>Our software finds optimal hangar configurations to <strong>increase utilization</strong> and safely <strong>stack more aircraft.</strong></p>
-          <p><em>Partner with us to validate and refine these algorithms in real-world operations.</em></p>
+          </div>
+          <h3>Real-Time Monitoring</h3>
+          <p>Overhead camera system ensures no blind-spots for real-time operations</p>
         </div>
-
-        <div class="row-single">
-          <div class="row-title"><span class="row-icon" aria-hidden="true">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <line x1="12" y1="1" x2="12" y2="23"></line>
-              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7H14a3.5 3.5 0 0 1 0 7H6"></path>
+        <div class="automation-card">
+          <div class="automation-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect width="16" height="20" x="4" y="2" rx="2" ry="2"></rect>
+              <line x1="12" x2="12.01" y1="18" y2="18"></line>
             </svg>
-          </span>Reduce Costs & Risk</div>
-          <p>Our auto-stack system reduces the time spent on towing and <strong>eliminates hangar rash</strong>, significantly <strong>reducing labor costs</strong> and unplanned maintenance.</p>
-          <p><em>Help us build a solution that addresses the specific challenges your team faces every day.</em></p>
+          </div>
+          <h3>Tablet Control</h3>
+          <p>View and manage all hangar data from any tablet device</p>
         </div>
+        <div class="automation-card">
+          <div class="automation-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
+            </svg>
+          </div>
+          <h3>Collision Detection</h3>
+          <p>Prevent accidents and damage to aircraft with constant monitoring</p>
+        </div>
+        <div class="automation-card">
+          <div class="automation-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+              <path d="M3 9h18"></path>
+              <path d="M3 15h18"></path>
+              <path d="M9 3v18"></path>
+              <path d="M15 3v18"></path>
+            </svg>
+          </div>
+          <h3>Auto-Stacking</h3>
+          <p>Optimal aircraft positioning maximizes hangar capacity</p>
+        </div>
+        <div class="automation-card">
+          <div class="automation-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="6" cy="19" r="3"></circle>
+              <path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"></path>
+              <circle cx="18" cy="5" r="3"></circle>
+            </svg>
+          </div>
+          <h3>Path Planning</h3>
+          <p>Intelligent routing guides aircraft movement efficiently</p>
+        </div>
+        <div class="automation-card">
+          <div class="automation-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path>
+              <path d="M15 18H9"></path>
+              <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path>
+              <circle cx="17" cy="18" r="2"></circle>
+              <circle cx="7" cy="18" r="2"></circle>
+            </svg>
+          </div>
+          <h3>Autonomous Tugs</h3>
+          <p>Self-operating tugs eliminate manual labor requirements</p>
+        </div>
+      </div>
+    </section>
 
-        <div class="row-single">
-          <div class="row-title"><span class="row-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-            <circle cx="9" cy="7" r="4"></circle>
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-            </svg></span>Shape the Future Together</div>
-            <p>As an early partner, you'll have <strong>direct input</strong> on product development and be among the first to benefit from <strong>fully autonomous operations.</strong></p>
-            <p><em>Join us in creating the future of FBO ground operations.</em></p>
-            <!-- </svg></span>Increase Customer Service</div>
-            <p>Fully autonomous tugs support your team, freeing them up for higher-level tasks and <strong>improving customer experience.</strong></p>
-            <p><em>Your team is often tied up with complex towing tasks instead of serving customers, reducing service quality.</em></p> -->
-        </div>
+    <section class="product-levels">
+      <div class="product-levels-header">
+        <h2>Three Product Levels</h2>
+        <p class="product-levels-subtitle">Each level builds upon the previous, creating a complete autonomous system</p>
+      </div>
+      <div class="product-levels-grid">
+        <a href="level1.html" class="product-level-card">
+          <div class="product-level-badge">Level 1</div>
+          <div class="product-level-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
+            </svg>
+          </div>
+          <h3>Collision Detection</h3>
+          <p>Foundation of safety with advanced sensor technology that prevents accidents and protects valuable aircraft assets.</p>
+          <span class="product-level-link">
+            Learn More
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
+            </svg>
+          </span>
+        </a>
+        <a href="level2.html" class="product-level-card">
+          <div class="product-level-badge">Level 2</div>
+          <div class="product-level-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+              <path d="M3 9h18"></path>
+              <path d="M3 15h18"></path>
+              <path d="M9 3v18"></path>
+              <path d="M15 3v18"></path>
+            </svg>
+          </div>
+          <h3>Auto-Stacking & Path Planning</h3>
+          <p>Intelligent algorithms determine optimal aircraft positions and generate efficient movement paths for maximum hangar utilization.</p>
+          <span class="product-level-link">
+            Learn More
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
+            </svg>
+          </span>
+        </a>
+        <a href="level3.html" class="product-level-card">
+          <div class="product-level-badge">Level 3</div>
+          <div class="product-level-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path>
+              <path d="M15 18H9"></path>
+              <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path>
+              <circle cx="17" cy="18" r="2"></circle>
+              <circle cx="7" cy="18" r="2"></circle>
+            </svg>
+          </div>
+          <h3>Autonomous Aircraft Tugs</h3>
+          <p>Complete automation with self-operating tugs that execute the entire system autonomously.</p>
+          <span class="product-level-link">
+            Learn More
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
+            </svg>
+          </span>
+        </a>
       </div>
     </section>
 
@@ -153,15 +249,54 @@
       </div>
     </section>
 
-    <footer>
-      <p><span id="year"></span> Sttugs • Built with FBOs, for FBOs</p>
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <div class="footer-logo-section">
+              <div class="logo footer-logo-img"></div>
+              <span class="footer-brand-name">STTUGS</span>
+            </div>
+            <p class="footer-tagline">Autonomous Aircraft Hangar Management</p>
+          </div>
+          
+          <div class="footer-column">
+            <h3>Product Levels</h3>
+            <ul>
+              <li><a href="level1.html">Level 1: Collision Detection</a></li>
+              <li><a href="level2.html">Level 2: Auto-Stacking & Path Planning</a></li>
+              <li><a href="level3.html">Level 3: Autonomous Tugs</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-column">
+            <h3>Company</h3>
+            <ul>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="roi.html">ROI Calculator</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-column">
+            <h3>Contact</h3>
+            <ul>
+              <li class="footer-contact">info@sttugs.com</li>
+              <li class="footer-contact">+1-781-975-1300</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p>© <span id="year"></span> STTUGS • Built with FBOs, for FBOs</p>
+        </div>
+      </div>
     </footer>
   </div>
 
   <script src="assets/site.js"></script>
 
   <!-- ROI drawer markup: placed before the end of body so it is part of the document -->
-  <div id="roiOverlay" class="roi-overlay" hidden aria-hidden="true"></div>
+  <!-- <div id="roiOverlay" class="roi-overlay" hidden aria-hidden="true"></div>
   <button id="roiTab" class="roi-tab" aria-expanded="false" aria-controls="roiDrawer">ROI Calculator</button>
   <aside id="roiDrawer" class="roi-drawer card" role="dialog" aria-labelledby="roi-title" aria-hidden="true">
     <div class="roi-drawer-inner">
@@ -222,6 +357,6 @@
     .roi-drawer .roi-drawer-inner{position:relative}
     .roi-drawer .roi-close{position:absolute;right:8px;top:8px;border:0;background:transparent;color:var(--muted);font-size:1.05rem;cursor:pointer}
     @media (max-width:900px){ .roi-drawer{width:100%;height:46vh;left:0;right:0;bottom:0;top:auto;transform:translateY(110%);border-radius:12px 12px 0 0} .roi-drawer.open{transform:translateY(0)} .roi-tab{right:12px;top:auto;bottom:12px;transform:none;border-radius:12px}}
-  </style>
+  </style> -->
 </body>
 </html>
