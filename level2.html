@@ -35,21 +35,26 @@
   </div>
 
   <div class="container">
-    <header>
-      <h1 class="hero-subtitle">Level 2 - Guided Auto Stack</h1>
-      <div class="hero-title">Coming soon: Automated guidance for aircraft stacking.</div>
+    <header class="level-hero">
+      <div class="level-badge">
+        <span class="level-badge-text">Product Level 2 of 3</span>
+      </div>
+      <div class="level-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect width="7" height="7" x="3" y="3" rx="1"></rect>
+          <rect width="7" height="7" x="14" y="3" rx="1"></rect>
+          <rect width="7" height="7" x="14" y="14" rx="1"></rect>
+          <rect width="7" height="7" x="3" y="14" rx="1"></rect>
+        </svg>
+      </div>
+      <h1 class="level-title">Auto-Stacking & Path Planning</h1>
+      <p class="level-description">Intelligent algorithms that first determine optimal aircraft positions to maximize hangar capacity, then generate efficient movement paths for users to follow.</p>
     </header>
 
     <section class="card centered-section video-split">
       <div class="video-split-text">
-        <h2>See AutoStack in Action</h2>
-        <p>Watch as aircraft are stacked in their optimal positions, taking the guesswork out of stacking.</p>
-        
-        <p>Users select aircraft to stack, using our growing database of supported aircraft to get exact dimensions.</p>
-
-        <!-- <p>Optional integration with existing hangar management tools stacks hangars based on aircraft arrival and departure times.</p> -->
-
-        <p>We're inviting FBOs to partner with us to develop this system for their specific use cases.</p>
+        <h2>AutoStack: Optimizing Hangar Space</h2>
+        <p>Watch as our algorithm stacks aircraft and maximizes your hangar space, increasing occupancy and taking the guesswork out of stacking.</p>
       </div>
       <div class="video-split-video">
         <video autoplay controls muted playsinline poster="assets/auto_stack_demo.mp4">
@@ -59,7 +64,79 @@
       </div>
     </section>
 
+    <section class="card centered-section video-split">
+      <div class="video-split-text">
+        <h2>Path Planning: Intelligent Route Generation</h2>
+        <p>See how the system generates efficient movement paths that avoid obstacles, minimize distance, and provide clear visual guidance for operators.</p>
+      </div>
+      <div class="video-split-video">
+        <h2 style="text-align: center;">Coming Soon</h2>
+        <!-- <video autoplay controls muted playsinline poster="assets/auto_stack_demo.mp4">
+          <source src="./assets/auto_stack_demo.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video> -->
+      </div>
+    </section>
+
+    <section class="how-it-works-section">
+      <div class="how-it-works-header">
+        <h2 class="how-it-works-title">Key Features</h2>
+        <p class="how-it-works-subtitle">Advanced capabilities for maximum efficiency</p>
+      </div>
+      <div class="how-it-works-grid">
+        <div class="how-it-works-card">
+          <div class="how-it-works-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+              <path d="M3 9h18"></path>
+              <path d="M3 15h18"></path>
+              <path d="M9 3v18"></path>
+              <path d="M15 3v18"></path>
+            </svg>
+          </div>
+          <h3 class="how-it-works-card-title">Optimal Positioning</h3>
+          <p class="how-it-works-card-desc">AI determines the most efficient aircraft placement for maximum capacity</p>
+        </div>
+        <div class="how-it-works-card">
+          <div class="how-it-works-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="6" cy="19" r="3"></circle>
+              <path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"></path>
+              <circle cx="18" cy="5" r="3"></circle>
+            </svg>
+          </div>
+          <h3 class="how-it-works-card-title">Dynamic Path Planning</h3>
+          <p class="how-it-works-card-desc">Real-time route calculation avoiding obstacles and minimizing movement time</p>
+        </div>
+        <div class="how-it-works-card">
+          <div class="how-it-works-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
+            </svg>
+          </div>
+          <h3 class="how-it-works-card-title">Visual Guidance</h3>
+          <p class="how-it-works-card-desc">Clear path visualization on tablet for manual operations</p>
+        </div>
+        <div class="how-it-works-card">
+          <div class="how-it-works-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 3v16a2 2 0 0 0 2 2h16"></path>
+              <path d="M18 17V9"></path>
+              <path d="M13 17V5"></path>
+              <path d="M8 17v-3"></path>
+            </svg>
+          </div>
+          <h3 class="how-it-works-card-title">Space Analytics</h3>
+          <p class="how-it-works-card-desc">Continuous monitoring and optimization of hangar utilization</p>
+        </div>
+      </div>
+    </section>
+
     <section class="benefits-bar centered-section">
+      <div class="how-it-works-header">
+        <h2 class="how-it-works-title">How This Helps You</h2>
+        <p class="how-it-works-subtitle">Real-world benefits including increased hangar useage and higherNow revenue</p>
+      </div>
       <div class="benefits-bar-grid">
         <div class="benefit-item">
           <div class="benefit-icon">
