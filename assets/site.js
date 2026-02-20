@@ -2,11 +2,73 @@
 function fmt(n){ return '$' + n.toLocaleString(undefined,{maximumFractionDigits:0}); }
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Inject shared nav
+  const page = location.pathname.split('/').pop() || 'index.html';
+  const isHome = !page || page === 'index.html';
+  const isAbout = page === 'about.html';
+  const isSolutions = /^level[123]\.html$/.test(page);
+  const isROI = page === 'roi.html';
+  const stickyEl = document.getElementById('stickyBrand');
+  if(stickyEl) stickyEl.innerHTML = `<div class="sticky-inner">
+    <div class="left"><a href="index.html" class="brand-link"><div class="logo"></div></a></div>
+    <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <nav class="sticky-nav" aria-label="Primary">
+      <a href="index.html"${isHome?' class="active"':''}>Home</a>
+      <a href="about.html"${isAbout?' class="active"':''}>About</a>
+      <div class="dropdown">
+        <button class="dropdown-btn${isSolutions?' active':''}" aria-expanded="false">Solutions</button>
+        <div class="dropdown-content">
+          <a href="level1.html">Level 1 - Collision Detection</a>
+          <a href="level2.html">Level 2 - Guided Auto Stack</a>
+          <a href="level3.html">Level 3 - Full Autonomy</a>
+        </div>
+      </div>
+      <a href="roi.html"${isROI?' class="active"':''}>ROI Calculator</a>
+    </nav>
+    <a href="contact.html" class="cta-button">Get Started</a>
+  </div>`;
+
+  // Inject shared footer
+  const footerEl = document.querySelector('footer.site-footer');
+  if(footerEl) footerEl.innerHTML = `<div class="footer-content">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo-section">
+          <div class="logo footer-logo-img"></div>
+          <span class="footer-brand-name">STTUGS</span>
+        </div>
+        <p class="footer-tagline">Autonomous Aircraft Hangar Management</p>
+      </div>
+      <div class="footer-column">
+        <h3>Product Levels</h3>
+        <ul>
+          <li><a href="level1.html">Level 1: Collision Detection</a></li>
+          <li><a href="level2.html">Level 2: Auto-Stacking &amp; Path Planning</a></li>
+          <li><a href="level3.html">Level 3: Autonomous Tugs</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="roi.html">ROI Calculator</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Contact</h3>
+        <ul>
+          <li class="footer-contact">info@sttugs.com</li>
+          <li class="footer-contact">+1-781-975-1300</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> STTUGS • Built with FBOs, for FBOs</p>
+    </div>
+  </div>`;
+
   // year
   const yearEl = document.getElementById('year'); if(yearEl) yearEl.textContent = new Date().getFullYear();
-
-  // ensure sticky visible to assistive tech
-  const sticky = document.getElementById('stickyBrand'); if(sticky) sticky.removeAttribute('aria-hidden');
 
   // demo form handling
   const demoForm = document.getElementById('demoForm');
