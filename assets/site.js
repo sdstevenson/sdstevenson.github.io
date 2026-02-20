@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const page = location.pathname.split('/').pop() || 'index.html';
   const isHome = !page || page === 'index.html';
   const isAbout = page === 'about.html';
-  const isSolutions = /^level[123]\.html$/.test(page);
+  const isSolutions = /^level[123]\.html$/.test(page) || page === 'audit.html';
   const isROI = page === 'roi.html';
   const stickyEl = document.getElementById('stickyBrand');
   if(stickyEl) stickyEl.innerHTML = `<div class="sticky-inner">
@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <a href="level1.html">Level 1 - Collision Detection</a>
           <a href="level2.html">Level 2 - Guided Auto Stack</a>
           <a href="level3.html">Level 3 - Full Autonomy</a>
+          <a href="audit.html">Verifiable Audit Trail</a>
         </div>
       </div>
       <a href="roi.html"${isROI?' class="active"':''}>ROI Calculator</a>
@@ -67,6 +68,18 @@ document.addEventListener('DOMContentLoaded', () => {
       <p style="margin-top:0.4rem;font-size:0.75rem;color:rgba(255,255,255,0.3)">Patent Pending — Autonomous hangar management system including collision detection, auto-stacking, path planning, tug retrofit, and overhead camera/sensor array.</p>
     </div>
   </div>`;
+
+  // Inject shared contact CTA
+  const ctaEl = document.getElementById('contact-cta');
+  if(ctaEl && !ctaEl.children.length){
+    const title = ctaEl.dataset.ctaTitle || 'Want to Learn More?';
+    const desc  = ctaEl.dataset.ctaDesc  || 'Reach out to discuss how STTUGS can work for your operation.';
+    ctaEl.innerHTML = `<div class="card" style="max-width:760px;margin:0 auto;text-align:center;">
+      <h2>${title}</h2>
+      <p class="small">${desc}</p>
+      <a href="contact.html" class="form-link">Get in Touch</a>
+    </div>`;
+  }
 
   // year
   const yearEl = document.getElementById('year'); if(yearEl) yearEl.textContent = new Date().getFullYear();
