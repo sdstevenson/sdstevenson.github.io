@@ -971,14 +971,20 @@ body.subpage header{margin-bottom:.35rem}
 
 /* Automation Features Section */
 .automation-features {
-  max-width: 1200px;
-  margin: 2rem auto;
-  padding: 3rem 2rem;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  padding: 3rem 3rem;
+  margin: 2rem 0;
 }
 
 .automation-header {
   text-align: center;
   margin-bottom: 3rem;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .automation-header h2 {
@@ -999,8 +1005,10 @@ body.subpage header{margin-bottom:.35rem}
 
 .automation-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .automation-card {
@@ -1012,10 +1020,26 @@ body.subpage header{margin-bottom:.35rem}
   position: relative;
 }
 
+.automation-card.featured {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 4px 16px rgba(245,166,35,0.15);
+}
+
+a.automation-card {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
 .automation-card:hover {
   border-color: rgba(37, 99, 235, 0.5);
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(37, 99, 235, 0.15);
+}
+
+.automation-card.featured:hover {
+  border-color: var(--accent-hover);
+  box-shadow: 0 0 0 1px var(--accent-hover), 0 8px 24px rgba(245,166,35,0.25);
 }
 
 .automation-icon {
@@ -1054,19 +1078,13 @@ body.subpage header{margin-bottom:.35rem}
   .automation-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .automation-header h2 {
     font-size: 2rem;
   }
-  
+
   .automation-features {
     padding: 2rem 1rem;
-  }
-}
-
-@media (min-width: 901px) and (max-width: 1100px) {
-  .automation-grid {
-    grid-template-columns: repeat(2, 1fr);
   }
 }
 
