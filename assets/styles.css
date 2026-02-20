@@ -59,13 +59,13 @@
     "Liberation Mono", "Courier New", monospace;
 }
 
-html { font-size:18px }
-body {font-family: var(--font-sans); margin:0; padding:calc(2rem + 110px) 2rem 2rem 2rem; color:var(--text); background:var(--bg)}
+html { font-size:18px; overflow-x:hidden }
+body {font-family: var(--font-sans); margin:0; padding:calc(2rem + 110px) 2rem 2rem 2rem; color:var(--text); background:var(--bg); overflow-x:hidden}
 .container {max-width:1200px; margin:0 auto}
 .layout {display:grid; grid-template-columns: 500px 500px; gap:2rem; align-items:center}
 @media (max-width:1200px){ .layout{grid-template-columns:1fr} .roi-panel{order:99} }
 /* Level page hero styles */
-.level-hero{position:relative;display:flex;flex-direction:column;align-items:center;gap:1.5rem;padding-top:5rem;padding-bottom:5rem;min-height:auto;justify-content:center;background:linear-gradient(180deg,var(--navy) 0%,var(--navy-mid) 50%,var(--navy) 100%);overflow:visible}
+.level-hero{position:relative;left:50%;transform:translateX(-50%);width:100vw;display:flex;flex-direction:column;align-items:center;gap:2rem;padding-top:10rem;padding-bottom:9rem;min-height:auto;justify-content:center;background:linear-gradient(180deg,var(--navy) 0%,var(--navy-mid) 50%,var(--navy) 100%);overflow:visible;margin-top:calc(-2rem - 30px)}
 .level-hero::before{content:'';position:absolute;top:calc(-80px - 2rem);left:0;right:0;bottom:0;background-image:linear-gradient(to bottom,var(--navy) 0%,transparent 15%,transparent 85%,var(--navy) 100%),linear-gradient(to right,var(--navy) 0%,transparent 20%,transparent 80%,var(--navy) 100%),linear-gradient(to right,rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:100% 100%,100% 100%,64px 64px,64px 64px;background-position:0 0,0 0,0 0,0 0;z-index:1;pointer-events:none}
 .level-hero::after{content:'';position:absolute;top:25%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(37,99,235,0.2) 0%,transparent 70%);border-radius:50%;filter:blur(120px);z-index:2;pointer-events:none}
 .level-hero > *{position:relative;z-index:10}
@@ -82,11 +82,12 @@ body {font-family: var(--font-sans); margin:0; padding:calc(2rem + 110px) 2rem 2
 /* Mobile responsive adjustments */
 @media (max-width:900px){
   body{padding:calc(2rem + 110px) 1rem 2rem 1rem}
+  .level-hero{padding-top:6rem;padding-bottom:6rem;gap:1.75rem}
   .level-title{font-size:2rem;padding:0 1rem}
   .level-description{font-size:1rem;padding:0 1rem}
   .level-subtitle-gold{font-size:1.25rem;padding:0 1rem}
-  .level-icon{width:4.5rem;height:4.5rem}
-  .level-icon svg{width:2rem;height:2rem}
+  .level-icon{width:3.5rem;height:3.5rem}
+  .level-icon svg{width:1.75rem;height:1.75rem}
   .three-cols{padding:1rem}
   .centered-section{padding:0.5rem}
   .card{padding:0.85rem}
@@ -338,6 +339,11 @@ body {font-family: var(--font-sans); margin:0; padding:calc(2rem + 110px) 2rem 2
   background: var(--navy);
   border-top: 1px solid var(--nav-hover-bg);
   margin-top: 4rem;
+  margin-bottom: -2rem;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
   padding: 0;
 }
 
@@ -599,6 +605,154 @@ body.subpage header{margin-bottom:.35rem}
    Hero & Video Showcase
    ===================================================== */
 
+/* Full-width video carousel hero - replaces level-hero on homepage */
+.video-showcase-hero {
+  /* Break out of body's 2rem side padding to span full width */
+  width: calc(100% + 4rem);
+  margin-left: -2rem;
+  margin-right: -2rem;
+  /* Pull up flush against the sticky bar (negate body padding minus sticky bar height) */
+  margin-top: calc(-2rem - 30px);
+  background: var(--navy);
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.video-showcase-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, var(--navy) 0%, transparent 10%, transparent 90%, var(--navy) 100%),
+    linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 100% 100%, 64px 64px, 64px 64px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.video-showcase-hero .video-carousel {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 4rem 5rem;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.video-showcase-hero .video-container {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4rem;
+  min-height: 0;
+}
+
+.video-text-panel {
+  flex: 0 0 38%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.video-panel-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.video-panel-desc {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.7;
+  margin: 0;
+  max-width: 420px;
+}
+
+.video-showcase-hero .video-wrapper {
+  flex: 1;
+  aspect-ratio: 16/9;
+  background: var(--navy);
+  border-radius: 12px;
+  overflow: hidden;
+  min-height: 0;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+}
+
+.video-showcase-hero .carousel-dots {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-left: 0.5rem;
+}
+
+.video-showcase-hero .carousel-dot {
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.video-showcase-hero .carousel-dot.active {
+  border-color: var(--accent);
+  background: var(--accent);
+  box-shadow: 0 0 12px rgba(245, 166, 35, 0.6);
+}
+
+@media (max-width: 900px) {
+  .video-showcase-hero {
+    width: calc(100% + 2rem);
+    margin-left: -1rem;
+    margin-right: -1rem;
+    min-height: auto;
+  }
+
+  .video-showcase-hero .video-carousel {
+    flex-direction: column;
+    padding: 2.5rem 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .video-showcase-hero .video-container {
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+  }
+
+  .video-text-panel {
+    flex: none;
+    width: 100%;
+  }
+
+  .video-panel-title {
+    font-size: 1.6rem;
+  }
+
+  .video-panel-desc {
+    font-size: 0.95rem;
+    max-width: 100%;
+  }
+
+  .video-showcase-hero .video-wrapper {
+    width: 100%;
+  }
+
+  .video-showcase-hero .carousel-dots {
+    flex-direction: row;
+    padding-left: 0;
+    padding-top: 0.25rem;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
 /* Compact hero for video showcase page */
 #hero-header.collapsed {
   min-height: auto;
@@ -685,7 +839,7 @@ body.subpage header{margin-bottom:.35rem}
 .video-container .video-wrapper {
   width: 100%;
   aspect-ratio: 16/9;
-  background: var(--black);
+  background: var(--navy);
   border-radius: 12px;
   overflow: hidden;
   min-height: 400px;
@@ -696,7 +850,7 @@ body.subpage header{margin-bottom:.35rem}
   height: 100%;
   display: block;
   object-fit: cover;
-  background: var(--black);
+  background: var(--navy);
 }
 
 .video-caption {

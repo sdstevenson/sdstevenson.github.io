@@ -320,8 +320,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // Auto Stacking
       {
         src: './assets/auto_stack_demo.mp4',
-        title: 'Intelligent Auto-Stack',
-        desc: 'Our algorithm finds optimal placements for maximum hangar utilization'
+        heroTitle: 'Maximize Hangar Efficiency',
+        heroDesc: 'Our algorithm intelligently positions each aircraft to fit more planes in less space—automatically and safely.'
       },
 
       // TO DO: Path Planning
@@ -329,8 +329,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // Collision Detection
       {
         src: './assets/collision_detection_demo_sim.mp4',
-        title: 'Collision Detection',
-        desc: 'Real-time hazard identification prevents costly hangar rash'
+        heroTitle: 'Protect Every Aircraft',
+        heroDesc: 'Real-time collision detection monitors every movement, preventing costly hangar rash and protecting valuable aircraft assets.'
       },
     ];
     
@@ -338,8 +338,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let isTransitioning = false;
     const videoEl = document.getElementById('showcase-video');
     const videoContainer = videoShowcase.querySelector('.video-container');
-    const videoTitle = videoShowcase.querySelector('.video-title');
-    const videoDesc = videoShowcase.querySelector('.video-desc'); 
+    const videoPanelTitle = videoShowcase.querySelector('.video-panel-title');
+    const videoPanelDesc = videoShowcase.querySelector('.video-panel-desc');
     const dotsContainer = videoShowcase.querySelector('.carousel-dots');
     
     // Create dots
@@ -356,9 +356,9 @@ document.addEventListener('DOMContentLoaded', () => {
       videoEl.src = video.src;
       videoEl.load();
       videoEl.play().catch(() => {}); // Autoplay may be blocked
-      videoTitle.textContent = video.title;
-      videoDesc.textContent = video.desc;
-      
+      if (videoPanelTitle) videoPanelTitle.textContent = video.heroTitle;
+      if (videoPanelDesc) videoPanelDesc.textContent = video.heroDesc;
+
       // Update dots
       dotsContainer.querySelectorAll('.carousel-dot').forEach((dot, i) => {
         dot.classList.toggle('active', i === index);

@@ -27,35 +27,25 @@
 <body>
   <div id="stickyBrand"></div>
 
-  <div class="container">
-    <header class="level-hero">
-      <div class="level-icon-logo">
-        <img src="assets/logo.svg" alt="STTUGS Logo" class="logo-image">
+  <!-- Full-width video hero carousel -->
+  <section id="video-showcase" class="video-showcase-hero">
+    <div class="video-carousel">
+      <div class="video-container">
+        <div class="video-text-panel">
+          <h2 class="video-panel-title">Maximize Hangar Efficiency</h2>
+          <p class="video-panel-desc">Our AI-powered algorithm intelligently positions each aircraft to fit more planes in less space—automatically and safely.</p>
+        </div>
+        <div class="video-wrapper">
+          <video id="showcase-video" playsinline muted preload="auto" autoplay controls>
+            <source src="./assets/auto_stack_demo.mp4" type="video/mp4">
+          </video>
+        </div>
       </div>
-      <h1 class="level-title">STTUGS</h1>
-      <p class="level-subtitle-gold">Autonomous Aircraft Hangar Management</p>
-      <p class="level-description">Parter with us to build the future of hangar management</p>
-    </header>
+      <div class="carousel-dots"></div>
+    </div>
+  </section>
 
   <div class="container">
-    <!-- Video Carousel -->
-    <section id="video-showcase" class="video-showcase">
-      <div class="video-carousel">
-        <!-- Video shown on startup -->
-        <div class="video-container">
-          <div class="video-wrapper">
-            <video id="showcase-video" playsinline muted preload="auto" autoplay controls>
-              <source src="./assets/auto_stack_demo.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="video-caption">
-            <span class="video-title">Intelligent Auto-Stack</span>
-            <span class="video-desc">Our algorithm finds optimal placements for maximum hangar utilization</span>
-          </div>
-        </div>
-        <div class="carousel-dots"></div>
-      </div>
-    </section>
 
     <section class="automation-features">
       <div class="automation-header">
