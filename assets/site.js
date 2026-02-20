@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <a href="index.html"${isHome?' class="active"':''}>Home</a>
       <a href="about.html"${isAbout?' class="active"':''}>About</a>
       <div class="dropdown">
-        <button class="dropdown-btn${isSolutions?' active':''}" aria-expanded="false">Solutions</button>
+        <button class="dropdown-btn${isSolutions?' active':''}" aria-expanded="false">Solutions<svg class="dropdown-chevron" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
         <div class="dropdown-content">
           <a href="level1.html">Level 1 - Collision Detection</a>
           <a href="level2.html">Level 2 - Guided Auto Stack</a>
@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
     <div class="footer-bottom">
       <p>© <span id="year"></span> STTUGS • Built with FBOs, for FBOs</p>
+      <p style="margin-top:0.4rem;font-size:0.75rem;color:rgba(255,255,255,0.3)">Patent Pending — Autonomous hangar management system including collision detection, auto-stacking, path planning, tug retrofit, and overhead camera/sensor array.</p>
     </div>
   </div>`;
 
@@ -270,21 +271,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return true;
   }
 
-  function initROIDrawer(){
-    const roiTab = document.getElementById('roiTab');
-    const roiDrawer = document.getElementById('roiDrawer');
-    const roiOverlay = document.getElementById('roiOverlay');
-    if(!roiDrawer || !roiTab || !roiOverlay) return false;
-    function openDrawer(){ roiDrawer.classList.add('open'); roiOverlay.hidden = false; roiTab.setAttribute('aria-expanded','true'); }
-    function closeDrawer(){ roiDrawer.classList.remove('open'); roiOverlay.hidden = true; roiTab.setAttribute('aria-expanded','false'); }
-    if(roiTab) roiTab.addEventListener('click', () => { const open = roiDrawer.classList.contains('open'); (open ? closeDrawer() : openDrawer()); });
-    if(roiOverlay) roiOverlay.addEventListener('click', closeDrawer);
-    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeDrawer(); });
-    const closeBtn = roiDrawer.querySelector('.roi-close'); if(closeBtn) closeBtn.addEventListener('click', closeDrawer);
-    return true;
-  }
-
-  if(!initROIDrawer()){ setTimeout(initROIDrawer, 300); }
   if(!initROIControls()){ setTimeout(initROIControls, 300); }
 
   // FAQ dropdown
