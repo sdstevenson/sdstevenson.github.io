@@ -18,9 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="dropdown">
         <button class="dropdown-btn${isSolutions?' active':''}" aria-expanded="false">Solutions<svg class="dropdown-chevron" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
         <div class="dropdown-content">
-          <a href="level1.html">Level 1 - Collision Detection</a>
-          <a href="level2.html">Level 2 - Guided Auto Stack</a>
-          <a href="level3.html">Level 3 - Full Autonomy</a>
+          <a href="level1.html">Collision Detection</a>
+          <a href="level2.html">Auto-Stacking & Path Planning</a>
+          <a href="level3.html">Autonomous Tugs</a>
           <a href="audit.html">Verifiable Audit Trail</a>
         </div>
       </div>
@@ -314,22 +314,18 @@ document.addEventListener('DOMContentLoaded', () => {
   if (videoShowcase) {
     // Video data for the carousel
     const videos = [
-      // TO DO: Automated Tug
-
-      // Auto Stacking
-      {
-        src: './assets/auto_stack_demo.mp4',
-        heroTitle: 'Maximize Hangar Efficiency',
-        heroDesc: 'Our algorithm intelligently positions each aircraft to fit more planes in less space—automatically and safely.'
-      },
-
-      // TO DO: Path Planning
-
       // Collision Detection
       {
         src: './assets/collision_detection_demo_sim.mp4',
         heroTitle: 'Protect Every Aircraft',
-        heroDesc: 'Real-time collision detection monitors every movement, preventing costly hangar rash and protecting valuable aircraft assets.'
+        heroDesc: 'Our real-time collision prevention system monitors every movement, notifying users of potential collisions before they happen.'
+      },
+
+      // Auto Stacking
+      {
+        src: './assets/auto_stack_demo.mp4',
+        heroTitle: 'Safely Maximize Hangar Efficiency',
+        heroDesc: 'Our algorithm intelligently positions each aircraft to optimize your hangar useage while maintaining strict safety buffers - increasing hangar revenue and hangar safety.'
       },
 
       // Audit Trail
@@ -338,6 +334,9 @@ document.addEventListener('DOMContentLoaded', () => {
         heroTitle: 'Verifiable Audit Log',
         heroDesc: 'Complete time-stamped logs of every movement and action in your hangar are stored and used to generate a risk score for insurers, proving the safety of your operations.'
       }
+
+      // TO DO: Path Planning
+      // TO DO: Automated Tug
     ];
     
     let currentVideoIndex = 0;
@@ -393,9 +392,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         // Auto-advance for images after 7 seconds (slightly longer than default video clips)
-        if (!userPaused) {
-          autoAdvanceTimer = setTimeout(nextVideo, 7000);
-        }
+        // TO ENABLE: uncomment the block below
+        // if (!userPaused) {
+        //   autoAdvanceTimer = setTimeout(nextVideo, 7000);
+        // }
       }
 
       if (videoPanelTitle) videoPanelTitle.textContent = media.heroTitle;
@@ -481,15 +481,16 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Auto-advance to next video when current one ends (with pause)
     // Only auto-advance if user hasn't paused
-    if (videoEl) {
-      videoEl.addEventListener('ended', () => {
-        if (!userPaused) {
-          setTimeout(() => {
-            nextVideo();
-          }, 1500); // 1.5 second pause before advancing
-        }
-      });
-    }
+    // TO ENABLE: uncomment the block below
+    // if (videoEl) {
+    //   videoEl.addEventListener('ended', () => {
+    //     if (!userPaused) {
+    //       setTimeout(() => {
+    //         nextVideo();
+    //       }, 1500); // 1.5 second pause before advancing
+    //     }
+    //   });
+    // }
   }
 
   // Custom video controls
