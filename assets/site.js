@@ -331,11 +331,22 @@ document.addEventListener('DOMContentLoaded', () => {
         heroTitle: 'Protect Every Aircraft',
         heroDesc: 'Real-time collision detection monitors every movement, preventing costly hangar rash and protecting valuable aircraft assets.'
       },
+
+      // Audit Trail
+      {
+        src: './assets/audit_log_demo_image.jpg',
+        heroTitle: 'Verifiable Audit Log',
+        heroDesc: 'Complete time-stamped logs of every movement and action in your hangar are stored and used to generate a risk score for insurers, proving the safety of your operations.'
+      }
     ];
     
     let currentVideoIndex = 0;
     let isTransitioning = false;
+    let autoAdvanceTimer = null;
+    let userPaused = false;
+    
     const videoEl = document.getElementById('showcase-video');
+    const imgEl = document.getElementById('showcase-img');
     const videoContainer = videoShowcase.querySelector('.video-container');
     const videoPanelTitle = videoShowcase.querySelector('.video-panel-title');
     const videoPanelDesc = videoShowcase.querySelector('.video-panel-desc');
@@ -345,24 +356,59 @@ document.addEventListener('DOMContentLoaded', () => {
     videos.forEach((_, index) => {
       const dot = document.createElement('button');
       dot.className = 'carousel-dot' + (index === 0 ? ' active' : '');
-      dot.setAttribute('aria-label', `Go to video ${index + 1}`);
+      dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
       dot.addEventListener('click', () => goToVideo(index));
       dotsContainer.appendChild(dot);
     });
     
-    function updateVideo(index, direction = 'right') {
-      const video = videos[index];
-      videoEl.src = video.src;
-      videoEl.load();
-      videoEl.play().catch(() => {}); // Autoplay may be blocked
-      if (videoPanelTitle) videoPanelTitle.textContent = video.heroTitle;
-      if (videoPanelDesc) videoPanelDesc.textContent = video.heroDesc;
+    function updateVideo(index) {
+      const media = videos[index];
+      const isVideo = media.src.toLowerCase().endsWith('.mp4');
+      
+      if (autoAdvanceTimer) {
+        clearTimeout(autoAdvanceTimer);
+        autoAdvanceTimer = null;
+      }
+
+      if (isVideo) {
+        if (imgEl) imgEl.style.display = 'none';
+        if (videoEl) {
+          videoEl.style.display = 'block';
+          // Only update src and load if it's different to prevent flickers on first slide
+          if (videoEl.getAttribute('src') !== media.src && !videoEl.querySelector(`source[src="${media.src}"]`)) {
+            videoEl.src = media.src;
+            videoEl.load();
+          }
+          videoEl.play().catch(() => {}); 
+        }
+      } else {
+        if (videoEl) {
+          videoEl.pause();
+          videoEl.style.display = 'none';
+        }
+        if (imgEl) {
+          imgEl.style.display = 'block';
+          imgEl.src = media.src;
+          imgEl.alt = media.heroTitle;
+        }
+        
+        // Auto-advance for images after 7 seconds (slightly longer than default video clips)
+        if (!userPaused) {
+          autoAdvanceTimer = setTimeout(nextVideo, 7000);
+        }
+      }
+
+      if (videoPanelTitle) videoPanelTitle.textContent = media.heroTitle;
+      if (videoPanelDesc) videoPanelDesc.textContent = media.heroDesc;
 
       // Update dots
       dotsContainer.querySelectorAll('.carousel-dot').forEach((dot, i) => {
         dot.classList.toggle('active', i === index);
       });
     }
+
+    // Set initial state
+    updateVideo(0);
     
     function transitionToVideo(index, direction) {
       if (isTransitioning || index === currentVideoIndex) return;
@@ -376,9 +422,9 @@ document.addEventListener('DOMContentLoaded', () => {
       videoContainer.classList.add(slideOutClass);
       
       setTimeout(() => {
-        // Update video content while hidden
+        // Update content while hidden
         currentVideoIndex = index;
-        updateVideo(currentVideoIndex, direction);
+        updateVideo(currentVideoIndex);
         
         // Disable transition, position off-screen
         videoContainer.style.transition = 'none';
@@ -419,9 +465,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.key === 'ArrowDown') nextVideo();
     });
     
-    // Track if user manually paused the video
-    let userPaused = false;
-    
     // Detect user pause/play actions
     if (videoEl) {
       videoEl.addEventListener('pause', () => {
@@ -446,11 +489,6 @@ document.addEventListener('DOMContentLoaded', () => {
           }, 1500); // 1.5 second pause before advancing
         }
       });
-    }
-    
-    // Start playing the first video
-    if (videoEl) {
-      videoEl.play().catch(() => {});
     }
   }
 
