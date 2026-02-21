@@ -119,6 +119,21 @@ body {font-family: var(--font-sans); margin:0; padding:calc(2rem + 110px) 2rem 2
 
 /* Video split layout - text above video */
 .video-split{display:flex;flex-direction:column;gap:1.5rem;align-items:stretch;background:transparent;border:none;padding:0}
+
+/* Side-by-side split for system page visuals */
+.video-split-vertical{display:grid;grid-template-columns:1.05fr 0.95fr;gap:1.75rem;align-items:center;padding:0;background:transparent;border:none}
+.video-split-vertical .split-text h2{margin-top:0}
+.video-split-vertical .split-text p{color:var(--muted);line-height:1.6;margin:0}
+.video-split-vertical .split-media{width:100%;display:flex;align-items:center;justify-content:center}
+.video-split-vertical .mock-image{width:100%;height:320px}
+.video-split-vertical.reverse .split-text{order:2}
+.video-split-vertical.reverse .split-media{order:1}
+@media (max-width:900px){
+  .video-split-vertical{grid-template-columns:1fr;gap:1rem}
+  .video-split-vertical.reverse .split-text{order:0}
+  .video-split-vertical.reverse .split-media{order:0}
+  .video-split-vertical .mock-image{height:240px}
+}
 .video-split-text{width:100%}
 .video-split-text h2{margin-top:0;text-align:left}
 .video-split-text p{color:var(--muted);line-height:1.6;text-align:left;max-width:800px;}
@@ -1283,4 +1298,43 @@ a.automation-card {
     max-width: 600px;
     margin: 0 auto;
   }
+}
+
+/* System page */
+.system-page{padding-bottom:4rem}
+.system-hero{text-align:center;max-width:940px;margin:0 auto;padding:110px 1rem 60px}
+.eyebrow{display:inline-block;font-size:.8rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue);margin-bottom:.5rem}
+.system-hero h1{font-size:2.75rem;margin:0.5rem 0 0.75rem;color:var(--text)}
+.hero-lead{margin:0 auto;max-width:780px;font-size:1.2rem;line-height:1.6;color:var(--muted)}
+.hero-actions{display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:1.5rem}
+.primary-btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:0.9rem 1.4rem;background:var(--blue);color:var(--bg);border-radius:10px;font-weight:700;text-decoration:none;box-shadow:0 10px 30px rgba(37,99,235,0.2);transition:transform .15s ease,box-shadow .15s ease}
+.primary-btn:hover{transform:translateY(-1px);box-shadow:0 14px 34px rgba(37,99,235,0.25)}
+.primary-btn:focus-visible{outline:3px solid rgba(37,99,235,0.35);outline-offset:3px}
+.system-intro{max-width:900px;margin:0 auto 3rem;text-align:center;padding:2rem 1.5rem}
+.system-section{max-width:1200px;margin:0 auto 3.75rem;padding:0 1rem}
+.system-split{display:grid;grid-template-columns:1.05fr 0.95fr;gap:2rem;align-items:center;margin-bottom:1.5rem}
+.system-split-reverse .system-copy{order:2}
+.system-split-reverse .mock-image{order:1}
+.system-copy h2{margin:0 0 .75rem}
+.system-copy p{margin:0 0 1rem;color:var(--muted);line-height:1.7}
+.system-list{margin:0;padding-left:1.1rem;display:flex;flex-direction:column;gap:.6rem;color:var(--text)}
+.system-list li{line-height:1.6;color:var(--text)}
+.mock-image{height:320px;border-radius:16px;background:linear-gradient(135deg,rgba(37,99,235,0.12),rgba(15,23,42,0.08));border:1px dashed rgba(37,99,235,0.3);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--blue);text-align:center;padding:1rem;box-shadow:0 12px 30px rgba(15,23,42,0.08)}
+.system-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:1rem}
+.system-feature-grid .how-it-works-card{height:100%}
+.contact-cta-card{max-width:900px;margin:0 auto 2rem;padding:0 1rem}
+.contact-cta-card .cta-inner{border:1px solid var(--card-border);background:var(--card-bg);border-radius:16px;padding:2rem;text-align:center;box-shadow:0 14px 36px rgba(15,23,42,0.08)}
+.contact-cta-card h2{margin:0 0 0.75rem}
+.contact-cta-card p{margin:0 0 1.2rem;color:var(--muted);line-height:1.6}
+@media (max-width:900px){
+  .system-hero{padding:90px 1rem 40px}
+  .system-hero h1{font-size:2.2rem}
+  .hero-lead{font-size:1.05rem}
+  .hero-actions{flex-direction:column;gap:.6rem}
+  .system-section{margin:0 auto 3rem}
+  .system-split{grid-template-columns:1fr;gap:1.25rem}
+  .system-split-reverse .system-copy{order:0}
+  .system-split-reverse .mock-image{order:0}
+  .mock-image{height:240px}
+  .system-feature-grid{grid-template-columns:1fr}
 }
