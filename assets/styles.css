@@ -5,7 +5,6 @@
 :root{
   /* Base palette */
   --bg: #FFFFFF;
-  --black: #000000;
   --navy: #0F172A;
   --navy-mid: #1E293B;
   --navy-glass: rgba(15,23,42,0.97);
@@ -54,7 +53,6 @@
     BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
     "Noto Color Emoji";
-  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
 }
@@ -99,8 +97,7 @@ body {font-family: var(--font-sans); margin:0; padding:calc(2rem + 110px) 2rem 2
 .dropdown-content a.active{background:rgba(37,99,235,0.08);border-radius:6px}
 .dropdown-btn.active{color:var(--blue-faint);border-color:rgba(255,255,255,0.25)}
 .dropdown-content{max-height:70vh;overflow-y:auto;padding-bottom:0.5rem}
-.visual-strip .visual-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1rem}
-.visual-tile{border:1px dashed var(--card-border);border-radius:12px;padding:2.5rem 1.5rem;text-align:center;color:var(--muted);background:linear-gradient(135deg,rgba(37,99,235,0.05),rgba(15,23,42,0.04));font-weight:600}
+
 .demo-form{display:flex;flex-direction:column;gap:.85rem;margin-top:.5rem}
 .demo-form .field{display:flex;flex-direction:column}
 .input-with-icon{display:flex;align-items:center;border:1px solid var(--input-border);padding:.7rem;border-radius:8px;background:transparent}
@@ -175,7 +172,7 @@ body {font-family: var(--font-sans); margin:0; padding:calc(2rem + 110px) 2rem 2
 
 /* How It Works section */
 .how-it-works-section{background:var(--card-bg-dark);padding:5rem 0;margin:2rem 0;width:100vw;position:relative;left:50%;transform:translateX(-50%)}
-.how-it-works-section.light{background:var(--card-bg-light);padding:5rem 0;margin:2rem 0;width:100vw;position:relative;left:50%;transform:translateX(-50%)}
+.how-it-works-section.light{background:var(--card-bg-light)}
 .how-it-works-header{text-align:center;margin-bottom:4rem;padding:0 2rem}
 .how-it-works-title{font-size:2.5rem;font-weight:700;color:var(--text);margin:0 0 1rem}
 .how-it-works-subtitle{font-size:1.25rem;color:var(--muted);max-width:48rem;margin:0 auto}
@@ -270,8 +267,7 @@ body {font-family: var(--font-sans); margin:0; padding:calc(2rem + 110px) 2rem 2
 .card.dark{background:var(--card-bg-dark);border:1px solid var(--card-border)}
 .layout{margin-top:1rem}
 .feature-area{background:var(--card-bg-dark);color:var(--text);padding:2rem;border-radius:12px;margin:0.75rem auto;max-width:1120px}
-.feature-area .layout{margin:0 auto}
-.feature-area .layout{grid-template-columns:1fr 1fr;gap:2rem;align-items:center}
+.feature-area .layout{margin:0 auto;grid-template-columns:1fr 1fr;gap:2rem;align-items:center}
 .feature-area .main, .feature-area .roi-panel{min-width:0}
 .feature-area .card{background:var(--card-bg);color:var(--text);border:1px solid var(--card-border)}
 .feature-area .input-with-icon{border-color:var(--input-border);background:var(--input-bg)}
@@ -1356,10 +1352,7 @@ a.automation-card {
 .mock-image{height:320px;border-radius:16px;background:linear-gradient(135deg,rgba(37,99,235,0.12),rgba(15,23,42,0.08));border:1px dashed rgba(37,99,235,0.3);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--blue);text-align:center;padding:1rem;box-shadow:0 12px 30px rgba(15,23,42,0.08)}
 .system-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:1rem}
 .system-feature-grid .how-it-works-card{height:100%}
-.contact-cta-card{max-width:900px;margin:0 auto 2rem;padding:0 1rem}
-.contact-cta-card .cta-inner{border:1px solid var(--card-border);background:var(--card-bg);border-radius:16px;padding:2rem;text-align:center;box-shadow:0 14px 36px rgba(15,23,42,0.08)}
-.contact-cta-card h2{margin:0 0 0.75rem}
-.contact-cta-card p{margin:0 0 1.2rem;color:var(--muted);line-height:1.6}
+
 @media (max-width:900px){
   .system-hero{padding:90px 1rem 40px}
   .system-hero h1{font-size:2.2rem}

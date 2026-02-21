@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <h2 class="cta-banner-title">${title}</h2>
         <p class="cta-banner-desc">${desc}</p>
         <form class="cta-banner-form" id="ctaBannerForm">
-          <input type="email" placeholder="Enter your work email..." required class="cta-email-input">
+          <input type="email" placeholder="Enter your email..." required class="cta-email-input">
           <button type="submit" class="cta-demo-btn">Request Demo</button>
         </form>
         <p class="cta-trust-signal">Join the FBOs already upgrading to STTUGS</p>
