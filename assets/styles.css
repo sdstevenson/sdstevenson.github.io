@@ -204,6 +204,10 @@ body {font-family: var(--font-sans); margin:0; padding:calc(2rem + 110px) 2rem 2
 .core-value-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;padding:2rem;transition:border-color 0.3s ease}
 .core-value-card:hover{border-color:rgba(37,99,235,0.3)}
 .core-value-card.core-value-wide{grid-column:span 2;margin-bottom:2rem}
+.core-value-card.featured {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 4px 16px rgba(245,166,35,0.15);
+}
 .core-value-icon{width:3rem;height:3rem;background:linear-gradient(135deg,var(--blue) 0%,var(--blue-dark) 100%);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
 .core-value-icon svg{width:1.5rem;height:1.5rem;stroke:var(--bg)}
 .core-value-title{font-size:1.5rem;font-weight:700;color:var(--text);margin:0 0 1rem;line-height:1.2}

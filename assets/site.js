@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
       <a href="roi.html"${isROI?' class="active"':''}>ROI Calculator</a>
     </nav>
-    <a href="contact.html" class="cta-button">Get Started</a>
+    <a href="contact.html" class="cta-button">Contact Us</a>
   </div>`;
 
   // Inject shared footer
