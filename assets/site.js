@@ -6,7 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const page = location.pathname.split('/').pop() || 'index.html';
   const isHome = !page || page === 'index.html';
   const isAbout = page === 'about.html';
-  const isSolutions = /^level[123]\.html$/.test(page) || page === 'audit.html';
+  const isSystem = page === 'system.html';
+  const isLevel1 = page === 'level1.html';
+  const isLevel2 = page === 'level2.html';
+  const isLevel3 = page === 'level3.html';
+  const isAudit = page === 'audit.html';
+  const isSolutions = isLevel1 || isLevel2 || isLevel3 || isAudit || isSystem;
   const isROI = page === 'roi.html';
   const stickyEl = document.getElementById('stickyBrand');
   if(stickyEl) stickyEl.innerHTML = `<div class="sticky-inner">
@@ -18,10 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="dropdown">
         <button class="dropdown-btn${isSolutions?' active':''}" aria-expanded="false">Solutions<svg class="dropdown-chevron" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
         <div class="dropdown-content">
-          <a href="level1.html">Collision Detection</a>
-          <a href="level2.html">Auto-Stacking & Path Planning</a>
-          <a href="level3.html">Autonomous Tugs</a>
-          <a href="audit.html">Verifiable Audit Trail</a>
+          <a href="level1.html"${isLevel1?' class="active" aria-current="page"':''}>Collision Prevention</a>
+          <a href="level2.html"${isLevel2?' class="active" aria-current="page"':''}>Auto-Stacking & Path Planning</a>
+          <a href="level3.html"${isLevel3?' class="active" aria-current="page"':''}>Autonomous Tugs</a>
+          <a href="audit.html"${isAudit?' class="active" aria-current="page"':''}>Verifiable Audit Trail</a>
+          <a href="system.html"${isSystem?' class="active" aria-current="page"':''}>Hardware & Infrastructure</a>
         </div>
       </div>
       <a href="roi.html"${isROI?' class="active"':''}>ROI Calculator</a>
@@ -41,11 +47,13 @@ document.addEventListener('DOMContentLoaded', () => {
         <p class="footer-tagline">Autonomous Aircraft Hangar Management</p>
       </div>
       <div class="footer-column">
-        <h3>Product Levels</h3>
+        <h3>Solutions</h3>
         <ul>
-          <li><a href="level1.html">Level 1: Collision Detection</a></li>
-          <li><a href="level2.html">Level 2: Auto-Stacking &amp; Path Planning</a></li>
-          <li><a href="level3.html">Level 3: Autonomous Tugs</a></li>
+          <li><a href="level1.html">Collision Prevention</a></li>
+          <li><a href="level2.html">Auto-Stacking &amp; Path Planning</a></li>
+          <li><a href="level3.html">Autonomous Tugs</a></li>
+          <li><a href="audit.html">Verifiable Audit Trail</a></li>
+          <li><a href="system.html">Hardware &amp; Infrastructure</a></li>
         </ul>
       </div>
       <div class="footer-column">
@@ -101,7 +109,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const fd = new FormData();
         fd.append('entry.191654158', document.getElementById('demo-name').value.trim());
         fd.append('entry.1925679811', document.getElementById('demo-company').value.trim());
-        fd.append('entry.878160977', document.getElementById('demo-contact').value.trim());
+        const messageVal = document.getElementById('demo-message')?.value.trim() || '';
+        const contactVal = document.getElementById('demo-contact').value.trim();
+        fd.append('entry.878160977', `${contactVal}${messageVal ? ' | Message: ' + messageVal : ''}`);
         fetch(gformUrl, { method: 'POST', mode: 'no-cors', body: fd })
           .finally(() => {
             const inline = document.getElementById('demoSuccessInline'); if(inline) inline.style.display = 'block';
@@ -271,7 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         slider.addEventListener('input', () => { input.value = slider.value; update(); });
       }
-      input.addEventListener('change', () => {
+      input.addEventListener('input', () => {
         let v = Number(input.value); if(isNaN(v)) return;
         const min = Number(slider.min || -Infinity); const max = Number(slider.max || Infinity);
         if(v < min) v = min; if(v > max) v = max;

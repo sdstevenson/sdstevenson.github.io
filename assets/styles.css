@@ -95,11 +95,21 @@ body {font-family: var(--font-sans); margin:0; padding:calc(2rem + 110px) 2rem 2
 .card {background:var(--card-bg);border:1px solid var(--card-border);padding:1rem;border-radius:10px;margin-top:1rem}
 .form-link, .schedule-link {display:inline-block;margin-top:1rem;padding:.6rem 1rem;background:var(--blue);color:var(--bg);border-radius:8px;text-decoration:none;font-weight:600}
 .form-link:hover, .schedule-link:hover {background:var(--blue-dark)}
+.sticky-nav a.active, .dropdown-content a.active{color:var(--blue-dark);font-weight:700}
+.dropdown-content a.active{background:rgba(37,99,235,0.08);border-radius:6px}
+.dropdown-btn.active{color:var(--blue-faint);border-color:rgba(255,255,255,0.25)}
+.dropdown-content{max-height:70vh;overflow-y:auto;padding-bottom:0.5rem}
+.visual-strip .visual-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1rem}
+.visual-tile{border:1px dashed var(--card-border);border-radius:12px;padding:2.5rem 1.5rem;text-align:center;color:var(--muted);background:linear-gradient(135deg,rgba(37,99,235,0.05),rgba(15,23,42,0.04));font-weight:600}
 .demo-form{display:flex;flex-direction:column;gap:.85rem;margin-top:.5rem}
 .demo-form .field{display:flex;flex-direction:column}
 .input-with-icon{display:flex;align-items:center;border:1px solid var(--input-border);padding:.7rem;border-radius:8px;background:transparent}
 .input-with-icon svg{width:18px;height:18px;flex:0 0 18px;fill:var(--muted)}
 .input-with-icon input{flex:1;border:0;background:transparent;color:var(--text);padding-left:.6rem;font-size:1.05rem}
+.textarea-field{align-items:flex-start;padding:.65rem .75rem .5rem .75rem}
+.textarea-field svg{margin-top:4px}
+.input-with-icon textarea{flex:1;border:0;background:transparent;color:var(--text);padding-left:.6rem;font-size:1.05rem;font-family:var(--font-sans);line-height:1.4;min-height:90px;max-height:160px;resize:vertical}
+.input-with-icon textarea:focus{outline:none}
 .demo-form .error{color:var(--error);font-size:.85rem;margin-top:6px;display:none}
 .primary-cta{display:inline-block;margin-top:.6rem;padding:0.95rem 1.25rem;border-radius:10px;background:var(--accent);color:var(--navy);border:0;font-weight:800;cursor:pointer;font-size:1.05rem}
 .primary-cta:hover{background:var(--accent-hover);color:var(--bg)}
@@ -158,6 +168,7 @@ body {font-family: var(--font-sans); margin:0; padding:calc(2rem + 110px) 2rem 2
 .how-it-works-card::before{content:'';position:absolute;inset:0;border-radius:12px;background:linear-gradient(135deg,rgba(37,99,235,0) 0%,rgba(37,99,235,0) 100%);opacity:0;transition:opacity 0.3s ease;pointer-events:none}
 .how-it-works-card:hover{border-color:rgba(37,99,235,0.5)}
 .how-it-works-card:hover::before{opacity:1;background:linear-gradient(135deg,rgba(37,99,235,0.05) 0%,transparent 100%)}
+.how-it-works-card.highlight{border-color:rgba(37,99,235,0.5);box-shadow:0 10px 30px rgba(37,99,235,0.12)}
 .how-it-works-icon{width:3rem;height:3rem;border-radius:8px;background:linear-gradient(135deg,var(--blue) 0%,var(--blue-dark) 100%);display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
 .how-it-works-icon svg{width:1.5rem;height:1.5rem;stroke:var(--bg);fill:none}
 .how-it-works-card-title{font-size:1.25rem;font-weight:600;color:var(--text);margin:0 0 0.5rem}
