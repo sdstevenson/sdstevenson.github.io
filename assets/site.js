@@ -80,13 +80,38 @@ document.addEventListener('DOMContentLoaded', () => {
   // Inject shared contact CTA
   const ctaEl = document.getElementById('contact-cta');
   if(ctaEl && !ctaEl.children.length){
-    const title = ctaEl.dataset.ctaTitle || 'Want to Learn More?';
-    const desc  = ctaEl.dataset.ctaDesc  || 'Reach out to discuss how STTUGS can work for your operation.';
-    ctaEl.innerHTML = `<div class="card" style="max-width:760px;margin:0 auto;text-align:center;">
-      <h2>${title}</h2>
-      <p class="small">${desc}</p>
-      <a href="contact.html" class="form-link">Get in Touch</a>
+    const title = ctaEl.dataset.ctaTitle || 'Ready to see the system?';
+    const desc  = ctaEl.dataset.ctaDesc  || 'Request a personalized demo from the Sttugs team.';
+    ctaEl.innerHTML = `<div class="cta-banner">
+      <div class="cta-banner-inner">
+        <h2 class="cta-banner-title">${title}</h2>
+        <p class="cta-banner-desc">${desc}</p>
+        <form class="cta-banner-form" id="ctaBannerForm">
+          <input type="email" placeholder="Enter your work email..." required class="cta-email-input">
+          <button type="submit" class="cta-demo-btn">Request Demo</button>
+        </form>
+        <p class="cta-trust-signal">Join the FBOs already upgrading to STTUGS</p>
+      </div>
     </div>`;
+    const ctaBannerForm = ctaEl.querySelector('#ctaBannerForm');
+    if(ctaBannerForm){
+      ctaBannerForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const emailInput = ctaBannerForm.querySelector('.cta-email-input');
+        if(emailInput && emailInput.value.trim()){
+          const gformUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSeESQcxH3hDUXmJm-tc7mCYc3_EB9Ef9Iv3A_ha_a9wWfpoYg/formResponse';
+          const fd = new FormData();
+          fd.append('entry.191654158', 'CTA Banner Demo Request');
+          fd.append('entry.878160977', emailInput.value.trim());
+          fetch(gformUrl, { method: 'POST', mode: 'no-cors', body: fd })
+            .finally(() => {
+              emailInput.value = '';
+              emailInput.placeholder = 'Thanks! We\'ll be in touch soon.';
+              const btn = ctaBannerForm.querySelector('.cta-demo-btn'); if(btn) btn.disabled = true;
+            });
+        }
+      });
+    }
   }
 
   // year

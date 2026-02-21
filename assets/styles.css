@@ -367,8 +367,8 @@ body {font-family: var(--font-sans); margin:0; padding:calc(2rem + 110px) 2rem 2
 /* New Site Footer */
 .site-footer {
   background: var(--navy);
-  border-top: 1px solid var(--nav-hover-bg);
-  margin-top: 4rem;
+  border-top: none;
+  margin-top: 0;
   margin-bottom: -2rem;
   width: 100vw;
   position: relative;
@@ -547,6 +547,30 @@ input[type="range"]:focus-visible {
 .benefit-icon{width:48px;height:48px;flex-shrink:0;border-radius:8px;background:linear-gradient(135deg,var(--blue) 0%,var(--blue-dark) 100%);display:flex;align-items:center;justify-content:center}
 .benefit-icon svg{width:24px;height:24px;stroke:var(--bg);stroke-width:2}
 .benefit-title{font-size:1.125rem;font-weight:700;color:var(--text);margin:0 0 0.5rem}
+
+/* CTA Banner Section */
+#contact-cta{background:var(--navy);padding:4rem 0!important;margin:0!important;width:100vw!important;max-width:none!important;position:relative;left:50%;transform:translateX(-50%)}
+.cta-banner{width:100%;margin:0;padding:0}
+.cta-banner-inner{max-width:1200px;margin:0 auto;padding:0 2rem;box-sizing:border-box;text-align:center;display:flex;flex-direction:column;align-items:center;gap:1.5rem}
+.cta-banner-title{font-size:2rem;font-weight:700;color:var(--bg);margin:0;line-height:1.2}
+.cta-banner-desc{font-size:1.125rem;color:rgba(255,255,255,0.85);margin:0;max-width:600px}
+.cta-banner-form{display:flex;gap:0.75rem;justify-content:center;align-items:stretch;width:100%;max-width:500px;margin:1rem 0}
+.cta-email-input{flex:1;padding:0.875rem 1rem;border:none;border-radius:8px;font-size:1rem;background:var(--bg);color:var(--text);font-family:var(--font-sans);min-width:0}
+.cta-email-input::placeholder{color:var(--muted)}
+.cta-email-input:focus{outline:2px solid var(--accent);outline-offset:0}
+.cta-demo-btn{padding:0.875rem 1.75rem;background:var(--accent);color:var(--navy);border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:1rem;white-space:nowrap;transition:all 0.2s ease}
+.cta-demo-btn:hover:not(:disabled){background:var(--accent-hover);color:var(--bg)}
+.cta-demo-btn:disabled{opacity:0.6;cursor:not-allowed}
+.cta-trust-signal{font-size:0.875rem;color:rgba(255,255,255,0.6);margin:0}
+@media (max-width:900px){
+  .cta-banner{padding:3rem 0}
+  .cta-banner-inner{gap:1.25rem;padding:0 1rem}
+  .cta-banner-title{font-size:1.5rem}
+  .cta-banner-desc{font-size:1rem}
+  .cta-banner-form{flex-direction:column;max-width:100%}
+  .cta-email-input{width:100%}
+  .cta-demo-btn{width:100%}
+}
 .benefit-desc{font-size:0.875rem;color:var(--muted);margin:0;line-height:1.5}
 @media (max-width:900px){.benefits-bar-grid{grid-template-columns:1fr;gap:1rem}.benefits-bar{padding:0 1rem}}
 
