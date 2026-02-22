@@ -402,8 +402,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (imgEl) imgEl.style.display = 'none';
         if (videoEl) {
           videoEl.style.display = 'block';
-          // Only update src and load if it's different to prevent flickers on first slide
-          if (videoEl.getAttribute('src') !== media.src && !videoEl.querySelector(`source[src="${media.src}"]`)) {
+          // Only update src and load if it's different to prevent flickers
+          if (videoEl.getAttribute('src') !== media.src) {
             videoEl.src = media.src;
             videoEl.load();
           }
