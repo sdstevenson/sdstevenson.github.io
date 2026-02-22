@@ -431,8 +431,8 @@ body {font-family: var(--font-sans); margin:0; padding:calc(2rem + 110px) 2rem 2
 .dropdown-btn:hover{background:var(--nav-hover-bg)}
 .dropdown-btn.active{color:var(--blue-active)}
 .dropdown-btn:focus{outline:none}
-.dropdown-content{position:absolute;top:100%;left:0;background:var(--navy);border:1px solid rgba(255,255,255,0.1);border-radius:8px;min-width:200px;z-index:1500;max-height:0;overflow:hidden;transition:max-height 0.3s ease-out,opacity 0.3s ease-out;opacity:0}
-.dropdown-content.open{max-height:300px;opacity:1}
+.dropdown-content{position:absolute;top:100%;left:0;background:var(--navy);border:1px solid rgba(255,255,255,0.1);border-radius:8px;min-width:200px;z-index:1500;max-height:0;overflow:hidden;transition:max-height 0.3s ease-out,opacity 0.3s ease-out;opacity:0;pointer-events:none}
+.dropdown-content.open{max-height:300px;opacity:1;pointer-events:auto}
 .dropdown-content a{display:block;padding:.5rem .7rem;color:var(--bg);text-decoration:none}
 .dropdown-content a:hover{background:var(--nav-hover-bg)}
 
@@ -632,6 +632,7 @@ input[type="range"]:focus-visible {
 
 /* CTA Banner Section */
 #contact-cta{background:var(--navy);padding:3rem 0 1rem!important;margin:0!important;width:100vw!important;max-width:none!important;position:relative;left:50%;transform:translateX(-50%)}
+#contact-cta.contact-cta-full{background:var(--bg)!important}
 .cta-banner{width:100%;margin:0;padding:0}
 .cta-banner-inner{max-width:1200px;margin:0 auto;padding:0 2rem;box-sizing:border-box;text-align:center;display:flex;flex-direction:column;align-items:center;gap:1.5rem}
 .cta-banner-title{font-size:2rem;font-weight:700;color:var(--bg);margin:0;line-height:1.2}
