@@ -40,7 +40,42 @@
       <p class="level-description">Intelligent algorithms that first determine optimal aircraft positions to maximize hangar capacity, then generate efficient movement paths for users to follow.</p>
     </header>
 
-    <section class="two-part-section">
+    <div class="video-band">
+      <section class="centered-section video-split-vertical-large">
+        <div class="split-text">
+          <h2>AutoStack: Optimizing Hangar Space</h2>
+          <p>Watch as our algorithm stacks aircraft and maximizes your hangar space, increasing occupancy and taking the guesswork out of stacking.</p>
+        </div>
+        <div class="split-media">
+          <div class="video-split-video">
+            <video muted playsinline preload="metadata" class="custom-video">
+              <source src="./assets/auto_stack_demo.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <div class="video-play-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+            </div>
+            <button class="video-fullscreen-btn" aria-label="Full screen" onclick="this.closest('.video-split-video').querySelector('video').requestFullscreen()">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3"></path><path d="M21 8V5a2 2 0 0 0-2-2h-3"></path><path d="M3 16v3a2 2 0 0 0 2 2h3"></path><path d="M16 21h3a2 2 0 0 0 2-2v-3"></path></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="centered-section video-split-vertical-large reverse" id="pathplanning-section">
+        <div class="split-text">
+          <h2>Path Planning: Intelligent Route Generation</h2>
+          <p>See how the system generates efficient movement paths that avoid obstacles, minimize distance, and provide clear visual guidance for operators.</p>
+        </div>
+        <div class="split-media">
+          <div class="mock-image" aria-hidden="true">Path Planning Demo — Coming Soon</div>
+        </div>
+      </section>
+    </div>
+
+    <!-- <section class="two-part-section dark">
       <div class="two-part-header">
         <h2 class="two-part-title">Two-Part Optimization Process</h2>
         <p class="two-part-subtitle">First we optimize placement, then we plan aircraft tow paths</p>
@@ -77,48 +112,9 @@
           </ul>
         </div>
       </div>
-    </section>
+    </section> -->
 
-    <section id="autostack-section" class="how-it-works-header dark">
-      <div class="how-it-works-header">
-        <h2 class="how-it-works-title">See It In Action</h2>
-        <p class="how-it-works-subtitle">Watch how our systems optimizes placement and plans paths</p>
-      </div>
-    </section>
-
-    <div class="video-dark-band">
-      <section class="centered-section video-split-vertical-large">
-        <div class="split-text">
-          <h2>AutoStack: Optimizing Hangar Space</h2>
-          <p>Watch as our algorithm stacks aircraft and maximizes your hangar space, increasing occupancy and taking the guesswork out of stacking.</p>
-        </div>
-        <div class="split-media">
-          <div class="video-split-video">
-            <video muted playsinline preload="metadata" class="custom-video">
-              <source src="./assets/auto_stack_demo.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-            <div class="video-play-overlay">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <polygon points="5 3 19 12 5 21 5 3"></polygon>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="centered-section video-split-vertical-large reverse" id="pathplanning-section">
-        <div class="split-text">
-          <h2>Path Planning: Intelligent Route Generation</h2>
-          <p>See how the system generates efficient movement paths that avoid obstacles, minimize distance, and provide clear visual guidance for operators.</p>
-        </div>
-        <div class="split-media">
-          <div class="mock-image" aria-hidden="true">Path Planning Demo — Coming Soon</div>
-        </div>
-      </section>
-    </div>
-
-    <section class="how-it-works-section">
+    <section class="how-it-works-section dark">
       <div class="how-it-works-header">
         <h2 class="how-it-works-title">Key Features</h2>
         <p class="how-it-works-subtitle">Advanced capabilities for maximum efficiency</p>
@@ -172,7 +168,7 @@
       </div>
     </section>
 
-    <section class="tech-features-section dark">
+    <section class="tech-features-section">
       <div class="tech-features-header">
         <h2 class="tech-features-title">How This Helps You</h2>
         <p class="tech-features-subtitle">Real-world benefits protecting your assets and streamlining operations</p>
@@ -214,7 +210,7 @@
       </div>
     </section>
 
-    <section class="card centered-section">
+    <section class="faq-section dark">
       <button class="faq-dropdown-btn" aria-expanded="false">
         <span class="faq-title-with-icon"><svg class="faq-question-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>FAQs</span>
         <span class="faq-dropdown-icon">+</span>
