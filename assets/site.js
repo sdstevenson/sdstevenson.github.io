@@ -6,7 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const page = location.pathname.split('/').pop() || 'index.html';
   const isHome = !page || page === 'index.html';
   const isAbout = page === 'about.html';
-  const isSolutions = /^level[123]\.html$/.test(page);
+  const isSystem = page === 'system.html';
+  const isLevel1 = page === 'level1.html';
+  const isLevel2 = page === 'level2.html';
+  const isLevel3 = page === 'level3.html';
+  const isAudit = page === 'audit.html';
+  const isSolutions = isLevel1 || isLevel2 || isLevel3 || isAudit || isSystem;
   const isROI = page === 'roi.html';
   const stickyEl = document.getElementById('stickyBrand');
   if(stickyEl) stickyEl.innerHTML = `<div class="sticky-inner">
@@ -16,16 +21,18 @@ document.addEventListener('DOMContentLoaded', () => {
       <a href="index.html"${isHome?' class="active"':''}>Home</a>
       <a href="about.html"${isAbout?' class="active"':''}>About</a>
       <div class="dropdown">
-        <button class="dropdown-btn${isSolutions?' active':''}" aria-expanded="false">Solutions</button>
+        <button class="dropdown-btn${isSolutions?' active':''}" aria-expanded="false">Solutions<svg class="dropdown-chevron" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
         <div class="dropdown-content">
-          <a href="level1.html">Level 1 - Collision Detection</a>
-          <a href="level2.html">Level 2 - Guided Auto Stack</a>
-          <a href="level3.html">Level 3 - Full Autonomy</a>
+          <a href="level1.html"${isLevel1?' class="active" aria-current="page"':''}>Collision Prevention</a>
+          <a href="level2.html"${isLevel2?' class="active" aria-current="page"':''}>Auto-Stacking & Path Planning</a>
+          <a href="level3.html"${isLevel3?' class="active" aria-current="page"':''}>Autonomous Tugs</a>
+          <a href="audit.html"${isAudit?' class="active" aria-current="page"':''}>Verifiable Audit Trail</a>
+          <a href="system.html"${isSystem?' class="active" aria-current="page"':''}>Hardware & Infrastructure</a>
         </div>
       </div>
       <a href="roi.html"${isROI?' class="active"':''}>ROI Calculator</a>
     </nav>
-    <a href="contact.html" class="cta-button">Get Started</a>
+    <a href="contact.html" class="cta-button">Contact Us</a>
   </div>`;
 
   // Inject shared footer
@@ -33,18 +40,18 @@ document.addEventListener('DOMContentLoaded', () => {
   if(footerEl) footerEl.innerHTML = `<div class="footer-content">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="footer-logo-section">
-          <div class="logo footer-logo-img"></div>
-          <span class="footer-brand-name">STTUGS</span>
-        </div>
-        <p class="footer-tagline">Autonomous Aircraft Hangar Management</p>
+        <img src="assets/logo_rectangle_darkbg_text.svg" alt="STTUGS" class="footer-logo-rect">
+        <p class="footer-copyright">© 2026 STTUGS</p>
+        <p class="footer-patent">Patent Pending</p>
       </div>
       <div class="footer-column">
-        <h3>Product Levels</h3>
+        <h3>Solutions</h3>
         <ul>
-          <li><a href="level1.html">Level 1: Collision Detection</a></li>
-          <li><a href="level2.html">Level 2: Auto-Stacking &amp; Path Planning</a></li>
-          <li><a href="level3.html">Level 3: Autonomous Tugs</a></li>
+          <li><a href="level1.html">Collision Prevention</a></li>
+          <li><a href="level2.html">Auto-Stacking &amp; Path Planning</a></li>
+          <li><a href="level3.html">Autonomous Tugs</a></li>
+          <li><a href="audit.html">Verifiable Audit Trail</a></li>
+          <li><a href="system.html">Hardware &amp; Infrastructure</a></li>
         </ul>
       </div>
       <div class="footer-column">
@@ -62,10 +69,44 @@ document.addEventListener('DOMContentLoaded', () => {
         </ul>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>© <span id="year"></span> STTUGS • Built with FBOs, for FBOs</p>
-    </div>
   </div>`;
+
+  // Inject shared contact CTA
+  const ctaEl = document.getElementById('contact-cta');
+  if(ctaEl && !ctaEl.children.length){
+    const title = ctaEl.dataset.ctaTitle || 'Ready to see the system?';
+    const desc  = ctaEl.dataset.ctaDesc  || 'Request a personalized demo from the Sttugs team.';
+    ctaEl.innerHTML = `<div class="cta-banner">
+      <div class="cta-banner-inner">
+        <h2 class="cta-banner-title">${title}</h2>
+        <p class="cta-banner-desc">${desc}</p>
+        <form class="cta-banner-form" id="ctaBannerForm">
+          <input type="email" placeholder="Enter your email..." required class="cta-email-input">
+          <button type="submit" class="cta-demo-btn">Request Demo</button>
+        </form>
+        <p class="cta-trust-signal">Join the FBOs already upgrading to STTUGS</p>
+      </div>
+    </div>`;
+    const ctaBannerForm = ctaEl.querySelector('#ctaBannerForm');
+    if(ctaBannerForm){
+      ctaBannerForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const emailInput = ctaBannerForm.querySelector('.cta-email-input');
+        if(emailInput && emailInput.value.trim()){
+          const gformUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSeESQcxH3hDUXmJm-tc7mCYc3_EB9Ef9Iv3A_ha_a9wWfpoYg/formResponse';
+          const fd = new FormData();
+          fd.append('entry.191654158', 'CTA Banner Demo Request');
+          fd.append('entry.878160977', emailInput.value.trim());
+          fetch(gformUrl, { method: 'POST', mode: 'no-cors', body: fd })
+            .finally(() => {
+              emailInput.value = '';
+              emailInput.placeholder = 'Thanks! We\'ll be in touch soon.';
+              const btn = ctaBannerForm.querySelector('.cta-demo-btn'); if(btn) btn.disabled = true;
+            });
+        }
+      });
+    }
+  }
 
   // year
   const yearEl = document.getElementById('year'); if(yearEl) yearEl.textContent = new Date().getFullYear();
@@ -87,7 +128,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const fd = new FormData();
         fd.append('entry.191654158', document.getElementById('demo-name').value.trim());
         fd.append('entry.1925679811', document.getElementById('demo-company').value.trim());
-        fd.append('entry.878160977', document.getElementById('demo-contact').value.trim());
+        const messageVal = document.getElementById('demo-message')?.value.trim() || '';
+        const contactVal = document.getElementById('demo-contact').value.trim();
+        fd.append('entry.878160977', `${contactVal}${messageVal ? ' | Message: ' + messageVal : ''}`);
         fetch(gformUrl, { method: 'POST', mode: 'no-cors', body: fd })
           .finally(() => {
             const inline = document.getElementById('demoSuccessInline'); if(inline) inline.style.display = 'block';
@@ -257,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         slider.addEventListener('input', () => { input.value = slider.value; update(); });
       }
-      input.addEventListener('change', () => {
+      input.addEventListener('input', () => {
         let v = Number(input.value); if(isNaN(v)) return;
         const min = Number(slider.min || -Infinity); const max = Number(slider.max || Infinity);
         if(v < min) v = min; if(v > max) v = max;
@@ -270,21 +313,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return true;
   }
 
-  function initROIDrawer(){
-    const roiTab = document.getElementById('roiTab');
-    const roiDrawer = document.getElementById('roiDrawer');
-    const roiOverlay = document.getElementById('roiOverlay');
-    if(!roiDrawer || !roiTab || !roiOverlay) return false;
-    function openDrawer(){ roiDrawer.classList.add('open'); roiOverlay.hidden = false; roiTab.setAttribute('aria-expanded','true'); }
-    function closeDrawer(){ roiDrawer.classList.remove('open'); roiOverlay.hidden = true; roiTab.setAttribute('aria-expanded','false'); }
-    if(roiTab) roiTab.addEventListener('click', () => { const open = roiDrawer.classList.contains('open'); (open ? closeDrawer() : openDrawer()); });
-    if(roiOverlay) roiOverlay.addEventListener('click', closeDrawer);
-    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeDrawer(); });
-    const closeBtn = roiDrawer.querySelector('.roi-close'); if(closeBtn) closeBtn.addEventListener('click', closeDrawer);
-    return true;
-  }
-
-  if(!initROIDrawer()){ setTimeout(initROIDrawer, 300); }
   if(!initROIControls()){ setTimeout(initROIControls, 300); }
 
   // FAQ dropdown
@@ -315,55 +343,101 @@ document.addEventListener('DOMContentLoaded', () => {
   if (videoShowcase) {
     // Video data for the carousel
     const videos = [
-      // TO DO: Automated Tug
+      // Collision Detection
+      {
+        src: './assets/collision_detection_demo_sim.mp4',
+        heroTitle: 'Protect Every Aircraft',
+        heroDesc: 'Our real-time collision prevention system monitors every movement, notifying users of potential collisions before they happen.'
+      },
 
       // Auto Stacking
       {
         src: './assets/auto_stack_demo.mp4',
-        title: 'Intelligent Auto-Stack',
-        desc: 'Our algorithm finds optimal placements for maximum hangar utilization'
+        heroTitle: 'Safely Maximize Hangar Efficiency',
+        heroDesc: 'Our algorithm intelligently positions each aircraft to optimize your hangar useage while maintaining strict safety buffers - increasing hangar revenue and hangar safety.'
       },
+
+      // Audit Trail
+      {
+        src: './assets/audit_log_demo_image.jpg',
+        heroTitle: 'Verifiable Audit Log',
+        heroDesc: 'Complete time-stamped logs of every movement and action in your hangar are stored and used to generate a risk score for insurers, proving the safety of your operations.'
+      }
 
       // TO DO: Path Planning
-
-      // Collision Detection
-      {
-        src: './assets/collision_detection_demo_sim.mp4',
-        title: 'Collision Detection',
-        desc: 'Real-time hazard identification prevents costly hangar rash'
-      },
+      // TO DO: Automated Tug
     ];
     
     let currentVideoIndex = 0;
     let isTransitioning = false;
+    let autoAdvanceTimer = null;
+    let userPaused = false;
+    
     const videoEl = document.getElementById('showcase-video');
+    const imgEl = document.getElementById('showcase-img');
     const videoContainer = videoShowcase.querySelector('.video-container');
-    const videoTitle = videoShowcase.querySelector('.video-title');
-    const videoDesc = videoShowcase.querySelector('.video-desc'); 
+    const videoPanelTitle = videoShowcase.querySelector('.video-panel-title');
+    const videoPanelDesc = videoShowcase.querySelector('.video-panel-desc');
     const dotsContainer = videoShowcase.querySelector('.carousel-dots');
     
     // Create dots
     videos.forEach((_, index) => {
       const dot = document.createElement('button');
       dot.className = 'carousel-dot' + (index === 0 ? ' active' : '');
-      dot.setAttribute('aria-label', `Go to video ${index + 1}`);
+      dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
       dot.addEventListener('click', () => goToVideo(index));
       dotsContainer.appendChild(dot);
     });
     
-    function updateVideo(index, direction = 'right') {
-      const video = videos[index];
-      videoEl.src = video.src;
-      videoEl.load();
-      videoEl.play().catch(() => {}); // Autoplay may be blocked
-      videoTitle.textContent = video.title;
-      videoDesc.textContent = video.desc;
+    function updateVideo(index) {
+      const media = videos[index];
+      const isVideo = media.src.toLowerCase().endsWith('.mp4');
       
+      if (autoAdvanceTimer) {
+        clearTimeout(autoAdvanceTimer);
+        autoAdvanceTimer = null;
+      }
+
+      if (isVideo) {
+        if (imgEl) imgEl.style.display = 'none';
+        if (videoEl) {
+          videoEl.style.display = 'block';
+          // Only update src and load if it's different to prevent flickers
+          if (videoEl.getAttribute('src') !== media.src) {
+            videoEl.src = media.src;
+            videoEl.load();
+          }
+          videoEl.play().catch(() => {}); 
+        }
+      } else {
+        if (videoEl) {
+          videoEl.pause();
+          videoEl.style.display = 'none';
+        }
+        if (imgEl) {
+          imgEl.style.display = 'block';
+          imgEl.src = media.src;
+          imgEl.alt = media.heroTitle;
+        }
+        
+        // Auto-advance for images after 7 seconds (slightly longer than default video clips)
+        // TO ENABLE: uncomment the block below
+        // if (!userPaused) {
+        //   autoAdvanceTimer = setTimeout(nextVideo, 7000);
+        // }
+      }
+
+      if (videoPanelTitle) videoPanelTitle.textContent = media.heroTitle;
+      if (videoPanelDesc) videoPanelDesc.textContent = media.heroDesc;
+
       // Update dots
       dotsContainer.querySelectorAll('.carousel-dot').forEach((dot, i) => {
         dot.classList.toggle('active', i === index);
       });
     }
+
+    // Set initial state
+    updateVideo(0);
     
     function transitionToVideo(index, direction) {
       if (isTransitioning || index === currentVideoIndex) return;
@@ -377,9 +451,9 @@ document.addEventListener('DOMContentLoaded', () => {
       videoContainer.classList.add(slideOutClass);
       
       setTimeout(() => {
-        // Update video content while hidden
+        // Update content while hidden
         currentVideoIndex = index;
-        updateVideo(currentVideoIndex, direction);
+        updateVideo(currentVideoIndex);
         
         // Disable transition, position off-screen
         videoContainer.style.transition = 'none';
@@ -420,9 +494,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.key === 'ArrowDown') nextVideo();
     });
     
-    // Track if user manually paused the video
-    let userPaused = false;
-    
     // Detect user pause/play actions
     if (videoEl) {
       videoEl.addEventListener('pause', () => {
@@ -439,20 +510,16 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Auto-advance to next video when current one ends (with pause)
     // Only auto-advance if user hasn't paused
-    if (videoEl) {
-      videoEl.addEventListener('ended', () => {
-        if (!userPaused) {
-          setTimeout(() => {
-            nextVideo();
-          }, 1500); // 1.5 second pause before advancing
-        }
-      });
-    }
-    
-    // Start playing the first video
-    if (videoEl) {
-      videoEl.play().catch(() => {});
-    }
+    // TO ENABLE: uncomment the block below
+    // if (videoEl) {
+    //   videoEl.addEventListener('ended', () => {
+    //     if (!userPaused) {
+    //       setTimeout(() => {
+    //         nextVideo();
+    //       }, 1500); // 1.5 second pause before advancing
+    //     }
+    //   });
+    // }
   }
 
   // Custom video controls

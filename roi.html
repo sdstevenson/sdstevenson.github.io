@@ -32,47 +32,6 @@
       <p class="level-description">Calculate the potential savings with STTUGS at your hangar</p>
     </header>
 
-    <div class="benefits-bar">
-      <div class="benefits-bar-grid">
-        <div class="benefit-item">
-          <div class="benefit-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
-              <polyline points="16 7 22 7 22 13"></polyline>
-            </svg>
-          </div>
-          <div>
-            <h3 class="benefit-title">Increased Capacity</h3>
-            <p class="benefit-desc">More aircraft per hangar with optimal auto-stacking</p>
-          </div>
-        </div>
-        <div class="benefit-item">
-          <div class="benefit-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <line x1="12" x2="12" y1="2" y2="22"></line>
-              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-            </svg>
-          </div>
-          <div>
-            <h3 class="benefit-title">Labor Reduction</h3>
-            <p class="benefit-desc">Reduce labor costs with autonomous operations</p>
-          </div>
-        </div>
-        <div class="benefit-item">
-          <div class="benefit-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="10"></circle>
-              <polyline points="12 6 12 12 16 14"></polyline>
-            </svg>
-          </div>
-          <div>
-            <h3 class="benefit-title">Time Savings</h3>
-            <p class="benefit-desc">Save time moving aircraft with path planning</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <section class="centered-section">
       <div class="card" style="max-width:760px;margin:0 auto;text-align:left;">
         <h2 id="roi-title">Your ROI</h2>
@@ -97,7 +56,7 @@
         <hr>
 
         <div style="margin-bottom:1rem">
-          <label class="small">People per stack: <input id="peopleInput" class="numbox small" type="number" min="1" max="99" step="1" value="25"></label>
+          <label class="small">People per stack: <input id="peopleInput" class="numbox small" type="number" min="1" max="99" step="1" value="5"></label>
           <input id="peoplePerStack" type="range" min="1" max="8" step="1" value="5">
         </div>
 
@@ -143,7 +102,7 @@
       </div>
     </section>
 
-    <section class="centered-section roi-calculation-section">
+    <section class="centered-section roi-calculation-section dark">
       <div class="roi-calculation-container">
         <div class="roi-calculation-header">
           <h2 class="roi-calculation-title">How We Calculate Your Savings</h2>
@@ -152,18 +111,36 @@
 
         <div class="roi-calculation-grid">
           <div class="roi-calculation-card">
+            <div class="how-it-works-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+                <polyline points="16 7 22 7 22 13"></polyline>
+              </svg>
+            </div>
             <h3>Increased Hangar Capacity</h3>
             <p>Our auto-stacking algorithm optimally positions aircraft to maximize hangar utilization. By analyzing aircraft dimensions and hangar space in real-time, we can achieve a noticable increase in capacity compared to traditional manual positioning.</p>
             <p><strong>Revenue Impact:</strong> Each additional aircraft generates money in hangar fees, maintenance services, and related revenue.</p>
           </div>
 
           <div class="roi-calculation-card">
+            <div class="how-it-works-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" x2="12" y1="2" y2="22"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
             <h3>Labor Cost Reduction</h3>
             <p>Autonomous aircraft tugs eliminate the need for manual towing operations, reducing labor requirements. The system operates 24/7 without breaks, shift changes, or overtime costs.</p>
             <p><strong>Cost Savings:</strong> Based on your labor hours and hourly rate, we calculate annual savings from reduced staffing needs while maintaining full operational capability.</p>
           </div>
 
           <div class="roi-calculation-card">
+            <div class="how-it-works-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
             <h3>Operational Time Savings</h3>
             <p>Path planning optimization reduces aircraft movement time greatly. With collision detection preventing delays and autonomous execution eliminating coordination overhead, operations run significantly faster.</p>
             <p><strong>Efficiency Gain:</strong> Time savings translate to faster turnaround, increased throughput, and improved customer satisfaction.</p>
@@ -171,6 +148,10 @@
         </div>
       </div>
     </section>
+
+    <section id="contact-cta" class="centered-section"
+      data-cta-title="Ready to see the system?"
+      data-cta-desc="Get a walkthrough of the camera layout and tablet workflow tuned to your hangar."></section>
 
     <footer class="site-footer"></footer>
   </div>

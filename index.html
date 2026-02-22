@@ -27,72 +27,41 @@
 <body>
   <div id="stickyBrand"></div>
 
-  <div class="container">
-    <header class="level-hero">
-      <div class="level-icon-logo">
-        <img src="assets/logo.svg" alt="STTUGS Logo" class="logo-image">
+  <!-- Full-width video hero carousel -->
+  <section id="video-showcase" class="video-showcase-hero">
+    <div class="video-carousel">
+      <div class="video-container">
+        <div class="video-text-panel">
+          <h2 class="video-panel-title">Maximize Hangar Efficiency</h2>
+          <p class="video-panel-desc">Our AI-powered algorithm intelligently positions each aircraft to fit more planes in less space—automatically and safely.</p>
+        </div>
+        <div class="video-wrapper">
+          <video id="showcase-video" playsinline muted preload="auto" autoplay controls></video>
+          <img id="showcase-img" src="" alt="" style="display: none; width: 100%; height: auto;">
+        </div>
       </div>
-      <h1 class="level-title">STTUGS</h1>
-      <p class="level-subtitle-gold">Autonomous Aircraft Hangar Management</p>
-      <p class="level-description">Parter with us to build the future of hangar management</p>
-    </header>
+      <div class="carousel-dots"></div>
+    </div>
+  </section>
 
   <div class="container">
-    <!-- Video Carousel -->
-    <section id="video-showcase" class="video-showcase">
-      <div class="video-carousel">
-        <!-- Video shown on startup -->
-        <div class="video-container">
-          <div class="video-wrapper">
-            <video id="showcase-video" playsinline muted preload="auto" autoplay controls>
-              <source src="./assets/auto_stack_demo.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="video-caption">
-            <span class="video-title">Intelligent Auto-Stack</span>
-            <span class="video-desc">Our algorithm finds optimal placements for maximum hangar utilization</span>
-          </div>
-        </div>
-        <div class="carousel-dots"></div>
-      </div>
-    </section>
 
     <section class="automation-features">
       <div class="automation-header">
-        <h2>Complete Hangar Automation</h2>
+        <h2>Complete Hangar Safety</h2>
         <p class="automation-subtitle">Everything you need for safe, efficient, and profitable hangar operations</p>
       </div>
       <div class="automation-grid">
-        <div class="automation-card">
-          <div class="automation-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
-              <circle cx="12" cy="13" r="3"></circle>
-            </svg>
-          </div>
-          <h3>Real-Time Monitoring</h3>
-          <p>Overhead camera system ensures no blind-spots for real-time operations</p>
-        </div>
-        <div class="automation-card">
-          <div class="automation-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect width="16" height="20" x="4" y="2" rx="2" ry="2"></rect>
-              <line x1="12" x2="12.01" y1="18" y2="18"></line>
-            </svg>
-          </div>
-          <h3>Tablet Control</h3>
-          <p>View and manage all hangar data from any tablet device</p>
-        </div>
-        <div class="automation-card">
+        <a href="level1.html" class="automation-card featured">
           <div class="automation-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
             </svg>
           </div>
-          <h3>Collision Detection</h3>
-          <p>Prevent accidents and damage to aircraft with constant monitoring</p>
-        </div>
-        <div class="automation-card">
+          <h3>Collision Prevention</h3>
+          <p>Prevent accidents and damage to aircraft with constant monitoring and real-time alerts</p>
+        </a>
+        <a href="level2.html#autostack-section" class="automation-card featured">
           <div class="automation-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <rect width="18" height="18" x="3" y="3" rx="2"></rect>
@@ -103,9 +72,9 @@
             </svg>
           </div>
           <h3>Auto-Stacking</h3>
-          <p>Optimal aircraft positioning maximizes hangar capacity</p>
-        </div>
-        <div class="automation-card">
+          <p>Optimize aircraft positions to maximize hangar capacity at the click of a button</p>
+        </a>
+        <a href="level2.html#pathplanning-section" class="automation-card featured">
           <div class="automation-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <circle cx="6" cy="19" r="3"></circle>
@@ -114,9 +83,43 @@
             </svg>
           </div>
           <h3>Path Planning</h3>
-          <p>Intelligent routing guides aircraft movement efficiently</p>
-        </div>
-        <div class="automation-card">
+          <p>Generate efficient and collision free tow paths for moving aircraft</p>
+        </a>
+        <a href="audit.html" class="automation-card featured">
+          <div class="automation-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+              <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+              <path d="M12 11h4"></path>
+              <path d="M12 16h4"></path>
+              <path d="M8 11h.01"></path>
+              <path d="M8 16h.01"></path>
+            </svg>
+          </div>
+          <h3>Verifiable Audit Trail</h3>
+          <p>Complete time-stamped logs of every aircraft movement, command, and safety event</p>
+        </a>
+        <a href="camera.html" class="automation-card">
+          <div class="automation-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
+              <circle cx="12" cy="13" r="3"></circle>
+            </svg>
+          </div>
+          <h3>Real-Time Monitoring</h3>
+          <p>Overhead camera system ensures no blind-spots for real-time operations</p>
+        </a>
+        <a href="tablet.html" class="automation-card">
+          <div class="automation-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect width="16" height="20" x="4" y="2" rx="2" ry="2"></rect>
+              <line x1="12" x2="12.01" y1="18" y2="18"></line>
+            </svg>
+          </div>
+          <h3>Tablet Control</h3>
+          <p>View and manage all hangar data in real-time from an intuitive tablet device</p>
+        </a>
+        <a href="level3.html" class="automation-card">
           <div class="automation-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path>
@@ -127,19 +130,27 @@
             </svg>
           </div>
           <h3>Autonomous Tugs</h3>
-          <p>Self-operating tugs eliminate manual labor requirements</p>
-        </div>
+          <p>Self-operating tugs with redundant safety systems help eliminate hangar rash</p>
+        </a>
+        <a href="level1.html" class="automation-card">
+          <div class="automation-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+            </svg>
+          </div>
+          <h3>Auto-Brake System</h3>
+          <p>Retrofit braking system adds autonomous stop capability to existing tug equipment</p>
+        </a>
       </div>
     </section>
 
-    <section class="product-levels">
+    <section class="product-levels product-levels-section">
       <div class="product-levels-header">
         <h2>Three Product Levels</h2>
-        <p class="product-levels-subtitle">Each level builds upon the previous, creating a complete autonomous system</p>
+        <p class="product-levels-subtitle">Click the icons below to learn more</p>
       </div>
       <div class="product-levels-grid">
         <a href="level1.html" class="product-level-card">
-          <div class="product-level-badge">Level 1</div>
           <div class="product-level-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
@@ -156,7 +167,6 @@
           </span>
         </a>
         <a href="level2.html" class="product-level-card">
-          <div class="product-level-badge">Level 2</div>
           <div class="product-level-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <rect width="18" height="18" x="3" y="3" rx="2"></rect>
@@ -177,7 +187,6 @@
           </span>
         </a>
         <a href="level3.html" class="product-level-card">
-          <div class="product-level-badge">Level 3</div>
           <div class="product-level-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path>
@@ -200,116 +209,13 @@
       </div>
     </section>
 
-    <section id="contact-cta" class="centered-section">
-      <div class="card" style="max-width:760px;margin:0 auto;text-align:center;">
-        <h2>Become a Partner</h2>
-        <p class="small">We're seeking FBO partners to help build the future of hangar operations.</p>
-
-        <form id="demoForm" class="demo-form" novalidate style="margin-top:.6rem;display:flex;flex-direction:column;gap:.9rem;align-items:center;">
-          <div style="width:100%;max-width:640px;">
-            <div class="field">
-              <label class="visually-hidden" for="demo-name">Your Name</label>
-              <div class="input-with-icon">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-4 0-7 2-7 4v2h14v-2c0-2-3-4-7-4z"/></svg>
-                <input id="demo-name" name="name" type="text" placeholder="Your Name" required>
-              </div>
-              <div class="error" data-for="demo-name">Please enter your name</div>
-            </div>
-
-            <div class="field">
-              <label class="visually-hidden" for="demo-company">Your FBO / Company</label>
-              <div class="input-with-icon">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18v-2H3v2zm2-4h4V7H5v10zm6 0h4V3h-4v14zm6 0h4V11h-4v6z"/></svg>
-                <input id="demo-company" name="company" type="text" placeholder="Your FBO / Company" required>
-              </div>
-              <div class="error" data-for="demo-company">Please enter the name of your FBO / Company</div>
-            </div>
-
-            <div class="field">
-              <label class="visually-hidden" for="demo-contact">Email or phone</label>
-              <div class="input-with-icon">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 6v12h20V6l-10 7L2 6z"/></svg>
-                <input id="demo-contact" name="contact" type="text" placeholder="Enter your email or phone" required>
-              </div>
-              <div class="error" data-for="demo-contact">Please enter your email or phone #</div>
-            </div>
-
-            <div style="text-align:center;margin-top:.5rem">
-              <button type="submit" class="primary-cta">Send Message</button>
-            </div>
-          </div>
-        </form>
-        <div id="demoSuccessInline" class="small demo-success-inline">Thanks — we're excited to explore this partnership with you.</div>
-      </div>
-    </section>
+    <section id="contact-cta" class="centered-section"
+      data-cta-title="Become a Partner"
+      data-cta-desc="We're seeking FBO partners to help build the future of hangar operations."></section>
 
     <footer class="site-footer"></footer>
   </div>
 
   <script src="assets/site.js"></script>
-
-  <!-- ROI drawer markup: placed before the end of body so it is part of the document -->
-  <!-- <div id="roiOverlay" class="roi-overlay" hidden aria-hidden="true"></div>
-  <button id="roiTab" class="roi-tab" aria-expanded="false" aria-controls="roiDrawer">ROI Calculator</button>
-  <aside id="roiDrawer" class="roi-drawer card" role="dialog" aria-labelledby="roi-title" aria-hidden="true">
-    <div class="roi-drawer-inner">
-      <button class="roi-close" aria-label="Close ROI panel">✕</button>
-      <h2 id="roi-title">Your ROI</h2>
-      <div id="roi-value" style="font-size:1.6rem;font-weight:700;color:var(--success);margin-bottom:.5rem">$0</div>
-      <div class="small muted" style="margin-bottom:1rem">Estimated annual benefit</div>
-
-      <div style="margin-bottom:1rem">
-        <label class="small">Hangar sqft: <input id="hangarSqftInput" class="numbox large" type="number" min="1000" max="200000" step="1000" value="40000"></label>
-        <input id="hangarSqft" type="range" min="1000" max="200000" step="1000" value="40000">
-      </div>
-
-      <div style="margin-bottom:1rem">
-        <label class="small">Utilization boost %: <input id="utilBoostInput" class="numbox small" type="number" min="0" max="50" step="1" value="8"></label>
-        <input id="utilBoost" type="range" min="0" max="50" step="1" value="8">
-      </div>
-
-      <div style="margin-bottom:1rem">
-        <label class="small">Tenant rate (monthly $/sqft): <input id="tenantRateInput" class="numbox large" type="number" min="0" max="10" step="0.01" value="2.00"></label>
-        <input id="tenantRate" type="range" min="0" max="10" step="0.1" value="2.0">
-      </div>
-
-      <hr>
-
-      <div style="margin-bottom:1rem">
-        <label class="small">People per stack: <input id="peopleInput" class="numbox small" type="number" min="1" max="99" step="1" value="25"></label>
-        <input id="peoplePerStack" type="range" min="1" max="8" step="1" value="5">
-      </div>
-
-      <div style="margin-bottom:1rem">
-        <label class="small">Wage per hour ($): <input id="wageInput" class="numbox small" type="number" min="0" max="99" step="1" value="25"></label>
-        <input id="wagePerHour" type="range" min="10" max="99" step="1" value="25">
-      </div>
-
-      <div style="margin-bottom:1rem">
-        <label class="small">Hours spent stacking per day: <input id="timeInput" class="numbox medium" type="number" min="0" max="12" step="0.5" value="4"></label>
-        <input id="timePerStack" type="range" min="0" max="12" step="0.5" value="4">
-      </div>
-
-      <hr>
-
-      <div class="small" style="margin-top:.5rem">Breakdown</div>
-      <ul class="small" id="breakdown" style="padding-left:1rem">
-        <li>Annual labor savings: <strong id="laborSaving">$0</strong></li>
-        <li>Annual additional revenue: <strong id="revenueGain">$0</strong></li>
-      </ul>
-    </div>
-  </aside>
-
-  <style>
-    /* ROI drawer + tab styles */
-  .roi-tab{position:fixed;right:0;top:50%;transform:translateY(-50%) translateX(0);background:var(--accent);color:#041014;border:0;padding:.9rem 1.1rem;border-radius:10px 0 0 10px;font-weight:900;cursor:pointer;z-index:1600;font-size:1.06rem}
-    .roi-overlay{position:fixed;inset:0;background:rgba(2,6,8,0.45);z-index:1550;display:block}
-    .roi-overlay[hidden]{display:none}
-    .roi-drawer{position:fixed;right:0;top:50%;transform:translateY(-50%) translateX(110%);width:380px;max-width:92vw;height:80vh;overflow:auto;padding:1rem 1rem;border-radius:12px 0 0 12px;box-shadow:-8px 24px 64px rgba(2,6,8,0.6);z-index:1605;transition:transform .32s cubic-bezier(.2,.9,.2,1);border:1px solid rgba(0,0,0,0.35);background:var(--card-bg)}
-    .roi-drawer.open{transform:translateY(-50%) translateX(0)}
-    .roi-drawer .roi-drawer-inner{position:relative}
-    .roi-drawer .roi-close{position:absolute;right:8px;top:8px;border:0;background:transparent;color:var(--muted);font-size:1.05rem;cursor:pointer}
-    @media (max-width:900px){ .roi-drawer{width:100%;height:46vh;left:0;right:0;bottom:0;top:auto;transform:translateY(110%);border-radius:12px 12px 0 0} .roi-drawer.open{transform:translateY(0)} .roi-tab{right:12px;top:auto;bottom:12px;transform:none;border-radius:12px}}
-  </style> -->
 </body>
 </html>
