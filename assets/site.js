@@ -40,11 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if(footerEl) footerEl.innerHTML = `<div class="footer-content">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="footer-logo-section">
-          <div class="logo footer-logo-img"></div>
-          <span class="footer-brand-name">STTUGS</span>
-        </div>
-        <p class="footer-tagline">Autonomous Aircraft Hangar Management</p>
+        <img src="assets/logo_rectangle_darkbg_text.svg" alt="STTUGS" class="footer-logo-rect">
+        <p class="footer-copyright">© 2026 STTUGS</p>
+        <p class="footer-patent">Patent Pending</p>
       </div>
       <div class="footer-column">
         <h3>Solutions</h3>
@@ -70,10 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
           <li class="footer-contact">+1-781-975-1300</li>
         </ul>
       </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© <span id="year"></span> STTUGS • Built with FBOs, for FBOs</p>
-      <p style="margin-top:0.4rem;font-size:0.75rem;color:rgba(255,255,255,0.3)">Patent Pending — Autonomous hangar management system including collision detection, auto-stacking, path planning, tug retrofit, and overhead camera/sensor array.</p>
     </div>
   </div>`;
 
