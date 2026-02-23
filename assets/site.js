@@ -74,8 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Inject shared contact CTA
   const ctaEl = document.getElementById('contact-cta');
   if(ctaEl && !ctaEl.children.length){
-    const title = ctaEl.dataset.ctaTitle || 'Ready to see the system?';
-    const desc  = ctaEl.dataset.ctaDesc  || 'Request a personalized demo from the Sttugs team.';
+    const title = 'Want to Learn More?';
+    const desc  = 'Reach out to discuss how the audit trail and other STTUGS features can work for your operation.';
     ctaEl.innerHTML = `<div class="cta-banner">
       <div class="cta-banner-inner">
         <h2 class="cta-banner-title">${title}</h2>
