@@ -331,6 +331,23 @@ body {font-family: var(--font-sans); margin:0; padding:calc(2rem + 110px) 2rem 2
   .info-content p{font-size:1rem}
 }
 
+/* Partner Section (About page) */
+.partner-section{position:relative;margin:3rem 0}
+.partner-section.dark::before{content:"";position:absolute;inset:0;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;background:var(--card-bg-dark);z-index:-1}
+.partner-section-inner{max-width:760px;margin:0 auto;padding:3rem 1.5rem}
+.partner-section-header{text-align:center;margin-bottom:2.5rem}
+.partner-section-title{font-size:2rem;font-weight:800;color:var(--text);margin:0 0 0.5rem 0}
+.partner-section-subtitle{font-size:1.05rem;color:var(--muted);margin:0}
+.partner-cards{display:flex;flex-direction:column;gap:1.25rem}
+.partner-card{display:flex;align-items:flex-start;gap:1.25rem;background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;padding:1.75rem 1.5rem;transition:all 0.3s ease}
+.partner-card:hover{border-color:var(--accent);box-shadow:0 4px 20px rgba(245,166,35,0.12);transform:translateY(-2px)}
+.partner-card-icon{width:48px;height:48px;flex-shrink:0;background:linear-gradient(135deg,var(--blue) 0%,var(--blue-dark) 100%);border-radius:10px;display:flex;align-items:center;justify-content:center}
+.partner-card-icon svg{width:22px;height:22px;stroke:var(--bg);stroke-width:2}
+.partner-card-body{display:flex;flex-direction:column;gap:0.4rem}
+.partner-card-title{font-size:1.1rem;font-weight:700;color:var(--text);margin:0}
+.partner-card-desc{font-size:0.975rem;color:var(--muted);line-height:1.65;margin:0}
+@media (max-width:600px){.partner-card{flex-direction:column;gap:1rem}}
+
 /* Team Section */
 .team-section{max-width:1200px;margin:2rem auto;padding:0 1rem}
 .team-section.dark {
