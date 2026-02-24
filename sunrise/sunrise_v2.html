@@ -532,15 +532,39 @@
     .tab_title:hover { color: var(--navy); }
 
     .accordion_content {
-      height: 0;
+      max-height: 0;
       opacity: 0;
       overflow: hidden;
+      transition: max-height 0.38s ease, opacity 0.28s ease;
+    }
+    .accordion_item.active .accordion_content {
+      max-height: 400px;
+      opacity: 1;
     }
     .tab_description {
       font-size: 0.9375rem;
       line-height: 1.7;
       color: var(--muted);
-      padding-bottom: 1.25rem;
+      padding-bottom: 1rem;
+    }
+    .tab-learn-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      margin-bottom: 1.25rem;
+      padding: 0.45rem 1rem;
+      border: 1.5px solid var(--accent);
+      border-radius: 6px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: background 0.18s, color 0.18s;
+    }
+    .tab-learn-more:hover {
+      background: var(--accent);
+      color: #0F172A;
     }
 
     /* Visual panel */
@@ -1063,7 +1087,7 @@
         </a>
       </div>
       <div class="nav_links home">
-        <a href="../about.html" class="nav_link home">About</a>
+        <a href="sunrise_about_v2.html" class="nav_link home">About</a>
         <a href="#" data-open-contact class="nav_link home cta">Contact Us</a>
       </div>
     </nav>
@@ -1086,7 +1110,7 @@
           </a>
         </div>
         <div class="nav_links home">
-          <a href="../about.html" class="nav_link home">About</a>
+          <a href="sunrise_about_v2.html" class="nav_link home">About</a>
           <a href="#" data-open-contact class="nav_link home cta">Contact Us</a>
           <button role="button" data-menu-toggle aria-label="open-menu" class="menu-button">
             <div class="hamburger_6_wrap">
@@ -1102,12 +1126,13 @@
       <div class="nav_mobile" data-nav="closed">
         <div class="nav_mobile_contain">
           <div class="mobile_nav_group">
-            <a href="../index.html" class="mobile_nav_link">Home</a>
-            <a href="../about.html" class="mobile_nav_link">About</a>
-            <a href="../level1.html" class="mobile_nav_link">Collision Prevention</a>
-            <a href="../level2.html" class="mobile_nav_link">Auto-Stacking</a>
-            <a href="../level3.html" class="mobile_nav_link">Autonomous Tugs</a>
-            <a href="../audit.html" class="mobile_nav_link">Audit Trail</a>
+            <a href="sunrise_v2.html" class="mobile_nav_link">Home</a>
+            <a href="sunrise_about_v2.html" class="mobile_nav_link">About</a>
+            <a href="collision-detection-and-prevention.html" class="mobile_nav_link">Collision Prevention</a>
+            <a href="auto-stack.html" class="mobile_nav_link">Auto-Stacking</a>
+            <a href="path-planning.html" class="mobile_nav_link">Path Planning</a>
+            <a href="autonomous-tugs.html" class="mobile_nav_link">Autonomous Tugs</a>
+            <a href="verifiable-audit-trail.html" class="mobile_nav_link">Audit Trail</a>
             <a href="#" data-open-contact class="mobile_nav_link">Contact Us</a>
           </div>
           <div class="mobile_nav_bottom">
@@ -1127,7 +1152,7 @@
 
       <!-- Title + animated circle -->
       <div class="hero_text_wrap">
-        <h1 class="hero_title">Intelligent hangar management,<br>powered by AI.</h1>
+        <h1 class="hero_title">Intelligent hangar management,<br>powered by Sttugs.</h1>
 
         <!-- Logo sun: no-hangar version rises like a sun; full logo with hangar fades in at destination -->
         <div class="svg_circle">
@@ -1174,14 +1199,14 @@
         <div class="mission_inner">
           <div class="mission_headline">
             <div class="mission_label">Mission</div>
-            <h2 class="mission_title">Sttugs is on a mission to bring autonomous intelligence to every hangar in the world.</h2>
+            <h2 class="mission_title">Sttugs is on a mission to eliminate hangar rash in every hangar in the world.</h2>
           </div>
           <div class="mission_content-a">
             <div class="mission_group">
               <p class="mission_body">
-                We're starting with aircraft hangars, where billions of dollars of assets move daily in tight quarters. Collisions, inefficient layouts, and manual workflows cost the industry hundreds of millions annually. Sttugs changes that — with a platform that sees, thinks, and acts to keep every aircraft safe and every square foot utilized.
+                Collisions, inefficient layouts, and manual workflows cost the industry hundreds of millions annually. Sttugs changes that: with a platform that sees, thinks, and acts to keep every aircraft safe and every square foot utilized.
               </p>
-              <a href="../about.html" class="outlined_button">Read more</a>
+              <a href="sunrise_about_v2.html" class="outlined_button">Read more</a>
             </div>
           </div>
         </div>
@@ -1227,6 +1252,7 @@
                     <p class="tab_description">
                       Constant sensor-based monitoring of every aircraft and obstacle in the hangar. Real-time alerts and auto-brake triggers prevent accidents before they happen — protecting your assets and your team.
                     </p>
+                    <a href="collision-detection-and-prevention.html" class="tab-learn-more">Learn More →</a>
                   </div>
                 </div>
 
@@ -1236,6 +1262,7 @@
                     <p class="tab_description">
                       Our AI optimizer calculates the ideal layout for your aircraft mix, maximizing every square foot of hangar space. Accommodate more aircraft with fewer moves — at the click of a button.
                     </p>
+                    <a href="auto-stack.html" class="tab-learn-more">Learn More →</a>
                   </div>
                 </div>
 
@@ -1245,6 +1272,7 @@
                     <p class="tab_description">
                       Generate safe, collision-free tow paths for moving aircraft through congested hangar layouts. Sequence multi-aircraft moves with confidence and eliminate guesswork from ground handling.
                     </p>
+                    <a href="path-planning.html" class="tab-learn-more">Learn More →</a>
                   </div>
                 </div>
 
@@ -1254,6 +1282,7 @@
                     <p class="tab_description">
                       Self-operating tug vehicles equipped with redundant safety systems execute aircraft movements without manual intervention. Redundant obstacle detection and emergency stop systems keep every move safe.
                     </p>
+                    <a href="autonomous-tugs.html" class="tab-learn-more">Learn More →</a>
                   </div>
                 </div>
 
@@ -1263,6 +1292,7 @@
                     <p class="tab_description">
                       Every aircraft movement, command, and safety event is time-stamped and recorded. Full accountability for compliance, insurance, and operational review — always on, always accurate.
                     </p>
+                    <a href="verifiable-audit-trail.html" class="tab-learn-more">Learn More →</a>
                   </div>
                 </div>
 
@@ -1506,7 +1536,8 @@
             <div class="product_card_content">
               <div class="product_card_title">See. Think. Act.</div>
               <p class="product_card_description">
-                Continuously observing the hangar environment, interpreting aircraft positions with advanced AI, and alerting operators or executing movements autonomously — all in real time. Sttugs learns from every shift, adapting to your fleet mix and delivering safer, smarter operations every day.
+                Continuously observing the hangar environment, interpreting aircraft positions with intelligent software, and alerting operators or executing movements autonomously - all in real time.
+                <!-- Sttugs learns from every movement, adapting to your fleet mix and delivering safer, smarter operations every day. -->
               </p>
             </div>
             <div class="product_graphic">
@@ -1523,7 +1554,8 @@
             <div class="product_card_content">
               <div class="product_card_title">Maximize Every Square Foot</div>
               <p class="product_card_description">
-                AI-powered auto-stacking finds the optimal layout for your specific aircraft mix — then executes it. Move less, fit more, and stop leaving capacity on the table. FBOs report storing up to 35% more aircraft after deployment.
+                Algorithmic auto-stacking finds the optimal layout for your specific aircraft mix - then executes it. Move less, fit more, and stop leaving capacity on the table. 
+                <!-- FBOs report storing up to 35% more aircraft after deployment. -->
               </p>
             </div>
             <div class="product_graphic">
@@ -1541,7 +1573,7 @@
             <div class="product_card_content">
               <div class="product_card_title">Scale Without Friction</div>
               <p class="product_card_description">
-                Start with collision prevention and expand to full autonomous tug operations at your own pace. Three scalable tiers ensure you get value from day one — with a clear path to complete hangar automation.
+                Start with collision prevention and expand to full autonomous tug operations at your own pace. Three scalable tiers ensure you get value from day one - with a clear path to ROI.
               </p>
             </div>
             <div class="product_graphic">
@@ -1631,7 +1663,7 @@
               We are a team of engineers, pilots, AI researchers, and aviation industry veterans building software that makes hangars safer and smarter. We believe autonomous technology will transform every aspect of ground operations — and we're starting with the hangar.<br/><br/>
               The Sttugs team has flown commercially, operated FBOs, built autonomous vehicle systems, and shipped AI products. We bring deep domain expertise together with cutting-edge technology to solve a real problem that has cost the industry billions.
             </p>
-            <a href="../about.html" class="outlined_button-4">Open Positions</a>
+            <a href="../roi.html" class="outlined_button-4">Check what your ROI could be</a>
           </div>
         </div>
       </div>
@@ -1649,11 +1681,12 @@
         <div class="footer_right">
           <nav class="footer_nav">
             <a href="#" data-open-contact class="footer_link">Contact</a>
-            <a href="../about.html" class="footer_link">About</a>
-            <a href="../level1.html" class="footer_link">Collision Prevention</a>
-            <a href="../level2.html" class="footer_link">Auto-Stacking</a>
-            <a href="../level3.html" class="footer_link">Autonomous Tugs</a>
-            <a href="../audit.html" class="footer_link">Audit Trail</a>
+            <a href="sunrise_about_v2.html" class="footer_link">About</a>
+            <a href="collision-detection-and-prevention.html" class="footer_link">Collision Prevention</a>
+            <a href="auto-stack.html" class="footer_link">Auto-Stacking</a>
+            <a href="path-planning.html" class="footer_link">Path Planning</a>
+            <a href="autonomous-tugs.html" class="footer_link">Autonomous Tugs</a>
+            <a href="verifiable-audit-trail.html" class="footer_link">Audit Trail</a>
           </nav>
         </div>
       </div>
