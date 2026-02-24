@@ -246,7 +246,7 @@
       align-items: center;
       justify-content: flex-start;
       padding-top: 6rem;
-      z-index: 4;
+      z-index: 6;
       pointer-events: none;
     }
     .hero_title {
@@ -298,34 +298,21 @@
       position: absolute;
       inset: 0;
       overflow: hidden;
-      background: linear-gradient(180deg, #0F172A 0%, #1E293B 27.5%, #FFFFFF 52%);
-      z-index: 1;
-      will-change: transform;
+      background: #0F172A;
+      z-index: 5;
+      will-change: opacity;
     }
     .lines_top {
       position: absolute;
       inset: 0;
       overflow: hidden;
     }
-    .svg_line {
+    #hero-lines-canvas {
       display: block;
       position: absolute;
-      left: 0; right: 0;
-      height: 1px;
-      will-change: transform;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
     }
-    .svg_line:nth-child(1){--index:0}.svg_line:nth-child(2){--index:1}.svg_line:nth-child(3){--index:2}
-    .svg_line:nth-child(4){--index:3}.svg_line:nth-child(5){--index:4}.svg_line:nth-child(6){--index:5}
-    .svg_line:nth-child(7){--index:6}.svg_line:nth-child(8){--index:7}.svg_line:nth-child(9){--index:8}
-    .svg_line:nth-child(10){--index:9}.svg_line:nth-child(11){--index:10}.svg_line:nth-child(12){--index:11}
-    .svg_line:nth-child(13){--index:12}.svg_line:nth-child(14){--index:13}.svg_line:nth-child(15){--index:14}
-    .svg_line:nth-child(16){--index:15}.svg_line:nth-child(17){--index:16}.svg_line:nth-child(18){--index:17}
-    .svg_line:nth-child(19){--index:18}.svg_line:nth-child(20){--index:19}.svg_line:nth-child(21){--index:20}
-    .svg_line:nth-child(22){--index:21}.svg_line:nth-child(23){--index:22}.svg_line:nth-child(24){--index:23}
-    .svg_line:nth-child(25){--index:24}.svg_line:nth-child(26){--index:25}.svg_line:nth-child(27){--index:26}
-    .svg_line:nth-child(28){--index:27}.svg_line:nth-child(29){--index:28}.svg_line:nth-child(30){--index:29}
-    .svg_line:nth-child(31){--index:30}.svg_line:nth-child(32){--index:31}.svg_line:nth-child(33){--index:32}
-    .svg_line:nth-child(34){--index:33}
 
     /* Hero subtitle (slides up with lines) */
     .hero_subtitle_wrap {
@@ -356,7 +343,7 @@
       position: absolute;
       inset: 0;
       background: var(--navy);
-      z-index: 6;
+      z-index: 8;
       transform: translateY(100%);
       will-change: transform;
       overflow: hidden;
@@ -1138,41 +1125,8 @@
       <!-- Lines + subtitle (scroll-animated) -->
       <div class="hero_lines_wrap">
         <div class="lines_top">
-          <!-- 34 horizontal lines, positioned by JS -->
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
+          <!-- Runway animation drawn here by JS -->
+          <canvas id="hero-lines-canvas"></canvas>
         </div>
       </div>
 

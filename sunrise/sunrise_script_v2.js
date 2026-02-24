@@ -53,37 +53,82 @@ function debounce(fn, delay) {
 }
 
 /* ============================================================
-   POSITION LINES (fan-out calculation — identical to original)
+   RUNWAY CANVAS — draws horizontal black lines + white center
+   dashes that scroll downward as progress advances (0→1),
+   simulating forward motion along a runway / road.
 ============================================================ */
-function calculatePosition(index, total, height, baseSpacing, factor) {
-  const center = height / 2;
-  const half = Math.floor(total / 2);
-  const offset = index - half;
-  const dist = Math.abs(offset);
-  let pos = center;
-  if (dist === 0) {
-    pos = center;
-  } else {
-    let accumulated = 0;
-    for (let i = 1; i <= dist; i++) {
-      accumulated += baseSpacing * Math.pow(factor, i - 1);
-    }
-    pos = offset > 0 ? center + accumulated : center - accumulated;
-  }
-  return pos;
+
+/** Resize canvas pixel buffer to match its CSS size. */
+function initRunwayCanvas() {
+  const canvas = document.getElementById("hero-lines-canvas");
+  if (!canvas) return;
+  canvas.width = canvas.offsetWidth || window.innerWidth;
+  canvas.height = canvas.offsetHeight || window.innerHeight;
+  drawRunwayLines(canvas, 0);
 }
 
-function positionLines() {
-  const lines = document.querySelectorAll(".svg_line");
-  const total = lines.length;
-  const height = window.innerHeight;
-  const baseSpacing = 3.4;
-  const factor = 1.08;
+/**
+ * Draw the animated runway lines onto the canvas.
+ * @param {HTMLCanvasElement} canvas
+ * @param {number} progress  0 = scroll start, 1 = scroll end
+ */
+function drawRunwayLines(canvas, progress) {
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  const W = canvas.width;
+  const H = canvas.height;
+  ctx.clearRect(0, 0, W, H);
 
-  lines.forEach((line, i) => {
-    const y = calculatePosition(i, total, height, baseSpacing, factor);
-    gsap.set(line, { y: y - height / 2, top: "50%" });
-  });
+  const startY = H * 0.25;     // lines begin at ~25% from top
+  const zoneH  = H - startY;   // visible zone: lower 75% of screen
+
+  // Horizontal line spacing: 4 px at start → 15 px at end
+  const spacing = 4 + 11 * progress;
+
+  // How far lines have scrolled downward (wraps so new lines feed in from top)
+  const scrollOffset = progress * 520;
+  const wrappedOffset = scrollOffset % zoneH;
+
+  // Draw enough lines to always fill the zone at current spacing
+  const numLines = Math.ceil(zoneH / spacing) + 4;
+  ctx.lineWidth = 1;
+  for (let i = 0; i < numLines; i++) {
+    const y = startY + ((i * spacing + wrappedOffset) % zoneH);
+    if (y < startY || y > H) continue;
+    const alpha = Math.max(0.1, 0.75 - progress * 0.35);
+    ctx.strokeStyle = `rgba(15,23,42,${alpha.toFixed(2)})`;
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(W, y);
+    ctx.stroke();
+  }
+
+  // White center dashes (runway / road lane markings)
+  // Start well below the title/logo area so they never overlap with text.
+  const dashStartY = H * 0.55;              // dashes only in bottom 45% of screen
+  const dashZoneH  = H - dashStartY;
+  const dashLen    = 22;
+  const dashGap    = 16;
+  const dashPeriod = dashLen + dashGap;
+  const dashOffset = (progress * 650) % dashZoneH;
+  const numDashes  = Math.ceil(dashZoneH / dashPeriod) + 4;
+  const cx = W / 2;
+  ctx.save();
+  ctx.rect(0, dashStartY, W, dashZoneH);  // clip so dashes can never draw above dashStartY
+  ctx.clip();
+  ctx.lineWidth = 2.5;
+  for (let i = 0; i < numDashes; i++) {
+    const dy    = dashStartY + ((i * dashPeriod + dashOffset) % dashZoneH);
+    const dyEnd = dy + dashLen;
+    if (dy > H || dyEnd < dashStartY) continue;
+    const alpha = Math.max(0.05, 0.65 - progress * 0.40);
+    ctx.strokeStyle = `rgba(255,255,255,${alpha.toFixed(2)})`;
+    ctx.beginPath();
+    ctx.moveTo(cx, Math.max(dy, dashStartY));
+    ctx.lineTo(cx, Math.min(dyEnd, H));
+    ctx.stroke();
+  }
+  ctx.restore();
 }
 
 /* ============================================================
@@ -147,7 +192,7 @@ function createAnimation(smoother) {
   const logoBase = document.querySelector(".logo-sun-base");
   const logoFull = document.querySelector(".logo-sun-full");
   const heroTitle = document.querySelector(".hero_title");
-  const svgLines = document.querySelectorAll(".svg_line");
+  const linesCanvas = document.getElementById("hero-lines-canvas");
   const heroSubtitleWrap = document.querySelector(".hero_subtitle_wrap");
   const heroSubtitle = document.querySelector(".hero_subtitle");
   const missionWrap = document.querySelector(".mission_wrap-a");
@@ -157,7 +202,7 @@ function createAnimation(smoother) {
   if (!heroWrap) return;
 
   // Initial states
-  gsap.set(svgLines, { y: (i) => calculatePosition(i, svgLines.length, window.innerHeight, 3.4, 1.08) - window.innerHeight / 2 + "px" });
+  initRunwayCanvas();                         // size canvas and draw progress=0 frame
   gsap.set(heroSubtitleWrap, { y: 40, opacity: 0 });
   gsap.set(missionWrap, { y: "100%" });
   gsap.set(svgCircle, { y: window.innerHeight * 0.4 });
@@ -189,6 +234,7 @@ function createAnimation(smoother) {
         const p = self.progress;
         if (Math.abs(p - lastProgress) > 0.001) {
           lastProgress = p;
+          drawRunwayLines(linesCanvas, p);
           updateCircleGradient(p);
           handleDesktopNavUpdate(p);
         }
@@ -215,18 +261,7 @@ function createAnimation(smoother) {
     0
   );
 
-  // 2. Lines: collapse faster (done by 30%) and fade out simultaneously
-  mainTimeline.to(
-    svgLines,
-    {
-      y: 0,
-      opacity: 0,
-      duration: 0.3,
-      stagger: { amount: 0.1, from: "center" },
-      ease: "power3.in",
-    },
-    0
-  );
+  // (Lines are drawn directly on canvas via onUpdate — no GSAP tween needed)
 
   // 3. Subtitle fades + slides up after lines are gone (starts at 0.3, done by 0.5)
   mainTimeline.to(
@@ -469,7 +504,7 @@ function initResize() {
   window.addEventListener(
     "resize",
     debounce(() => {
-      positionLines();
+      initRunwayCanvas();
       ScrollTrigger.refresh(true);
     }, 200)
   );
@@ -542,7 +577,7 @@ function initPageHandlers(smoother) {
 
   // Wait for DOM + layout to be ready
   window.addEventListener("load", function () {
-    positionLines();
+    initRunwayCanvas();
 
     const smoother = initSmoother();
 
