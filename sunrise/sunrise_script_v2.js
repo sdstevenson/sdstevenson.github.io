@@ -32,6 +32,10 @@ function setupViewportHeight() {
    SCROLL SMOOTHER INIT
 ============================================================ */
 function initSmoother() {
+  // Only create ScrollSmoother on pages that have the required wrapper elements
+  if (!document.getElementById('smooth-wrapper') || !document.getElementById('smooth-content')) {
+    return null;
+  }
   return ScrollSmoother.create({
     wrapper: "#smooth-wrapper",
     content: "#smooth-content",
@@ -583,6 +587,261 @@ function initPageHandlers(smoother) {
 }
 
 /* ============================================================
+   SHARED FOOTER + CONTACT MODAL INJECTION
+   -----------------------------------------------------------
+   Called on every page that loads this script.  Finds the
+   <footer> element and populates it, then injects the shared
+   contact modal and the minimal CSS both need (idempotent —
+   safe to call multiple times).
+============================================================ */
+function injectSharedComponents() {
+  /* ── 1. Shared CSS (inject once) ── */
+  if (!document.getElementById('sttugs-shared-styles')) {
+    const style = document.createElement('style');
+    style.id = 'sttugs-shared-styles';
+    style.textContent = `
+      /* Shared footer */
+      .sttugs-footer {
+        background: #0F172A;
+        padding: 3rem 0;
+        position: relative;
+      }
+      .sttugs-footer_container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        flex-wrap: wrap;
+      }
+      .sttugs-footer_left { display: flex; flex-direction: column; gap: 0.5rem; }
+      .sttugs-site_name {
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: #FFFFFF;
+        letter-spacing: -0.02em;
+        text-decoration: none;
+      }
+      .sttugs-copyright { font-size: 0.8125rem; color: rgba(255,255,255,0.4); }
+      .sttugs-footer_nav { display: flex; gap: 1.25rem; flex-wrap: wrap; align-items: center; }
+      .sttugs-footer_link {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: rgba(255,255,255,0.55);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .sttugs-footer_link:hover { color: #FFFFFF; }
+      @media (max-width: 600px) {
+        .sttugs-footer_container { flex-direction: column; align-items: flex-start; }
+      }
+
+      /* Shared contact modal */
+      .sttugs-modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(15,23,42,0.7);
+        z-index: 9000;
+        backdrop-filter: blur(4px);
+      }
+      .sttugs-modal-overlay.active { display: block; }
+      .sttugs-modal-wrap {
+        display: none;
+        position: fixed;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        width: min(520px, 92vw);
+        background: #FFFFFF;
+        border-radius: 16px;
+        z-index: 9001;
+        overflow: hidden;
+        box-shadow: 0 24px 80px rgba(15,23,42,0.3);
+      }
+      .sttugs-modal-wrap.active { display: block; }
+      .sttugs-modal-inner { padding: 2.25rem 2.5rem 2.5rem; }
+      .sttugs-modal-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #0F172A;
+        margin-bottom: 1.25rem;
+      }
+      .sttugs-modal-divider { height: 1px; background: rgba(15,23,42,0.1); margin: 0 0 1.25rem; }
+      .sttugs-modal-form { display: flex; flex-direction: column; gap: 1.1rem; }
+      .sttugs-field-label {
+        display: block;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        color: #64748B;
+        margin-bottom: 0.35rem;
+      }
+      .sttugs-text-field, .sttugs-textarea {
+        width: 100%;
+        padding: 0.7rem 0.9rem;
+        border: 1.5px solid #CBD5E1;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 0.9375rem;
+        color: #0F172A;
+        background: #F8FAFC;
+        transition: border-color 0.2s;
+        box-sizing: border-box;
+      }
+      .sttugs-text-field:focus, .sttugs-textarea:focus {
+        outline: none;
+        border-color: #2563EB;
+        background: #FFFFFF;
+      }
+      .sttugs-textarea { min-height: 110px; resize: vertical; }
+      .sttugs-submit {
+        padding: 0.8rem 1.5rem;
+        background: #2563EB;
+        color: #FFFFFF;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.9375rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.2s;
+        align-self: flex-start;
+      }
+      .sttugs-submit:hover { background: #1d4ed8; }
+      .sttugs-modal-success { display: none; padding: 2rem; text-align: center; }
+      .sttugs-modal-success.visible { display: block; }
+      .sttugs-success-big { font-size: 1.5rem; font-weight: 700; color: #0F172A; margin-bottom: 0.5rem; }
+      .sttugs-success-small { font-size: 0.9375rem; color: #64748B; }
+      .sttugs-modal-close {
+        position: absolute;
+        top: 1rem; right: 1rem;
+        width: 32px; height: 32px;
+        border-radius: 50%;
+        background: transparent;
+        border: none;
+        display: flex; align-items: center; justify-content: center;
+        cursor: pointer;
+        color: #64748B;
+        transition: background 0.2s, color 0.2s;
+      }
+      .sttugs-modal-close:hover { background: rgba(15,23,42,0.08); color: #0F172A; }
+    `;
+    document.head.appendChild(style);
+  }
+
+  /* ── 2. Footer HTML ── */
+  const footer = document.querySelector('footer');
+  if (footer) {
+    footer.setAttribute('data-bg-type', 'dark');
+    footer.className = 'sttugs-footer';
+    footer.innerHTML = `
+      <div class="sttugs-footer_container">
+        <div class="sttugs-footer_left">
+          <a href="../index.html" class="sttugs-site_name">STTUGS</a>
+          <div class="sttugs-copyright">
+            © <span data-current-year></span> Sttugs. Patent Pending.
+          </div>
+        </div>
+        <div class="sttugs-footer_right">
+          <nav class="sttugs-footer_nav">
+            <a href="#" data-open-contact class="sttugs-footer_link">Contact</a>
+            <a href="../about.html"   class="sttugs-footer_link">About</a>
+            <a href="../level1.html" class="sttugs-footer_link">Collision Prevention</a>
+            <a href="../level2.html" class="sttugs-footer_link">Auto-Stacking</a>
+            <a href="../level3.html" class="sttugs-footer_link">Autonomous Tugs</a>
+            <a href="../audit.html"  class="sttugs-footer_link">Audit Trail</a>
+          </nav>
+        </div>
+      </div>
+    `;
+  }
+
+  /* ── 3. Contact Modal HTML (inject once, only on pages that don't
+            have their own Webflow-style .modal_wrap-contact) ── */
+  const hasLegacyModal = !!document.querySelector('.modal_wrap-contact');
+  if (!hasLegacyModal && !document.getElementById('sttugs-shared-modal')) {
+    const modalWrap = document.createElement('div');
+    modalWrap.id = 'sttugs-shared-modal';
+    modalWrap.innerHTML = `
+      <div class="sttugs-modal-overlay" id="sttugs-modal-overlay"></div>
+      <div class="sttugs-modal-wrap" id="sttugs-modal-wrap" role="dialog" aria-modal="true" aria-labelledby="sttugs-modal-title">
+        <button class="sttugs-modal-close" id="sttugs-modal-close" aria-label="Close">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1L13 13M13 1L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <div class="sttugs-modal-inner">
+          <div class="sttugs-modal-title" id="sttugs-modal-title">Contact Sttugs</div>
+          <div class="sttugs-modal-divider"></div>
+          <form id="sttugs-contact-form" class="sttugs-modal-form">
+            <div>
+              <label class="sttugs-field-label" for="sttugs-email">Your email</label>
+              <input class="sttugs-text-field" type="email" id="sttugs-email" name="email" placeholder="you@example.com" required/>
+            </div>
+            <div>
+              <label class="sttugs-field-label" for="sttugs-message">Message</label>
+              <textarea class="sttugs-textarea" id="sttugs-message" name="message" placeholder="Tell us about your operation..." required></textarea>
+            </div>
+            <button type="submit" class="sttugs-submit">Send Message</button>
+          </form>
+          <div class="sttugs-modal-success" id="sttugs-modal-success">
+            <div class="sttugs-success-big">Thank you!</div>
+            <div class="sttugs-success-small">We'll be in touch shortly.</div>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modalWrap);
+  }
+
+  /* ── 4. Wire up the shared modal ── */
+  initSharedContactModal();
+}
+
+function initSharedContactModal() {
+  const overlay  = document.getElementById('sttugs-modal-overlay');
+  const modal    = document.getElementById('sttugs-modal-wrap');
+  const closeBtn = document.getElementById('sttugs-modal-close');
+  const form     = document.getElementById('sttugs-contact-form');
+  const success  = document.getElementById('sttugs-modal-success');
+  if (!overlay || !modal) return;
+
+  function openModal() {
+    overlay.classList.add('active');
+    modal.classList.add('active');
+    document.body.classList.add('scroll-locked');
+    if (form)    form.style.display = '';
+    if (success) success.classList.remove('visible');
+  }
+  function closeModal() {
+    overlay.classList.remove('active');
+    modal.classList.remove('active');
+    document.body.classList.remove('scroll-locked');
+  }
+
+  // All [data-open-contact] triggers — re-query so newly injected footer links are found
+  document.querySelectorAll('[data-open-contact]').forEach(el =>
+    el.addEventListener('click', e => { e.preventDefault(); openModal(); })
+  );
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', closeModal);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  if (form) {
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      form.style.display = 'none';
+      if (success) success.classList.add('visible');
+    });
+  }
+
+  // Re-run year stamp on freshly injected footer
+  document.querySelectorAll('[data-current-year]').forEach(el =>
+    el.textContent = new Date().getFullYear()
+  );
+}
+
+/* ============================================================
    MAIN ENTRY POINT
 ============================================================ */
 (function main() {
@@ -590,6 +849,13 @@ function initPageHandlers(smoother) {
   setupViewportHeight();
   initYear();
   initNavStates();
+
+  // Inject shared footer + modal as early as possible
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', injectSharedComponents);
+  } else {
+    injectSharedComponents();
+  }
 
   // Wait for DOM + layout to be ready
   window.addEventListener("load", function () {
