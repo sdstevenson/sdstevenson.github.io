@@ -64,15 +64,22 @@ function initRunwayCanvas() {
   if (!canvas) return;
   canvas.width = canvas.offsetWidth || window.innerWidth;
   canvas.height = canvas.offsetHeight || window.innerHeight;
-  drawRunwayLines(canvas, 0);
+  const logoEl = document.querySelector(".svg_circle");
+  let logoCenterY;
+  if (logoEl) {
+    const r = logoEl.getBoundingClientRect();
+    logoCenterY = (r.top + r.bottom) / 2;
+  }
+  drawRunwayLines(canvas, 0, logoCenterY);
 }
 
 /**
  * Draw the animated runway lines onto the canvas.
  * @param {HTMLCanvasElement} canvas
- * @param {number} progress  0 = scroll start, 1 = scroll end
+ * @param {number} progress   0 = scroll start, 1 = scroll end
+ * @param {number} [dashTopY] Y coordinate where dashes begin (logo center). Defaults to H*0.65.
  */
-function drawRunwayLines(canvas, progress) {
+function drawRunwayLines(canvas, progress, dashTopY) {
   if (!canvas) return;
   const ctx = canvas.getContext("2d");
   const W = canvas.width;
@@ -104,8 +111,8 @@ function drawRunwayLines(canvas, progress) {
   }
 
   // White center dashes (runway / road lane markings)
-  // Start well below the title/logo area so they never overlap with text.
-  const dashStartY = H * 0.55;              // dashes only in bottom 45% of screen
+  // dashTopY tracks the live logo center so dashes never overlap the logo.
+  const dashStartY = (dashTopY !== undefined) ? dashTopY : H * 0.65;
   const dashZoneH  = H - dashStartY;
   const dashLen    = 22;
   const dashGap    = 16;
@@ -132,26 +139,30 @@ function drawRunwayLines(canvas, progress) {
 }
 
 /* ============================================================
-   NAV: DESKTOP COLOUR UPDATES
+   NAV THEME  (dark = navy bg / white text,  light = white bg / navy text)
 ============================================================ */
-function handleDesktopNavUpdate(progress) {
+function setNavTheme(theme) {
   const fixedNav = document.querySelector(".nav_wrap.home.fixed");
-  const absNav = document.querySelector(".nav_wrap.home.absolute");
-  if (!fixedNav || !absNav) return;
-
-  if (progress >= NAV_TRIGGER_POINTS.hide) {
-    // Past the mission section — show fixed nav, hide absolute
-    gsap.to(fixedNav, { duration: 0.35, opacity: 1, pointerEvents: "auto", ease: "power2.out" });
-    gsap.to(absNav, { duration: 0.2, opacity: 0, pointerEvents: "none", ease: "power2.out" });
-  } else if (progress >= NAV_TRIGGER_POINTS.show) {
-    // In the hero transition — hide both (dark region)
-    gsap.to(fixedNav, { duration: 0.2, opacity: 0, pointerEvents: "none", ease: "power2.out" });
-    gsap.to(absNav, { duration: 0.2, opacity: 0, pointerEvents: "none", ease: "power2.out" });
+  if (!fixedNav) return;
+  if (theme === "light") {
+    fixedNav.classList.add("nav--light");
   } else {
-    // Top of page — absolute nav visible
-    gsap.to(fixedNav, { duration: 0.25, opacity: 0, pointerEvents: "none", ease: "power2.out" });
-    gsap.to(absNav, { duration: 0.25, opacity: 1, pointerEvents: "auto", ease: "power2.out" });
+    fixedNav.classList.remove("nav--light");
   }
+}
+
+/* Set up ScrollTriggers for sections after the hero */
+function initPostHeroNavTheme() {
+  document.querySelectorAll("[data-bg-type]").forEach((section) => {
+    const theme = section.dataset.bgType; // "light" or "dark"
+    ScrollTrigger.create({
+      trigger: section,
+      start: "top top+=1",
+      end: "bottom top+=1",
+      onEnter: ()      => setNavTheme(theme),
+      onEnterBack: ()  => setNavTheme(theme),
+    });
+  });
 }
 
 /* ============================================================
@@ -234,9 +245,17 @@ function createAnimation(smoother) {
         const p = self.progress;
         if (Math.abs(p - lastProgress) > 0.001) {
           lastProgress = p;
-          drawRunwayLines(linesCanvas, p);
+          // Compute logo center in viewport coords so dashes always end exactly there.
+          const logoEl = document.querySelector(".svg_circle");
+          let logoCenterY;
+          if (logoEl) {
+            const r = logoEl.getBoundingClientRect();
+            logoCenterY = (r.top + r.bottom) / 2;
+          }
+          drawRunwayLines(linesCanvas, p, logoCenterY);
           updateCircleGradient(p);
-          handleDesktopNavUpdate(p);
+          // Lines canvas fades out 0.25-0.40 (white bg), mission starts at 0.58 (dark).
+          setNavTheme(p >= 0.30 && p < 0.55 ? "light" : "dark");
         }
       },
     },
@@ -535,13 +554,10 @@ function initScrollReveals() {
 }
 
 /* ============================================================
-   INITIAL NAV STATE (hide fixed nav on page load)
+   INITIAL NAV STATE — fixed nav always visible, starts dark
 ============================================================ */
 function initNavStates() {
-  const fixedNav = document.querySelector(".nav_wrap.home.fixed");
-  if (fixedNav) {
-    gsap.set(fixedNav, { opacity: 0, pointerEvents: "none" });
-  }
+  // Nav is always on — nothing to hide. CSS handles the default dark theme.
 }
 
 /* ============================================================
@@ -587,7 +603,8 @@ function initPageHandlers(smoother) {
     // Build hero animation
     createAnimation(smoother);
 
-    // UI interactions
+    // Nav theme for sections below the hero
+    initPostHeroNavTheme();
     initProductAccordion();
     initProductCards();
     initMobileMenu();

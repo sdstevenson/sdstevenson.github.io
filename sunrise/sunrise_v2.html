@@ -76,21 +76,37 @@
       z-index: 1000;
       padding: 0;
       pointer-events: auto;
-    }
-    .nav_wrap.home.fixed .nav_contain.home {
+      opacity: 1 !important;
       background: rgba(15,23,42,0.96);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(255,255,255,0.08);
+      transition: background 0.35s ease, border-color 0.35s ease;
     }
+    .nav_wrap.home.fixed .nav_contain.home {
+      /* layout only — background lives on the wrapper above */
+    }
+    /* Nav text / logo colour transitions */
+    .nav_wrap.home.fixed .logo_nav_link.home,
+    .nav_wrap.home.fixed .nav_link.home:not(.cta) {
+      transition: color 0.35s ease, opacity 0.35s ease;
+    }
+    .nav_wrap.home.fixed .logo_nav_img { transition: filter 0.35s ease; }
+    .nav_wrap.home.fixed .hamburger_6_line.home { transition: background 0.35s ease, transform 0.3s ease, opacity 0.3s ease; }
 
-    /* NAVIGATION — ABSOLUTE (over hero) */
-    .nav_wrap.home.absolute {
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      pointer-events: auto;
+    /* Light nav theme — over white sections */
+    .nav_wrap.home.fixed.nav--light {
+      background: rgba(255,255,255,0.97);
+      border-bottom: 1px solid rgba(15,23,42,0.10);
     }
+    .nav_wrap.home.fixed.nav--light .logo_nav_link.home { color: var(--navy); }
+    .nav_wrap.home.fixed.nav--light .nav_link.home:not(.cta) { color: var(--navy); opacity: 0.75; }
+    .nav_wrap.home.fixed.nav--light .nav_link.home:not(.cta):hover { opacity: 1; background: rgba(15,23,42,0.06); }
+    .nav_wrap.home.fixed.nav--light .logo_nav_img { filter: none; }
+    .nav_wrap.home.fixed.nav--light .hamburger_6_line.home { background: var(--navy); }
+
+    /* NAVIGATION — ABSOLUTE (hidden — fixed nav handles everything) */
+    .nav_wrap.home.absolute { display: none !important; }
 
     /* SHARED NAV CONTAINER */
     .nav_contain.home {
