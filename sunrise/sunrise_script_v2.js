@@ -158,8 +158,7 @@ function createAnimation(smoother) {
 
   // Initial states
   gsap.set(svgLines, { y: (i) => calculatePosition(i, svgLines.length, window.innerHeight, 3.4, 1.08) - window.innerHeight / 2 + "px" });
-  gsap.set(heroSubtitleWrap, { y: "80%" });
-  gsap.set(heroSubtitle, { opacity: 0.6 });
+  gsap.set(heroSubtitleWrap, { y: 40, opacity: 0 });
   gsap.set(missionWrap, { y: "100%" });
   gsap.set(svgCircle, { y: window.innerHeight * 0.4 });
   if (heroTitle) gsap.set(heroTitle, { opacity: 1 });
@@ -216,40 +215,48 @@ function createAnimation(smoother) {
     0
   );
 
-  // 2. Lines fan-out → collapse to y:0 (converge to center)
+  // 2. Lines: collapse faster (done by 30%) and fade out simultaneously
   mainTimeline.to(
     svgLines,
     {
       y: 0,
-      stagger: { amount: 0.15, from: "center" },
-      ease: "power2.inOut",
+      opacity: 0,
+      duration: 0.3,
+      stagger: { amount: 0.1, from: "center" },
+      ease: "power3.in",
     },
     0
   );
 
-  // 3. Subtitle slides up and becomes fully visible
+  // 3. Subtitle fades + slides up after lines are gone (starts at 0.3, done by 0.5)
   mainTimeline.to(
     heroSubtitleWrap,
     {
-      y: "0%",
-      ease: "power2.inOut",
-    },
-    0.1
-  );
-  mainTimeline.to(
-    heroSubtitle,
-    {
+      y: 0,
       opacity: 1,
-      ease: "power2.inOut",
+      duration: 0.2,
+      ease: "power2.out",
     },
-    0.15
+    0.3
   );
 
-  // 4a. Logo crossfade: inner icon (no hangar) → full logo (with hangar outer bounds)
-  //     Starts at 35% through the scroll — when the logo is ~70% of the way up
+  // 4a. Fade out the gradient lines-wrap → reveals white hero_wrap background
+  //     Starts at 0.25 (once lines are largely done), completes by 0.4
+  mainTimeline.to(
+    heroLinesWrap,
+    {
+      opacity: 0,
+      duration: 0.15,
+      ease: "power2.inOut",
+    },
+    0.25
+  );
+
+  // 4b. Logo crossfade: inner icon (no hangar) → full logo (with hangar outer bounds)
+  //     duration: 0.08 = snappy crossfade over a small scroll window
   if (logoBase && logoFull) {
-    mainTimeline.to(logoBase, { opacity: 0, ease: "power2.inOut" }, 0.35);
-    mainTimeline.to(logoFull, { opacity: 1, ease: "power2.inOut" }, 0.35);
+    mainTimeline.to(logoBase, { opacity: 0, duration: 0.08, ease: "power2.in" }, 0.35);
+    mainTimeline.to(logoFull, { opacity: 1, duration: 0.08, ease: "power2.out" }, 0.35);
   }
 
   // 4b. Overlay fades out
@@ -262,14 +269,14 @@ function createAnimation(smoother) {
     0
   );
 
-  // 5. Mission section slides up over hero
+  // 5. Mission section slides up over hero — delayed so user scrolls more first
   mainTimeline.to(
     missionWrap,
     {
       y: "0%",
       ease: "power2.inOut",
     },
-    0.45
+    0.58
   );
 
   return mainTimeline;

@@ -225,7 +225,7 @@
       height: 100vh;
       min-height: 600px;
       overflow: hidden;
-      background: var(--navy);
+      background: #FFFFFF;
     }
 
     /* Dark overlay (fades out during scroll) */
@@ -330,8 +330,8 @@
     /* Hero subtitle (slides up with lines) */
     .hero_subtitle_wrap {
       position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 3rem 2rem 4rem;
+      bottom: 12%; left: 0; right: 0;
+      padding: 0 2rem;
       transform: translateY(80%);
       z-index: 5;
       will-change: transform;
@@ -1174,17 +1174,17 @@
           <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
           <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 100 1" preserveAspectRatio="none" class="svg_line"><rect width="100" height="1" fill="#0F172A"/></svg>
         </div>
+      </div>
 
-        <!-- Subtitle slides up with lines -->
-        <div class="hero_subtitle_wrap">
-          <h2 class="hero_subtitle">
-            <span class="span_blue">Sttugs is a new kind of aviation software company.</span>
-            We don't just build software — we transform how hangars operate.
-            Our <span class="span_blue">intelligent, autonomous platform</span> prevents collisions,
-            optimizes aircraft positions, and <span class="span_blue">empowers hangar operators</span>
-            to run safer, more efficient operations.
-          </h2>
-        </div>
+      <!-- Subtitle sits directly on the white hero background, animated in after lines fade -->
+      <div class="hero_subtitle_wrap">
+        <h2 class="hero_subtitle">
+          <span class="span_blue">Sttugs is a new kind of aviation software company.</span>
+          We don't just build software — we transform how hangars operate.
+          Our <span class="span_blue">intelligent, autonomous platform</span> prevents collisions,
+          optimizes aircraft positions, and <span class="span_blue">empowers hangar operators</span>
+          to run safer, more efficient operations.
+        </h2>
       </div>
 
       <!-- Mission section (slides up from below) -->
