@@ -647,19 +647,50 @@ function initSharedNavBehavior(navHeader) {
     }
   });
 
-  // ── Color-switch: go light-mode when a light section is under the nav ──
-  const NAV_H = 72;
-  function updateNavTheme() {
-    const lightEls = document.querySelectorAll('[data-bg-type="light"], .section-light, .section-white');
-    let isLight = false;
-    lightEls.forEach(el => {
-      const r = el.getBoundingClientRect();
-      if (r.top <= NAV_H && r.bottom > NAV_H) isLight = true;
-    });
-    navHeader.classList.toggle('snav--light', isLight);
+  // ── Color-switch: go light-mode when a light/dark section is under the nav ──
+  // Use ScrollTrigger when available (same engine as sunrise_v2.html), fallback to scroll event.
+  function setupNavColorSwitch() {
+    const sections = document.querySelectorAll('[data-bg-type]');
+    if (!sections.length) return;
+
+    if (typeof ScrollTrigger !== 'undefined') {
+      sections.forEach(section => {
+        const theme = section.dataset.bgType; // 'light' | 'dark'
+        ScrollTrigger.create({
+          trigger: section,
+          start: 'top top+=1',
+          end:   'bottom top+=1',
+          onEnter:      () => navHeader.classList.toggle('snav--light', theme === 'light'),
+          onEnterBack:  () => navHeader.classList.toggle('snav--light', theme === 'light'),
+          onLeave:      () => {},
+          onLeaveBack:  () => {},
+        });
+      });
+      // Set correct initial state
+      ScrollTrigger.refresh();
+    } else {
+      // Fallback: raw scroll event
+      const NAV_H = 72;
+      function updateNavTheme() {
+        const lightEls = document.querySelectorAll('[data-bg-type="light"], .section-light, .section-white');
+        let isLight = false;
+        lightEls.forEach(el => {
+          const r = el.getBoundingClientRect();
+          if (r.top <= NAV_H && r.bottom > NAV_H) isLight = true;
+        });
+        navHeader.classList.toggle('snav--light', isLight);
+      }
+      window.addEventListener('scroll', updateNavTheme, { passive: true });
+      updateNavTheme();
+    }
   }
-  window.addEventListener('scroll', updateNavTheme, { passive: true });
-  updateNavTheme();
+
+  // Run after layout is ready so ScrollTrigger measures correctly
+  if (document.readyState === 'complete') {
+    setupNavColorSwitch();
+  } else {
+    window.addEventListener('load', setupNavColorSwitch);
+  }
 }
 
 function injectSharedNav() {
@@ -924,10 +955,10 @@ function injectSharedComponents() {
       .snav--light .snav-link { color: rgba(15,23,42,0.65); }
       .snav--light .snav-link:hover { color: #0F172A; }
       .snav-cta {
-        background: #2563EB !important; color: #fff !important;
-        padding: 0.45rem 1.1rem !important; border-radius: 7px; font-weight: 600;
+        background: #F5A623 !important; color: #0F172A !important;
+        padding: 0.45rem 1.1rem !important; border-radius: 7px; font-weight: 700;
       }
-      .snav-cta:hover { background: #1d4ed8 !important; }
+      .snav-cta:hover { background: #d4891e !important; color: #fff !important; }
       .snav-chevron {
         width: 12px; height: 12px;
         transition: transform 0.25s; flex-shrink: 0;
@@ -1166,6 +1197,31 @@ function initSharedContactModal() {
 }
 
 /* ============================================================
+   HOME PAGE: PLATFORM DROPDOWN (fixed nav on sunrise_v2.html)
+============================================================ */
+function initHomeNavDropdowns() {
+  const platformItem    = document.getElementById('home-platform-item');
+  const platformTrigger = document.getElementById('home-platform-trigger');
+  if (!platformItem || !platformTrigger) return;
+
+  // Toggle on click
+  platformTrigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = platformItem.classList.toggle('open');
+    platformTrigger.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  // Close on outside click
+  document.addEventListener('click', () => {
+    platformItem.classList.remove('open');
+    platformTrigger.setAttribute('aria-expanded', 'false');
+  });
+
+  // Prevent the item's own clicks from bubbling to document
+  platformItem.addEventListener('click', (e) => e.stopPropagation());
+}
+
+/* ============================================================
    MAIN ENTRY POINT
 ============================================================ */
 (function main() {
@@ -1202,6 +1258,7 @@ function initSharedContactModal() {
     initScrollReveals();
     initPageHandlers(smoother);
     initResize();
+    initHomeNavDropdowns();
 
     // Refresh scroll triggers after everything is set
     ScrollTrigger.refresh(true);
