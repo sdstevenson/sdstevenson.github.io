@@ -834,70 +834,6 @@
     }
     .text-span { display: block; }
 
-    /* CSS Animation for autonomous graphic */
-    .autonomous_graphic_css {
-      width: 100%;
-      max-width: 420px;
-      aspect-ratio: 4/3;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .auto-hangar {
-      position: absolute;
-      inset: 1.5rem;
-    }
-    .auto-grid-cell {
-      position: absolute;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 4px;
-      background: rgba(255,255,255,0.03);
-    }
-    .auto-aircraft {
-      position: absolute;
-      opacity: 0.7;
-    }
-    .auto-tug {
-      position: absolute;
-      width: 24px; height: 12px;
-      background: var(--blue);
-      border-radius: 3px;
-      bottom: 20%; left: 10%;
-      animation: auto-tug-route 4s ease-in-out infinite;
-      box-shadow: 0 0 12px rgba(37,99,235,0.6);
-    }
-    @keyframes auto-tug-route {
-      0%  { left: 10%; bottom: 20%; }
-      33% { left: 55%; bottom: 20%; }
-      66% { left: 55%; bottom: 55%; }
-      100%{ left: 10%; bottom: 20%; }
-    }
-    .auto-pulse {
-      position: absolute;
-      width: 80px; height: 80px;
-      border: 1.5px solid rgba(37,99,235,0.4);
-      border-radius: 50%;
-      top: 50%; left: 50%;
-      transform: translate(-50%,-50%);
-      animation: auto-ring 2.5s ease-out infinite;
-    }
-    .auto-pulse:nth-child(2) { animation-delay: 0.8s; }
-    .auto-pulse:nth-child(3) { animation-delay: 1.6s; }
-    @keyframes auto-ring { 0% { transform: translate(-50%,-50%) scale(0.5); opacity: 0.8; } 100% { transform: translate(-50%,-50%) scale(2); opacity: 0; } }
-
-    .autonomous_content { display: flex; flex-direction: column; justify-content: center; }
-    .autonomous_description { display: flex; flex-direction: column; gap: 2rem; }
-    .autonomous_paragraph {
-      font-size: 1.0625rem;
-      line-height: 1.8;
-      color: rgba(255,255,255,0.65);
-    }
-
     /* ============================================================
        CAREERS / JOIN THE MISSION
     ============================================================ */
@@ -2030,19 +1966,88 @@
         </div>
 
         <div class="mission_content">
-          <div class="mission-graphic">
-            <div class="mission-graphic-dots"></div>
-            <div class="mission-graphic-text">
-              <span class="mission-graphic-label">Aircraft Protected</span>
-              <div class="mission-graphic-number">10,000+</div>
-              <div class="mission-graphic-sublabel">and counting</div>
-            </div>
-          </div>
+          <svg viewBox="0 0 600 450" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <title>The True Cost of Damage Pyramid</title>
+            <defs>
+              <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0F172A" /> 
+                <stop offset="100%" stop-color="#1E293B" /> 
+              </linearGradient>
+
+              <pattern id="dot-pattern" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+                <circle cx="12" cy="12" r="1" fill="rgba(255,255,255,0.06)"/>
+              </pattern>
+
+              <linearGradient id="tip-gradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#93C5FD" /> 
+                <stop offset="100%" stop-color="#60A5FA" /> 
+              </linearGradient>
+              <linearGradient id="base-gradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#1E3A8A" stop-opacity="0.9" />
+                <stop offset="100%" stop-color="#172554" stop-opacity="0.95" /> 
+              </linearGradient>
+
+              <filter id="blue-glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
+                <feColorMatrix in="blur" type="matrix" values="
+                    0 0 0 0 0.23 
+                    0 0 0 0 0.65 
+                    0 0 0 0 0.98 
+                    0 0 0 0.5 0" result="glow" />
+                <feMerge>
+                  <feMergeNode in="glow" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+
+            <g clip-path="url(#rounded-corners)">
+              <rect width="600" height="450" fill="url(#bg-gradient)"/>
+              <rect width="600" height="450" fill="url(#dot-pattern)"/>
+              
+              <rect x="0" y="170" width="600" height="280" fill="rgba(37,99,235,0.12)" stroke="rgba(37,99,235,0.3)" stroke-width="1"/>
+            </g>
+            
+            <clipPath id="rounded-corners">
+              <rect width="600" height="450" rx="20" ry="20"/>
+            </clipPath>
+
+            <text x="300" y="55" text-anchor="middle" fill="#FFFFFF" font-size="20" font-weight="600">
+              A <tspan fill="#93C5FD">$10k scratch</tspan> can cost you <tspan fill="#EF4444">$100k.</tspan>
+            </text>
+            
+            <text x="300" y="88" text-anchor="middle" fill="#FFFFFF" font-size="24" font-weight="800" letter-spacing="0.05em">
+              PROTECT YOUR BOTTOM LINE<tspan fill="#EF4444">.</tspan>
+            </text>
+
+            <g transform="translate(300, 280)" filter="url(#blue-glow)">
+              <polygon points="-260,160 260,160 160,-80 -160,-80" fill="url(#base-gradient)" stroke="rgba(147,197,253,0.3)" stroke-width="2"/>
+              
+              <polygon points="158,-81 -158,-81 0,-180" fill="url(#tip-gradient)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+            </g>
+
+            <g text-anchor="middle" font-family="Inter, sans-serif">
+              <text x="300" y="160" fill="#FFFFFF" font-size="18" font-weight="800" letter-spacing="0.02em">
+                <tspan x="300" dy="0">DIRECT</tspan>
+                <tspan x="300" dy="22">REPAIR COSTS</tspan>
+              </text>
+              
+              <text x="300" y="255" fill="#FFFFFF" font-size="30" font-weight="800" letter-spacing="0.02em">INDIRECT COSTS</text>
+              
+              <text x="300" y="295" fill="rgba(255,255,255,0.85)" font-size="16" font-weight="500" leading="1.5">
+                <tspan x="300" dy="0">• AOG Reimbursment</tspan>
+                <tspan x="300" dy="26">• Diminuation of Value</tspan>
+                <tspan x="300" dy="26">• Insurance Hikes</tspan>
+                <tspan x="300" dy="26">• Brand Damage</tspan>
+              </text>
+            </g>
+          </svg>
 
           <div class="mission-description-2">
             <p class="mission_home_paragraph">
-              We are a team of engineers, pilots, AI researchers, and aviation industry veterans building software that makes hangars safer and smarter. We believe autonomous technology will transform every aspect of ground operations — and we're starting with the hangar.<br/><br/>
-              The Sttugs team has flown commercially, operated FBOs, built autonomous vehicle systems, and shipped AI products. We bring deep domain expertise together with cutting-edge technology to solve a real problem that has cost the industry billions.
+              Sttugs is not built in a vacuum. We work with FBOs, MROs, and aviation vetrans to identify the paint points that cost you money every day.<br/><br/>
+              We know that 'Hangar Rash' is more than just a repair bill—it's lost revenue from grounded aircraft, exponential insurance hikes, and a hit to your reputation. 
+              Our system is designed with people who move the, ensuring our autonomous intelligence solves real-world operational bottlenecks while keeping safety at the absolute center of your mission.
             </p>
             <a href="../roi.html" class="outlined_button-4">Check what your ROI could be</a>
           </div>
