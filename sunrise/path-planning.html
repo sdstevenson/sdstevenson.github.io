@@ -143,10 +143,10 @@
         <circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/>
       </svg>
     </div>
-    <div class="detail-hero-tag">Platform — Intelligence Layer</div>
+    <!-- <div class="detail-hero-tag">Platform — Intelligence Layer</div> -->
     <h1>Path Planning</h1>
     <p>Generate safe, collision-free tow paths for moving aircraft through congested hangar layouts. Sequence multi-aircraft moves with confidence and eliminate guesswork from ground handling.</p>
-    <a href="sunrise_v2.html#platform" class="back-link">← Back to Platform</a>
+    <!-- <a href="sunrise_v2.html#platform" class="back-link">← Back to Platform</a> -->
   </section>
 
   <!-- COMING SOON VISUAL -->
@@ -158,40 +158,61 @@
       </div>
       <div class="coming-soon-visual">
         <!-- Animated path planning SVG preview -->
-        <svg viewBox="0 0 400 225" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="400" height="225" fill="#0F172A"/>
-          <rect x="20" y="20" width="360" height="185" rx="4" stroke="rgba(255,255,255,0.05)" fill="none"/>
-          <!-- Grid -->
-          <line x1="20" y1="95" x2="380" y2="95" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-          <line x1="20" y1="150" x2="380" y2="150" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-          <line x1="140" y1="20" x2="140" y2="205" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-          <line x1="260" y1="20" x2="260" y2="205" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
-          <!-- Parked aircraft -->
-          <g transform="translate(175,65)">
-            <rect x="-22" y="-15" width="44" height="30" rx="3" fill="rgba(71,85,105,0.6)" stroke="rgba(255,255,255,0.12)"/>
-            <path d="M0,-12 L2,-5 L14,-2 L2,0 L2,7 L0,5 L-2,7 L-2,0 L-14,-2 L-2,-5 Z" fill="rgba(147,197,253,0.5)"/>
+        <svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="320" fill="#0F172A"/>
+          
+          <defs>
+            <g id="realistic-aircraft">
+              <path d="M 0,-28 C 4,-28 6,-18 6,-8 L 6,10 L -6,10 L -6,-8 C -6,-18 -4,-28 0,-28 Z" fill="rgba(147,197,253,0.3)" stroke="rgba(147,197,253,0.9)" stroke-width="1.2"/>
+              <rect x="-6" y="10" width="12" height="30" fill="rgba(147,197,253,0.3)" stroke="rgba(147,197,253,0.9)" stroke-width="1.2"/>
+              <path d="M 6,-2 L 40,18 L 40,24 L 6,14 Z" fill="rgba(147,197,253,0.3)" stroke="rgba(147,197,253,0.9)" stroke-width="1.2"/>
+              <path d="M -6,-2 L -40,18 L -40,24 L -6,14 Z" fill="rgba(147,197,253,0.3)" stroke="rgba(147,197,253,0.9)" stroke-width="1.2"/>
+              <path d="M 4,32 L 18,42 L 18,46 L 4,40 Z" fill="rgba(147,197,253,0.4)" stroke="rgba(147,197,253,0.9)" stroke-width="1.2"/>
+              <path d="M -4,32 L -18,42 L -18,46 L -4,40 Z" fill="rgba(147,197,253,0.4)" stroke="rgba(147,197,253,0.9)" stroke-width="1.2"/>
+            </g>
+            
+            <path id="tow-path" d="M 80,280 C 80,230 200,240 200,180 C 200,140 185,135 185,115" fill="none"/>
+          </defs>
+
+          <rect x="30" y="20" width="340" height="280" rx="4" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" fill="rgba(255,255,255,0.02)"/>
+          <path d="M 30 90 L 370 90 M 30 160 L 370 160 M 30 230 L 370 230" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+          <path d="M 115 20 L 115 300 M 200 20 L 200 300 M 285 20 L 285 300" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+
+          <g transform="translate(120, 150) rotate(30) scale(0.6)">
+            <use href="#realistic-aircraft" opacity="0.7"/>
+            <rect x="-45" y="-35" width="90" height="90" fill="none" stroke="rgba(239,68,68,0.3)" stroke-width="1" stroke-dasharray="4 2"/>
           </g>
-          <g transform="translate(295,130)">
-            <rect x="-20" y="-13" width="40" height="26" rx="3" fill="rgba(71,85,105,0.6)" stroke="rgba(255,255,255,0.12)"/>
-            <path d="M0,-10 L2,-4 L12,-2 L2,0 L2,6 L0,4 L-2,6 L-2,0 L-12,-2 L-2,-4 Z" fill="rgba(147,197,253,0.5)"/>
+          
+          <g transform="translate(250, 90) rotate(-45) scale(0.6)">
+            <use href="#realistic-aircraft" opacity="0.7"/>
+            <rect x="-45" y="-35" width="90" height="90" fill="none" stroke="rgba(239,68,68,0.3)" stroke-width="1" stroke-dasharray="4 2"/>
           </g>
-          <!-- Path animated -->
-          <path d="M 50,190 C 50,165 65,140 105,132 C 145,124 145,95 185,88 C 225,80 260,92 268,108 C 276,125 268,158 308,178 C 328,188 348,190 348,190"
-            stroke="#2563EB" stroke-width="2.5" stroke-dasharray="8 5" fill="none" stroke-linecap="round">
-            <animate attributeName="stroke-dashoffset" values="0;-52" dur="2s" repeatCount="indefinite"/>
-          </path>
-          <!-- Start/End -->
-          <circle cx="50" cy="190" r="7" fill="#16A34A" stroke="white" stroke-width="1.5"/>
-          <text x="50" y="194" text-anchor="middle" fill="white" font-size="7" font-weight="bold">S</text>
-          <circle cx="348" cy="190" r="7" fill="#F5A623" stroke="white" stroke-width="1.5"/>
-          <text x="348" y="194" text-anchor="middle" fill="#0F172A" font-size="7" font-weight="bold">E</text>
-          <!-- Moving dot -->
-          <circle r="4.5" fill="#2563EB" opacity="0.9">
-            <animateMotion dur="4s" repeatCount="indefinite">
-              <mpath href="#pp-path"/>
+
+          <use href="#tow-path" stroke="#3B82F6" stroke-width="2.5" stroke-dasharray="6 4" stroke-linecap="round">
+            <animate attributeName="stroke-dashoffset" values="20;0" dur="0.5s" repeatCount="indefinite" calcMode="linear"/>
+          </use>
+
+          <g transform="translate(80,280)">
+            <circle r="6" fill="#10B981" stroke="#0F172A" stroke-width="1.5"/>
+            <text y="15" text-anchor="middle" fill="#10B981" font-size="9" font-family="Inter,sans-serif" font-weight="700">START</text>
+          </g>
+          
+          <g transform="translate(185,115)">
+            <circle r="6" fill="#F59E0B" stroke="#0F172A" stroke-width="1.5"/>
+            <text y="-10" text-anchor="middle" fill="#F59E0B" font-size="9" font-family="Inter,sans-serif" font-weight="700">END</text>
+          </g>
+
+          <g>
+            <animateMotion dur="5s" repeatCount="indefinite" rotate="auto">
+              <mpath href="#tow-path"/>
             </animateMotion>
-          </circle>
-          <path id="pp-path" d="M 50,190 C 50,165 65,140 105,132 C 145,124 145,95 185,88 C 225,80 260,92 268,108 C 276,125 268,158 308,178 C 328,188 348,190 348,190" fill="none"/>
+            
+            <g transform="scale(0.55) rotate(90)">
+              <use href="#realistic-aircraft" />
+              <use href="#realistic-aircraft" fill="none" stroke="#60A5FA" stroke-width="1" opacity="0.5"/>
+            </g>
+          </g>
+
         </svg>
         <div class="coming-soon-badge">Demo Coming Soon</div>
       </div>

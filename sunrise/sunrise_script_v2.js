@@ -450,7 +450,7 @@ function initMobileMenu() {
 
   // Close mobile contact CTAs
   mobileNav.querySelectorAll("[data-open-contact]").forEach((el) =>
-    el.addEventListener("click", closeMenu)
+    el.addEventListener("click", (e) => { e.preventDefault(); closeMenu(); })
   );
 }
 
@@ -635,7 +635,7 @@ function initSharedNavBehavior(navHeader) {
   // Close mobile menu when a contact CTA is clicked
   if (mobile) {
     mobile.querySelectorAll('[data-open-contact]').forEach(el =>
-      el.addEventListener('click', closeMobileMenu)
+      el.addEventListener('click', (e) => { e.preventDefault(); closeMobileMenu(); })
     );
   }
 
@@ -722,7 +722,7 @@ function injectSharedNav() {
             </button>
             <div class="snav-dropdown">
               <a href="collision-detection-and-prevention.html" class="snav-dropdown-item">Collision Detection &amp; Prevention</a>
-              <a href="auto-stack.html" class="snav-dropdown-item">Auto-Stacking Algorithm</a>
+              <a href="auto-stack.html" class="snav-dropdown-item">Auto-Stacking</a>
               <a href="path-planning.html" class="snav-dropdown-item">Path Planning</a>
               <a href="autonomous-tugs.html" class="snav-dropdown-item">Autonomous Tugs</a>
               <a href="verifiable-audit-trail.html" class="snav-dropdown-item">Verifiable Audit Trail</a>
@@ -748,7 +748,7 @@ function injectSharedNav() {
           <button class="snav-mobile-link" id="sttugs-mobile-platform-toggle">Platform ▾</button>
           <div class="snav-mobile-sub" id="sttugs-mobile-platform-sub">
             <a href="collision-detection-and-prevention.html">Collision Detection &amp; Prevention</a>
-            <a href="auto-stack.html">Auto-Stacking Algorithm</a>
+            <a href="auto-stack.html">Auto-Stacking</a>
             <a href="path-planning.html">Path Planning</a>
             <a href="autonomous-tugs.html">Autonomous Tugs</a>
             <a href="verifiable-audit-trail.html">Verifiable Audit Trail</a>
@@ -1225,6 +1225,14 @@ function initHomeNavDropdowns() {
    MAIN ENTRY POINT
 ============================================================ */
 (function main() {
+  // Global handler to prevent default for all data-open-contact clicks (capture phase)
+  document.addEventListener("click", (e) => {
+    const target = e.target.closest("[data-open-contact]");
+    if (target) {
+      e.preventDefault();
+    }
+  }, true); // true = capture phase, fires before other handlers
+
   // Set CSS --vh immediately
   setupViewportHeight();
   initYear();

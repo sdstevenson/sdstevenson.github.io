@@ -278,14 +278,27 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="mission_asset">
           <!-- Decorative SVG using STTUGS blue palette -->
           <svg viewBox="0 0 300 260" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;" class="mission_graphic">
+                    <defs>
+                      <g id="realistic-aircraft">
+                        <path d="M 0,-28 C 4,-28 6,-18 6,-8 L 6,10 L -6,10 L -6,-8 C -6,-18 -4,-28 0,-28 Z" fill="rgba(147,197,253,0.3)" stroke="rgba(147,197,253,0.9)" stroke-width="1.2"/>
+                        <rect x="-6" y="10" width="12" height="30" fill="rgba(147,197,253,0.3)" stroke="rgba(147,197,253,0.9)" stroke-width="1.2"/>
+                        <path d="M 6,-2 L 40,18 L 40,24 L 6,14 Z" fill="rgba(147,197,253,0.3)" stroke="rgba(147,197,253,0.9)" stroke-width="1.2"/>
+                        <path d="M -6,-2 L -40,18 L -40,24 L -6,14 Z" fill="rgba(147,197,253,0.3)" stroke="rgba(147,197,253,0.9)" stroke-width="1.2"/>
+                        <path d="M 4,32 L 18,42 L 18,46 L 4,40 Z" fill="rgba(147,197,253,0.4)" stroke="rgba(147,197,253,0.9)" stroke-width="1.2"/>
+                        <path d="M -4,32 L -18,42 L -18,46 L -4,40 Z" fill="rgba(147,197,253,0.4)" stroke="rgba(147,197,253,0.9)" stroke-width="1.2"/>
+                      </g>
+                    </defs>
             <circle cx="150" cy="130" r="120" stroke="rgba(37,99,235,0.25)" stroke-width="1.2" stroke-dasharray="2 6"/>
             <circle cx="150" cy="130" r="80"  stroke="rgba(37,99,235,0.35)" stroke-width="1"/>
             <circle cx="150" cy="130" r="44"  stroke="rgba(245,166,35,0.5)"  stroke-width="1.2"/>
             <circle cx="150" cy="130" r="10"  fill="#2563EB"/>
             <!-- Airplane silhouette -->
-            <path d="M100 130 L150 115 L200 130 L150 125 Z" fill="rgba(37,99,235,0.6)"/>
+                    <g transform="translate(150, 130) scale(2)">
+                      <use href="#realistic-aircraft" />
+                    </g>
+            <!-- <path d="M100 130 L150 115 L200 130 L150 125 Z" fill="rgba(37,99,235,0.6)"/>
             <path d="M130 130 L144 155 L150 152 L156 155 L170 130 Z" fill="rgba(37,99,235,0.4)"/>
-            <path d="M138 130 L142 140 L150 138 L158 140 L162 130 Z" fill="rgba(245,166,35,0.5)"/>
+            <path d="M138 130 L142 140 L150 138 L158 140 L162 130 Z" fill="rgba(245,166,35,0.5)"/> -->
           </svg>
         </div>
       </div>
@@ -381,7 +394,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="team_wrap w-dyn-list">
         <div role="list" class="team_card_layout w-dyn-items">
           <div role="listitem" class="team_card w-dyn-item">
-            <img src="../headshot.jpeg" loading="lazy" alt="Samir Stevenson" class="team_image" style="width:100%;border-radius:8px;object-fit:cover;aspect-ratio:1/1;"/>
+            <img src="../assets/headshot.jpeg" loading="lazy" alt="Samir Stevenson" class="team_image" style="width:100%;border-radius:8px;object-fit:cover;aspect-ratio:1/1;"/>
             <div class="name_position" style="margin-top:1rem;">
               <h3 class="team_name u-text-body-1">Samir Stevenson</h3>
               <div class="team_position u-text-body-1">Founder, STTUGS</div>
