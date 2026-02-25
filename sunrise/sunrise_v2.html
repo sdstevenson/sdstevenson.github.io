@@ -834,6 +834,23 @@
     }
     .text-span { display: block; }
 
+    .autonomous_content {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .autonomous_description {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .autonomous_paragraph {
+      font-size: 1.125rem;
+      line-height: 1.75;
+      color: rgba(255, 255, 255, 0.85);
+      font-weight: 400;
+    }
+
     /* ============================================================
        CAREERS / JOIN THE MISSION
     ============================================================ */
@@ -1923,23 +1940,121 @@
             </h2>
           </div>
 
-          <!-- CSS-animated autonomous graphic -->
-          <div class="autonomous_graphic_css">
-            <div class="mission-graphic-dots"></div>
-            <div class="auto-hangar">
-              <!-- Grid cells representing hangar bays -->
-              <div class="auto-grid-cell" style="left:5%;top:5%;width:40%;height:42%;"></div>
-              <div class="auto-grid-cell" style="left:55%;top:5%;width:40%;height:42%;"></div>
-              <div class="auto-grid-cell" style="left:5%;top:55%;width:40%;height:40%;"></div>
-              <div class="auto-grid-cell" style="left:55%;top:55%;width:40%;height:40%;"></div>
-            </div>
-            <!-- Sensor pulse rings -->
-            <div class="auto-pulse"></div>
-            <div class="auto-pulse"></div>
-            <div class="auto-pulse"></div>
-            <!-- Autonomous tug marker -->
-            <div class="auto-tug"></div>
-          </div>
+          <!-- Animated graphic -->
+          <svg viewBox="0 0 600 450" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <defs>
+              <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0F172A" /> 
+                <stop offset="100%" stop-color="#1E293B" /> 
+              </linearGradient>
+
+              <pattern id="dot-pattern" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+                <circle cx="15" cy="15" r="1.5" fill="rgba(255,255,255,0.05)"/>
+              </pattern>
+
+              <g id="realistic-aircraft">
+                <path d="M 0,-35 C 5,-35 7,-22 7,-10 L 7,12 L -7,12 L -7,-10 C -7,-22 -5,-35 0,-35 Z" fill="rgba(147,197,253,0.15)" stroke="rgba(147,197,253,0.6)" stroke-width="1.5"/>
+                <rect x="-7" y="12" width="14" height="38" fill="rgba(147,197,253,0.15)" stroke="rgba(147,197,253,0.6)" stroke-width="1.5"/>
+                <path d="M 7,-2 L 50,22 L 50,30 L 7,18 Z" fill="rgba(147,197,253,0.15)" stroke="rgba(147,197,253,0.6)" stroke-width="1.5"/>
+                <path d="M -7,-2 L -50,22 L -50,30 L -7,18 Z" fill="rgba(147,197,253,0.15)" stroke="rgba(147,197,253,0.6)" stroke-width="1.5"/>
+                <path d="M 5,40 L 22,52 L 22,58 L 5,50 Z" fill="rgba(147,197,253,0.2)" stroke="rgba(147,197,253,0.6)" stroke-width="1.5"/>
+                <path d="M -5,40 L -22,52 L -22,58 L -5,50 Z" fill="rgba(147,197,253,0.2)" stroke="rgba(147,197,253,0.6)" stroke-width="1.5"/>
+              </g>
+
+              <path id="tug-path" d="M 90,380 C 90,280 280,320 320,200 C 350,110 400,100 480,100" fill="none"/>
+            </defs>
+
+            <rect width="600" height="450" rx="16" fill="url(#bg-gradient)"/>
+            <rect width="600" height="450" rx="16" fill="url(#dot-pattern)"/>
+
+            <g transform="translate(160, 130) rotate(-55) scale(0.8)">
+              <use href="#realistic-aircraft" />
+            </g>
+            <g transform="translate(440, 270) rotate(-150) scale(0.8)">
+              <use href="#realistic-aircraft" />
+            </g>
+
+            <line x1="0" y1="0" x2="600" y2="0" stroke="rgba(59,130,246,0.5)" stroke-width="3" opacity="0">
+              <animate attributeName="opacity" values="0; 1; 1; 0; 0" keyTimes="0; 0.01; 0.29; 0.3; 1" dur="20s" repeatCount="indefinite"/>
+              <animate attributeName="y1" values="0; 450; 450; 0" keyTimes="0; 0.3; 0.95; 1" dur="20s" repeatCount="indefinite"/>
+              <animate attributeName="y2" values="0; 450; 450; 0" keyTimes="0; 0.3; 0.95; 1" dur="20s" repeatCount="indefinite"/>
+            </line>
+
+            <use href="#tug-path" stroke="#F59E0B" stroke-width="3" stroke-dasharray="8 6" stroke-linecap="round" opacity="0">
+              <animate attributeName="opacity" values="0; 0; 0.8; 0.8; 0" keyTimes="0; 0.3; 0.35; 0.9; 1" dur="20s" repeatCount="indefinite"/>
+              <animate attributeName="stroke-dashoffset" values="40; 0" dur="1s" repeatCount="indefinite" calcMode="linear"/>
+            </use>
+
+            <g transform="translate(480, 100)" opacity="0">
+              <animate attributeName="opacity" values="0; 0; 1; 1; 0" keyTimes="0; 0.3; 0.35; 0.9; 1" dur="20s" repeatCount="indefinite"/>
+              <circle r="12" fill="none" stroke="#F59E0B" stroke-width="2" stroke-dasharray="4 2">
+                <animateTransform attributeName="transform" type="rotate" values="0; 360" dur="4s" repeatCount="indefinite" calcMode="linear"/>
+              </circle>
+              <circle r="4" fill="#F59E0B"/>
+            </g>
+
+            <g>
+              <animateMotion dur="20s" repeatCount="indefinite" rotate="auto" 
+                            keyTimes="0; 0.5; 0.88; 1" 
+                            keyPoints="0; 0; 1; 1" 
+                            calcMode="spline" keySplines="0 0 1 1; 0.4 0 0.2 1; 0 0 1 1">
+                <mpath href="#tug-path"/>
+              </animateMotion>
+
+              <g transform="rotate(90) scale(0.8)">
+                
+                <use href="#realistic-aircraft" />
+
+                <g transform="translate(0, -45)">
+                  <circle cx="0" cy="0" r="30" fill="none" stroke="#3B82F6" stroke-width="1.5" opacity="0">
+                    <animate attributeName="r" values="10; 55" dur="2s" repeatCount="indefinite"/>
+                    <animate attributeName="opacity" values="0.6; 0" dur="2s" repeatCount="indefinite"/>
+                  </circle>
+                  <circle cx="0" cy="0" r="30" fill="none" stroke="#3B82F6" stroke-width="1.5" opacity="0">
+                    <animate attributeName="r" values="10; 55" begin="1s" dur="2s" repeatCount="indefinite"/>
+                    <animate attributeName="opacity" values="0.6; 0" begin="1s" dur="2s" repeatCount="indefinite"/>
+                  </circle>
+                  
+                  <rect x="-12" y="-15" width="24" height="30" rx="4" fill="#2563EB" stroke="#93C5FD" stroke-width="1.5"/>
+                  <rect x="-12" y="-8" width="24" height="4" fill="#60A5FA"/>
+                  <circle cx="0" cy="0" r="3" fill="#10B981">
+                    <animate attributeName="opacity" values="1; 0.4; 1" dur="0.5s" repeatCount="indefinite"/>
+                  </circle>
+                </g>
+              </g>
+            </g>
+
+            <g transform="translate(260, 360)">
+              <rect width="300" height="50" rx="8" fill="rgba(15,23,42,0.8)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+              
+              <g opacity="0">
+                <animate attributeName="opacity" values="1; 1; 0; 0; 0" keyTimes="0; 0.29; 0.3; 0.99; 1" dur="20s" repeatCount="indefinite"/>
+                <circle cx="25" cy="25" r="4" fill="#3B82F6">
+                  <animate attributeName="opacity" values="1; 0.2; 1" dur="0.5s" repeatCount="indefinite"/>
+                </circle>
+                <text x="45" y="21" fill="#93C5FD" font-size="10" font-weight="700" letter-spacing="0.1em">PERCEPTION</text>
+                <text x="45" y="37" fill="#94A3B8" font-size="11" font-weight="500">Scanning hanger layout...</text>
+              </g>
+
+              <g opacity="0">
+                <animate attributeName="opacity" values="0; 0; 1; 1; 0; 0" keyTimes="0; 0.29; 0.3; 0.49; 0.5; 1" dur="20s" repeatCount="indefinite"/>
+                <circle cx="25" cy="25" r="4" fill="#F59E0B">
+                  <animate attributeName="opacity" values="1; 0.2; 1" dur="0.5s" repeatCount="indefinite"/>
+                </circle>
+                <text x="45" y="21" fill="#FCD34D" font-size="10" font-weight="700" letter-spacing="0.1em">PLANNING</text>
+                <text x="45" y="37" fill="#94A3B8" font-size="11" font-weight="500">Generating optimal placement and route...</text>
+              </g>
+
+              <g opacity="0">
+                <animate attributeName="opacity" values="0; 0; 1; 1; 0" keyTimes="0; 0.49; 0.5; 0.95; 1" dur="20s" repeatCount="indefinite"/>
+                <circle cx="25" cy="25" r="4" fill="#10B981">
+                  <animate attributeName="opacity" values="1; 0.2; 1" dur="0.5s" repeatCount="indefinite"/>
+                </circle>
+                <text x="45" y="21" fill="#6EE7B7" font-size="10" font-weight="700" letter-spacing="0.1em">EXECUTION</text>
+                <text x="45" y="37" fill="#94A3B8" font-size="11" font-weight="500">Autonomous towing.</text>
+              </g>
+            </g>
+          </svg>
         </div>
 
         <div class="autonomous_content">
