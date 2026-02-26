@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>Hardware &amp; Infrastructure – Sttugs</title>
+	<meta name="description" content="Overhead cameras and tablet control that power every STTUGS level without disrupting your hangar."/>
+	<meta content="width=device-width, initial-scale=1" name="viewport"/>
+	<link rel="icon" href="../favicon/favicon.ico" sizes="any"/>
+	<link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png"/>
+	<link rel="preconnect" href="https://fonts.googleapis.com"/>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+	<style>
+		*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+		:root {
+			--navy: #0F172A; --navy-mid: #1E293B;
+			--blue: #2563EB; --blue-dark: #1d4ed8; --blue-faint: #93C5FD;
+			--accent: #F5A623; --accent-hover: #d4891e;
+			--muted: #64748B; --text: #0F172A; --bg: #FFFFFF; --light-bg: #F1F5F9;
+			--card-border: rgba(15,23,42,0.1);
+			--font: Inter, ui-sans-serif, system-ui, sans-serif;
+		}
+		html { font-size: 16px; overflow-x: hidden; scroll-behavior: smooth; }
+		body { font-family: var(--font); color: var(--text); background: var(--bg); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+		h1,h2,h3,h4,p { margin: 0; } a { text-decoration: none; } button { background: none; border: none; cursor: pointer; } img { display: block; max-width: 100%; }
+
+		/* NAV */
+		.nav_wrap { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(15,23,42,0.96); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.08); }
+		.nav_contain { display: flex; align-items: center; justify-content: space-between; padding: 1.125rem 2.5rem; max-width: 1200px; margin: 0 auto; }
+		.nav_logo a { display: flex; align-items: center; gap: 0.5rem; color: #fff; }
+		.nav_logo img { height: 32px; filter: brightness(0) invert(1); }
+		.nav_logo span { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.02em; }
+		.nav_links { display: flex; align-items: center; gap: 1.5rem; }
+		.nav_link { font-size: 0.9rem; font-weight: 500; color: rgba(255,255,255,0.75); transition: color 0.2s; padding: 0.4rem 0.75rem; border-radius: 6px; }
+		.nav_link:hover { color: #fff; }
+		.nav_link.cta { background: var(--blue); color: #fff; padding: 0.45rem 1.1rem; border-radius: 7px; font-weight: 600; }
+		.nav_link.cta:hover { background: var(--blue-dark); }
+		@media (max-width: 640px) { .nav_contain { padding: 1rem 1.25rem; } .nav_links .nav_link:not(.cta) { display: none; } }
+
+		/* HERO */
+		.detail-hero { background: var(--navy); padding: 9rem 2rem 5rem; text-align: center; }
+		.detail-hero-icon { width: 64px; height: 64px; margin: 0 auto 1.5rem; background: rgba(37,99,235,0.15); border: 1px solid rgba(37,99,235,0.3); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: var(--blue-faint); }
+		.detail-hero-tag { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-faint); margin-bottom: 1rem; }
+		.detail-hero h1 { font-size: clamp(2rem, 5vw, 3.25rem); font-weight: 800; color: #fff; line-height: 1.12; letter-spacing: -0.025em; max-width: 700px; margin: 0 auto 1.25rem; }
+		.detail-hero p { font-size: 1.0625rem; line-height: 1.75; color: rgba(255,255,255,0.65); max-width: 580px; margin: 0 auto 2rem; }
+
+		/* COMING SOON BLOCK */
+		.coming-soon-section { background: var(--navy-mid); padding: 5rem 2rem; }
+		.coming-soon-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+		@media (max-width: 768px) { .coming-soon-inner { grid-template-columns: 1fr; } }
+		.coming-soon-text h2 { font-size: clamp(1.5rem, 3vw, 2.125rem); font-weight: 700; color: #fff; line-height: 1.22; letter-spacing: -0.02em; margin-bottom: 1rem; }
+		.coming-soon-text p { font-size: 0.9375rem; line-height: 1.75; color: rgba(255,255,255,0.6); }
+		.coming-soon-visual { border-radius: 14px; overflow: hidden; background: var(--navy); border: 1px solid rgba(255,255,255,0.08); aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; position: relative; }
+		.coming-soon-badge { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); background: rgba(245,166,35,0.15); border: 1px solid rgba(245,166,35,0.4); color: var(--accent); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.35rem 0.9rem; border-radius: 20px; }
+
+		/* SECTIONS */
+		.section-dark { background: var(--navy); padding: 5rem 2rem; }
+		.section-light { background: var(--light-bg); padding: 5rem 2rem; }
+		.section-inner { max-width: 1100px; margin: 0 auto; }
+		.section-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-faint); margin-bottom: 0.75rem; }
+		.section-heading { font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800; color: #fff; line-height: 1.18; letter-spacing: -0.02em; margin-bottom: 0.875rem; }
+		.section-heading.light { color: var(--navy); }
+		.section-subheading { font-size: 1rem; line-height: 1.7; color: rgba(255,255,255,0.55); max-width: 560px; margin-bottom: 3rem; }
+		.section-subheading.light { color: var(--muted); }
+
+		/* FEATURE CARDS */
+		.feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+		@media (max-width: 900px) { .feature-grid { grid-template-columns: repeat(2, 1fr); } }
+		@media (max-width: 480px) { .feature-grid { grid-template-columns: 1fr; } }
+		.feature-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 1.75rem; transition: background 0.2s, transform 0.2s; }
+		.feature-card:hover { background: rgba(255,255,255,0.08); transform: translateY(-3px); }
+		.feature-icon { width: 44px; height: 44px; margin-bottom: 1rem; background: rgba(37,99,235,0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--blue-faint); }
+		.feature-card h3 { font-size: 1.0625rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+		.feature-card p { font-size: 0.9rem; line-height: 1.65; color: rgba(255,255,255,0.55); }
+
+		/* BENEFIT GRID */
+		.benefit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+		@media (max-width: 700px) { .benefit-grid { grid-template-columns: 1fr; } }
+		.benefit-card { background: #fff; border: 1px solid var(--card-border); border-radius: 14px; padding: 2rem; display: flex; align-items: flex-start; gap: 1rem; transition: box-shadow 0.2s, transform 0.2s; }
+		.benefit-card:hover { box-shadow: 0 8px 32px rgba(15,23,42,0.1); transform: translateY(-3px); }
+		.benefit-check { width: 36px; height: 36px; flex-shrink: 0; background: rgba(37,99,235,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--blue); }
+		.benefit-card p { font-size: 0.9375rem; line-height: 1.65; color: var(--muted); font-weight: 500; }
+
+        /* ── FAQ ── */
+        .faq-section { background: var(--navy); padding: 5rem 2rem; }
+        .faq-list { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 0; }
+        .faq-item {
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .faq-question {
+        width: 100%; text-align: left;
+        padding: 1.25rem 0;
+        display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+        font-size: 0.9375rem; font-weight: 600; color: rgba(255,255,255,0.85);
+        cursor: pointer; background: none; border: none;
+        transition: color 0.2s;
+        }
+        .faq-question:hover { color: #fff; }
+        .faq-question .faq-icon {
+        font-size: 1.25rem; font-weight: 300; color: rgba(255,255,255,0.4);
+        flex-shrink: 0; transition: transform 0.3s;
+        }
+        .faq-item.open .faq-question .faq-icon { transform: rotate(45deg); color: var(--blue-faint); }
+        .faq-answer {
+        height: 0; overflow: hidden;
+        font-size: 0.9rem; line-height: 1.75; color: rgba(255,255,255,0.55);
+        transition: height 0.3s ease, padding 0.3s ease;
+        }
+        .faq-answer-inner { padding-bottom: 1.25rem; }
+
+		/* CTA STRIP */
+		.cta-strip { background: var(--navy-mid); padding: 4rem 2rem; text-align: center; }
+		.cta-strip h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 800; color: #fff; margin-bottom: 0.75rem; }
+		.cta-strip p { font-size: 1rem; color: rgba(255,255,255,0.6); margin-bottom: 2rem; }
+		.btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--blue); color: #fff; padding: 0.75rem 1.75rem; border-radius: 8px; font-size: 0.9375rem; font-weight: 600; border: none; cursor: pointer; transition: background 0.2s, transform 0.15s; text-decoration: none; }
+		.btn-primary:hover { background: var(--blue-dark); transform: translateY(-2px); }
+	</style>
+</head>
+<body>
+
+	<!-- NAV (matches path-planning.html) -->
+	<header class="nav_wrap">
+		<nav class="nav_contain">
+			<div class="nav_logo">
+				<a href="sunrise_v2.html" aria-label="Sttugs home">
+					<img src="../assets/logo.svg" alt="Sttugs"/>
+					<span>Sttugs</span>
+				</a>
+			</div>
+			<div class="nav_links">
+				<a href="sunrise_v2.html" class="nav_link">Platform</a>
+				<a href="sunrise_about_v2.html" class="nav_link">About</a>
+				<a href="#" data-open-contact class="nav_link cta">Contact Us</a>
+			</div>
+		</nav>
+	</header>
+
+	<!-- HERO -->
+	<section class="detail-hero">
+		<div class="detail-hero-icon">
+			<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<rect x="3" y="4" width="18" height="14" rx="2" ry="2"/>
+				<path d="M7 20h10"/>
+				<path d="M12 14h.01"/>
+			</svg>
+		</div>
+		<h1>Hardware &amp; Infrastructure</h1>
+		<p>Overhead cameras and tablet control that power every STTUGS level without disrupting your hangar.</p>
+	</section>
+
+	<!-- COMING SOON VISUAL (Overhead Camera System) -->
+	<section class="coming-soon-section">
+		<div class="coming-soon-inner">
+			<div class="coming-soon-text">
+				<h2>Overhead Camera System</h2>
+				<p>Achieve full-coverage sensing with near-zero downtime. Our lightweight camera array is designed to plug into your existing power and network architecture, requiring no heavy construction, no floor modifications, and keeping upfront capital costs to an absolute minimum.</p>
+			</div>
+			<div class="coming-soon-visual">
+				<div style="color:rgba(255,255,255,0.5);font-weight:600">Mockup: Camera array visual</div>
+				<div class="coming-soon-badge">Demo Coming Soon</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- CAPABILITIES -->
+	<section class="section-dark">
+		<div class="section-inner">
+			<div class="section-label">Overhead Camera System</div>
+			<h2 class="section-heading">Persistent, stitched view that powers collision prevention and automation</h2>
+			<p class="section-subheading">Complete 360° coverage with lightweight installs that integrate into your existing infrastructure.</p>
+			<div class="feature-grid">
+				<div class="feature-card">
+					<div class="feature-icon">
+						<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<rect x="3" y="3" width="18" height="18" rx="2"/>
+							<path d="M3 9h18"/>
+							<path d="M3 15h18"/>
+						</svg>
+					</div>
+					<h3>Full-coverage sensing</h3>
+					<p>Complete 360° view of your hangar floor, allowing clear visual to every part of your hangar.</p>
+				</div>
+				<div class="feature-card">
+					<div class="feature-icon">
+						<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<path d="m9 18V5l12-2v13"/>
+							<circle cx="6" cy="18" r="3"/>
+						</svg>
+					</div>
+					<h3>Low-friction install</h3>
+					<p>Lightweight cameras reuse existing power and network; most installs wrap in days without downtime.</p>
+				</div>
+				<div class="feature-card">
+					<div class="feature-icon">
+						<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<circle cx="12" cy="12" r="4"/>
+						</svg>
+					</div>
+					<h3>Real-time signals</h3>
+					<p>Live camera streams power real-time collision alerts and guide Auto Stacking and Path Planning.</p>
+				</div>
+				<div class="feature-card">
+					<div class="feature-icon">
+						<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<path d="m9 12 2 2 4-4"/>
+							<rect x="3" y="5" width="18" height="14" rx="2"/>
+						</svg>
+					</div>
+					<h3>Audit-ready capture</h3>
+					<p>Recorded events pair with telemetry so incident reviews are fast and defensible.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+    <!-- COMING SOON VISUAL (Tablet UI) -->
+	<section class="coming-soon-section">
+		<div class="coming-soon-inner">
+            <div class="coming-soon-visual">
+                <div style="color:rgba(255,255,255,0.5);font-weight:600">Mockup: Tablet UI</div>
+                <div class="coming-soon-badge">Demo Coming Soon</div>
+            </div>
+			<div class="coming-soon-text">
+				<h2>Tablet workflow at a glance</h2>
+				<p>Put the power of the entire STTUGS system in the palm of your hand. Operators can command, confirm, and monitor moves from a single, intuitive interface with minimal training and no complex workstation setups.</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- TABLET CONTROL -->
+	<section class="section-dark">
+		<div class="section-inner">
+			<div class="section-label">Rugged Tablet Control</div>
+			<h2 class="section-heading">One console to command, confirm, and monitor every move</h2>
+			<p class="section-subheading">Put the power of the entire STTUGS system in the palm of your hand. Operators can command, confirm, and monitor moves from a single, intuitive interface.</p>
+
+			<div class="feature-grid" style="margin-top:2rem;">
+				<div class="feature-card">
+					<div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/></svg></div>
+					<h3>Live hangar map</h3>
+					<p>Collision alerts and active traffic displayed where operators need them.</p>
+				</div>
+				<div class="feature-card">
+					<div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18"/></svg></div>
+					<h3>Guided auto-stacking</h3>
+					<p>Job queue, confirmations, and handoffs for Level 2 path planning and Level 3 autonomy.</p>
+				</div>
+				<div class="feature-card">
+					<div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/></svg></div>
+					<h3>Manual control</h3>
+					<p>Overrides, confirmations, and fine-grain moves when crews want to drive.</p>
+				</div>
+				<div class="feature-card">
+					<div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/></svg></div>
+					<h3>Single-pane safety</h3>
+					<p>Alerts, e-stops, and status logs captured automatically for compliance.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- BENEFITS -->
+	<section class="section-light">
+		<div class="section-inner">
+			<div class="section-label dark-mode">Benefits</div>
+			<h2 class="section-heading light">How This Helps You</h2>
+			<p class="section-subheading light">Smarter movement decisions that pay off every day.</p>
+			<div class="benefit-grid">
+				<div class="benefit-card"><div class="benefit-check"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg></div><p>Maximize hangar capacity and revenue by fitting more aircraft into the same footprint.</p></div>
+				<div class="benefit-card"><div class="benefit-check"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg></div><p>Save time with instant stacking and routing decisions that guide every operator clearly.</p></div>
+				<div class="benefit-card"><div class="benefit-check"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg></div><p>Eliminate collisions with smart path planning that accounts for every obstacle and wingtip.</p></div>
+			</div>
+		</div>
+	</section>
+
+	<!-- FAQ -->
+	<section class="faq-section">
+		<div class="section-inner">
+			<div class="section-label" style="text-align:center; margin-bottom:0.5rem;">Got Questions?</div>
+			<h2 class="section-heading" style="text-align:center; margin-bottom:0.5rem;">Frequently Asked Questions</h2>
+			<p class="section-subheading" style="max-width:560px; margin:0 auto 3rem; text-align:center;">Everything you need to know about our overhead camera and tablet system, installation, and support.</p>
+			<div class="faq-list" id="faq-list">
+				<div class="faq-item">
+					<button class="faq-question">How much downtime should we expect during installation? <span class="faq-icon">+</span></button>
+					<div class="faq-answer"><div class="faq-answer-inner">Most installs are non-invasive and require no hangar closures; typical on-site work is completed within 1–3 days. We schedule work to minimize disruption and can perform most setup during off-hours.</div></div>
+				</div>
+				<div class="faq-item">
+					<button class="faq-question">How long does a full installation take from site survey to commissioning? <span class="faq-icon">+</span></button>
+					<div class="faq-answer"><div class="faq-answer-inner">From initial site survey to full commissioning, projects typically complete in 2–6 weeks depending on hangar size, cabling needs, and customer scheduling.</div></div>
+				</div>
+				<div class="faq-item">
+					<button class="faq-question">What happens if a camera or tablet breaks? <span class="faq-icon">+</span></button>
+					<div class="faq-answer"><div class="faq-answer-inner">We provide hardware warranties and can ship replacement units quickly. Our software supports graceful degradation so the system continues operating while a failed device is replaced.</div></div>
+				</div>
+				<div class="faq-item">
+					<button class="faq-question">Do you offer remote monitoring and support? <span class="faq-icon">+</span></button>
+					<div class="faq-answer"><div class="faq-answer-inner">Yes — our support team can access system telemetry and logs remotely to diagnose issues and often remediate configuration problems without an on-site visit.</div></div>
+				</div>
+				<div class="faq-item">
+					<button class="faq-question">What are the network and power requirements? <span class="faq-icon">+</span></button>
+					<div class="faq-answer"><div class="faq-answer-inner">Cameras require standard PoE (Power over Ethernet) and a reliable LAN connection. Tablets use Wi‑Fi. We provide a detailed spec sheet during the site survey and can work with your IT team on network segmentation and QoS.</div></div>
+				</div>
+				<div class="faq-item">
+					<button class="faq-question">Can this integrate with existing CCTV or security systems? <span class="faq-icon">+</span></button>
+					<div class="faq-answer"><div class="faq-answer-inner">Yes. We support common streaming protocols and can export events via secure APIs so your security platform or VMS can ingest detection data.</div></div>
+				</div>
+				<div class="faq-item">
+					<button class="faq-question">How is data stored and who can access it? <span class="faq-icon">+</span></button>
+					<div class="faq-answer"><div class="faq-answer-inner">We provide configurable retention policies. Video and telemetry can be stored locally or in a customer-approved cloud. Access controls and audit logs ensure only authorized users can view or export data.</div></div>
+				</div>
+				<div class="faq-item">
+					<button class="faq-question">What maintenance is required? <span class="faq-icon">+</span></button>
+					<div class="faq-answer"><div class="faq-answer-inner">Routine maintenance is minimal — firmware updates and occasional camera repositioning after large layout changes. We offer optional maintenance plans for regular checkups and priority support.</div></div>
+				</div>
+				<div class="faq-item">
+					<button class="faq-question">Do you provide operator training? <span class="faq-icon">+</span></button>
+					<div class="faq-answer"><div class="faq-answer-inner">Yes. We provide on-site or remote training sessions, quick-start guides, and ongoing documentation to get your teams comfortable with the tablet workflows and safety features.</div></div>
+				</div>
+				<div class="faq-item">
+					<button class="faq-question">Is the system compliant with FAA and local safety regulations? <span class="faq-icon">+</span></button>
+					<div class="faq-answer"><div class="faq-answer-inner">Our solutions are designed to assist compliance; we provide documentation and configuration guidance to help meet FAA and local requirements. For site-specific certification questions we work directly with customers and regulators.</div></div>
+				</div>
+				<div class="faq-item">
+					<button class="faq-question">How much does an installation typically cost? <span class="faq-icon">+</span></button>
+					<div class="faq-answer"><div class="faq-answer-inner">Costs vary with hangar size and desired retention/feature set. We aim to keep upfront hardware costs low and will provide a tailored quote after a free site survey.</div></div>
+				</div>
+				<div class="faq-item">
+					<button class="faq-question">Do you support international installations? <span class="faq-icon">+</span></button>
+					<div class="faq-answer"><div class="faq-answer-inner">Yes. We support installations in the US and internationally; logistics and on-site support timelines depend on location.</div></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA -->
+	<div class="cta-strip">
+		<h2>Ready to protect your hangar?</h2>
+		<p>Get in touch to schedule a demo or discuss your installation.</p>
+		<a href="#" data-open-contact class="btn-primary">Contact Us</a>
+	</div>
+
+	<footer></footer>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+	<script src="sunrise_script_v2.js"></script>
+	<script>
+		if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+			gsap.utils.toArray('.feature-card, .benefit-card').forEach((el, i) => {
+				gsap.from(el, { scrollTrigger: { trigger: el, start: 'top 88%' }, opacity: 0, y: 24, duration: 0.55, ease: 'power2.out', delay: (i % 4) * 0.08 });
+			});
+		}
+	</script>
+</body>
+</html>
