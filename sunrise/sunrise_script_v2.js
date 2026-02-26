@@ -721,9 +721,10 @@ function injectSharedNav() {
               </svg>
             </button>
             <div class="snav-dropdown">
-              <a href="collision-detection-and-prevention.html" class="snav-dropdown-item">Collision Detection &amp; Prevention</a>
+              <a href="collision-detection-and-prevention.html" class="snav-dropdown-item">Collision Prevention</a>
               <a href="auto-stack.html" class="snav-dropdown-item">Auto-Stacking</a>
               <a href="path-planning.html" class="snav-dropdown-item">Path Planning</a>
+              <a href="hardware-and-infastructure.html" class="snav-dropdown-item">Hardware &amp; Infrastructure</a>
               <a href="autonomous-tugs.html" class="snav-dropdown-item">Autonomous Tugs</a>
               <a href="verifiable-audit-trail.html" class="snav-dropdown-item">Verifiable Audit Trail</a>
             </div>
@@ -747,9 +748,10 @@ function injectSharedNav() {
         <li>
           <button class="snav-mobile-link" id="sttugs-mobile-platform-toggle">Platform ▾</button>
           <div class="snav-mobile-sub" id="sttugs-mobile-platform-sub">
-            <a href="collision-detection-and-prevention.html">Collision Detection &amp; Prevention</a>
+            <a href="collision-detection-and-prevention.html">Collision Prevention</a>
             <a href="auto-stack.html">Auto-Stacking</a>
             <a href="path-planning.html">Path Planning</a>
+            <a href="hardware-and-infastructure.html">Hardware &amp; Infrastructure</a>
             <a href="autonomous-tugs.html">Autonomous Tugs</a>
             <a href="verifiable-audit-trail.html">Verifiable Audit Trail</a>
           </div>
@@ -1102,6 +1104,7 @@ function injectSharedComponents() {
             <a href="sunrise_about_v2.html" class="sttugs-footer_link">About</a>
             <a href="collision-detection-and-prevention.html" class="sttugs-footer_link">Collision Prevention</a>
             <a href="auto-stack.html" class="sttugs-footer_link">Auto-Stacking</a>
+              <a href="hardware-and-infastructure.html" class="sttugs-footer_link">Hardware &amp; Infrastructure</a>
             <a href="path-planning.html" class="sttugs-footer_link">Path Planning</a>
             <a href="autonomous-tugs.html" class="sttugs-footer_link">Autonomous Tugs</a>
             <a href="verifiable-audit-trail.html" class="sttugs-footer_link">Audit Trail</a>
