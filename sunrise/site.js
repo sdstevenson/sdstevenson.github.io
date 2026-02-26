@@ -1,5 +1,5 @@
 /**
- * sunrise_script_v2.js
+ * site.js
  * Sttugs animated landing page — adapted from Sunrise Robotics.
  * Uses GSAP 3.14.2 (ScrollSmoother, ScrollTrigger, DrawSVGPlugin).
  */
@@ -648,7 +648,7 @@ function initSharedNavBehavior(navHeader) {
   });
 
   // ── Color-switch: go light-mode when a light/dark section is under the nav ──
-  // Use ScrollTrigger when available (same engine as sunrise_v2.html), fallback to scroll event.
+  // Use ScrollTrigger when available (same engine as index.html), fallback to scroll event.
   function setupNavColorSwitch() {
     const sections = document.querySelectorAll('[data-bg-type]');
     if (!sections.length) return;
@@ -696,7 +696,7 @@ function initSharedNavBehavior(navHeader) {
 function injectSharedNav() {
   const header = document.querySelector('header');
   if (!header) return;
-  // Skip sunrise_v2.html — it manages its own animated nav
+  // Skip index.html — it manages its own animated nav
   if (header.classList.contains('home')) return;
   // Idempotent guard
   if (document.getElementById('sttugs-nav-header')) return;
@@ -707,7 +707,7 @@ function injectSharedNav() {
     <nav class="snav">
       <div class="snav-inner">
         <div class="snav-logo">
-          <a href="sunrise_v2.html" class="snav-logo-link" aria-label="STTUGS home">
+          <a href="index.html" class="snav-logo-link" aria-label="STTUGS home">
             <img src="../assets/logo.svg" class="snav-logo-img" alt="STTUGS"/>
             <span class="snav-logo-text">STTUGS</span>
           </a>
@@ -1188,8 +1188,22 @@ function initSharedContactModal() {
   if (form) {
     form.addEventListener('submit', e => {
       e.preventDefault();
+      const email = document.getElementById('sttugs-email')?.value.trim() || '';
+      const message = document.getElementById('sttugs-message')?.value.trim() || '';
+      // Google Form endpoint (matches other form handlers)
+      const gformUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSeESQcxH3hDUXmJm-tc7mCYc3_EB9Ef9Iv3A_ha_a9wWfpoYg/formResponse';
+      const fd = new FormData();
+      // Map modal fields to the Google Form entry IDs used elsewhere in the site
+      fd.append('entry.191654158', 'Contact Form Submission');
+      fd.append('entry.1925679811', message);
+      fd.append('entry.878160977', email);
+      // Hide form immediately for UX, show success when request completes
       form.style.display = 'none';
-      if (success) success.classList.add('visible');
+      fetch(gformUrl, { method: 'POST', mode: 'no-cors', body: fd })
+        .finally(() => {
+          if (success) success.classList.add('visible');
+          const btn = form.querySelector('button[type=submit]'); if (btn) btn.disabled = true;
+        });
     });
   }
 
@@ -1200,7 +1214,7 @@ function initSharedContactModal() {
 }
 
 /* ============================================================
-   HOME PAGE: PLATFORM DROPDOWN (fixed nav on sunrise_v2.html)
+   HOME PAGE: PLATFORM DROPDOWN (fixed nav on index.html)
 ============================================================ */
 function initHomeNavDropdowns() {
   const platformItem    = document.getElementById('home-platform-item');

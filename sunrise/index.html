@@ -1082,6 +1082,15 @@
       .footer_nav { gap: 1rem; }
     }
   </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DGHZZ8BDEZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+
+    gtag('config', 'G-DGHZZ8BDEZ');
+  </script>
 </head>
 <body>
 <div id="smooth-wrapper" class="page_wrap">
@@ -1131,7 +1140,7 @@
   <div class="nav_mobile" data-nav="closed">
     <div class="nav_mobile_contain">
       <div class="mobile_nav_group">
-        <a href="sunrise_v2.html" class="mobile_nav_link">Home</a>
+        <a href="index.html" class="mobile_nav_link">Home</a>
         <a href="sunrise_about_v2.html" class="mobile_nav_link">About</a>
         <a href="collision-detection-and-prevention.html" class="mobile_nav_link">Collision Prevention</a>
         <a href="auto-stack.html" class="mobile_nav_link">Auto-Stacking</a>
@@ -2224,42 +2233,7 @@
     </footer>
 
   </main><!-- #smooth-content -->
-
-  <!-- ============================================================
-       CONTACT MODAL
-  ============================================================ -->
-  <div class="form_component-contact">
-    <div id="form-modal-contact" role="dialog" aria-modal="true" aria-labelledby="modal-title-contact" class="modal_wrap-contact">
-      <div class="modal_contain">
-        <div class="modal_layout">
-          <div id="modal-title-contact" class="modal_title">Contact Sttugs</div>
-          <div class="line-2"></div>
-          <form id="contact-form" class="form" onsubmit="handleContactSubmit(event)">
-            <div class="input_block">
-              <label for="contact-email" class="field-label">Your email</label>
-              <input class="text-field" type="email" id="contact-email" placeholder="you@example.com" required/>
-            </div>
-            <div class="line-2"></div>
-            <textarea id="contact-message" class="textarea" placeholder="Tell us about your operation..." required></textarea>
-            <div class="line-2"></div>
-            <button type="submit" class="submit-button">Send Message</button>
-          </form>
-          <div class="success-message" id="contact-success">
-            <div class="success_big">Thank you!</div>
-            <div class="success_small">We'll be in touch shortly.</div>
-          </div>
-        </div>
-      </div>
-      <button role="button" aria-label="close-form" class="modal_close-contact">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 25 25" fill="none">
-          <path d="M17.1 7.9L7.9 17.1" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="square"/>
-          <path d="M17.1 17.1L7.9 7.9" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="square"/>
-        </svg>
-      </button>
-    </div>
-    <div class="modal_overlay-contact"></div>
-  </div>
-
+ 
 </div><!-- #smooth-wrapper -->
 
 <!-- ============================================================
@@ -2272,15 +2246,7 @@
 <script>gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin, ScrollSmoother);</script>
 
 <!-- Main script -->
-<script src="sunrise_script_v2.js"></script>
+<script src="site.js"></script>
 
-<!-- Contact form handler (inline, minimal) -->
-<script>
-function handleContactSubmit(e) {
-  e.preventDefault();
-  document.getElementById('contact-form').style.display = 'none';
-  document.getElementById('contact-success').style.display = 'block';
-}
-</script>
 </body>
 </html>
