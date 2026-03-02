@@ -257,6 +257,49 @@
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="section-inner">
+      <div class="section-label" style="text-align:center; margin-bottom:0.5rem;">Got Questions?</div>
+      <h2 class="section-heading" style="text-align:center; margin-bottom:0.5rem;">Frequently Asked Questions</h2>
+      <p class="section-subheading" style="max-width:560px; margin:0 auto 3rem; text-align:center;">Everything you need to know about the Verifiable Audit Trail and how it protects your operation.</p>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question">How long are audit logs retained? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Retention periods are configurable to meet your operational and regulatory requirements. We plan to support both local and cloud storage, and can retain logs for months or years depending on your needs.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Who can access the audit trail? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Access is controlled by role-based permissions. You define which staff members can view, search, or export records. All access events are themselves logged so you always know who reviewed what and when.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Is the audit trail tamper-proof? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Yes. Logs will be written to a secure write-only store. Records cannot be modified or deleted retroactively, ensuring the trail remains admissible as objective evidence in insurance or regulatory proceedings.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Can I export records for insurance or regulatory reviews? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Yes. Authorized users can export filtered reports — by date range, aircraft, operator, or event type — directly from the tablet or web dashboard. Exports are available in standard formats suitable for submission to insurers or airport authorities.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Does the system continue logging if connectivity is lost? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Yes. Logs are written locally first, then synced to the cloud. If the internet connection drops, all events continue to be captured on-device and are automatically uploaded once connectivity is restored — with no gaps in the record.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">How quickly can I retrieve records for a specific incident? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Instantly. The search interface lets you filter by timestamp, aircraft tail number, operator, or event type. Relevant records surface in seconds, so incident reviews that previously took hours can be completed in minutes.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Does the audit trail integrate with existing hangar management or FBO software? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Yes. We plan on providing secure API endpoints so event data can be fed into your existing FBO software, maintenance tracking systems, or reporting tools. Contact us to discuss your specific integration requirements.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">What events are logged automatically versus manually? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">All events are logged automatically with no manual input required from staff. Aircraft movements, collision warnings, operator confirmations, overrides, and system health events are all captured the moment they occur.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA -->
   <div class="cta-strip">
     <h2>Want full accountability in your hangar?</h2>
@@ -270,6 +313,15 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="site.js"></script>
   <script>
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const answer = item.querySelector('.faq-answer');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(o => { o.classList.remove('open'); o.querySelector('.faq-answer').style.height = '0'; });
+        if (!isOpen) { item.classList.add('open'); answer.style.height = answer.querySelector('.faq-answer-inner').offsetHeight + 'px'; }
+      });
+    });
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
       gsap.utils.toArray('.feature-card, .why-card, .how-card').forEach((el, i) => {
         gsap.from(el, { scrollTrigger: { trigger: el, start: 'top 88%' }, opacity: 0, y: 24, duration: 0.55, ease: 'power2.out', delay: (i % 4) * 0.08 });
