@@ -91,8 +91,35 @@
   .story_wrap {
     background: var(--sttugs-light-bg) !important;
   }
-  .story_heading { color: var(--sttugs-navy) !important; }
+  .story_layout {
+    max-width: 1100px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 5rem 2rem !important;
+  }
+  .story_heading {
+    color: var(--sttugs-navy) !important;
+    margin-bottom: 1rem !important;
+    display: block !important;
+  }
   .story_paragraph { color: #475569 !important; }
+  /* Two-column layout: card left, text right */
+  .team_profile_grid {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+  }
+  .team_profile_grid .team_card {
+    flex: 0 0 500px;
+  }
+  .team_profile_grid .story_description {
+    flex: 1;
+    min-width: 0;
+  }
+  @media (max-width: 840px) {
+    .team_profile_grid { flex-direction: column; gap: 2rem; }
+    .team_profile_grid .team_card { flex: none; width: 100%; }
+  }
   /* Team cards */
   .team_card { background: var(--sttugs-white) !important; border: 1px solid rgba(15,23,42,0.1) !important; border-radius: 12px; padding: 1.5rem; }
   .team_name { color: var(--sttugs-navy) !important; }
@@ -256,32 +283,28 @@
   <!-- ─── 3. OUR TEAM ─── -->
   <section data-bg-type="light" class="story_wrap">
     <div class="story_layout">
-      <div class="w-layout-hflex story_contain">
-        <div class="story-left">
-          <h2 class="story_heading u-text-heading">Our Team</h2>
+      <h2 class="story_heading u-text-heading">Our Team</h2>
+      <div class="team_profile_grid">
+        <!-- Left: team card (photo, name, title, bio) -->
+        <div class="team_card">
+          <img src="../assets/headshot.jpeg" loading="lazy" alt="Samir Stevenson" class="team_image" style="width:100%;border-radius:8px;object-fit:cover;aspect-ratio:1/1;"/>
+          <div class="name_position" style="margin-top:1rem;">
+            <h3 class="team_name u-text-body-1">Samir Stevenson</h3>
+            <div class="team_position u-text-body-1">Founder, STTUGS</div>
+          </div>
+          <div class="team_description u-text-body-2" style="margin-top:.75rem;">
+            A lifelong innovator, Samir is focused on using software and robotics to automate repetitive tasks with the goal of making people's lives easier. 
+            He is currently finishing his B.S. in Computer Engineering at the Georgia Institute of Technology. 
+            Originally from the Boston area, he is working towards his private pilot certificate at Hanscom Field (KBED) in Bedford, MA.
+          </div>
         </div>
+        <!-- Right: founding story -->
         <div class="story_description">
           <p class="story_paragraph u-text-body-1">
-            STTUGS was founded to build a future where intelligent robotics make aviation operations safer and more efficient — starting with the hangar.<br/><br/>
-            We are engineers, roboticists, and pilots who believe that the tools powering aviation ground operations are long overdue for a transformation. By combining autonomy with deep FBO know-how, we are creating technology that works the way operators actually work.<br/><br/>
-            STTUGS is headquartered in the United States, with roots in the New England aviation community. 
-            <!-- Our team regularly operates at Hanscom Field (KBED) and partner facilities to develop and validate our systems in real-world conditions. -->
+            STTUGS was founded to build a future where intelligent robotics make hangar operations safer and more efficient.<br/><br/>
+            We believe that the tools powering aviation ground operations are long overdue for a transformation. By combining autonomy with deep FBO know-how, we are creating technology that works the way operators actually work.<br/><br/>
+            STTUGS is headquartered in the United States, with roots in the New England aviation community.
           </p>
-        </div>
-      </div>
-      <!-- Team cards -->
-      <div class="team_wrap w-dyn-list">
-        <div role="list" class="team_card_layout w-dyn-items">
-          <div role="listitem" class="team_card w-dyn-item">
-            <img src="../assets/headshot.jpeg" loading="lazy" alt="Samir Stevenson" class="team_image" style="width:100%;border-radius:8px;object-fit:cover;aspect-ratio:1/1;"/>
-            <div class="name_position" style="margin-top:1rem;">
-              <h3 class="team_name u-text-body-1">Samir Stevenson</h3>
-              <div class="team_position u-text-body-1">Founder, STTUGS</div>
-            </div>
-            <div class="team_description u-text-body-2" style="margin-top:.75rem;">
-              A lifelong innovator, Samir is focused on using software and robotics to automate repetitive tasks with the goal of making people's lives easier. He is currently finishing his B.S. in Computer Engineering at the Georgia Institute of Technology. Originally from the Boston area, he is working towards his private pilot certificate at Hanscom Field (KBED) in Bedford, MA — giving STTUGS genuine roots in the FBO community it serves.
-            </div>
-          </div>
         </div>
       </div>
     </div>
