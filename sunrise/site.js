@@ -722,7 +722,7 @@ function injectSharedNav() {
             </button>
             <div class="snav-dropdown">
               <a href="collision-detection-and-prevention.html" class="snav-dropdown-item">Collision Prevention</a>
-              <a href="auto-stack.html" class="snav-dropdown-item">Auto-Stacking</a>
+              <a href="auto-stack.html" class="snav-dropdown-item">Auto Stacking</a>
               <a href="path-planning.html" class="snav-dropdown-item">Path Planning</a>
               <a href="hardware-and-infastructure.html" class="snav-dropdown-item">Hardware &amp; Infrastructure</a>
               <a href="autonomous-tugs.html" class="snav-dropdown-item">Autonomous Tugs</a>
@@ -749,7 +749,7 @@ function injectSharedNav() {
           <button class="snav-mobile-link" id="sttugs-mobile-platform-toggle">Platform ▾</button>
           <div class="snav-mobile-sub" id="sttugs-mobile-platform-sub">
             <a href="collision-detection-and-prevention.html">Collision Prevention</a>
-            <a href="auto-stack.html">Auto-Stacking</a>
+            <a href="auto-stack.html">Auto Stacking</a>
             <a href="path-planning.html">Path Planning</a>
             <a href="hardware-and-infastructure.html">Hardware &amp; Infrastructure</a>
             <a href="autonomous-tugs.html">Autonomous Tugs</a>
