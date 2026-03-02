@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>ROI Calculator – Sttugs</title>
+  <meta name="description" content="Calculate the potential annual savings from deploying STTUGS at your hangar — labor, revenue, and efficiency all in one place."/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <link rel="icon" href="../favicon/favicon.ico" sizes="any"/>
+  <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    /* ── ROI CALCULATOR CARD ── */
+    .roi-section { background: var(--light-bg); padding: 5rem 2rem; }
+    .roi-card {
+      max-width: 780px; margin: 0 auto;
+      background: #fff;
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 4px 32px rgba(15,23,42,0.07);
+    }
+    @media (max-width: 600px) { .roi-card { padding: 1.5rem; } }
+
+    /* Result banner */
+    .roi-result {
+      background: linear-gradient(135deg, #1e3a5f 0%, #1d4ed8 100%);
+      border-radius: 14px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .roi-result-label { font-size: 0.875rem; font-weight: 600; color: rgba(255,255,255,0.7); letter-spacing: 0.04em; text-transform: uppercase; }
+    .roi-result-value { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; color: #fff; line-height: 1; }
+    .roi-result-sub { font-size: 0.8125rem; color: rgba(255,255,255,0.55); margin-top: 0.25rem; }
+    .roi-breakdown { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .roi-breakdown-item { display: flex; flex-direction: column; gap: 0.2rem; }
+    .roi-breakdown-label { font-size: 0.75rem; font-weight: 600; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 0.04em; }
+    .roi-breakdown-val { font-size: 1.125rem; font-weight: 700; color: #93C5FD; }
+
+    /* Section divider inside card */
+    .roi-divider { border: none; border-top: 1px solid var(--card-border); margin: 1.75rem 0; }
+    .roi-group-label {
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.07em; color: var(--muted); margin: 0 0 1.25rem;
+    }
+
+    /* Slider rows */
+    .roi-row { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem 1rem; align-items: center; margin-bottom: 1.25rem; }
+    .roi-row:last-child { margin-bottom: 0; }
+    .roi-row-label { font-size: 0.875rem; font-weight: 500; color: var(--navy); grid-column: 1 / -1; margin-bottom: 0.15rem; }
+    .roi-row input[type="range"] {
+      width: 100%; height: 4px; appearance: none; -webkit-appearance: none;
+      background: var(--card-border); border-radius: 4px; outline: none; cursor: pointer;
+      accent-color: var(--blue);
+    }
+    .roi-row input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 18px; height: 18px;
+      border-radius: 50%; background: var(--blue);
+      box-shadow: 0 1px 4px rgba(37,99,235,0.4); cursor: pointer;
+    }
+    .roi-numbox {
+      width: 88px; text-align: right;
+      border: 1px solid var(--card-border); border-radius: 8px;
+      padding: 0.4rem 0.5rem; font-size: 0.875rem; font-weight: 600;
+      color: var(--navy); font-family: inherit; background: #fff; outline: none;
+    }
+    .roi-numbox:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,0.12); }
+
+    /* Email form */
+    .roi-form-wrap { margin-top: 2rem; text-align: center; }
+    .roi-form-wrap > p { font-size: 0.9rem; color: var(--muted); margin-bottom: 1rem; }
+    .roi-form {
+      display: flex; gap: 0.75rem; align-items: flex-start;
+      max-width: 460px; margin: 0 auto; flex-wrap: wrap; justify-content: center;
+    }
+    .roi-email-wrap { flex: 1; min-width: 200px; }
+    .roi-email-wrap input[type="email"] {
+      width: 100%; padding: 0.7rem 1rem;
+      border: 1px solid var(--card-border); border-radius: 8px;
+      font-size: 0.9rem; font-family: inherit; color: var(--navy);
+      outline: none; box-sizing: border-box;
+    }
+    .roi-email-wrap input[type="email"]:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,0.12); }
+    .roi-email-error { display: none; font-size: 0.8rem; color: #dc2626; margin-top: 0.35rem; text-align: left; }
+    .roi-email-error.visible { display: block; }
+    .roi-submit {
+      padding: 0.7rem 1.5rem; background: var(--blue); color: #fff;
+      border: none; border-radius: 8px; font-size: 0.9rem; font-weight: 700;
+      font-family: inherit; cursor: pointer; white-space: nowrap; transition: background 0.2s;
+    }
+    .roi-submit:hover { background: #1d4ed8; }
+    .roi-submit:disabled { background: var(--muted); cursor: not-allowed; }
+    .roi-success { display: none; font-size: 0.9rem; color: #16a34a; font-weight: 600; margin-top: 1rem; }
+
+    /* How we calculate */
+    .how-calc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    @media (max-width: 900px) { .how-calc-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .how-calc-grid { grid-template-columns: 1fr; } }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DGHZZ8BDEZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DGHZZ8BDEZ');
+  </script>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav_wrap"></header>
+
+  <!-- HERO -->
+  <section class="detail-hero">
+    <div class="detail-hero-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="12" x2="12" y1="2" y2="22"/>
+        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+      </svg>
+    </div>
+    <h1>ROI Calculator</h1>
+    <p>Estimate the potential annual savings from deploying STTUGS at your hangar — based on your labor costs and revenue opportunity.</p>
+  </section>
+
+  <!-- CALCULATOR -->
+  <section class="roi-section">
+    <div class="roi-card">
+
+      <!-- Result banner -->
+      <div class="roi-result">
+        <div>
+          <div class="roi-result-label">Estimated Annual Benefit</div>
+          <div class="roi-result-value" id="roi-value">$0</div>
+          <div class="roi-result-sub">Labor savings + additional revenue</div>
+        </div>
+        <div class="roi-breakdown">
+          <div class="roi-breakdown-item">
+            <span class="roi-breakdown-label">Labor Savings</span>
+            <span class="roi-breakdown-val" id="laborSaving">$0</span>
+          </div>
+          <div class="roi-breakdown-item">
+            <span class="roi-breakdown-label">Revenue Gain</span>
+            <span class="roi-breakdown-val" id="revenueGain">$0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Revenue inputs -->
+      <p class="roi-group-label">Hangar Revenue</p>
+
+      <div class="roi-row">
+        <span class="roi-row-label">Hangar size (sqft)</span>
+        <input type="number" id="hangarSqftInput" class="roi-numbox" min="1000" max="200000" step="1000" value="40000">
+        <input type="range" id="hangarSqft" min="1000" max="200000" step="1000" value="40000">
+      </div>
+
+      <div class="roi-row">
+        <span class="roi-row-label">Utilization boost (%)</span>
+        <input type="number" id="utilBoostInput" class="roi-numbox" min="0" max="50" step="1" value="8">
+        <input type="range" id="utilBoost" min="0" max="50" step="1" value="8">
+      </div>
+
+      <div class="roi-row">
+        <span class="roi-row-label">Tenant rate (monthly $/sqft)</span>
+        <input type="number" id="tenantRateInput" class="roi-numbox" min="0" max="10" step="0.1" value="2.0">
+        <input type="range" id="tenantRate" min="0" max="10" step="0.1" value="2.0">
+      </div>
+
+      <hr class="roi-divider">
+
+      <!-- Labor inputs -->
+      <p class="roi-group-label">Labor Savings</p>
+
+      <div class="roi-row">
+        <span class="roi-row-label">People per stack</span>
+        <input type="number" id="peopleInput" class="roi-numbox" min="1" max="20" step="1" value="5">
+        <input type="range" id="peoplePerStack" min="1" max="8" step="1" value="5">
+      </div>
+
+      <div class="roi-row">
+        <span class="roi-row-label">Wage per hour ($)</span>
+        <input type="number" id="wageInput" class="roi-numbox" min="0" max="99" step="1" value="25">
+        <input type="range" id="wagePerHour" min="10" max="99" step="1" value="25">
+      </div>
+
+      <div class="roi-row">
+        <span class="roi-row-label">Hours spent stacking per day</span>
+        <input type="number" id="timeInput" class="roi-numbox" min="0" max="12" step="0.5" value="4">
+        <input type="range" id="timePerStack" min="0" max="12" step="0.5" value="4">
+      </div>
+
+      <hr class="roi-divider">
+
+      <!-- Email form -->
+      <div class="roi-form-wrap">
+        <p>Want a detailed breakdown of your ROI calculation?</p>
+        <form id="roiDownloadForm" class="roi-form" novalidate>
+          <div class="roi-email-wrap">
+            <input type="email" id="roi-email" placeholder="Enter your email" required>
+            <div class="roi-email-error" id="roi-email-error">Please enter a valid email address.</div>
+          </div>
+          <button type="submit" class="roi-submit" id="roi-submit-btn">Get Report</button>
+        </form>
+        <div class="roi-success" id="roiDownloadSuccess">Thanks! We'll be in touch with your ROI report.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HOW WE CALCULATE -->
+  <section class="section-dark">
+    <div class="section-inner">
+      <div class="section-label">Methodology</div>
+      <h2 class="section-heading">How We Calculate Your Savings</h2>
+      <p class="section-subheading">Our estimates are based on two measurable, real-world impact areas.</p>
+      <div class="how-calc-grid">
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+              <polyline points="16 7 22 7 22 13"/>
+            </svg>
+          </div>
+          <h3>Increased Hangar Capacity</h3>
+          <p>Our auto-stacking algorithm optimally positions aircraft to maximize utilization. The revenue estimate uses your hangar size, utilization boost, and monthly tenant rate to project additional annual income.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" x2="12" y1="2" y2="22"/>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+          </div>
+          <h3>Labor Cost Reduction</h3>
+          <p>Autonomous tugs and guided path planning reduce the staff hours needed for stacking. The labor estimate multiplies your staff count, hourly wage, and daily stacking hours across 365 days per year.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <h3>Conservative by Design</h3>
+          <p>These figures don't account for incident cost avoidance, insurance benefits from the audit trail, or staff redeployment to higher-value tasks. Real-world impact is typically higher.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-strip">
+    <h2>Ready to see STTUGS in action?</h2>
+    <p>Talk to us about deploying the platform at your hangar.</p>
+    <a href="#" data-open-contact class="btn-primary">Contact Us</a>
+  </div>
+
+  <footer></footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="site.js"></script>
+  <script>
+    // ── ROI Calculator ──────────────────────────────────────────────
+    const GFORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSeESQcxH3hDUXmJm-tc7mCYc3_EB9Ef9Iv3A_ha_a9wWfpoYg/formResponse';
+
+    function fmtDollars(n) {
+      return '$' + Math.round(n).toLocaleString('en-US');
+    }
+
+    function getVal(id) {
+      return parseFloat(document.getElementById(id).value) || 0;
+    }
+
+    function update() {
+      const sqft        = getVal('hangarSqft');
+      const boost       = getVal('utilBoost');
+      const tenant      = getVal('tenantRate');
+      const people      = getVal('peoplePerStack');
+      const wage        = getVal('wagePerHour');
+      const hoursPerDay = getVal('timePerStack');
+
+      const annualLabor   = people * wage * hoursPerDay * 365;
+      const annualRevenue = sqft * (Math.max(0, boost) / 100) * tenant * 12;
+      const total         = Math.round(annualLabor + annualRevenue);
+
+      document.getElementById('roi-value').textContent   = fmtDollars(total);
+      document.getElementById('laborSaving').textContent = fmtDollars(annualLabor);
+      document.getElementById('revenueGain').textContent = fmtDollars(annualRevenue);
+    }
+
+    // Sync slider ↔ number input pairs
+    const PAIRS = [
+      ['hangarSqft',     'hangarSqftInput'],
+      ['utilBoost',      'utilBoostInput'],
+      ['tenantRate',     'tenantRateInput'],
+      ['peoplePerStack', 'peopleInput'],
+      ['wagePerHour',    'wageInput'],
+      ['timePerStack',   'timeInput'],
+    ];
+
+    PAIRS.forEach(([sliderId, inputId]) => {
+      const slider = document.getElementById(sliderId);
+      const numbox = document.getElementById(inputId);
+      slider.addEventListener('input', () => { numbox.value = slider.value; update(); });
+      numbox.addEventListener('input', () => {
+        let v = parseFloat(numbox.value);
+        if (!isNaN(v)) {
+          v = Math.min(parseFloat(slider.max), Math.max(parseFloat(slider.min), v));
+          slider.value = v;
+        }
+        update();
+      });
+    });
+
+    update(); // initial render
+
+    // ── Form submission ─────────────────────────────────────────────
+    document.getElementById('roiDownloadForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const emailEl   = document.getElementById('roi-email');
+      const errorEl   = document.getElementById('roi-email-error');
+      const submitBtn = document.getElementById('roi-submit-btn');
+      const successEl = document.getElementById('roiDownloadSuccess');
+
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim());
+      errorEl.classList.toggle('visible', !emailOk);
+      if (!emailOk) return;
+
+      const roiValue    = document.getElementById('roi-value').textContent;
+      const laborSaving = document.getElementById('laborSaving').textContent;
+      const revenueGain = document.getElementById('revenueGain').textContent;
+      const sqft   = getVal('hangarSqft');
+      const boost  = getVal('utilBoost');
+      const tenant = getVal('tenantRate');
+      const people = getVal('peoplePerStack');
+      const wage   = getVal('wagePerHour');
+      const hours  = getVal('timePerStack');
+
+      const fd = new FormData();
+      fd.append('entry.191654158', 'ROI Download Request');
+      fd.append('entry.1925679811', `ROI: ${roiValue}, Labor: ${laborSaving}, Revenue: ${revenueGain}`);
+      fd.append('entry.878160977',  `${emailEl.value.trim()} | Inputs: ${sqft}sqft, ${boost}% boost, $${tenant}/sqft/mo, ${people} people, $${wage}/hr, ${hours}hrs/day`);
+
+      fetch(GFORM_URL, { method: 'POST', mode: 'no-cors', body: fd })
+        .finally(() => {
+          successEl.style.display = 'block';
+          submitBtn.disabled = true;
+        });
+    });
+
+    // ── Scroll reveal ───────────────────────────────────────────────
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.utils.toArray('.feature-card').forEach((el, i) => {
+        gsap.from(el, { scrollTrigger: { trigger: el, start: 'top 88%' }, opacity: 0, y: 24, duration: 0.55, ease: 'power2.out', delay: (i % 3) * 0.08 });
+      });
+    }
+  </script>
+</body>
+</html>

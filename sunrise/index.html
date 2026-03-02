@@ -164,6 +164,14 @@
       font-weight: 700;
     }
     .nav_link.home.cta:hover { background: var(--accent-hover); color: #fff; }
+    .nav_link.home.roi-link {
+      border: 1.5px solid rgba(37,99,235,0.5);
+      padding: 0.4rem 1rem; border-radius: 7px;
+      color: rgba(147,197,253,0.9) !important; opacity: 1;
+    }
+    .nav_link.home.roi-link:hover { border-color: #3B82F6; color: #fff !important; background: rgba(37,99,235,0.12); opacity: 1; }
+    .nav_wrap.home.fixed.nav--light .nav_link.home.roi-link { border-color: rgba(37,99,235,0.4); color: #1d4ed8 !important; }
+    .nav_wrap.home.fixed.nav--light .nav_link.home.roi-link:hover { border-color: #2563EB; background: rgba(37,99,235,0.08); }
 
     /* HAMBURGER */
     .menu-button {
@@ -1104,10 +1112,11 @@
       <div class="nav_logo home">
         <a href="../index.html" class="logo_nav_link home" aria-label="Sttugs">
           <img src="../assets/logo.svg" class="logo_nav_img" alt="Sttugs" />
-          <span class="logo_nav_text home">Sttugs</span>
+          <span class="logo_nav_text home">STTUGS</span>
         </a>
       </div>
       <div class="nav_links home">
+        <a href="index.html" class="nav_link home">Home</a>
         <div class="nav-platform-wrap" id="home-platform-item">
           <button class="nav-platform-btn" id="home-platform-trigger" aria-expanded="false" aria-haspopup="true">
             Platform
@@ -1124,7 +1133,8 @@
             <a href="verifiable-audit-trail.html">Verifiable Audit Trail</a>
           </div>
         </div>
-        <a href="sunrise_about_v2.html" class="nav_link home">About</a>
+        <a href="about.html" class="nav_link home">About</a>
+        <a href="roi.html" class="nav_link home roi-link">ROI Calculator</a>
         <a href="#" data-open-contact class="nav_link home cta">Contact Us</a>
         <button role="button" data-menu-toggle aria-label="open-menu" class="menu-button">
           <div class="hamburger_6_wrap">
@@ -1142,7 +1152,8 @@
     <div class="nav_mobile_contain">
       <div class="mobile_nav_group">
         <a href="index.html" class="mobile_nav_link">Home</a>
-        <a href="sunrise_about_v2.html" class="mobile_nav_link">About</a>
+        <a href="about.html" class="mobile_nav_link">About</a>
+        <a href="roi.html" class="mobile_nav_link">ROI Calculator</a>
         <a href="collision-detection-and-prevention.html" class="mobile_nav_link">Collision Prevention</a>
         <a href="auto-stack.html" class="mobile_nav_link">Auto-Stacking</a>
         <a href="path-planning.html" class="mobile_nav_link">Path Planning</a>
@@ -1169,11 +1180,11 @@
         <div class="nav_logo home">
           <a href="../index.html" class="logo_nav_link home" aria-label="Sttugs">
             <img src="../assets/logo.svg" class="logo_nav_img" alt="Sttugs" />
-            <div class="logo_nav_text home">Sttugs</div>
+            <div class="logo_nav_text home">STTUGS</div>
           </a>
         </div>
         <div class="nav_links home">
-          <a href="sunrise_about_v2.html" class="nav_link home">About</a>
+          <a href="about.html" class="nav_link home">About</a>
           <a href="#" data-open-contact class="nav_link home cta">Contact Us</a>
           <button role="button" data-menu-toggle aria-label="open-menu" class="menu-button">
             <div class="hamburger_6_wrap">
@@ -1252,7 +1263,7 @@
                 Collisions, inefficient layouts, and manual workflows cost the industry hundreds of millions annually. 
                 Sttugs changes that: with a platform that sees, thinks, and acts to keep every assets safe and every square foot of your hangar utilized.
               </p>
-              <a href="sunrise_about_v2.html" class="outlined_button">Read more</a>
+              <a href="about.html" class="outlined_button">Read more</a>
             </div>
           </div>
         </div>
@@ -1263,21 +1274,6 @@
          PRODUCT SECTION
     ============================================================ -->
     <section class="product_wrap" data-bg-type="light">
-
-      <!-- Decorative rotating orbit graphic -->
-      <div class="orbit-graphic rotating">
-        <svg viewBox="0 0 436 436" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" style="width:100%;height:auto;">
-          <circle cx="218" cy="218" r="210" stroke="#0F172A" stroke-width="1" stroke-dasharray="6 8" fill="none"/>
-          <circle cx="218" cy="8" r="6" fill="#0F172A"/>
-          <circle cx="218" cy="428" r="6" fill="#0F172A"/>
-          <circle cx="8" cy="218" r="6" fill="#0F172A"/>
-          <circle cx="428" cy="218" r="6" fill="#0F172A"/>
-          <circle cx="370" cy="66" r="5" fill="#0F172A"/>
-          <circle cx="66" cy="370" r="5" fill="#0F172A"/>
-          <circle cx="370" cy="370" r="5" fill="#0F172A"/>
-          <circle cx="66" cy="66" r="5" fill="#0F172A"/>
-        </svg>
-      </div>
 
       <div class="product_container">
         <div class="section-headline">
@@ -2223,7 +2219,7 @@
         <div class="footer_right">
           <nav class="footer_nav">
             <a href="#" data-open-contact class="footer_link">Contact</a>
-            <a href="sunrise_about_v2.html" class="footer_link">About</a>
+            <a href="about.html" class="footer_link">About</a>
             <a href="collision-detection-and-prevention.html" class="footer_link">Collision Prevention</a>
             <a href="auto-stack.html" class="footer_link">Auto-Stacking</a>
             <a href="path-planning.html" class="footer_link">Path Planning</a>

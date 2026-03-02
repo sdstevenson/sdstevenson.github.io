@@ -703,8 +703,13 @@ function initSharedNavBehavior(navHeader) {
     });
 
     // About page
-    if (filename === 'sunrise_about_v2.html') {
+    if (filename === 'about.html') {
       document.querySelectorAll('.snav-about-link').forEach(a => a.classList.add('snav-active'));
+    }
+
+    // ROI page
+    if (filename === 'roi.html') {
+      document.querySelectorAll('.snav-roi-link').forEach(a => a.classList.add('snav-active'));
     }
 
     // Home link (detail pages showing Home)
@@ -754,7 +759,8 @@ function injectSharedNav() {
               <a href="verifiable-audit-trail.html" class="snav-dropdown-item">Verifiable Audit Trail</a>
             </div>
           </li>
-          <li class="snav-item"><a href="sunrise_about_v2.html" class="snav-link snav-about-link">About</a></li>
+          <li class="snav-item"><a href="about.html" class="snav-link snav-about-link">About</a></li>
+          <li class="snav-item"><a href="roi.html" class="snav-link snav-roi-link">ROI Calculator</a></li>
           <li class="snav-item"><a href="#" data-open-contact class="snav-link snav-cta">Contact Us</a></li>
         </ul>
         <button class="snav-hamburger" id="sttugs-nav-hamburger" aria-label="Open menu">
@@ -782,7 +788,8 @@ function injectSharedNav() {
             <a href="verifiable-audit-trail.html">Verifiable Audit Trail</a>
           </div>
         </li>
-        <li><a href="sunrise_about_v2.html" class="snav-mobile-link snav-about-link">About</a></li>
+        <li><a href="about.html" class="snav-mobile-link snav-about-link">About</a></li>
+        <li><a href="roi.html" class="snav-mobile-link snav-roi-link">ROI Calculator</a></li>
       </ul>
       <a href="#" data-open-contact class="snav-mobile-cta">Contact Us</a>
     </div>
@@ -989,6 +996,14 @@ function injectSharedComponents() {
         padding: 0.45rem 1.1rem !important; border-radius: 7px; font-weight: 700;
       }
       .snav-cta:hover { background: #d4891e !important; color: #fff !important; }
+      .snav-roi-link {
+        border: 1.5px solid rgba(37,99,235,0.5) !important;
+        padding: 0.4rem 1rem !important; border-radius: 7px;
+        color: rgba(147,197,253,0.9) !important;
+      }
+      .snav-roi-link:hover { border-color: #3B82F6 !important; color: #fff !important; background: rgba(37,99,235,0.12) !important; }
+      .snav--light .snav-roi-link { border-color: rgba(37,99,235,0.4) !important; color: #1d4ed8 !important; }
+      .snav--light .snav-roi-link:hover { border-color: var(--blue) !important; background: rgba(37,99,235,0.08) !important; }
       .snav-chevron {
         width: 12px; height: 12px;
         transition: transform 0.25s; flex-shrink: 0;
@@ -1133,7 +1148,7 @@ function injectSharedComponents() {
         <div class="sttugs-footer_right">
           <nav class="sttugs-footer_nav">
             <a href="#" data-open-contact class="sttugs-footer_link">Contact</a>
-            <a href="sunrise_about_v2.html" class="sttugs-footer_link">About</a>
+            <a href="about.html" class="sttugs-footer_link">About</a>
             <a href="collision-detection-and-prevention.html" class="sttugs-footer_link">Collision Prevention</a>
             <a href="auto-stack.html" class="sttugs-footer_link">Auto-Stacking</a>
               <a href="hardware-and-infastructure.html" class="sttugs-footer_link">Hardware &amp; Infrastructure</a>

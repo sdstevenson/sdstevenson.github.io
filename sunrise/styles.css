@@ -47,7 +47,7 @@ video { display: block; width: 100%; }
   max-width: 1200px; margin: 0 auto;
 }
 .nav_logo a { display: flex; align-items: center; gap: 0.5rem; color: #fff; text-decoration: none; }
-.nav_logo img { height: 32px; filter: brightness(0) invert(1); }
+.nav_logo img { height: 36px; filter: brightness(0) invert(1); }
 .nav_logo span { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.02em; }
 .nav_links { display: flex; align-items: center; gap: 1.5rem; }
 .nav_link {
