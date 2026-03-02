@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Autonomous Tugs – Sttugs</title>
+  <meta name="description" content="The final piece that brings it all together. Self-operating tugs execute the entire system autonomously, combining collision detection, auto-stacking, and path planning for complete hangar automation."/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <link rel="icon" href="./favicon/favicon.ico" sizes="any"/>
+  <link rel="apple-touch-icon" href="./favicon/apple-touch-icon.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/styles.css"/>
+  <style>
+    /* COMPLETE SYSTEM GRID */
+    .system-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    @media (max-width: 700px) { .system-grid { grid-template-columns: 1fr; } }
+    .system-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 2rem; }
+    .system-card.highlighted { background: rgba(37,99,235,0.1); border-color: rgba(37,99,235,0.35); }
+    .system-number { width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 800; color: var(--blue-faint); margin-bottom: 1rem; }
+    .system-card.highlighted .system-number { background: var(--blue); color: #fff; }
+    .system-card h3 { font-size: 1.0625rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+    .system-card p { font-size: 0.9rem; line-height: 1.65; color: rgba(255,255,255,0.55); }
+    .system-card.highlighted p { color: rgba(255,255,255,0.7); }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DGHZZ8BDEZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+
+    gtag('config', 'G-DGHZZ8BDEZ');
+  </script>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav_wrap">
+    <nav class="nav_contain">
+      <div class="nav_logo">
+        <a href="index.html" aria-label="Sttugs home">
+          <img src="../assets/logo.svg" alt="Sttugs"/>
+          <span>Sttugs</span>
+        </a>
+      </div>
+      <div class="nav_links">
+        <a href="index.html" class="nav_link">Platform</a>
+        <a href="about.html" class="nav_link">About</a>
+        <a href="#" data-open-contact class="nav_link cta">Contact Us</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="detail-hero">
+    <div class="detail-hero-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/>
+        <path d="M15 18H9"/>
+        <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/>
+        <circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/>
+      </svg>
+    </div>
+    <h1>Autonomous Tugs</h1>
+    <p>The final piece that brings it all together. Self-operating tug vehicles execute the entire system autonomously — combining collision detection, auto-stacking, and path planning for complete hangar automation.</p>
+  </section>
+
+  <!-- COMPLETE SYSTEM -->
+  <section class="section-dark-mid">
+    <div class="section-inner">
+      <div class="section-label">The Full Picture</div>
+      <h2 class="section-heading">The Complete Autonomous System</h2>
+      <p class="section-subheading">All three intelligence layers working together seamlessly to automate every aircraft movement in your hangar.</p>
+      <div class="system-grid">
+        <div class="system-card">
+          <div class="system-number">1</div>
+          <h3>Collision Detection</h3>
+          <p>Sensors continuously monitor for obstacles and prevent accidents — protecting every aircraft on the floor.</p>
+        </div>
+        <div class="system-card">
+          <div class="system-number">2</div>
+          <h3>Auto-Stacking &amp; Paths</h3>
+          <p>Software determines optimal aircraft positions and generates efficient, safe movement routes through the hangar.</p>
+        </div>
+        <div class="system-card highlighted">
+          <div class="system-number">3</div>
+          <h3>Autonomous Tugs</h3>
+          <p>Self-operating tugs that can execute every movement without human intervention.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPABILITIES — dark -->
+  <section class="section-dark">
+    <div class="section-inner">
+      <div class="section-label">Capabilities</div>
+      <h2 class="section-heading">Autonomous Tug Capabilities</h2>
+      <p class="section-subheading">Advanced robotics purpose-built for the unique demands of aircraft hangar environments.</p>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/>
+              <path d="M15 18H9"/>
+              <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/>
+              <circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/>
+            </svg>
+          </div>
+          <h3>Fully Autonomous</h3>
+          <p>Self-operating tug vehicles can execute aircraft movements without any human intervention — day or night, continuously.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/>
+              <path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/>
+            </svg>
+          </div>
+          <h3>Systems Integration</h3>
+          <p>Seamlessly integrates with your existing hangar management tools and databases for a fully connected operation.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+            </svg>
+          </div>
+          <h3>Precision Control</h3>
+          <p>Millimeter-accurate positioning for tight hangar spaces, using our unique towbar-less design that works with any aircraft type.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <h3>24/7 Operation</h3>
+          <p>Continuous operation without fatigue or shift changes — the tug never needs a break and is always ready for the next movement.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="section-inner">
+      <div class="section-label" style="text-align:center; margin-bottom:0.5rem;">Got Questions?</div>
+      <h2 class="section-heading" style="text-align:center; margin-bottom:0.5rem;">Frequently Asked Questions</h2>
+      <p class="section-subheading" style="max-width:560px; margin:0 auto 3rem; text-align:center;">Everything you need to know about Sttugs autonomous tug vehicles.</p>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question">What safety features are built in? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">All tugs come with a dead-man's switch and multiple hardware stops and software backups, including native integration with our collision detection system.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Can the tug operate outdoors in rain or snow? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">The tug can be operated in any conditions. In the early stages, autonomous navigation will be limited to inside your hangar, with outdoor ramp operations planned for future releases.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Does it work with all aircraft types? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Yes. With our unique towbar-less design, our tug will be able to work with any aircraft — from single-engine pistons to large jets.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Is remote monitoring and fleet management available? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Yes. A central dashboard provides real-time telemetry, task scheduling, and health monitoring for fleets operating across multiple sites.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">What are the insurance and liability considerations for deploying autonomous tugs? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">We provide safety reports, maintenance logs, and integration documentation to assist customers in discussions with insurers and to support coverage and liability reviews.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-strip">
+    <h2>Ready for full hangar automation?</h2>
+    <p>Reach out to learn more or schedule a demo with our team.</p>
+    <a href="#" data-open-contact class="btn-primary">Contact Us</a>
+  </div>
+
+  <footer></footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="./assets/site.js"></script>
+  <script>
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const answer = item.querySelector('.faq-answer');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(o => { o.classList.remove('open'); o.querySelector('.faq-answer').style.height = '0'; });
+        if (!isOpen) { item.classList.add('open'); answer.style.height = answer.querySelector('.faq-answer-inner').offsetHeight + 'px'; }
+      });
+    });
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.utils.toArray('.feature-card, .system-card').forEach((el, i) => {
+        gsap.from(el, { scrollTrigger: { trigger: el, start: 'top 88%' }, opacity: 0, y: 24, duration: 0.55, ease: 'power2.out', delay: (i % 4) * 0.08 });
+      });
+    }
+  </script>
+</body>
+</html>

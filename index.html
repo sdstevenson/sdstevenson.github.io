@@ -1,219 +1,2250 @@
-<!-- layout: none -->
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="utf-8"/>
+  <title>Sttugs - Autonomous Hangar Intelligence</title>
+  <meta content="Sttugs transforms how hangars operate — preventing collisions, optimizing aircraft positions, and enabling full autonomous tug operations." name="description"/>
+  <meta content="Sttugs - Autonomous Hangar Intelligence" property="og:title"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <link rel="icon" href="./favicon/favicon.ico" sizes="any"/>
+  <link rel="apple-touch-icon" href="./favicon/apple-touch-icon.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/styles.css"/>
 
+  <style>
+    /* ============================================================
+       BASE RESET & CSS VARIABLES
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #FFFFFF;
+      --navy: #0F172A;
+      --navy-mid: #1E293B;
+      --navy-glass: rgba(15,23,42,0.97);
+      --blue: #2563EB;
+      --blue-dark: #1d4ed8;
+      --blue-faint: #93C5FD;
+      --accent: #F5A623;
+      --accent-hover: #d4891e;
+      --muted: #64748B;
+      --text: #0F172A;
+      --text-light-muted: rgba(255,255,255,0.6);
+      --card-bg: rgba(248,250,252,0.9);
+      --card-border: rgba(15,23,42,0.1);
+      --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      /* Hero palette */
+      --hero-base: #FFFFFF;
+      --hero-accent: #2563EB;
+      --hero-dark: #0F172A;
+    }
+
+    html { font-size: 16px; overflow-x: hidden; scroll-behavior: auto; }
+    body {
+      font-family: var(--font-sans);
+      margin: 0; padding: 0;
+      color: var(--text);
+      background: var(--bg);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    h1,h2,h3,h4,h5,h6,p,label,blockquote { font-size: inherit; line-height: inherit; font-weight: inherit; margin: 0; }
+    button { background: unset; padding: unset; cursor: pointer; border: none; }
+    a { text-decoration: none; }
+    img::selection { background: transparent; }
+    section, header, footer { position: relative; }
+
+    .scroll-locked { overflow: hidden; touch-action: none; position: fixed; width: 100%; height: calc(var(--vh, 1vh) * 100); }
+    .rotating { animation: rotate 10s linear infinite; }
+    @keyframes rotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+    /* ============================================================
+       PAGE WRAPPER (SCROLL SMOOTHER)
+    ============================================================ */
+    .page_wrap { position: relative; }
+    .page_main { width: 100%; }
+
+    /* ============================================================
+       NAVIGATION — FIXED (appears after hero scroll)
+    ============================================================ */
+    .nav_wrap.home.fixed {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 0;
+      pointer-events: auto;
+      opacity: 1 !important;
+      background: rgba(15,23,42,0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      transition: background 0.35s ease, border-color 0.35s ease;
+    }
+    .nav_wrap.home.fixed .nav_contain.home {
+      /* layout only — background lives on the wrapper above */
+    }
+    /* Nav text / logo colour transitions */
+    .nav_wrap.home.fixed .logo_nav_link.home,
+    .nav_wrap.home.fixed .nav_link.home:not(.cta) {
+      transition: color 0.35s ease, opacity 0.35s ease;
+    }
+    .nav_wrap.home.fixed .logo_nav_img { transition: filter 0.35s ease; }
+    .nav_wrap.home.fixed .hamburger_6_line.home { transition: background 0.35s ease, transform 0.3s ease, opacity 0.3s ease; }
+
+    /* Light nav theme — over white sections */
+    .nav_wrap.home.fixed.nav--light {
+      background: rgba(255,255,255,0.97);
+      border-bottom: 1px solid rgba(15,23,42,0.10);
+    }
+    .nav_wrap.home.fixed.nav--light .logo_nav_link.home { color: var(--navy); }
+    .nav_wrap.home.fixed.nav--light .nav_link.home:not(.cta) { color: var(--navy); opacity: 0.75; }
+    .nav_wrap.home.fixed.nav--light .nav_link.home:not(.cta):hover { opacity: 1; background: rgba(15,23,42,0.06); }
+    .nav_wrap.home.fixed.nav--light .logo_nav_img { filter: none; }
+    .nav_wrap.home.fixed.nav--light .hamburger_6_line.home { background: var(--navy); }
+
+    /* NAVIGATION — ABSOLUTE (hidden — fixed nav handles everything) */
+    .nav_wrap.home.absolute { display: none !important; }
+
+    /* SHARED NAV CONTAINER */
+    .nav_contain.home {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 2.5rem;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    /* LOGO */
+    .nav_logo.home { display: flex; align-items: center; gap: 0.5rem; }
+    .logo_nav_link.home {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #FFFFFF;
+      text-decoration: none;
+    }
+    .logo_nav_img {
+      height: 36px;
+      width: auto;
+      display: block;
+      filter: brightness(0) invert(1); /* white on dark bg */
+    }
+    .logo_nav_text.home {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: inherit;
+      letter-spacing: -0.02em;
+    }
+
+    /* FIXED NAV: logo visible on dark navy bg, no invert needed */
+    .nav_wrap.home.fixed .logo_nav_img { filter: brightness(0) invert(1); }
+
+    /* NAV LINKS */
+    .nav_links.home { display: flex; align-items: center; gap: 1.5rem; }
+    .nav_link.home {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: #FFFFFF;
+      opacity: 0.85;
+      padding: 0.4rem 0.6rem;
+      border-radius: 6px;
+      transition: opacity 0.2s, background 0.2s;
+      text-decoration: none;
+    }
+    .nav_link.home:hover { opacity: 1; background: rgba(255,255,255,0.08); }
+    .nav_link.home.cta {
+      background: var(--accent);
+      color: var(--navy);
+      opacity: 1;
+      padding: 0.5rem 1.1rem;
+      border-radius: 8px;
+      font-weight: 700;
+    }
+    .nav_link.home.cta:hover { background: var(--accent-hover); color: #fff; }
+    .nav_link.home.roi-link {
+      border: 1.5px solid rgba(37,99,235,0.5);
+      padding: 0.4rem 1rem; border-radius: 7px;
+      color: rgba(147,197,253,0.9) !important; opacity: 1;
+    }
+    .nav_link.home.roi-link:hover { border-color: #3B82F6; color: #fff !important; background: rgba(37,99,235,0.12); opacity: 1; }
+    .nav_wrap.home.fixed.nav--light .nav_link.home.roi-link { border-color: rgba(37,99,235,0.4); color: #1d4ed8 !important; }
+    .nav_wrap.home.fixed.nav--light .nav_link.home.roi-link:hover { border-color: #2563EB; background: rgba(37,99,235,0.08); }
+
+    /* HAMBURGER */
+    .menu-button {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 40px; height: 40px;
+      border-radius: 8px;
+      cursor: pointer;
+      gap: 5px;
+    }
+    .hamburger_6_wrap { display: flex; flex-direction: column; gap: 5px; width: 22px; }
+    .hamburger_6_line.home {
+      display: block; height: 2px; width: 100%;
+      background: #FFFFFF;
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .hamburger_6_wrap.open .hamburger_6_line.home:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .hamburger_6_wrap.open .hamburger_6_line.home:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger_6_wrap.open .hamburger_6_line.home:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* MOBILE NAV */
+    .nav_mobile {
+      display: none;
+      position: fixed;
+      top: 0; right: 0;
+      width: min(340px, 85vw);
+      height: 100vh;
+      background: var(--navy);
+      z-index: 2000;
+      overflow-y: auto;
+    }
+    .nav_mobile_contain {
+      display: flex; flex-direction: column;
+      height: 100%;
+      padding: 5rem 2rem 2rem;
+    }
+    .mobile_nav_group { display: flex; flex-direction: column; gap: 0.25rem; }
+    .mobile_nav_link {
+      font-size: 1.25rem; font-weight: 600;
+      color: #FFFFFF; padding: 0.85rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      text-decoration: none;
+      display: block;
+    }
+    .mobile_nav_link:hover { color: var(--accent); }
+    .mobile_nav_bottom {
+      margin-top: auto;
+      padding-top: 2rem;
+      font-size: 0.85rem;
+      color: var(--text-light-muted);
+    }
+    .mobile_privacy_link { color: var(--text-light-muted); display: block; margin-bottom: 0.5rem; }
+    .mobile_copyright { color: var(--text-light-muted); }
+
+    @media (max-width: 768px) {
+      .menu-button { display: flex; }
+      .nav_links.home .nav_link.home:not(.cta) { display: none; }
+      .nav_links.home .nav_link.home.cta { display: inline-flex; }
+    }
+
+    /* ============================================================
+       PLATFORM DROPDOWN (fixed nav)
+    ============================================================ */
+    .nav-platform-wrap {
+      position: relative;
+    }
+    .nav-platform-btn {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      font-size: 0.9375rem; font-weight: 600;
+      color: #FFFFFF; opacity: 0.85;
+      padding: 0.4rem 0.6rem; border-radius: 6px;
+      background: none; border: none; cursor: pointer;
+      font-family: inherit;
+      transition: opacity 0.2s, background 0.2s;
+    }
+    .nav-platform-btn:hover { opacity: 1; background: rgba(255,255,255,0.08); }
+    .nav-platform-chevron {
+      width: 11px; height: 11px;
+      transition: transform 0.25s;
+      flex-shrink: 0;
+    }
+    .nav-platform-wrap.open .nav-platform-chevron { transform: rotate(180deg); }
+    .nav-platform-dropdown {
+      position: absolute;
+      top: calc(100% + 0.625rem); left: 50%;
+      transform: translateX(-50%) translateY(-8px);
+      background: #1E293B;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px; padding: 0.5rem;
+      min-width: 270px;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.2s, transform 0.2s;
+      z-index: 100;
+    }
+    .nav-platform-wrap.open .nav-platform-dropdown {
+      opacity: 1; pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .nav-platform-dropdown a {
+      display: block; padding: 0.6rem 0.9rem;
+      font-size: 0.875rem; font-weight: 500;
+      color: rgba(255,255,255,0.75);
+      text-decoration: none; border-radius: 8px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .nav-platform-dropdown a:hover { background: rgba(255,255,255,0.08); color: #fff; }
+    /* Light theme overrides */
+    .nav_wrap.home.fixed.nav--light .nav-platform-btn { color: var(--navy); opacity: 0.75; }
+    .nav_wrap.home.fixed.nav--light .nav-platform-btn:hover { opacity: 1; background: rgba(15,23,42,0.06); }
+    .nav_wrap.home.fixed.nav--light .nav-platform-dropdown {
+      background: #fff; border-color: rgba(15,23,42,0.1);
+      box-shadow: 0 16px 48px rgba(15,23,42,0.15);
+    }
+    .nav_wrap.home.fixed.nav--light .nav-platform-dropdown a { color: rgba(15,23,42,0.7); }
+    .nav_wrap.home.fixed.nav--light .nav-platform-dropdown a:hover { background: #F1F5F9; color: #0F172A; }
+    @media (max-width: 768px) {
+      .nav-platform-wrap { display: none; }
+    }
+
+    /* ============================================================
+       HERO SECTION
+    ============================================================ */
+    .hero_wrap {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+      background: #FFFFFF;
+    }
+
+    /* Dark overlay (fades out during scroll) */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(15,23,42,0.55);
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    /* Main hero text + circle */
+    .hero_text_wrap {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 6rem;
+      z-index: 6;
+      pointer-events: none;
+    }
+    .hero_title {
+      font-size: clamp(2rem, 5vw, 4.5rem);
+      font-weight: 800;
+      text-align: center;
+      color: #FFFFFF;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      max-width: 900px;
+      padding: 0 2rem;
+    }
+
+    /* SVG Circle (gradient ball) */
+    .svg_circle {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%) translateY(calc(var(--vh, 1vh) * 40));
+      z-index: 2;
+      will-change: transform, opacity;
+      pointer-events: none;
+    }
+    /* Logo sun — replaces the gradient circle */
+    .logo-sun-wrap {
+      position: relative;
+      width: 340px; height: 340px;
+      filter: drop-shadow(0 0 80px rgba(255,255,255,0.9)) drop-shadow(0 0 160px rgba(255,255,255,0.45));
+      pointer-events: none;
+    }
+    @media (min-width: 1440px) { .logo-sun-wrap { width: 380px; height: 380px; } }
+    @media (min-width: 1280px) and (max-width: 1439px) { .logo-sun-wrap { width: 330px; height: 330px; } }
+    @media (min-width: 992px) and (max-width: 1279px) { .logo-sun-wrap { width: 300px; height: 300px; } }
+    @media (min-width: 768px) and (max-width: 991px) { .logo-sun-wrap { width: 260px; height: 260px; } }
+    @media (max-width: 767px) { .logo-sun-wrap { width: 220px; height: 220px; } }
+    .logo-sun {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: contain;
+      display: block;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+    .logo-sun-base { opacity: 1; z-index: 1; }
+    .logo-sun-full { opacity: 0; z-index: 2; }
+
+    /* Lines wrap */
+    .hero_lines_wrap {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #0F172A;
+      z-index: 5;
+      will-change: opacity;
+    }
+    .lines_top {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    #hero-lines-canvas {
+      display: block;
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+    }
+
+    /* Hero subtitle (slides up with lines) */
+    .hero_subtitle_wrap {
+      position: absolute;
+      bottom: 12%; left: 0; right: 0;
+      padding: 0 2rem;
+      transform: translateY(80%);
+      z-index: 5;
+      will-change: transform;
+    }
+    .hero_subtitle {
+      font-size: clamp(1rem, 1.5vw, 1.3rem);
+      font-weight: 400;
+      line-height: 1.65;
+      color: rgba(15,23,42,0.85);
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+      will-change: opacity;
+      opacity: 1.0;
+    }
+    .span_blue { color: var(--blue); font-weight: 600; }
+
+    /* ============================================================
+       MISSION SECTION (slides up over hero)
+    ============================================================ */
+    .mission_wrap-a {
+      position: absolute;
+      inset: 0;
+      background: var(--navy);
+      z-index: 8;
+      transform: translateY(100%);
+      will-change: transform;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .mission_inner {
+      position: relative;
+      max-width: 900px;
+      width: 100%;
+      padding: 4rem 2rem;
+      z-index: 2;
+    }
+    .bg_circle {
+      position: absolute;
+      width: 500px; height: 500px;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      pointer-events: none;
+    }
+    .bg_circle_small {
+      position: absolute;
+      width: 300px; height: 300px;
+      top: 20%; right: 5%;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.4;
+    }
+    .mission_headline {
+      position: relative;
+      z-index: 2;
+      margin-bottom: 2.5rem;
+    }
+    .mission_label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue-faint);
+      margin-bottom: 1.25rem;
+    }
+    .mission_title {
+      font-size: clamp(1.75rem, 4vw, 3rem);
+      font-weight: 800;
+      color: #FFFFFF;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+    }
+    .mission_content-a { position: relative; z-index: 2; }
+    .mission_group { display: flex; flex-direction: column; gap: 1.5rem; }
+    .mission_body {
+      font-size: 1.0625rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.65);
+      max-width: 600px;
+    }
+    .outlined_button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.5rem;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      border-radius: 8px;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: #FFFFFF;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+    .outlined_button:hover { border-color: var(--blue-faint); background: rgba(37,99,235,0.12); }
+    .outlined_button.light-blue { border-color: rgba(147,197,253,0.4); color: var(--blue-faint); }
+    .outlined_button.light-blue:hover { background: rgba(37,99,235,0.15); border-color: var(--blue-faint); }
+
+    /* ============================================================
+       PRODUCT SECTION
+    ============================================================ */
+    .product_wrap {
+      position: relative;
+      background: #F1F5F9;
+      padding: 6rem 0 4rem;
+      overflow: hidden;
+    }
+
+    /* Orbit graphic (rotating) */
+    .orbit-graphic {
+      position: absolute;
+      top: 3rem; right: 3rem;
+      width: 200px; height: 200px;
+      opacity: 0.12;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @media (max-width: 768px) { .orbit-graphic { width: 120px; height: 120px; right: 1rem; } }
+
+    .product_container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+    .section-headline {
+      margin-bottom: 3rem;
+    }
+    .section-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.75rem;
+    }
+    .section_heading {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+    }
+
+    /* Accordion + visual layout */
+    .product_tabs {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+    .animation_container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .animation_container { grid-template-columns: 1fr; }
+    }
+
+    .accordion_container { padding-top: 1rem; }
+    .accordion_wrapper { display: flex; flex-direction: column; gap: 0; }
+
+    .accordion_item {
+      border-bottom: 1px solid rgba(15,23,42,0.1);
+      cursor: pointer;
+    }
+    .tab_title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--muted);
+      padding: 1.25rem 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      transition: color 0.2s ease;
+      user-select: none;
+    }
+    .tab_title::after {
+      content: '+';
+      font-size: 1.25rem;
+      font-weight: 300;
+      color: var(--muted);
+      flex-shrink: 0;
+      transition: transform 0.3s ease, color 0.2s ease;
+    }
+    .accordion_item.active .tab_title { color: var(--navy); }
+    .accordion_item.active .tab_title::after { transform: rotate(45deg); color: var(--blue); }
+    .tab_title:hover { color: var(--navy); }
+
+    .accordion_content {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.38s ease, opacity 0.28s ease;
+    }
+    .accordion_item.active .accordion_content {
+      max-height: 400px;
+      opacity: 1;
+    }
+    .tab_description {
+      font-size: 0.9375rem;
+      line-height: 1.7;
+      color: var(--muted);
+      padding-bottom: 1rem;
+    }
+    .tab-learn-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      margin-bottom: 1.25rem;
+      padding: 0.45rem 1rem;
+      border: 1.5px solid var(--accent);
+      border-radius: 6px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: background 0.18s, color 0.18s;
+    }
+    .tab-learn-more:hover {
+      background: var(--accent);
+      color: #0F172A;
+    }
+
+    /* Visual panel */
+    .animation_video_container {
+      position: sticky;
+      top: 6rem;
+      height: 420px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--navy);
+      box-shadow: 0 20px 60px rgba(15,23,42,0.2);
+    }
+    @media (max-width: 900px) {
+      .animation_video_container {
+        position: relative; top: 0;
+        height: 280px;
+        order: -1;
+      }
+    }
+
+    .video_animation {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    .tab-visual {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .tab-visual.active { opacity: 1; }
+    .tab-visual svg { width: 100%; height: 100%; max-height: 360px; }
+
+    /* Product cards stack (See. Think. Act.) */
+    .product_cards_stack {
+      max-width: 1200px;
+      margin: 5rem auto 0;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+    .product_cards_stack .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    @media (max-width: 900px) {
+      .product_cards_stack .grid { grid-template-columns: 1fr; }
+    }
+
+    .product_card {
+      background: #FFFFFF;
+      border: 1px solid rgba(15,23,42,0.08);
+      border-radius: 16px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .product_card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(15,23,42,0.12);
+    }
+    .product_card_content { flex: 1; }
+    .product_card_title {
+      font-size: 1.375rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+    .product_card_description {
+      font-size: 0.9375rem;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+    .product_graphic {
+      height: 120px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .product_card_graphic_css {
+      width: 80px; height: 80px;
+      position: relative;
+    }
+
+    /* Card graphic animations */
+    /* Card 1 - See: rotating scan ring */
+    .anim-see .ring {
+      width: 60px; height: 60px;
+      border: 2px solid var(--blue-faint);
+      border-radius: 50%;
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      animation: scan-pulse 2s ease-in-out infinite;
+    }
+    .anim-see .ring:nth-child(2) { width: 80px; height: 80px; animation-delay: 0.5s; opacity: 0.6; }
+    .anim-see .ring:nth-child(3) { width: 40px; height: 40px; animation-delay: 1s; }
+    .anim-see .eye { width: 16px; height: 16px; background: var(--blue-faint); border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    @keyframes scan-pulse { 0%,100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; } 50% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.3; } }
+
+    /* Card 2 - Think: AI nodes */
+    .anim-think .node {
+      width: 10px; height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+      position: absolute;
+      animation: node-pulse 1.5s ease-in-out infinite;
+    }
+    .anim-think .node:nth-child(1) { top: 10%; left: 50%; animation-delay: 0s; }
+    .anim-think .node:nth-child(2) { top: 40%; left: 15%; animation-delay: 0.3s; }
+    .anim-think .node:nth-child(3) { top: 40%; left: 75%; animation-delay: 0.6s; }
+    .anim-think .node:nth-child(4) { top: 70%; left: 30%; animation-delay: 0.9s; }
+    .anim-think .node:nth-child(5) { top: 70%; left: 60%; animation-delay: 1.2s; }
+    .anim-think .line-conn {
+      position: absolute;
+      height: 1px;
+      background: rgba(255,255,255,0.2);
+      transform-origin: left center;
+    }
+    @keyframes node-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.6); background: var(--blue-faint); } }
+
+    /* Card 3 - Act: moving tug */
+    .anim-act .tug {
+      width: 32px; height: 16px;
+      background: var(--blue-faint);
+      border-radius: 4px;
+      position: absolute;
+      top: 50%; left: 15%;
+      transform: translateY(-50%);
+      animation: tug-move 3s ease-in-out infinite;
+    }
+    .anim-act .path-dots {
+      position: absolute;
+      top: 50%; left: 15%;
+      right: 15%; height: 2px;
+      background: repeating-linear-gradient(to right, rgba(255,255,255,0.3) 0, rgba(255,255,255,0.3) 6px, transparent 6px, transparent 12px);
+      transform: translateY(-50%);
+    }
+    .anim-act .aircraft {
+      width: 28px; height: 28px;
+      position: absolute;
+      top: 50%; right: 15%;
+      transform: translateY(-50%);
+      opacity: 0.7;
+    }
+    @keyframes tug-move { 0%,100% { left: 15%; } 50% { left: 55%; } }
+
+    /* ============================================================
+       AUTONOMOUS SECTION
+    ============================================================ */
+    .autonomous_wrap {
+      background: var(--navy);
+      padding: 7rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .autonomous_wrap::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+    .autonomous_container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    @media (max-width: 900px) {
+      .autonomous_container { grid-template-columns: 1fr; gap: 3rem; }
+    }
+    .title_and_graphic { display: flex; flex-direction: column; gap: 2.5rem; }
+    .autonomous_title { position: relative; }
+    .autonomous_title::before {
+      content: '';
+      position: absolute;
+      left: -2rem; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--blue) 0%, var(--accent) 100%);
+      border-radius: 2px;
+    }
+    .dark_section_heading {
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      font-weight: 800;
+      color: #FFFFFF;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+    }
+    .text-span { display: block; }
+
+    .autonomous_content {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .autonomous_description {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .autonomous_paragraph {
+      font-size: 1.125rem;
+      line-height: 1.75;
+      color: rgba(255, 255, 255, 0.85);
+      font-weight: 400;
+    }
+
+    /* ============================================================
+       CAREERS / JOIN THE MISSION
+    ============================================================ */
+    .carrers_wrap {
+      background: #F8FAFC;
+      padding: 7rem 0;
+    }
+    .careers-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    .section-headline.light .section-title { color: var(--blue); }
+    .section-headline.light .section_heading { color: var(--navy); }
+
+    .mission_content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      margin-top: 3rem;
+    }
+    @media (max-width: 900px) { .mission_content { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+    .mission-graphic {
+      position: relative;
+      height: 360px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    /* Animated hangar silhouette */
+    .mission-graphic::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 45%;
+      background: rgba(37,99,235,0.15);
+      border-top: 1px solid rgba(37,99,235,0.3);
+    }
+    .mission-graphic-text {
+      position: relative;
+      text-align: center;
+      z-index: 2;
+    }
+    .mission-graphic-icon {
+      font-size: 4rem;
+      display: block;
+      margin-bottom: 1rem;
+      color: rgba(255,255,255,0.15);
+    }
+    .mission-graphic-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue-faint);
+    }
+    .mission-graphic-number {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      line-height: 1;
+    }
+    .mission-graphic-sublabel {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.5);
+      margin-top: 0.25rem;
+    }
+    .mission-graphic-dots {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    .mission-description-2 { display: flex; flex-direction: column; gap: 1.5rem; }
+    .mission_home_paragraph {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+    .outlined_button-4 {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.75rem 1.5rem;
+      border: 1.5px solid var(--navy);
+      border-radius: 8px;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--navy);
+      background: transparent;
+      transition: all 0.25s ease;
+      text-decoration: none;
+      align-self: flex-start;
+    }
+    .outlined_button-4:hover { background: var(--navy); color: #fff; }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    .footer {
+      background: var(--navy);
+      padding: 3rem 2rem 2rem;
+    }
+    .footer_container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    @media (max-width: 600px) { .footer_container { flex-direction: column; align-items: flex-start; } }
+    .footer_left { display: flex; flex-direction: column; gap: 0.5rem; }
+    .site_name {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+    .copyright { font-size: 0.8125rem; color: rgba(255,255,255,0.4); }
+    .footer_right { }
+    .footer_nav { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .footer_link { font-size: 0.875rem; font-weight: 500; color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; }
+    .footer_link:hover { color: #FFFFFF; }
+
+    /* ============================================================
+       MODAL
+    ============================================================ */
+    .modal_overlay-contact {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 3000;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0s 0.3s;
+    }
+    .modal_overlay-contact.active {
+      opacity: 1; visibility: visible;
+      transition: opacity 0.3s ease;
+    }
+    .modal_wrap-contact {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) translateY(20px);
+      width: min(540px, 95vw);
+      background: #fff;
+      border-radius: 16px;
+      z-index: 3001;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
+      overflow: hidden;
+    }
+    .modal_wrap-contact.active {
+      opacity: 1; visibility: visible;
+      transform: translate(-50%, -50%) translateY(0);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .modal_contain { position: relative; }
+    .modal_layout { padding: 2.5rem; }
+    .modal_title {
+      font-size: 1.25rem; font-weight: 700;
+      color: var(--navy); margin-bottom: 1.25rem;
+    }
+    .line-2 { height: 1px; background: rgba(15,23,42,0.1); margin: 1rem 0; }
+    .form { display: flex; flex-direction: column; gap: 1.25rem; }
+    .input_block { display: flex; flex-direction: column; gap: 0.4rem; }
+    .field-label { font-size: 0.875rem; font-weight: 600; color: var(--muted); }
+    .text-field, .textarea {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      border: 1px solid rgba(15,23,42,0.15);
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: var(--font-sans);
+      color: var(--navy);
+      background: #FAFAFA;
+      transition: border-color 0.2s;
+    }
+    .text-field:focus, .textarea:focus { outline: none; border-color: var(--blue); }
+    .textarea { min-height: 120px; resize: vertical; }
+    .submit-button {
+      padding: 0.85rem 1.5rem;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-family: var(--font-sans);
+    }
+    .submit-button:hover { background: var(--blue-dark); }
+    .modal_close-contact {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(15,23,42,0.06);
+      border: none;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .modal_close-contact:hover { background: rgba(15,23,42,0.12); }
+    .success-message { display: none; padding: 1.5rem; text-align: center; }
+    .success-message.visible { display: block; }
+    .success_big { font-size: 1.5rem; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
+    .success_small { color: var(--muted); }
+
+    /* ============================================================
+       RESPONSIVE UTILITIES
+    ============================================================ */
+    @media (max-width: 768px) {
+      .nav_contain.home { padding: 1rem 1.25rem; }
+      .hero_title { font-size: clamp(1.75rem, 7vw, 2.5rem); }
+      .mission_inner { padding: 3rem 1.5rem; }
+      .product_wrap { padding: 4rem 0 3rem; }
+      .autonomous_wrap { padding: 5rem 0; }
+      .autonomous_title::before { display: none; }
+      .carrers_wrap { padding: 5rem 0; }
+      .product_cards_stack { margin-top: 3rem; }
+      .footer_nav { gap: 1rem; }
+    }
+  </style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DGHZZ8BDEZ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag(){dataLayer.push(arguments);} 
     gtag('js', new Date());
 
     gtag('config', 'G-DGHZZ8BDEZ');
   </script>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Sttugs - Autonomous Hangar Stacking</title>
-  <link rel="icon" href="favicon/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="192x192" href="favicon/web-app-manifest-192x192.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="favicon/web-app-manifest-512x512.png">
-  <link rel="apple-touch-icon" href="favicon/apple-touch-icon.png">
-  <link rel="manifest" href="favicon/site.webmanifest">
-  <meta name="theme-color" content="#ffffff">
-  <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-  <div id="stickyBrand"></div>
+<div id="smooth-wrapper" class="page_wrap">
 
-  <!-- Full-width video hero carousel -->
-  <section id="video-showcase" class="video-showcase-hero">
-    <div class="video-carousel">
-      <div class="video-container">
-        <div class="video-text-panel">
-          <h2 class="video-panel-title">Maximize Hangar Efficiency</h2>
-          <p class="video-panel-desc">Our AI-powered algorithm intelligently positions each aircraft to fit more planes in less space—automatically and safely.</p>
-        </div>
-        <div class="video-wrapper">
-          <video id="showcase-video" playsinline muted preload="auto" autoplay controls></video>
-          <img id="showcase-img" src="" alt="" style="display: none; width: 100%; height: auto;">
-        </div>
+  <!-- ============================================================
+       FIXED NAV (shown after hero scroll-through)
+  ============================================================ -->
+  <header class="nav_wrap home fixed">
+    <nav class="nav_contain home">
+      <div class="nav_logo home">
+        <a href="../index.html" class="logo_nav_link home" aria-label="Sttugs">
+          <img src="../assets/logo.svg" class="logo_nav_img" alt="Sttugs" />
+          <span class="logo_nav_text home">STTUGS</span>
+        </a>
       </div>
-      <div class="carousel-dots"></div>
+      <div class="nav_links home">
+        <a href="index.html" class="nav_link home">Home</a>
+        <div class="nav-platform-wrap" id="home-platform-item">
+          <button class="nav-platform-btn" id="home-platform-trigger" aria-expanded="false" aria-haspopup="true">
+            Platform
+            <svg class="nav-platform-chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="nav-platform-dropdown">
+            <a href="collision-detection-and-prevention.html">Collision Prevention</a>
+            <a href="auto-stack.html">Auto Stacking</a>
+            <a href="path-planning.html">Path Planning</a>
+            <a href="hardware-and-infastructure.html" class="snav-dropdown-item">Hardware &amp; Infrastructure</a>
+            <a href="autonomous-tugs.html">Autonomous Tugs</a>
+            <a href="verifiable-audit-trail.html">Verifiable Audit Trail</a>
+          </div>
+        </div>
+        <a href="about.html" class="nav_link home">About</a>
+        <a href="roi.html" class="nav_link home roi-link">ROI Calculator</a>
+        <a href="#" data-open-contact class="nav_link home cta">Contact Us</a>
+        <button role="button" data-menu-toggle aria-label="open-menu" class="menu-button">
+          <div class="hamburger_6_wrap">
+            <div class="hamburger_6_line home"></div>
+            <div class="hamburger_6_line home"></div>
+            <div class="hamburger_6_line home"></div>
+          </div>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Mobile nav panel (wired to fixed nav hamburger) -->
+  <div class="nav_mobile" data-nav="closed">
+    <div class="nav_mobile_contain">
+      <div class="mobile_nav_group">
+        <a href="index.html" class="mobile_nav_link">Home</a>
+        <a href="about.html" class="mobile_nav_link">About</a>
+        <a href="roi.html" class="mobile_nav_link">ROI Calculator</a>
+        <a href="collision-detection-and-prevention.html" class="mobile_nav_link">Collision Prevention</a>
+        <a href="auto-stack.html" class="mobile_nav_link">Auto-Stacking</a>
+        <a href="path-planning.html" class="mobile_nav_link">Path Planning</a>
+        <a href="autonomous-tugs.html" class="mobile_nav_link">Autonomous Tugs</a>
+        <a href="verifiable-audit-trail.html" class="mobile_nav_link">Audit Trail</a>
+        <a href="#" data-open-contact class="mobile_nav_link">Contact Us</a>
+      </div>
+      <div class="mobile_nav_bottom">
+        <div class="mobile_copyright">© <span data-current-year></span> Sttugs</div>
+      </div>
     </div>
-  </section>
-
-  <div class="container">
-
-    <section class="automation-features">
-      <div class="automation-header">
-        <h2>Platform Capabilities</h2>
-        <p class="automation-subtitle">One integrated platform — combining safety, intelligence, and automation to transform how your hangar operates</p>
-      </div>
-      <div class="automation-grid">
-        <a href="level1.html" class="automation-card featured">
-          <div class="automation-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
-            </svg>
-          </div>
-          <h3>Collision Prevention</h3>
-          <p>Prevent accidents and damage to aircraft with constant monitoring and real-time alerts</p>
-        </a>
-        <a href="level2.html#autostack-section" class="automation-card featured">
-          <div class="automation-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-              <path d="M3 9h18"></path>
-              <path d="M3 15h18"></path>
-              <path d="M9 3v18"></path>
-              <path d="M15 3v18"></path>
-            </svg>
-          </div>
-          <h3>Auto-Stacking</h3>
-          <p>Optimize aircraft positions to maximize hangar capacity at the click of a button</p>
-        </a>
-        <a href="level2.html#pathplanning-section" class="automation-card featured">
-          <div class="automation-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="6" cy="19" r="3"></circle>
-              <path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"></path>
-              <circle cx="18" cy="5" r="3"></circle>
-            </svg>
-          </div>
-          <h3>Path Planning</h3>
-          <p>Generate efficient and collision free tow paths for moving aircraft</p>
-        </a>
-        <a href="audit.html" class="automation-card featured">
-          <div class="automation-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-              <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-              <path d="M12 11h4"></path>
-              <path d="M12 16h4"></path>
-              <path d="M8 11h.01"></path>
-              <path d="M8 16h.01"></path>
-            </svg>
-          </div>
-          <h3>Verifiable Audit Trail</h3>
-          <p>Complete time-stamped logs of every aircraft movement, command, and safety event</p>
-        </a>
-        <a href="camera.html" class="automation-card">
-          <div class="automation-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
-              <circle cx="12" cy="13" r="3"></circle>
-            </svg>
-          </div>
-          <h3>Real-Time Monitoring</h3>
-          <p>Overhead camera system ensures no blind-spots for real-time operations</p>
-        </a>
-        <a href="tablet.html" class="automation-card">
-          <div class="automation-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect width="16" height="20" x="4" y="2" rx="2" ry="2"></rect>
-              <line x1="12" x2="12.01" y1="18" y2="18"></line>
-            </svg>
-          </div>
-          <h3>Tablet Control</h3>
-          <p>View and manage all hangar data in real-time from an intuitive tablet device</p>
-        </a>
-        <a href="level3.html" class="automation-card">
-          <div class="automation-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path>
-              <path d="M15 18H9"></path>
-              <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path>
-              <circle cx="17" cy="18" r="2"></circle>
-              <circle cx="7" cy="18" r="2"></circle>
-            </svg>
-          </div>
-          <h3>Autonomous Tugs</h3>
-          <p>Self-operating tugs with redundant safety systems help eliminate hangar rash</p>
-        </a>
-        <a href="level1.html" class="automation-card">
-          <div class="automation-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
-            </svg>
-          </div>
-          <h3>Auto-Brake System</h3>
-          <p>Retrofit braking system adds autonomous stop capability to existing tug equipment</p>
-        </a>
-      </div>
-    </section>
-
-    <section class="product-levels product-levels-section">
-      <div class="product-levels-header">
-        <h2>Three Product Tiers</h2>
-        <p class="product-levels-subtitle">These capabilities are packaged into three scalable tiers — start with the level that fits your operation, and expand over time</p>
-      </div>
-      <div class="product-levels-grid">
-        <a href="level1.html" class="product-level-card">
-          <div class="product-level-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
-            </svg>
-          </div>
-          <h3>Collision Detection</h3>
-          <p>Foundation of safety with advanced sensor technology that prevents accidents and protects valuable aircraft assets.</p>
-          <span class="product-level-link">
-            Learn More
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M5 12h14"></path>
-              <path d="m12 5 7 7-7 7"></path>
-            </svg>
-          </span>
-        </a>
-        <a href="level2.html" class="product-level-card">
-          <div class="product-level-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-              <path d="M3 9h18"></path>
-              <path d="M3 15h18"></path>
-              <path d="M9 3v18"></path>
-              <path d="M15 3v18"></path>
-            </svg>
-          </div>
-          <h3>Auto-Stacking & Path Planning</h3>
-          <p>Intelligent algorithms determine optimal aircraft positions and generate efficient movement paths for maximum hangar utilization.</p>
-          <span class="product-level-link">
-            Learn More
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M5 12h14"></path>
-              <path d="m12 5 7 7-7 7"></path>
-            </svg>
-          </span>
-        </a>
-        <a href="level3.html" class="product-level-card">
-          <div class="product-level-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path>
-              <path d="M15 18H9"></path>
-              <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path>
-              <circle cx="17" cy="18" r="2"></circle>
-              <circle cx="7" cy="18" r="2"></circle>
-            </svg>
-          </div>
-          <h3>Autonomous Aircraft Tugs</h3>
-          <p>Complete automation with self-operating tugs that execute the entire system autonomously.</p>
-          <span class="product-level-link">
-            Learn More
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M5 12h14"></path>
-              <path d="m12 5 7 7-7 7"></path>
-            </svg>
-          </span>
-        </a>
-      </div>
-    </section>
-
-    <section id="contact-cta" class="centered-section"></section>
-
-    <footer class="site-footer"></footer>
   </div>
 
-  <script src="assets/site.js"></script>
+  <!-- ============================================================
+       MAIN CONTENT
+  ============================================================ -->
+  <main id="smooth-content" class="page_main">
+
+    <!-- ============================================================
+         ABSOLUTE NAV (over the dark hero section, animates with scroll)
+    ============================================================ -->
+    <div class="nav_wrap home absolute">
+      <nav class="nav_contain home">
+        <div class="nav_logo home">
+          <a href="../index.html" class="logo_nav_link home" aria-label="Sttugs">
+            <img src="../assets/logo.svg" class="logo_nav_img" alt="Sttugs" />
+            <div class="logo_nav_text home">STTUGS</div>
+          </a>
+        </div>
+        <div class="nav_links home">
+          <a href="about.html" class="nav_link home">About</a>
+          <a href="#" data-open-contact class="nav_link home cta">Contact Us</a>
+          <button role="button" data-menu-toggle aria-label="open-menu" class="menu-button">
+            <div class="hamburger_6_wrap">
+              <div class="hamburger_6_line home"></div>
+              <div class="hamburger_6_line home"></div>
+              <div class="hamburger_6_line home"></div>
+            </div>
+          </button>
+        </div>
+      </nav>
+
+    </div>
+
+    <!-- ============================================================
+         HERO SECTION
+    ============================================================ -->
+    <section class="hero_wrap">
+
+      <!-- Overlay (fades out during scroll animation) -->
+      <div class="overlay"></div>
+
+      <!-- Title + animated circle -->
+      <div class="hero_text_wrap">
+        <h1 class="hero_title">Intelligent hangar management,<br>powered by Sttugs.</h1>
+
+        <!-- Logo sun: no-hangar version rises like a sun; full logo with hangar fades in at destination -->
+        <div class="svg_circle">
+          <div class="logo-sun-wrap" id="logo-sun-wrap">
+            <img src="../assets/logo_no_hangar.svg" class="logo-sun logo-sun-base" alt="Sttugs" draggable="false" />
+            <img src="../assets/logo.svg" class="logo-sun logo-sun-full" alt="Sttugs" draggable="false" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Lines + subtitle (scroll-animated) -->
+      <div class="hero_lines_wrap">
+        <div class="lines_top">
+          <!-- Runway animation drawn here by JS -->
+          <canvas id="hero-lines-canvas"></canvas>
+        </div>
+      </div>
+
+      <!-- Subtitle sits directly on the white hero background, animated in after lines fade -->
+      <div class="hero_subtitle_wrap">
+        <h2 class="hero_subtitle">
+          <span class="span_blue">Sttugs is a new kind of aviation software company.</span>
+          We don't just build software — we transform how hangars operate.
+          Our <span class="span_blue">intelligent, autonomous platform</span> prevents collisions,
+          optimizes aircraft positions, and <span class="span_blue">empowers hangar operators</span>
+          to run safer, more efficient operations.
+        </h2>
+      </div>
+
+      <!-- Mission section (slides up from below) -->
+      <div class="mission_wrap-a">
+        <!-- Decorative background circle (drawn by GSAP DrawSVGPlugin) -->
+        <div class="bg_circle">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" fill="none" style="width:100%;height:100%">
+            <path d="M 150,10 A 140,140 0 1,1 149.99,10" stroke="rgba(37,99,235,0.3)" stroke-width="1" vector-effect="non-scaling-stroke" fill="none"/>
+          </svg>
+        </div>
+        <div class="bg_circle_small">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" fill="none" style="width:100%;height:100%">
+            <path d="M 150,10 A 140,140 0 1,1 149.99,10" stroke="rgba(37,99,235,0.4)" stroke-width="1" vector-effect="non-scaling-stroke" fill="none"/>
+          </svg>
+        </div>
+
+        <div class="mission_inner">
+          <div class="mission_headline">
+            <div class="mission_label">Mission</div>
+            <h2 class="mission_title">Sttugs is on a mission to eliminate hangar rash in every hangar in the world.</h2>
+          </div>
+          <div class="mission_content-a">
+            <div class="mission_group">
+              <p class="mission_body">
+                Collisions, inefficient layouts, and manual workflows cost the industry hundreds of millions annually. 
+                Sttugs changes that: with a platform that sees, thinks, and acts to keep every assets safe and every square foot of your hangar utilized.
+              </p>
+              <a href="about.html" class="outlined_button">Read more</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PRODUCT SECTION
+    ============================================================ -->
+    <section class="product_wrap" data-bg-type="light">
+
+      <div class="product_container">
+        <div class="section-headline">
+          <div class="section-title">PLATFORM</div>
+          <div class="section_heading">Safety.<br/>Intelligence.<br/>Automation.</div>
+        </div>
+
+        <div class="product_tabs">
+          <div class="animation_container">
+
+            <!-- Left: Accordion tabs -->
+            <div class="accordion_container">
+              <div class="accordion_wrapper">
+
+                <div class="accordion_item" data-visual="visual-collision">
+                  <h3 class="tab_title">Collision Detection &amp; Prevention</h3>
+                  <div class="accordion_content">
+                    <p class="tab_description">
+                      Constant sensor-based monitoring of every aircraft and obstacle in the hangar. Real-time alerts and auto-brake triggers prevent accidents before they happen — protecting your assets and your team.
+                    </p>
+                    <a href="collision-detection-and-prevention.html" class="tab-learn-more">Learn More →</a>
+                  </div>
+                </div>
+
+                <div class="accordion_item" data-visual="visual-autostack">
+                  <h3 class="tab_title">Auto-Stacking Algorithm</h3>
+                  <div class="accordion_content">
+                    <p class="tab_description">
+                      Our AI optimizer calculates the ideal layout for your aircraft mix, maximizing every square foot of hangar space. Accommodate more aircraft with fewer moves — at the click of a button.
+                    </p>
+                    <a href="auto-stack.html" class="tab-learn-more">Learn More →</a>
+                  </div>
+                </div>
+
+                <div class="accordion_item" data-visual="visual-pathplan">
+                  <h3 class="tab_title">Path Planning</h3>
+                  <div class="accordion_content">
+                    <p class="tab_description">
+                      Generate safe, collision-free tow paths for moving aircraft through congested hangar layouts. Sequence multi-aircraft moves with confidence and eliminate guesswork from ground handling.
+                    </p>
+                    <a href="path-planning.html" class="tab-learn-more">Learn More →</a>
+                  </div>
+                </div>
+
+                <div class="accordion_item" data-visual="visual-tugs">
+                  <h3 class="tab_title">Autonomous Tugs</h3>
+                  <div class="accordion_content">
+                    <p class="tab_description">
+                      Self-operating tug vehicles equipped with redundant safety systems execute aircraft movements without manual intervention. Redundant obstacle detection and emergency stop systems keep every move safe.
+                    </p>
+                    <a href="autonomous-tugs.html" class="tab-learn-more">Learn More →</a>
+                  </div>
+                </div>
+
+                <div class="accordion_item" data-visual="visual-audit">
+                  <h3 class="tab_title">Verifiable Audit Trail</h3>
+                  <div class="accordion_content">
+                    <p class="tab_description">
+                      Every aircraft movement, command, and safety event is time-stamped and recorded. Full accountability for compliance, insurance, and operational review — always on, always accurate.
+                    </p>
+                    <a href="verifiable-audit-trail.html" class="tab-learn-more">Learn More →</a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Right: Visual panels (swap based on active accordion tab) -->
+            <div class="animation_video_container">
+              <div class="video_animation">
+
+                <!-- Visual 1: Collision Prevention -->
+                <div class="tab-visual active" id="visual-collision">
+                  <svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="400" height="320" fill="#0F172A"/>
+                    
+                    <rect x="30" y="40" width="340" height="240" rx="4" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" fill="rgba(255,255,255,0.02)"/>
+                    
+                    <path d="M 86 40 L 86 280 M 143 40 L 143 280 M 200 40 L 200 280 M 256 40 L 256 280 M 313 40 L 313 280" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+                    <path d="M 30 88 L 370 88 M 30 136 L 370 136 M 30 184 L 370 184 M 30 232 L 370 232" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+
+                    <defs>
+                      <g id="realistic-aircraft">
+                        <path d="M 0,-28 C 4,-28 6,-18 6,-8 L 6,10 L -6,10 L -6,-8 C -6,-18 -4,-28 0,-28 Z" fill="rgba(147,197,253,0.2)" stroke="rgba(147,197,253,0.8)" stroke-width="1.2"/>
+                        <rect x="-6" y="10" width="12" height="30" fill="rgba(147,197,253,0.2)" stroke="rgba(147,197,253,0.8)" stroke-width="1.2"/>
+                        <path d="M 6,-2 L 40,18 L 40,24 L 6,14 Z" fill="rgba(147,197,253,0.2)" stroke="rgba(147,197,253,0.8)" stroke-width="1.2"/>
+                        <path d="M -6,-2 L -40,18 L -40,24 L -6,14 Z" fill="rgba(147,197,253,0.2)" stroke="rgba(147,197,253,0.8)" stroke-width="1.2"/>
+                        <path d="M 4,32 L 18,42 L 18,46 L 4,40 Z" fill="rgba(147,197,253,0.3)" stroke="rgba(147,197,253,0.8)" stroke-width="1.2"/>
+                        <path d="M -4,32 L -18,42 L -18,46 L -4,40 Z" fill="rgba(147,197,253,0.3)" stroke="rgba(147,197,253,0.8)" stroke-width="1.2"/>
+                      </g>
+                    </defs>
+
+                    <g transform="translate(270, 140) rotate(-60)">
+                      <circle cx="0" cy="0" r="60" fill="rgba(147,197,253,0.03)" stroke="rgba(147,197,253,0.2)" stroke-width="1" stroke-dasharray="4 8"/>
+                      
+                      <use href="#realistic-aircraft" />
+                      
+                      <circle cx="-18" cy="44" r="3" fill="#64748B"/> <circle cx="18" cy="44" r="3" fill="#64748B"/>  <circle cx="0" cy="42" r="3" fill="#64748B"/>   <circle cx="0" cy="20" r="3" fill="#64748B"/>   <circle cx="0" cy="5" r="3" fill="#64748B"/>    <circle cx="40" cy="20" r="3" fill="#64748B"/>  <circle cx="20" cy="10" r="3" fill="#64748B"/>  <g>
+                        <animate attributeName="fill" calcMode="linear" 
+                                values="#64748B; #64748B; #FACC15; #FACC15; #FACC15; #FACC15; #64748B" 
+                                keyTimes="0; 0.25; 0.35; 0.60; 0.70; 0.95; 1" 
+                                dur="7s" repeatCount="indefinite"/>
+                        <circle cx="-20" cy="10" r="3"/> <circle cx="0" cy="-10" r="3"/>  </g>
+
+                      <g>
+                        <animate attributeName="fill" calcMode="linear" 
+                                values="#64748B; #64748B; #FACC15; #FACC15; #EF4444; #EF4444; #64748B" 
+                                keyTimes="0; 0.25; 0.35; 0.60; 0.70; 0.95; 1" 
+                                dur="7s" repeatCount="indefinite"/>
+                        <circle cx="0" cy="-28" r="3"/>  <circle cx="-40" cy="20" r="3"/> </g>
+                    </g>
+
+                    <g>
+                      <animate attributeName="opacity" calcMode="linear" 
+                              values="0; 1; 1; 1; 1; 1; 0; 0" 
+                              keyTimes="0; 0.05; 0.25; 0.35; 0.60; 0.90; 0.95; 1" 
+                              dur="7s" repeatCount="indefinite"/>
+
+                      <animateTransform attributeName="transform" type="translate" calcMode="spline"
+                                        values="100,250; 100,250; 165,200; 165,200; 210,165; 210,165; 100,250"
+                                        keyTimes="0; 0.25; 0.35; 0.60; 0.70; 0.95; 1"
+                                        keySplines="0 0 1 1; 0.4 0 0.2 1; 0 0 1 1; 0.4 0 0.2 1; 0 0 1 1; 1 0 1 1"
+                                        dur="7s" repeatCount="indefinite"/>
+                      
+                      <g transform="rotate(45)">
+                        <use href="#realistic-aircraft" />
+                        
+                        <circle cx="-18" cy="44" r="3" fill="#64748B"/> <circle cx="18" cy="44" r="3" fill="#64748B"/>  <circle cx="0" cy="42" r="3" fill="#64748B"/>   <circle cx="0" cy="20" r="3" fill="#64748B"/>   <circle cx="0" cy="5" r="3" fill="#64748B"/>    <circle cx="-40" cy="20" r="3" fill="#64748B"/> <circle cx="-20" cy="10" r="3" fill="#64748B"/> <g>
+                          <animate attributeName="fill" calcMode="linear" 
+                                  values="#64748B; #64748B; #FACC15; #FACC15; #FACC15; #FACC15; #64748B" 
+                                  keyTimes="0; 0.25; 0.35; 0.60; 0.70; 0.95; 1" 
+                                  dur="7s" repeatCount="indefinite"/>
+                          <circle cx="20" cy="10" r="3"/> <circle cx="0" cy="-10" r="3"/> </g>
+
+                        <g>
+                          <animate attributeName="fill" calcMode="linear" 
+                                  values="#64748B; #64748B; #FACC15; #FACC15; #EF4444; #EF4444; #64748B" 
+                                  keyTimes="0; 0.25; 0.35; 0.60; 0.70; 0.95; 1" 
+                                  dur="7s" repeatCount="indefinite"/>
+                          <circle cx="0" cy="-28" r="3"/> <circle cx="40" cy="20" r="3"/> </g>
+
+                        <g opacity="0">
+                          <animate attributeName="opacity" calcMode="discrete" 
+                                  values="0; 0; 0; 0; 1; 1; 0" 
+                                  keyTimes="0; 0.25; 0.35; 0.60; 0.70; 0.95; 1" 
+                                  dur="7s" repeatCount="indefinite"/>
+                          
+                          <circle cx="0" cy="-28" r="12" fill="none" stroke="#EF4444" stroke-width="1.5">
+                            <animate attributeName="r" values="3; 14; 3" dur="1s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values="1; 0; 0" dur="1s" repeatCount="indefinite"/>
+                          </circle>
+                          
+                          <circle cx="40" cy="20" r="12" fill="none" stroke="#EF4444" stroke-width="1.5">
+                            <animate attributeName="r" values="3; 14; 3" dur="1s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values="1; 0; 0" dur="1s" repeatCount="indefinite"/>
+                          </circle>
+                        </g>
+                      </g>
+                    </g>
+
+                    <g transform="translate(148, 268)">
+                      <rect x="0" y="0" width="104" height="22" rx="4" fill="#1E293B" stroke="rgba(255,255,255,0.1)"/>
+                      
+                      <rect x="0" y="0" width="104" height="22" rx="4">
+                        <animate attributeName="fill" calcMode="linear" 
+                                values="rgba(30,41,59,0); rgba(30,41,59,0); rgba(250,204,21,0.9); rgba(250,204,21,0.9); rgba(239,68,68,0.9); rgba(239,68,68,0.9); rgba(30,41,59,0)" 
+                                keyTimes="0; 0.25; 0.35; 0.60; 0.70; 0.95; 1" 
+                                dur="7s" repeatCount="indefinite"/>
+                      </rect>
+
+                      <text x="52" y="15" text-anchor="middle" fill="#94A3B8" font-size="10" font-weight="700" font-family="Inter, sans-serif">
+                        STATUS: CLEAR
+                        <animate attributeName="opacity" calcMode="discrete" 
+                                values="1; 1; 0; 0; 0; 0; 1" 
+                                keyTimes="0; 0.25; 0.35; 0.60; 0.70; 0.95; 1" 
+                                dur="7s" repeatCount="indefinite"/>
+                      </text>
+
+                      <text x="52" y="15" text-anchor="middle" fill="#0F172A" font-size="10" font-weight="700" font-family="Inter, sans-serif" opacity="0">
+                        PROXIMITY ALERT
+                        <animate attributeName="opacity" calcMode="discrete" 
+                                values="0; 0; 1; 1; 0; 0; 0" 
+                                keyTimes="0; 0.25; 0.35; 0.60; 0.70; 0.95; 1" 
+                                dur="7s" repeatCount="indefinite"/>
+                      </text>
+
+                      <text x="52" y="15" text-anchor="middle" fill="white" font-size="10" font-weight="700" font-family="Inter, sans-serif" opacity="0">
+                        COLLISION RISK
+                        <animate attributeName="opacity" calcMode="discrete" 
+                                values="0; 0; 0; 0; 1; 1; 0" 
+                                keyTimes="0; 0.25; 0.35; 0.60; 0.70; 0.95; 1" 
+                                dur="7s" repeatCount="indefinite"/>
+                      </text>
+                    </g>
+                  </svg>
+                </div>
+
+                <!-- Visual 2: Auto-Stacking -->
+                <div class="tab-visual" id="visual-autostack">
+                  <svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="400" height="320" fill="#0F172A"/>
+                    
+                    <defs>
+                      <g id="realistic-aircraft">
+                        <path d="M 0,-28 C 4,-28 6,-18 6,-8 L 6,10 L -6,10 L -6,-8 C -6,-18 -4,-28 0,-28 Z" fill="rgba(147,197,253,0.3)" stroke="rgba(147,197,253,0.9)" stroke-width="1.2"/>
+                        <rect x="-6" y="10" width="12" height="30" fill="rgba(147,197,253,0.3)" stroke="rgba(147,197,253,0.9)" stroke-width="1.2"/>
+                        <path d="M 6,-2 L 40,18 L 40,24 L 6,14 Z" fill="rgba(147,197,253,0.3)" stroke="rgba(147,197,253,0.9)" stroke-width="1.2"/>
+                        <path d="M -6,-2 L -40,18 L -40,24 L -6,14 Z" fill="rgba(147,197,253,0.3)" stroke="rgba(147,197,253,0.9)" stroke-width="1.2"/>
+                        <path d="M 4,32 L 18,42 L 18,46 L 4,40 Z" fill="rgba(147,197,253,0.4)" stroke="rgba(147,197,253,0.9)" stroke-width="1.2"/>
+                        <path d="M -4,32 L -18,42 L -18,46 L -4,40 Z" fill="rgba(147,197,253,0.4)" stroke="rgba(147,197,253,0.9)" stroke-width="1.2"/>
+                      </g>
+                    </defs>
+
+                    <rect x="20" y="20" width="160" height="180" rx="4" stroke="rgba(255,255,255,0.08)" fill="rgba(255,255,255,0.02)"/>
+                    <text x="100" y="38" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="9" font-family="Inter,sans-serif">BEFORE</text>
+                    
+                    <g transform="translate(60, 65) rotate(-15) scale(0.55)" opacity="0.6">
+                      <use href="#realistic-aircraft" />
+                    </g>
+                    <g transform="translate(125, 55) rotate(25) scale(0.55)" opacity="0.6">
+                      <use href="#realistic-aircraft" />
+                    </g>
+                    <g transform="translate(150, 110) rotate(55) scale(0.55)" opacity="0.6">
+                      <use href="#realistic-aircraft" />
+                    </g>
+                    <g transform="translate(55, 125) rotate(-5) scale(0.55)" opacity="0.6">
+                      <use href="#realistic-aircraft" />
+                    </g>
+                    <g transform="translate(105, 145) rotate(15) scale(0.55)" opacity="0.6">
+                      <use href="#realistic-aircraft" />
+                    </g>
+                    <g transform="translate(145, 170) rotate(-35) scale(0.55)" opacity="0.6">
+                      <use href="#realistic-aircraft" />
+                    </g>
+                    
+                    <path d="M190,110 L210,110 M205,105 L212,110 L205,115" stroke="rgba(37,99,235,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <animate attributeName="stroke-opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+                    </path>
+                    
+                    <rect x="220" y="20" width="160" height="180" rx="4" stroke="rgba(37,99,235,0.4)" fill="rgba(37,99,235,0.06)"/>
+                    <text x="300" y="38" text-anchor="middle" fill="rgba(147,197,253,0.8)" font-size="9" font-family="Inter,sans-serif">AFTER — OPTIMIZED STACKING</text>
+                    
+                    <g transform="translate(250, 60) scale(0.55)">
+                      <use href="#realistic-aircraft" />
+                    </g>
+                    <g transform="translate(300, 60) scale(0.55)">
+                      <use href="#realistic-aircraft" />
+                    </g>
+                    <g transform="translate(350, 60) scale(0.55)">
+                      <use href="#realistic-aircraft" />
+                    </g>
+
+                    <g transform="translate(275, 85) scale(0.55)">
+                      <use href="#realistic-aircraft" />
+                    </g>
+                    <g transform="translate(325, 85) scale(0.55)">
+                      <use href="#realistic-aircraft" />
+                    </g>
+
+                    <g transform="translate(250, 110) scale(0.55)">
+                      <use href="#realistic-aircraft" />
+                    </g>
+                    <g transform="translate(300, 110) scale(0.55)">
+                      <use href="#realistic-aircraft" />
+                    </g>
+                    <g transform="translate(350, 110) scale(0.55)">
+                      <use href="#realistic-aircraft" />
+                    </g>
+
+                    <g transform="translate(275, 135) scale(0.55)">
+                      <use href="#realistic-aircraft" />
+                    </g>
+                    <g transform="translate(325, 135) scale(0.55)">
+                      <use href="#realistic-aircraft" />
+                    </g>
+                    
+                    <rect x="138" y="238" width="124" height="34" rx="6" fill="rgba(37,99,235,0.15)" stroke="rgba(37,99,235,0.5)"/>
+                    <rect x="138" y="238" width="124" height="34" rx="6" fill="none" stroke="rgba(147,197,253,0.8)" stroke-width="1">
+                      <animate attributeName="opacity" values="0; 1; 0" dur="2s" repeatCount="indefinite"/>
+                    </rect>
+                    
+                    <text x="200" y="259" text-anchor="middle" fill="#FFFFFF" font-size="12" font-family="Inter,sans-serif" font-weight="700" letter-spacing="1">CAPACITY BOOST</text>
+
+                  </svg>
+                </div>
+
+                <!-- Visual 3: Path Planning -->
+                <div class="tab-visual" id="visual-pathplan">
+                  <svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="400" height="320" fill="#0F172A"/>
+                    
+                    <defs>
+                      <g id="realistic-aircraft">
+                        <path d="M 0,-28 C 4,-28 6,-18 6,-8 L 6,10 L -6,10 L -6,-8 C -6,-18 -4,-28 0,-28 Z" fill="rgba(147,197,253,0.3)" stroke="rgba(147,197,253,0.9)" stroke-width="1.2"/>
+                        <rect x="-6" y="10" width="12" height="30" fill="rgba(147,197,253,0.3)" stroke="rgba(147,197,253,0.9)" stroke-width="1.2"/>
+                        <path d="M 6,-2 L 40,18 L 40,24 L 6,14 Z" fill="rgba(147,197,253,0.3)" stroke="rgba(147,197,253,0.9)" stroke-width="1.2"/>
+                        <path d="M -6,-2 L -40,18 L -40,24 L -6,14 Z" fill="rgba(147,197,253,0.3)" stroke="rgba(147,197,253,0.9)" stroke-width="1.2"/>
+                        <path d="M 4,32 L 18,42 L 18,46 L 4,40 Z" fill="rgba(147,197,253,0.4)" stroke="rgba(147,197,253,0.9)" stroke-width="1.2"/>
+                        <path d="M -4,32 L -18,42 L -18,46 L -4,40 Z" fill="rgba(147,197,253,0.4)" stroke="rgba(147,197,253,0.9)" stroke-width="1.2"/>
+                      </g>
+                      
+                      <path id="tow-path" d="M 80,280 C 80,230 200,240 200,180 C 200,140 185,135 185,115" fill="none"/>
+                    </defs>
+
+                    <rect x="30" y="20" width="340" height="280" rx="4" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" fill="rgba(255,255,255,0.02)"/>
+                    <path d="M 30 90 L 370 90 M 30 160 L 370 160 M 30 230 L 370 230" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+                    <path d="M 115 20 L 115 300 M 200 20 L 200 300 M 285 20 L 285 300" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+
+                    <g transform="translate(120, 150) rotate(30) scale(0.6)">
+                      <use href="#realistic-aircraft" opacity="0.7"/>
+                      <rect x="-45" y="-35" width="90" height="90" fill="none" stroke="rgba(239,68,68,0.3)" stroke-width="1" stroke-dasharray="4 2"/>
+                    </g>
+                    
+                    <g transform="translate(250, 90) rotate(-45) scale(0.6)">
+                      <use href="#realistic-aircraft" opacity="0.7"/>
+                      <rect x="-45" y="-35" width="90" height="90" fill="none" stroke="rgba(239,68,68,0.3)" stroke-width="1" stroke-dasharray="4 2"/>
+                    </g>
+
+                    <use href="#tow-path" stroke="#3B82F6" stroke-width="2.5" stroke-dasharray="6 4" stroke-linecap="round">
+                      <animate attributeName="stroke-dashoffset" values="20;0" dur="0.5s" repeatCount="indefinite" calcMode="linear"/>
+                    </use>
+
+                    <g transform="translate(80,280)">
+                      <circle r="6" fill="#10B981" stroke="#0F172A" stroke-width="1.5"/>
+                      <text y="15" text-anchor="middle" fill="#10B981" font-size="9" font-family="Inter,sans-serif" font-weight="700">START</text>
+                    </g>
+                    
+                    <g transform="translate(185,115)">
+                      <circle r="6" fill="#F59E0B" stroke="#0F172A" stroke-width="1.5"/>
+                      <text y="-10" text-anchor="middle" fill="#F59E0B" font-size="9" font-family="Inter,sans-serif" font-weight="700">END</text>
+                    </g>
+
+                    <g>
+                      <animateMotion dur="5s" repeatCount="indefinite" rotate="auto">
+                        <mpath href="#tow-path"/>
+                      </animateMotion>
+                      
+                      <g transform="scale(0.55) rotate(90)">
+                        <use href="#realistic-aircraft" />
+                        <use href="#realistic-aircraft" fill="none" stroke="#60A5FA" stroke-width="1" opacity="0.5"/>
+                      </g>
+                    </g>
+
+                    <rect x="130" y="285" width="140" height="20" rx="4" fill="rgba(37,99,235,0.15)" stroke="rgba(37,99,235,0.3)"/>
+                    <text x="200" y="298" text-anchor="middle" fill="#93C5FD" font-size="9" font-family="Inter,sans-serif" font-weight="600">COLLISION-FREE TOW PATH</text>
+
+                  </svg>
+                </div>
+
+                <!-- Visual 4: Autonomous Tugs -->
+                <div class="tab-visual" id="visual-tugs">
+                  <svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="400" height="320" fill="#0F172A"/>
+
+                    <defs>
+                      <g id="realistic-aircraft">
+                        <path d="M 0,-28 C 4,-28 6,-18 6,-8 L 6,10 L -6,10 L -6,-8 C -6,-18 -4,-28 0,-28 Z" fill="rgba(147,197,253,0.3)" stroke="rgba(147,197,253,0.9)" stroke-width="1.2"/>
+                        <rect x="-6" y="10" width="12" height="30" fill="rgba(147,197,253,0.3)" stroke="rgba(147,197,253,0.9)" stroke-width="1.2"/>
+                        <path d="M 6,-2 L 40,18 L 40,24 L 6,14 Z" fill="rgba(147,197,253,0.3)" stroke="rgba(147,197,253,0.9)" stroke-width="1.2"/>
+                        <path d="M -6,-2 L -40,18 L -40,24 L -6,14 Z" fill="rgba(147,197,253,0.3)" stroke="rgba(147,197,253,0.9)" stroke-width="1.2"/>
+                        <path d="M 4,32 L 18,42 L 18,46 L 4,40 Z" fill="rgba(147,197,253,0.4)" stroke="rgba(147,197,253,0.9)" stroke-width="1.2"/>
+                        <path d="M -4,32 L -18,42 L -18,46 L -4,40 Z" fill="rgba(147,197,253,0.4)" stroke="rgba(147,197,253,0.9)" stroke-width="1.2"/>
+                      </g>
+                    </defs>
+
+                    <rect x="30" y="40" width="340" height="240" rx="4" stroke="rgba(255,255,255,0.07)" fill="rgba(255,255,255,0.02)"/>
+
+                    <line x1="200" y1="140" x2="200" y2="150" stroke="rgba(255,255,255,0.6)" stroke-width="3" stroke-linecap="round"/>
+
+                    <g transform="translate(200, 190) scale(1.5)">
+                      <use href="#realistic-aircraft" />
+                    </g>
+
+                    <g transform="translate(200, 130) scale(0.8)">
+                      <rect x="-18" y="-10" width="36" height="20" rx="4" fill="#2563EB" stroke="rgba(147,197,253,0.6)" stroke-width="1">
+                        <animate attributeName="x" values="-18.5;-17.5;-18.5" dur="0.2s" repeatCount="indefinite"/>
+                      </rect>
+                      <circle cx="-12" cy="12" r="4" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+                      <circle cx="12" cy="12" r="4" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+                      <circle cx="0" cy="-14" r="3" fill="#F5A623">
+                        <animate attributeName="opacity" values="1;0.3;1" dur="1s" repeatCount="indefinite"/>
+                      </circle>
+                    </g>
+
+                    <!-- Tug and glowing light on top -->
+                    <circle cx="200" cy="130" r="45" stroke="rgba(37,99,235,0.25)" stroke-width="1.5" stroke-dasharray="4 3" fill="none">
+                      <animate attributeName="r" values="40;55;40" dur="2s" repeatCount="indefinite"/>
+                      <animate attributeName="opacity" values="0.6;0.2;0.6" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="200" cy="130" r="65" stroke="rgba(37,99,235,0.1)" stroke-width="1" fill="none">
+                      <animate attributeName="r" values="60;80;60" dur="2.5s" repeatCount="indefinite"/>
+                    </circle>
+
+                    <path d="M 200,150 L 200,60" stroke="rgba(37,99,235,0.4)" stroke-width="2" stroke-dasharray="4 3" stroke-linecap="round">
+                      <animate attributeName="stroke-dashoffset" values="0;14" dur="0.8s" repeatCount="indefinite"/>
+                    </path>
+
+                    <rect x="40" y="265" width="110" height="48" rx="6" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)"/>
+                    <text x="95" y="282" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Inter,sans-serif">STATUS</text>
+                    <text x="95" y="300" text-anchor="middle" fill="#4ADE80" font-size="11" font-family="Inter,sans-serif" font-weight="700">● AUTONOMOUS</text>
+                    
+                    <rect x="250" y="265" width="110" height="48" rx="6" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)"/>
+                    <text x="305" y="282" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Inter,sans-serif">SAFETY</text>
+                    <text x="305" y="300" text-anchor="middle" fill="#4ADE80" font-size="11" font-family="Inter,sans-serif" font-weight="700">● ALL CLEAR</text>
+                  </svg>
+                </div>
+
+                <!-- Visual 5: Audit Trail -->
+                <div class="tab-visual" id="visual-audit">
+                  <svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="400" height="320" fill="#0F172A"/>
+                    <!-- Timeline container -->
+                    <rect x="30" y="30" width="340" height="260" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.07)"/>
+                    <!-- Header -->
+                    <text x="50" y="57" fill="rgba(255,255,255,0.35)" font-size="10" font-family="Inter,sans-serif" font-weight="600">AUDIT LOG</text>
+                    <text x="350" y="57" text-anchor="end" fill="rgba(147,197,253,0.5)" font-size="9" font-family="Inter,sans-serif">LIVE</text>
+                    <circle cx="360" cy="53" r="4" fill="#4ADE80"><animate attributeName="opacity" values="1;0.3;1" dur="1.2s" repeatCount="indefinite"/></circle>
+                    <line x1="30" y1="65" x2="370" y2="65" stroke="rgba(255,255,255,0.06)"/>
+                    <!-- Timeline line -->
+                    <line x1="65" y1="80" x2="65" y2="275" stroke="rgba(37,99,235,0.3)" stroke-width="1.5"/>
+                    <!-- Entry 1 -->
+                    <circle cx="65" cy="95" r="5" fill="#4ADE80" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                    <text x="82" y="91" fill="rgba(255,255,255,0.85)" font-size="10" font-family="Inter,sans-serif" font-weight="600">Aircraft Tow Complete — N12345</text>
+                    <text x="82" y="104" fill="rgba(255,255,255,0.35)" font-size="9" font-family="Inter,sans-serif">14:32:08 — Path logged, 0 incidents</text>
+                    <!-- Entry 2 -->
+                    <circle cx="65" cy="135" r="5" fill="#2563EB" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                    <text x="82" y="131" fill="rgba(255,255,255,0.85)" font-size="10" font-family="Inter,sans-serif" font-weight="600">Auto-Stack triggered</text>
+                    <text x="82" y="144" fill="rgba(255,255,255,0.35)" font-size="9" font-family="Inter,sans-serif">14:35:22 — 6 aircraft placed</text>
+                    <!-- Entry 3 -->
+                    <circle cx="65" cy="175" r="5" fill="#F5A623" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                    <text x="82" y="171" fill="rgba(255,255,255,0.85)" font-size="10" font-family="Inter,sans-serif" font-weight="600">Proximity alert — high</text>
+                    <text x="82" y="184" fill="rgba(255,255,255,0.35)" font-size="9" font-family="Inter,sans-serif">15:10:44 — Auto-brake engaged</text>
+                    <!-- Entry 4 -->
+                    <circle cx="65" cy="215" r="5" fill="#4ADE80" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                    <text x="82" y="211" fill="rgba(255,255,255,0.85)" font-size="10" font-family="Inter,sans-serif" font-weight="600">Aircraft Tow Starting — N234AB</text>
+                    <text x="82" y="224" fill="rgba(255,255,255,0.35)" font-size="9" font-family="Inter,sans-serif">16:02:17 — Logging path</text>
+                    <!-- Entry 5 (live, pulsing) -->
+                    <circle cx="65" cy="255" r="5" fill="#93C5FD" stroke="rgba(255,255,255,0.2)" stroke-width="1">
+                      <animate attributeName="r" values="5;7;5" dur="1.5s" repeatCount="indefinite"/>
+                    </circle>
+                    <text x="82" y="251" fill="rgba(255,255,255,0.85)" font-size="10" font-family="Inter,sans-serif" font-weight="600">Monitoring active...</text>
+                    <text x="82" y="264" fill="rgba(147,197,253,0.5)" font-size="9" font-family="Inter,sans-serif">16:08:55 — All systems nominal</text>
+                  </svg>
+                </div>
+
+              </div><!-- .video_animation -->
+            </div><!-- .animation_video_container -->
+
+          </div><!-- .animation_container -->
+        </div><!-- .product_tabs -->
+      </div><!-- .product_container -->
+
+      <!-- ── See. Think. Act. cards ── -->
+      <div class="product_cards_stack">
+        <div class="grid" id="w-product-grid">
+
+          <div class="product_card">
+            <div class="product_card_content">
+              <div class="product_card_title">See. Think. Act.</div>
+              <p class="product_card_description">
+                Continuously observing the hangar environment, interpreting aircraft positions, and alerting operators or executing movements autonomously - all in real time.
+                <!-- Sttugs learns from every movement, adapting to your fleet mix and delivering safer, smarter operations every day. -->
+              </p>
+            </div>
+            <div class="product_graphic">
+              <div class="product_card_graphic_css anim-see">
+                <div class="eye"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="product_card">
+            <div class="product_card_content">
+              <div class="product_card_title">Maximize Every Foot</div>
+              <p class="product_card_description">
+                Our auto-stacking software finds the optimal layout for your specific aircraft mix - then executes it. Move less, fit more, and stop leaving capacity on the table. 
+                <!-- FBOs report storing up to 35% more aircraft after deployment. -->
+              </p>
+            </div>
+            <div class="product_graphic">
+              <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                <g opacity="0.3">
+                  <path d="M16 16 L16 64 M28 16 L28 64 M40 16 L40 64 M52 16 L52 64 M64 16 L64 64" stroke="rgba(147,197,253,0.5)" stroke-width="1"/>
+                  <path d="M16 16 L64 16 M16 28 L64 28 M16 40 L64 40 M16 52 L64 52 M16 64 L64 64" stroke="rgba(147,197,253,0.5)" stroke-width="1"/>
+                </g>
+                
+                <circle cx="40" cy="40" r="30" fill="rgba(245, 158, 11, 0.2)" opacity="0">
+                  <animate attributeName="opacity" values="0; 0; 1; 1; 0" keyTimes="0; 0.29; 0.3; 0.9; 1" dur="10s" repeatCount="indefinite"/>
+                  <animate attributeName="r" values="24; 24; 36; 32; 24" keyTimes="0; 0.29; 0.35; 0.9; 1" dur="10s" repeatCount="indefinite"/>
+                </circle>
+
+                <g transform="translate(40, 40)">
+                  
+                  <g>
+                    <animateTransform attributeName="transform" type="translate" additive="sum"
+                                      values="-30,-35; -30,-35; -12,-12; -12,-12; -30,-35"
+                                      keyTimes="0; 0.15; 0.3; 0.9; 1" dur="10s" repeatCount="indefinite"
+                                      calcMode="spline" keySplines="0.4 0 0.2 1; 0.2 0 0 1; 0 0 1 1; 0.4 0 0.2 1"/>
+                    <animateTransform attributeName="transform" type="rotate" additive="sum"
+                                      values="-45; -45; 0; 0; -45"
+                                      keyTimes="0; 0.15; 0.3; 0.9; 1" dur="10s" repeatCount="indefinite"
+                                      calcMode="spline" keySplines="0.4 0 0.2 1; 0.2 0 0 1; 0 0 1 1; 0.4 0 0.2 1"/>
+                    
+                    <g stroke-width="1.5">
+                      <animate attributeName="fill" values="rgba(147,197,253,0.4); rgba(147,197,253,0.4); #F59E0B; #F59E0B; rgba(147,197,253,0.4)" keyTimes="0; 0.28; 0.3; 0.9; 1" dur="10s" repeatCount="indefinite"/>
+                      <animate attributeName="stroke" values="#93C5FD; #93C5FD; #FCD34D; #FCD34D; #93C5FD" keyTimes="0; 0.28; 0.3; 0.9; 1" dur="10s" repeatCount="indefinite"/>
+                      
+                      <rect x="-12" y="-12" width="12" height="12"/>
+                      <rect x="0" y="-12" width="12" height="12"/>
+                      <rect x="-12" y="0" width="12" height="12"/>
+                    </g>
+                  </g>
+
+                  <g>
+                    <animateTransform attributeName="transform" type="translate" additive="sum"
+                                      values="35,-30; 35,-30; 12,-12; 12,-12; 35,-30"
+                                      keyTimes="0; 0.15; 0.3; 0.9; 1" dur="10s" repeatCount="indefinite"
+                                      calcMode="spline" keySplines="0.4 0 0.2 1; 0.2 0 0 1; 0 0 1 1; 0.4 0 0.2 1"/>
+                    <animateTransform attributeName="transform" type="rotate" additive="sum"
+                                      values="90; 90; 0; 0; 90"
+                                      keyTimes="0; 0.15; 0.3; 0.9; 1" dur="10s" repeatCount="indefinite"
+                                      calcMode="spline" keySplines="0.4 0 0.2 1; 0.2 0 0 1; 0 0 1 1; 0.4 0 0.2 1"/>
+
+                    <g stroke-width="1.5">
+                      <animate attributeName="fill" values="rgba(147,197,253,0.4); rgba(147,197,253,0.4); #F59E0B; #F59E0B; rgba(147,197,253,0.4)" keyTimes="0; 0.28; 0.3; 0.9; 1" dur="10s" repeatCount="indefinite"/>
+                      <animate attributeName="stroke" values="#93C5FD; #93C5FD; #FCD34D; #FCD34D; #93C5FD" keyTimes="0; 0.28; 0.3; 0.9; 1" dur="10s" repeatCount="indefinite"/>
+                      
+                      <rect x="-12" y="-12" width="12" height="12"/>
+                      <rect x="0" y="-12" width="12" height="12"/>
+                      <rect x="0" y="0" width="12" height="12"/>
+                      <rect x="0" y="12" width="12" height="12"/>
+                    </g>
+                  </g>
+
+                  <g>
+                    <animateTransform attributeName="transform" type="translate" additive="sum"
+                                      values="-35,30; -35,30; -12,12; -12,12; -35,30"
+                                      keyTimes="0; 0.15; 0.3; 0.9; 1" dur="10s" repeatCount="indefinite"
+                                      calcMode="spline" keySplines="0.4 0 0.2 1; 0.2 0 0 1; 0 0 1 1; 0.4 0 0.2 1"/>
+                    <animateTransform attributeName="transform" type="rotate" additive="sum"
+                                      values="-90; -90; 0; 0; -90"
+                                      keyTimes="0; 0.15; 0.3; 0.9; 1" dur="10s" repeatCount="indefinite"
+                                      calcMode="spline" keySplines="0.4 0 0.2 1; 0.2 0 0 1; 0 0 1 1; 0.4 0 0.2 1"/>
+
+                    <g stroke-width="1.5">
+                      <animate attributeName="fill" values="rgba(147,197,253,0.4); rgba(147,197,253,0.4); #F59E0B; #F59E0B; rgba(147,197,253,0.4)" keyTimes="0; 0.28; 0.3; 0.9; 1" dur="10s" repeatCount="indefinite"/>
+                      <animate attributeName="stroke" values="#93C5FD; #93C5FD; #FCD34D; #FCD34D; #93C5FD" keyTimes="0; 0.28; 0.3; 0.9; 1" dur="10s" repeatCount="indefinite"/>
+                      
+                      <rect x="0" y="-24" width="12" height="12"/>
+                      <rect x="12" y="-24" width="12" height="12"/>
+                      <rect x="0" y="-12" width="12" height="12"/>
+                      <rect x="12" y="-12" width="12" height="12"/>
+                    </g>
+                  </g>
+
+                  <g>
+                    <animateTransform attributeName="transform" type="translate" additive="sum"
+                                      values="30,35; 30,35; 12,12; 12,12; 30,35"
+                                      keyTimes="0; 0.15; 0.3; 0.9; 1" dur="10s" repeatCount="indefinite"
+                                      calcMode="spline" keySplines="0.4 0 0.2 1; 0.2 0 0 1; 0 0 1 1; 0.4 0 0.2 1"/>
+                    <animateTransform attributeName="transform" type="rotate" additive="sum"
+                                      values="180; 180; 0; 0; 180"
+                                      keyTimes="0; 0.15; 0.3; 0.9; 1" dur="10s" repeatCount="indefinite"
+                                      calcMode="spline" keySplines="0.4 0 0.2 1; 0.2 0 0 1; 0 0 1 1; 0.4 0 0.2 1"/>
+
+                    <g stroke-width="1.5">
+                      <animate attributeName="fill" values="rgba(147,197,253,0.4); rgba(147,197,253,0.4); #F59E0B; #F59E0B; rgba(147,197,253,0.4)" keyTimes="0; 0.28; 0.3; 0.9; 1" dur="10s" repeatCount="indefinite"/>
+                      <animate attributeName="stroke" values="#93C5FD; #93C5FD; #FCD34D; #FCD34D; #93C5FD" keyTimes="0; 0.28; 0.3; 0.9; 1" dur="10s" repeatCount="indefinite"/>
+                      
+                      <rect x="-36" y="-12" width="12" height="12"/>
+                      <rect x="-36" y="0" width="12" height="12"/>
+                      <rect x="-24" y="0" width="12" height="12"/>
+                      <rect x="-12" y="0" width="12" height="12"/>
+                      <rect x="0" y="0" width="12" height="12"/>
+                    </g>
+                  </g>
+
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <div class="product_card">
+            <div class="product_card_content">
+              <div class="product_card_title">Frictionless Install</div>
+              <p class="product_card_description">
+                Our system requires little to no infrastructure changes, minimizing downtime and upfront costs. Get up and running in hours, not days.
+                <!-- Start with collision prevention and expand to full autonomous tug operations at your own pace. Three scalable tiers ensure you get value from day one - with a clear path to ROI. -->
+              </p>
+            </div>
+            <div class="product_graphic">
+              <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                <g transform="translate(40, 40)">
+                  <animateTransform attributeName="transform" type="translate" additive="sum"
+                                    values="0,0; 0,0; 0,3; 0,0; 0,0"
+                                    keyTimes="0; 0.2; 0.22; 0.26; 1"
+                                    dur="5s" repeatCount="indefinite" calcMode="spline" 
+                                    keySplines="0 0 1 1; 0.2 0 0.8 1; 0.2 0 0.8 1; 0 0 1 1"/>
+
+                  <circle cx="0" cy="0" r="24" stroke="rgba(147,197,253,0.3)" stroke-width="4">
+                    <animate attributeName="stroke" 
+                            values="rgba(147,197,253,0.3); rgba(147,197,253,0.3); #F59E0B; #F59E0B; rgba(147,197,253,0.3)"
+                            keyTimes="0; 0.198; 0.2; 0.7; 1" dur="5s" repeatCount="indefinite"/>
+                  </circle>
+                  
+                  <circle cx="0" cy="0" r="14" fill="rgba(147,197,253,0.1)">
+                    <animate attributeName="fill" 
+                            values="rgba(147,197,253,0.1); rgba(147,197,253,0.1); rgba(245, 158, 11, 0.4); rgba(245, 158, 11, 0.4); rgba(147,197,253,0.1)"
+                            keyTimes="0; 0.198; 0.2; 0.7; 1" dur="5s" repeatCount="indefinite"/>
+                  </circle>
+                </g>
+
+                <g transform="translate(40, 4)">
+                  <circle r="12" fill="#3B82F6" stroke="#93C5FD" stroke-width="2">
+                    <animateTransform attributeName="transform" type="translate"
+                                      values="0,0; 0,36; 0,36; 0,0"
+                                      keyTimes="0; 0.2; 0.7; 1"
+                                      dur="5s" repeatCount="indefinite"
+                                      calcMode="spline" keySplines="0.6 0 0.9 0.1; 0 0 1 1; 0.4 0 0.2 1"/>
+                    
+                    <animate attributeName="fill" 
+                            values="#3B82F6; #3B82F6; #F59E0B; #F59E0B; #3B82F6"
+                            keyTimes="0; 0.198; 0.2; 0.7; 1" dur="5s" repeatCount="indefinite"/>
+                    <animate attributeName="stroke" 
+                            values="#93C5FD; #93C5FD; #FCD34D; #FCD34D; #93C5FD"
+                            keyTimes="0; 0.198; 0.2; 0.7; 1" dur="5s" repeatCount="indefinite"/>
+                  </circle>
+                </g>
+
+                <g transform="translate(40, 40)">
+                  <circle cx="0" cy="0" r="24" fill="none" stroke="#FCD34D" stroke-width="3" opacity="0">
+                    <animate attributeName="r" values="24; 24; 38; 38" 
+                            keyTimes="0; 0.2; 0.5; 1" dur="5s" repeatCount="indefinite"/>
+                    <animate attributeName="opacity" values="0; 0; 0.8; 0; 0" 
+                            keyTimes="0; 0.19; 0.2; 0.5; 1" dur="5s" repeatCount="indefinite"/>
+                  </circle>
+                  
+                  <g transform="scale(0)">
+                    <animateTransform attributeName="transform" type="scale"
+                                      values="0; 0; 1.15; 1; 1; 0; 0"
+                                      keyTimes="0; 0.2; 0.22; 0.24; 0.7; 0.75; 1"
+                                      dur="5s" repeatCount="indefinite"
+                                      calcMode="spline" keySplines="0 0 1 1; 0.175 0.885 0.32 1.275; 0.4 0 0.2 1; 0 0 1 1; 0.4 0 0.2 1; 0 0 1 1"/>
+                    
+                    <circle cx="0" cy="0" r="16" fill="#F59E0B"/>
+                    <path d="M -8,0 L -2,6 L 8,-5" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </g>
+                </g>
+              </svg>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================================
+         AUTONOMOUS / INTELLIGENT SOFTWARE SECTION
+    ============================================================ -->
+    <section class="autonomous_wrap" data-bg-type="dark">
+      <div class="autonomous_container">
+
+        <div class="title_and_graphic">
+          <div class="autonomous_title">
+            <h2 class="dark_section_heading">
+              <span class="text-span">Intelligent Software.</span>
+              <span class="text-span">Autonomous Hardware.</span>
+            </h2>
+          </div>
+
+          <!-- Animated graphic -->
+          <svg viewBox="0 0 600 450" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <defs>
+              <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0F172A" /> 
+                <stop offset="100%" stop-color="#1E293B" /> 
+              </linearGradient>
+
+              <pattern id="dot-pattern" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+                <circle cx="15" cy="15" r="1.5" fill="rgba(255,255,255,0.05)"/>
+              </pattern>
+
+              <g id="realistic-aircraft">
+                <path d="M 0,-35 C 5,-35 7,-22 7,-10 L 7,12 L -7,12 L -7,-10 C -7,-22 -5,-35 0,-35 Z" fill="rgba(147,197,253,0.15)" stroke="rgba(147,197,253,0.6)" stroke-width="1.5"/>
+                <rect x="-7" y="12" width="14" height="38" fill="rgba(147,197,253,0.15)" stroke="rgba(147,197,253,0.6)" stroke-width="1.5"/>
+                <path d="M 7,-2 L 50,22 L 50,30 L 7,18 Z" fill="rgba(147,197,253,0.15)" stroke="rgba(147,197,253,0.6)" stroke-width="1.5"/>
+                <path d="M -7,-2 L -50,22 L -50,30 L -7,18 Z" fill="rgba(147,197,253,0.15)" stroke="rgba(147,197,253,0.6)" stroke-width="1.5"/>
+                <path d="M 5,40 L 22,52 L 22,58 L 5,50 Z" fill="rgba(147,197,253,0.2)" stroke="rgba(147,197,253,0.6)" stroke-width="1.5"/>
+                <path d="M -5,40 L -22,52 L -22,58 L -5,50 Z" fill="rgba(147,197,253,0.2)" stroke="rgba(147,197,253,0.6)" stroke-width="1.5"/>
+              </g>
+
+              <path id="tug-path" d="M 90,380 C 90,280 280,320 320,200 C 350,110 400,100 480,100" fill="none"/>
+            </defs>
+
+            <rect width="600" height="450" rx="16" fill="url(#bg-gradient)"/>
+            <rect width="600" height="450" rx="16" fill="url(#dot-pattern)"/>
+
+            <g transform="translate(160, 130) rotate(-55) scale(0.8)">
+              <use href="#realistic-aircraft" />
+            </g>
+            <g transform="translate(440, 270) rotate(-150) scale(0.8)">
+              <use href="#realistic-aircraft" />
+            </g>
+
+            <line x1="0" y1="0" x2="600" y2="0" stroke="rgba(59,130,246,0.5)" stroke-width="3" opacity="0">
+              <animate attributeName="opacity" values="0; 1; 1; 0; 0" keyTimes="0; 0.01; 0.29; 0.3; 1" dur="20s" repeatCount="indefinite"/>
+              <animate attributeName="y1" values="0; 450; 450; 0" keyTimes="0; 0.3; 0.95; 1" dur="20s" repeatCount="indefinite"/>
+              <animate attributeName="y2" values="0; 450; 450; 0" keyTimes="0; 0.3; 0.95; 1" dur="20s" repeatCount="indefinite"/>
+            </line>
+
+            <use href="#tug-path" stroke="#F59E0B" stroke-width="3" stroke-dasharray="8 6" stroke-linecap="round" opacity="0">
+              <animate attributeName="opacity" values="0; 0; 0.8; 0.8; 0" keyTimes="0; 0.3; 0.35; 0.9; 1" dur="20s" repeatCount="indefinite"/>
+              <animate attributeName="stroke-dashoffset" values="40; 0" dur="1s" repeatCount="indefinite" calcMode="linear"/>
+            </use>
+
+            <g transform="translate(480, 100)" opacity="0">
+              <animate attributeName="opacity" values="0; 0; 1; 1; 0" keyTimes="0; 0.3; 0.35; 0.9; 1" dur="20s" repeatCount="indefinite"/>
+              <circle r="12" fill="none" stroke="#F59E0B" stroke-width="2" stroke-dasharray="4 2">
+                <animateTransform attributeName="transform" type="rotate" values="0; 360" dur="4s" repeatCount="indefinite" calcMode="linear"/>
+              </circle>
+              <circle r="4" fill="#F59E0B"/>
+            </g>
+
+            <g>
+              <animateMotion dur="20s" repeatCount="indefinite" rotate="auto" 
+                            keyTimes="0; 0.5; 0.88; 1" 
+                            keyPoints="0; 0; 1; 1" 
+                            calcMode="spline" keySplines="0 0 1 1; 0.4 0 0.2 1; 0 0 1 1">
+                <mpath href="#tug-path"/>
+              </animateMotion>
+
+              <g transform="rotate(90) scale(0.8)">
+                
+                <use href="#realistic-aircraft" />
+
+                <g transform="translate(0, -45)">
+                  <circle cx="0" cy="0" r="30" fill="none" stroke="#3B82F6" stroke-width="1.5" opacity="0">
+                    <animate attributeName="r" values="10; 55" dur="2s" repeatCount="indefinite"/>
+                    <animate attributeName="opacity" values="0.6; 0" dur="2s" repeatCount="indefinite"/>
+                  </circle>
+                  <circle cx="0" cy="0" r="30" fill="none" stroke="#3B82F6" stroke-width="1.5" opacity="0">
+                    <animate attributeName="r" values="10; 55" begin="1s" dur="2s" repeatCount="indefinite"/>
+                    <animate attributeName="opacity" values="0.6; 0" begin="1s" dur="2s" repeatCount="indefinite"/>
+                  </circle>
+                  
+                  <rect x="-12" y="-15" width="24" height="30" rx="4" fill="#2563EB" stroke="#93C5FD" stroke-width="1.5"/>
+                  <rect x="-12" y="-8" width="24" height="4" fill="#60A5FA"/>
+                  <circle cx="0" cy="0" r="3" fill="#10B981">
+                    <animate attributeName="opacity" values="1; 0.4; 1" dur="0.5s" repeatCount="indefinite"/>
+                  </circle>
+                </g>
+              </g>
+            </g>
+
+            <g transform="translate(260, 360)">
+              <rect width="300" height="50" rx="8" fill="rgba(15,23,42,0.8)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+              
+              <g opacity="0">
+                <animate attributeName="opacity" values="1; 1; 0; 0; 0" keyTimes="0; 0.29; 0.3; 0.99; 1" dur="20s" repeatCount="indefinite"/>
+                <circle cx="25" cy="25" r="4" fill="#3B82F6">
+                  <animate attributeName="opacity" values="1; 0.2; 1" dur="0.5s" repeatCount="indefinite"/>
+                </circle>
+                <text x="45" y="21" fill="#93C5FD" font-size="10" font-weight="700" letter-spacing="0.1em">PERCEPTION</text>
+                <text x="45" y="37" fill="#94A3B8" font-size="11" font-weight="500">Scanning hanger layout...</text>
+              </g>
+
+              <g opacity="0">
+                <animate attributeName="opacity" values="0; 0; 1; 1; 0; 0" keyTimes="0; 0.29; 0.3; 0.49; 0.5; 1" dur="20s" repeatCount="indefinite"/>
+                <circle cx="25" cy="25" r="4" fill="#F59E0B">
+                  <animate attributeName="opacity" values="1; 0.2; 1" dur="0.5s" repeatCount="indefinite"/>
+                </circle>
+                <text x="45" y="21" fill="#FCD34D" font-size="10" font-weight="700" letter-spacing="0.1em">PLANNING</text>
+                <text x="45" y="37" fill="#94A3B8" font-size="11" font-weight="500">Generating optimal placement and route...</text>
+              </g>
+
+              <g opacity="0">
+                <animate attributeName="opacity" values="0; 0; 1; 1; 0" keyTimes="0; 0.49; 0.5; 0.95; 1" dur="20s" repeatCount="indefinite"/>
+                <circle cx="25" cy="25" r="4" fill="#10B981">
+                  <animate attributeName="opacity" values="1; 0.2; 1" dur="0.5s" repeatCount="indefinite"/>
+                </circle>
+                <text x="45" y="21" fill="#6EE7B7" font-size="10" font-weight="700" letter-spacing="0.1em">EXECUTION</text>
+                <text x="45" y="37" fill="#94A3B8" font-size="11" font-weight="500">Autonomous towing.</text>
+              </g>
+            </g>
+          </svg>
+        </div>
+
+        <div class="autonomous_content">
+          <div class="autonomous_description">
+            <p class="autonomous_paragraph">
+              At Sttugs, we've built a unique software and hardware platform designed specifically for aviation ground handling. Our algorithm generates real hangar layouts, aircraft geometries, and movement patterns — and is continuously improving.<br/><br/>
+              Each installation is designed for your operation's specific needs, quickly configured for your hangar footprint and installed in hours, not days. By uniting perception, planning, and execution in one integrated system, we unlock unprecedented safety and efficiency for any FBO or MRO operation.
+            </p>
+            <a href="#" data-open-contact class="outlined_button light-blue">Get more information</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ROI SECTION
+    ============================================================ -->
+    <section class="carrers_wrap" data-bg-type="light">
+      <div class="careers-container">
+        <div class="section-headline light">
+          <div class="section-title">ROI</div>
+          <h2 class="section_heading">See Your ROI</h2>
+        </div>
+
+        <!-- ROI SVG -->
+        <div class="mission_content">
+            <svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0F172A"/>
+                  <stop offset="100%" stop-color="#1E293B"/>
+                </linearGradient>
+
+                <pattern id="dot-pattern" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+                  <circle cx="15" cy="15" r="1.5" fill="rgba(255,255,255,0.05)"/>
+                </pattern>
+
+                <!-- Water fill -->
+                <linearGradient id="water-fill" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#0F2040" stop-opacity="0.85"/>
+                  <stop offset="100%" stop-color="#0F172A" stop-opacity="0.95"/>
+                </linearGradient>
+
+                <!-- Tip gradient -->
+                <linearGradient id="tip-fill" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#93C5FD" stop-opacity="0.3"/>
+                  <stop offset="100%" stop-color="#3B82F6" stop-opacity="0.15"/>
+                </linearGradient>
+
+                <!-- Body gradient -->
+                <linearGradient id="body-fill" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#1D4ED8" stop-opacity="0.25"/>
+                  <stop offset="100%" stop-color="#0F172A" stop-opacity="0.1"/>
+                </linearGradient>
+
+                <!-- Waterline fade -->
+                <linearGradient id="waterline-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#F59E0B" stop-opacity="0"/>
+                  <stop offset="15%" stop-color="#F59E0B" stop-opacity="0.7"/>
+                  <stop offset="85%" stop-color="#F59E0B" stop-opacity="0.7"/>
+                  <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+
+              <!-- Background -->
+              <rect width="400" height="320" rx="16" fill="url(#bg-gradient)"/>
+              <rect width="400" height="320" rx="16" fill="url(#dot-pattern)"/>
+
+              <!-- Water mass -->
+              <rect x="0" y="130" width="400" height="190" rx="0" fill="url(#water-fill)"/>
+
+              <!-- ── ICEBERG TIP ── -->
+              <polygon points="200,42 248,130 152,130" fill="url(#tip-fill)" stroke="rgba(147,197,253,0.5)" stroke-width="1.2"/>
+              <!-- inner highlight -->
+              <polygon points="200,52 238,126 162,126" fill="none" stroke="rgba(147,197,253,0.12)" stroke-width="1"/>
+
+              <!-- ── ICEBERG BODY ── -->
+              <polygon points="152,130 248,130 296,318 104,318" fill="url(#body-fill)" stroke="rgba(59,130,246,0.3)" stroke-width="1.2"/>
+              <!-- subtle inner shimmer lines -->
+              <line x1="155" y1="172" x2="245" y2="172" stroke="rgba(59,130,246,0.1)" stroke-width="1"/>
+              <line x1="147" y1="210" x2="253" y2="210" stroke="rgba(59,130,246,0.1)" stroke-width="1"/>
+              <line x1="138" y1="250" x2="262" y2="250" stroke="rgba(59,130,246,0.1)" stroke-width="1"/>
+
+              <!-- ── WATERLINE ── -->
+              <line x1="0" y1="130" x2="400" y2="130" stroke="url(#waterline-grad)" stroke-width="1.5"/>
+              <!-- animated shimmer on waterline -->
+              <line x1="0" y1="130" x2="400" y2="130" stroke="rgba(255,255,255,0.08)" stroke-width="1">
+                <animate attributeName="stroke-opacity" values="0.05;0.18;0.05" dur="3.5s" repeatCount="indefinite"/>
+              </line>
+              <!-- pulsing dot at center waterline -->
+              <circle cx="200" cy="130" r="3" fill="#F59E0B">
+                <animate attributeName="r" values="3;5;3" dur="2s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+              </circle>
+
+              <!-- ── DIRECT COST LABEL (above water) ── right side -->
+              <line x1="248" y1="86" x2="290" y2="74" stroke="rgba(147,197,253,0.3)" stroke-width="1" stroke-dasharray="3 3"/>
+              <rect x="290" y="58" width="90" height="38" rx="5" fill="rgba(15,23,42,0.8)" stroke="rgba(147,197,253,0.2)" stroke-width="1"/>
+              <text x="302" y="74" fill="#93C5FD" font-size="8.5" font-weight="700" letter-spacing="0.1em" font-family="monospace">DIRECT</text>
+              <text x="302" y="87" fill="#94A3B8" font-size="8" font-family="monospace">Repair bill</text>
+
+              <!-- SURFACE LEVEL text -->
+              <text x="20" y="124" fill="rgba(245,158,11,0.45)" font-size="7.5" font-family="monospace" letter-spacing="0.12em">SURFACE</text>
+
+              <!-- ── INDIRECT COST LABEL (below water) ── left side -->
+              <line x1="152" y1="214" x2="100" y2="214" stroke="rgba(245,158,11,0.35)" stroke-width="1" stroke-dasharray="3 3"/>
+              <rect x="10" y="190" width="90" height="48" rx="5" fill="rgba(15,23,42,0.8)" stroke="rgba(245,158,11,0.2)" stroke-width="1"/>
+              <circle cx="24" cy="205" r="3" fill="#F59E0B">
+                <animate attributeName="opacity" values="1;0.3;1" dur="0.9s" repeatCount="indefinite"/>
+              </circle>
+              <text x="32" y="208" fill="#FCD34D" font-size="8.5" font-weight="700" letter-spacing="0.08em" font-family="monospace">INDIRECT</text>
+              <text x="20" y="222" fill="#94A3B8" font-size="7.5" font-family="monospace">Far greater</text>
+              <text x="20" y="233" fill="#94A3B8" font-size="7.5" font-family="monospace">than it looks</text>
+
+              <!-- Indirect cost items inside iceberg body -->
+              <text x="200" y="160" text-anchor="middle" fill="rgba(147,197,253,0.5)" font-size="8.5" font-family="monospace">Grounded aircraft</text>
+              <text x="200" y="198" text-anchor="middle" fill="rgba(147,197,253,0.58)" font-size="8.5" font-family="monospace">Lost revenue</text>
+              <text x="200" y="236" text-anchor="middle" fill="rgba(147,197,253,0.66)" font-size="8.5" font-family="monospace">Insurance hikes</text>
+              <text x="200" y="272" text-anchor="middle" fill="rgba(147,197,253,0.74)" font-size="8.5" font-family="monospace">Reputation damage</text>
+
+              <!-- Repair bill text inside tip -->
+              <text x="200" y="98" text-anchor="middle" fill="rgba(147,197,253,0.7)" font-size="8.5" font-family="monospace">Repair bill</text>
+
+              <!-- Bottom status bar -->
+              <rect x="80" y="294" width="240" height="20" rx="5" fill="rgba(15,23,42,0.8)" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+              <circle cx="97" cy="304" r="3" fill="#10B981">
+                <animate attributeName="opacity" values="1;0.3;1" dur="1.1s" repeatCount="indefinite"/>
+              </circle>
+              <text x="108" y="308" fill="#94A3B8" font-size="8" font-family="monospace">Sttugs eliminates both</text>
+
+            </svg>
+          <div class="mission-description-2">
+            <p class="mission_home_paragraph">
+              Sttugs is not built in a vacuum. We work with FBOs, MROs, and aviation vetrans to identify the paint points that cost you money every day.<br/><br/>
+              We know that 'Hangar Rash' is more than just a repair bill—it's lost revenue from grounded aircraft, exponential insurance hikes, and a hit to your reputation. 
+              Our system is designed with people who move the, ensuring our autonomous intelligence solves real-world operational bottlenecks while keeping safety at the absolute center of your mission.
+            </p>
+            <a href="../roi.html" class="outlined_button-4">Check what your ROI could be</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FOOTER
+    ============================================================ -->
+    <footer class="footer" data-bg-type="dark">
+      <div class="footer_container">
+        <div class="footer_left">
+          <a href="../index.html" class="site_name">STTUGS</a>
+          <div class="copyright">© <span data-current-year></span> Sttugs. Patent Pending.</div>
+        </div>
+        <div class="footer_right">
+          <nav class="footer_nav">
+            <a href="#" data-open-contact class="footer_link">Contact</a>
+            <a href="about.html" class="footer_link">About</a>
+            <a href="collision-detection-and-prevention.html" class="footer_link">Collision Prevention</a>
+            <a href="auto-stack.html" class="footer_link">Auto-Stacking</a>
+            <a href="path-planning.html" class="footer_link">Path Planning</a>
+            <a href="autonomous-tugs.html" class="footer_link">Autonomous Tugs</a>
+            <a href="verifiable-audit-trail.html" class="footer_link">Audit Trail</a>
+          </nav>
+        </div>
+      </div>
+    </footer>
+
+  </main><!-- #smooth-content -->
+ 
+</div><!-- #smooth-wrapper -->
+
+<!-- ============================================================
+     SCRIPTS: GSAP (Club CDN via Webflow — same as sunrise.html)
+============================================================ -->
+<script src="https://cdn.prod.website-files.com/gsap/3.14.2/gsap.min.js"></script>
+<script src="https://cdn.prod.website-files.com/gsap/3.14.2/ScrollTrigger.min.js"></script>
+<script src="https://cdn.prod.website-files.com/gsap/3.14.2/DrawSVGPlugin.min.js"></script>
+<script src="https://cdn.prod.website-files.com/gsap/3.14.2/ScrollSmoother.min.js"></script>
+<script>gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin, ScrollSmoother);</script>
+
+<!-- Main script -->
+<script src="./assets/site.js"></script>
+
 </body>
 </html>
