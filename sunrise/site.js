@@ -647,50 +647,74 @@ function initSharedNavBehavior(navHeader) {
     }
   });
 
-  // ── Color-switch: go light-mode when a light/dark section is under the nav ──
-  // Use ScrollTrigger when available (same engine as index.html), fallback to scroll event.
+  // ── Color-switch: go light-mode when a light section is under the nav ──
+  // Uses a scroll listener (not ScrollTrigger) so the state correctly reverts
+  // when scrolling back into a dark section from any direction.
   function setupNavColorSwitch() {
-    const sections = document.querySelectorAll('[data-bg-type]');
-    if (!sections.length) return;
+    const LIGHT_SELECTOR = '[data-bg-type="light"], .section-light, .section-white, .faq-section';
+    const NAV_H = navHeader.offsetHeight || 72;
 
-    if (typeof ScrollTrigger !== 'undefined') {
-      sections.forEach(section => {
-        const theme = section.dataset.bgType; // 'light' | 'dark'
-        ScrollTrigger.create({
-          trigger: section,
-          start: 'top top+=1',
-          end:   'bottom top+=1',
-          onEnter:      () => navHeader.classList.toggle('snav--light', theme === 'light'),
-          onEnterBack:  () => navHeader.classList.toggle('snav--light', theme === 'light'),
-          onLeave:      () => {},
-          onLeaveBack:  () => {},
-        });
+    let rafPending = false;
+    function checkTheme() {
+      rafPending = false;
+      const midY = NAV_H / 2;
+      let isLight = false;
+      document.querySelectorAll(LIGHT_SELECTOR).forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (r.top <= midY && r.bottom > midY) isLight = true;
       });
-      // Set correct initial state
-      ScrollTrigger.refresh();
-    } else {
-      // Fallback: raw scroll event
-      const NAV_H = 72;
-      function updateNavTheme() {
-        const lightEls = document.querySelectorAll('[data-bg-type="light"], .section-light, .section-white');
-        let isLight = false;
-        lightEls.forEach(el => {
-          const r = el.getBoundingClientRect();
-          if (r.top <= NAV_H && r.bottom > NAV_H) isLight = true;
-        });
-        navHeader.classList.toggle('snav--light', isLight);
+      navHeader.classList.toggle('snav--light', isLight);
+    }
+
+    function onScroll() {
+      if (!rafPending) {
+        rafPending = true;
+        requestAnimationFrame(checkTheme);
       }
-      window.addEventListener('scroll', updateNavTheme, { passive: true });
-      updateNavTheme();
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    // Run immediately and after full load (fonts/images may shift layout)
+    checkTheme();
+    window.addEventListener('load', checkTheme);
+  }
+
+  // ── Highlight active page in nav ──
+  function highlightCurrentPage() {
+    const filename = window.location.pathname.split('/').pop() || 'index.html';
+    let isOnPlatformPage = false;
+
+    // Desktop: dropdown items
+    document.querySelectorAll('.snav-dropdown-item').forEach(a => {
+      if (a.getAttribute('href') === filename) {
+        a.classList.add('snav-active');
+        isOnPlatformPage = true;
+      }
+    });
+    // Desktop: highlight Platform trigger if on a platform page
+    if (isOnPlatformPage) {
+      const trigger = document.querySelector('.snav-dropdown-trigger');
+      if (trigger) trigger.classList.add('snav-active--parent');
+    }
+
+    // Mobile: platform sub-links
+    document.querySelectorAll('.snav-mobile-sub a').forEach(a => {
+      if (a.getAttribute('href') === filename) a.classList.add('snav-active');
+    });
+
+    // About page
+    if (filename === 'sunrise_about_v2.html') {
+      document.querySelectorAll('.snav-about-link').forEach(a => a.classList.add('snav-active'));
+    }
+
+    // Home link (detail pages showing Home)
+    if (filename === '' || filename === 'index.html') {
+      document.querySelectorAll('.snav-home-link').forEach(a => a.classList.add('snav-active'));
     }
   }
 
-  // Run after layout is ready so ScrollTrigger measures correctly
-  if (document.readyState === 'complete') {
-    setupNavColorSwitch();
-  } else {
-    window.addEventListener('load', setupNavColorSwitch);
-  }
+  highlightCurrentPage();
+  setupNavColorSwitch();
 }
 
 function injectSharedNav() {
@@ -713,6 +737,7 @@ function injectSharedNav() {
           </a>
         </div>
         <ul class="snav-links" role="list">
+          <li class="snav-item"><a href="index.html" class="snav-link snav-home-link">Home</a></li>
           <li class="snav-item snav-item--dropdown" id="sttugs-platform-item">
             <button class="snav-link snav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
               Platform
@@ -729,7 +754,7 @@ function injectSharedNav() {
               <a href="verifiable-audit-trail.html" class="snav-dropdown-item">Verifiable Audit Trail</a>
             </div>
           </li>
-          <li class="snav-item"><a href="sunrise_about_v2.html" class="snav-link">About</a></li>
+          <li class="snav-item"><a href="sunrise_about_v2.html" class="snav-link snav-about-link">About</a></li>
           <li class="snav-item"><a href="#" data-open-contact class="snav-link snav-cta">Contact Us</a></li>
         </ul>
         <button class="snav-hamburger" id="sttugs-nav-hamburger" aria-label="Open menu">
@@ -745,6 +770,7 @@ function injectSharedNav() {
         </svg>
       </button>
       <ul class="snav-mobile-links">
+        <li><a href="index.html" class="snav-mobile-link snav-home-link">Home</a></li>
         <li>
           <button class="snav-mobile-link" id="sttugs-mobile-platform-toggle">Platform ▾</button>
           <div class="snav-mobile-sub" id="sttugs-mobile-platform-sub">
@@ -756,7 +782,7 @@ function injectSharedNav() {
             <a href="verifiable-audit-trail.html">Verifiable Audit Trail</a>
           </div>
         </li>
-        <li><a href="sunrise_about_v2.html" class="snav-mobile-link">About</a></li>
+        <li><a href="sunrise_about_v2.html" class="snav-mobile-link snav-about-link">About</a></li>
       </ul>
       <a href="#" data-open-contact class="snav-mobile-cta">Contact Us</a>
     </div>
@@ -913,7 +939,7 @@ function injectSharedComponents() {
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
         border-bottom: 1px solid rgba(255,255,255,0.08);
-        transition: background 0.3s, border-color 0.3s;
+        transition: background 0.35s ease, border-color 0.35s ease;
       }
       .snav--light .snav {
         background: rgba(255,255,255,0.97);
@@ -921,41 +947,43 @@ function injectSharedComponents() {
       }
       .snav-inner {
         display: flex; align-items: center; justify-content: space-between;
-        padding: 1.125rem 2.5rem;
-        max-width: 1200px; margin: 0 auto;
+        padding: 1.25rem 2.5rem;
+        max-width: 1440px; margin: 0 auto;
       }
       .snav-logo-link {
         display: flex; align-items: center; gap: 0.5rem; text-decoration: none;
       }
       .snav-logo-img {
-        height: 32px;
+        height: 36px;
         filter: brightness(0) invert(1);
-        transition: filter 0.3s;
+        transition: filter 0.35s ease;
       }
       .snav--light .snav-logo-img { filter: none; }
       .snav-logo-text {
         font-size: 1.1rem; font-weight: 800; letter-spacing: -0.02em;
-        color: #fff; transition: color 0.3s;
+        color: #fff; transition: color 0.35s ease;
       }
       .snav--light .snav-logo-text { color: #0F172A; }
       .snav-links {
-        display: flex; align-items: center; gap: 0.25rem;
+        display: flex; align-items: center; gap: 1.5rem;
         list-style: none; margin: 0; padding: 0;
       }
       .snav-item { position: relative; }
       .snav-link {
         display: flex; align-items: center; gap: 0.3rem;
-        font-size: 0.9rem; font-weight: 500;
+        font-size: 0.9375rem; font-weight: 600;
         color: rgba(255,255,255,0.75);
         background: none; border: none; cursor: pointer;
         padding: 0.4rem 0.75rem; border-radius: 6px;
         text-decoration: none;
-        transition: color 0.2s;
+        transition: color 0.35s ease;
         font-family: inherit;
       }
       .snav-link:hover { color: #fff; }
       .snav--light .snav-link { color: rgba(15,23,42,0.65); }
       .snav--light .snav-link:hover { color: #0F172A; }
+      .snav-link.snav-active, .snav-dropdown-trigger.snav-active--parent { color: #fff; }
+      .snav--light .snav-link.snav-active, .snav--light .snav-dropdown-trigger.snav-active--parent { color: #0F172A; }
       .snav-cta {
         background: #F5A623 !important; color: #0F172A !important;
         padding: 0.45rem 1.1rem !important; border-radius: 7px; font-weight: 700;
@@ -997,8 +1025,10 @@ function injectSharedComponents() {
         transition: background 0.15s, color 0.15s;
       }
       .snav-dropdown-item:hover { background: rgba(255,255,255,0.08); color: #fff; }
+      .snav-dropdown-item.snav-active { background: rgba(37,99,235,0.2); color: #93C5FD; font-weight: 600; }
       .snav--light .snav-dropdown-item { color: rgba(15,23,42,0.7); }
       .snav--light .snav-dropdown-item:hover { background: #F1F5F9; color: #0F172A; }
+      .snav--light .snav-dropdown-item.snav-active { background: rgba(37,99,235,0.1); color: #1d4ed8; }
       .snav-hamburger {
         display: none; flex-direction: column; gap: 5px;
         width: 40px; height: 40px;
@@ -1055,6 +1085,8 @@ function injectSharedComponents() {
         border-radius: 6px; transition: background 0.15s, color 0.15s;
       }
       .snav-mobile-sub a:hover { background: rgba(255,255,255,0.07); color: #fff; }
+      .snav-mobile-sub a.snav-active { color: #93C5FD; font-weight: 600; background: rgba(37,99,235,0.15); }
+      .snav-mobile-link.snav-active { color: #fff; background: rgba(255,255,255,0.07); }
       .snav-mobile-cta {
         display: block; margin-top: 1.5rem;
         padding: 0.85rem 1rem; text-align: center;
