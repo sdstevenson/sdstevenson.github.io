@@ -6,6 +6,9 @@
 
 "use strict";
 
+/* Register GSAP plugins (loaded as defer, executes in order) */
+gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin, ScrollSmoother);
+
 /* ============================================================
    CONSTANTS
 ============================================================ */
