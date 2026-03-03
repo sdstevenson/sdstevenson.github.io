@@ -45,6 +45,12 @@ function initSmoother() {
   if (!document.getElementById('smooth-wrapper') || !document.getElementById('smooth-content')) {
     return null;
   }
+  // On mobile, skip ScrollSmoother entirely — native browser scroll is
+  // compositor-accelerated (off the main thread). normalizeScroll:true would
+  // replace that with JS-driven scroll, causing severe jank on mobile devices.
+  if (window.matchMedia('(max-width: 768px)').matches) {
+    return null;
+  }
   return ScrollSmoother.create({
     wrapper: "#smooth-wrapper",
     content: "#smooth-content",
@@ -155,12 +161,17 @@ function drawRunwayLines(canvas, progress, dashTopY) {
    NAV THEME  (dark = navy bg / white text,  light = white bg / navy text)
 ============================================================ */
 function setNavTheme(theme) {
+  // Legacy home nav (kept for safety — no longer present after snav migration)
   const fixedNav = document.querySelector(".nav_wrap.home.fixed");
-  if (!fixedNav) return;
-  if (theme === "light") {
-    fixedNav.classList.add("nav--light");
-  } else {
-    fixedNav.classList.remove("nav--light");
+  if (fixedNav) {
+    if (theme === "light") fixedNav.classList.add("nav--light");
+    else fixedNav.classList.remove("nav--light");
+  }
+  // Shared snav header (injected by injectSharedNav on all pages including index)
+  const snavHeader = document.getElementById("sttugs-nav-header");
+  if (snavHeader) {
+    if (theme === "light") snavHeader.classList.add("snav--light");
+    else snavHeader.classList.remove("snav--light");
   }
 }
 
@@ -787,8 +798,8 @@ function injectSharedNav() {
       <ul class="snav-mobile-links">
         <li><a href="index.html" class="snav-mobile-link snav-home-link">Home</a></li>
         <li>
-          <button class="snav-mobile-link" id="sttugs-mobile-platform-toggle">Platform ▾</button>
-          <div class="snav-mobile-sub" id="sttugs-mobile-platform-sub">
+          <div class="snav-mobile-platform-label">Platform</div>
+          <div class="snav-mobile-sub open">
             <a href="collision-detection-and-prevention.html">Collision Prevention</a>
             <a href="auto-stack.html">Auto Stacking</a>
             <a href="path-planning.html">Path Planning</a>
@@ -1129,6 +1140,11 @@ function injectSharedComponents() {
         transition: background 0.15s, color 0.15s;
       }
       .snav-mobile-close:hover { background: rgba(255,255,255,0.14); color: #fff; }
+      .snav-mobile-platform-label {
+        padding: 0.85rem 1rem 0.4rem;
+        font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.1em;
+        text-transform: uppercase; color: rgba(255,255,255,0.35);
+      }
       @media (max-width: 768px) {
         .snav-links { display: none; }
         .snav-hamburger { display: flex; }
@@ -1295,6 +1311,28 @@ function initHomeNavDropdowns() {
 }
 
 /* ============================================================
+   MOBILE HERO RESET
+   On mobile we skip createAnimation entirely, so elements that
+   start off-screen via CSS transforms (mission_wrap-a, hero_subtitle_wrap,
+   overlay) need to be reset to their visible/natural state.
+============================================================ */
+function resetHeroForMobile() {
+  const missionWrap   = document.querySelector(".mission_wrap-a");
+  const subtitleWrap  = document.querySelector(".hero_subtitle_wrap");
+  const overlay       = document.querySelector(".overlay");
+  const linesWrap     = document.querySelector(".hero_lines_wrap");
+
+  // Mission section: CSS has translateY(100%) — bring it to natural position
+  if (missionWrap) missionWrap.style.transform = "none";
+  // Subtitle: CSS has translateY(80%) — show it
+  if (subtitleWrap) subtitleWrap.style.transform = "none";
+  // Overlay: darken but don't hide the hero entirely
+  if (overlay)    overlay.style.opacity = "0";
+  // Lines canvas background: hide it so white hero_wrap shows instead
+  if (linesWrap)  linesWrap.style.opacity = "0";
+}
+
+/* ============================================================
    MAIN ENTRY POINT
 ============================================================ */
 (function main() {
@@ -1318,17 +1356,24 @@ function initHomeNavDropdowns() {
     injectSharedComponents();
   }
 
+  // Detect mobile once — used to skip heavy desktop-only animation work
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
   // Wait for DOM + layout to be ready
   window.addEventListener("load", function () {
-    initRunwayCanvas();
-
     const smoother = initSmoother();
 
-    // Restore scroll position if navigating back
-    restoreScrollPos(smoother);
-
-    // Build hero animation
-    createAnimation(smoother);
+    if (!isMobile) {
+      // Desktop only: runway canvas + pinned hero scroll animation
+      initRunwayCanvas();
+      restoreScrollPos(smoother);
+      createAnimation(smoother);
+      initPageHandlers(smoother);
+      initResize();
+    } else {
+      // Mobile: reset elements that start off-screen (normally driven by animation)
+      resetHeroForMobile();
+    }
 
     // Nav theme for sections below the hero
     initPostHeroNavTheme();
@@ -1337,11 +1382,12 @@ function initHomeNavDropdowns() {
     initMobileMenu();
     initContactModal();
     initScrollReveals();
-    initPageHandlers(smoother);
-    initResize();
     initHomeNavDropdowns();
 
-    // Refresh scroll triggers after everything is set
-    ScrollTrigger.refresh(true);
+    // Only refresh ScrollTrigger on desktop — on mobile this forces a layout
+    // recalculation that blocks the main thread unnecessarily
+    if (!isMobile) {
+      ScrollTrigger.refresh(true);
+    }
   });
 })();

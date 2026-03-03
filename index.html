@@ -28,68 +28,8 @@
 <body>
 <div id="smooth-wrapper" class="page_wrap">
 
-  <!-- ============================================================
-       FIXED NAV (shown after hero scroll-through)
-  ============================================================ -->
-  <header class="nav_wrap home fixed">
-    <nav class="nav_contain home">
-      <div class="nav_logo home">
-        <a href="../index.html" class="logo_nav_link home" aria-label="Sttugs">
-          <img src="../assets/logo.svg" class="logo_nav_img" alt="Sttugs" />
-          <span class="logo_nav_text home">STTUGS</span>
-        </a>
-      </div>
-      <div class="nav_links home">
-        <a href="index.html" class="nav_link home">Home</a>
-        <div class="nav-platform-wrap" id="home-platform-item">
-          <button class="nav-platform-btn" id="home-platform-trigger" aria-expanded="false" aria-haspopup="true">
-            Platform
-            <svg class="nav-platform-chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-          <div class="nav-platform-dropdown">
-            <a href="collision-detection-and-prevention.html">Collision Prevention</a>
-            <a href="auto-stack.html">Auto Stacking</a>
-            <a href="path-planning.html">Path Planning</a>
-            <a href="hardware-and-infastructure.html" class="snav-dropdown-item">Hardware &amp; Infrastructure</a>
-            <a href="autonomous-tugs.html">Autonomous Tugs</a>
-            <a href="verifiable-audit-trail.html">Verifiable Audit Trail</a>
-          </div>
-        </div>
-        <a href="about.html" class="nav_link home">About</a>
-        <a href="roi.html" class="nav_link home roi-link">ROI Calculator</a>
-        <a href="#" data-open-contact class="nav_link home cta">Contact Us</a>
-        <button role="button" data-menu-toggle aria-label="open-menu" class="menu-button">
-          <div class="hamburger_6_wrap">
-            <div class="hamburger_6_line home"></div>
-            <div class="hamburger_6_line home"></div>
-            <div class="hamburger_6_line home"></div>
-          </div>
-        </button>
-      </div>
-    </nav>
-  </header>
-
-  <!-- Mobile nav panel (wired to fixed nav hamburger) -->
-  <div class="nav_mobile" data-nav="closed">
-    <div class="nav_mobile_contain">
-      <div class="mobile_nav_group">
-        <a href="index.html" class="mobile_nav_link">Home</a>
-        <a href="about.html" class="mobile_nav_link">About</a>
-        <a href="roi.html" class="mobile_nav_link">ROI Calculator</a>
-        <a href="collision-detection-and-prevention.html" class="mobile_nav_link">Collision Prevention</a>
-        <a href="auto-stack.html" class="mobile_nav_link">Auto-Stacking</a>
-        <a href="path-planning.html" class="mobile_nav_link">Path Planning</a>
-        <a href="autonomous-tugs.html" class="mobile_nav_link">Autonomous Tugs</a>
-        <a href="verifiable-audit-trail.html" class="mobile_nav_link">Audit Trail</a>
-        <a href="#" data-open-contact class="mobile_nav_link">Contact Us</a>
-      </div>
-      <div class="mobile_nav_bottom">
-        <div class="mobile_copyright">© <span data-current-year></span> Sttugs</div>
-      </div>
-    </div>
-  </div>
+  <!-- ═══ NAV — populated by site.js injectSharedNav() ═══ -->
+  <header class="nav_wrap"></header>
 
   <!-- ============================================================
        MAIN CONTENT
