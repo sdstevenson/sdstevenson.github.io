@@ -6,8 +6,14 @@
 
 "use strict";
 
-/* Register GSAP plugins (loaded as defer, executes in order) */
-gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin, ScrollSmoother);
+/* Register GSAP plugins — guard against Club plugins not being loaded on detail pages */
+{
+  const _plugins = [];
+  if (typeof ScrollTrigger  !== 'undefined') _plugins.push(ScrollTrigger);
+  if (typeof DrawSVGPlugin  !== 'undefined') _plugins.push(DrawSVGPlugin);
+  if (typeof ScrollSmoother !== 'undefined') _plugins.push(ScrollSmoother);
+  if (_plugins.length) gsap.registerPlugin(..._plugins);
+}
 
 /* ============================================================
    CONSTANTS
