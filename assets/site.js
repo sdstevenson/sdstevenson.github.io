@@ -230,7 +230,6 @@ function createAnimation(smoother) {
   const linesCanvas = document.getElementById("hero-lines-canvas");
   const heroSubtitleWrap = document.querySelector(".hero_subtitle_wrap");
   const heroSubtitle = document.querySelector(".hero_subtitle");
-  const missionWrap = document.querySelector(".mission_wrap-a");
   const bgCircle = document.querySelector(".bg_circle path");
   const bgCircleSmall = document.querySelector(".bg_circle_small path");
 
@@ -239,7 +238,6 @@ function createAnimation(smoother) {
   // Initial states
   initRunwayCanvas();                         // size canvas and draw progress=0 frame
   gsap.set(heroSubtitleWrap, { y: 40, opacity: 0 });
-  gsap.set(missionWrap, { y: "100%" });
   gsap.set(svgCircle, { y: window.innerHeight * 0.4 });
   if (heroTitle) gsap.set(heroTitle, { opacity: 1 });
 
@@ -278,7 +276,7 @@ function createAnimation(smoother) {
           }
           drawRunwayLines(linesCanvas, p, logoCenterY);
           updateCircleGradient(p);
-          // Lines canvas fades out 0.25-0.40 (white bg), mission starts at 0.58 (dark).
+          // Lines canvas fades out 0.25-0.40 (white bg), white background visible
           setNavTheme(p >= 0.30 && p < 0.55 ? "light" : "dark");
         }
       },
@@ -345,16 +343,6 @@ function createAnimation(smoother) {
       ease: "power2.inOut",
     },
     0
-  );
-
-  // 5. Mission section slides up over hero — delayed so user scrolls more first
-  mainTimeline.to(
-    missionWrap,
-    {
-      y: "0%",
-      ease: "power2.inOut",
-    },
-    0.58
   );
 
   return mainTimeline;
@@ -771,11 +759,22 @@ function injectSharedNav() {
               </svg>
             </button>
             <div class="snav-dropdown">
+              <div class="snav-dropdown-section-label">Safety</div>
               <a href="collision-detection-and-prevention.html" class="snav-dropdown-item">Collision Prevention</a>
+              
+              <div class="snav-dropdown-section-label">Planning &amp; Optimization</div>
+              <a href="planning.html" class="snav-dropdown-item">Digital Twin Planning</a>
               <a href="auto-stack.html" class="snav-dropdown-item">Auto Stacking</a>
               <a href="path-planning.html" class="snav-dropdown-item">Path Planning</a>
-              <a href="hardware-and-infastructure.html" class="snav-dropdown-item">Hardware &amp; Infrastructure</a>
+              
+              <div class="snav-dropdown-section-label">Execution</div>
               <a href="autonomous-tugs.html" class="snav-dropdown-item">Autonomous Tugs</a>
+              <a href="retrofit.html" class="snav-dropdown-item">Retrofit</a>
+              
+              <div class="snav-dropdown-section-label">Infrastructure</div>
+              <a href="hardware-and-infastructure.html" class="snav-dropdown-item">Hardware &amp; Infrastructure</a>
+              
+              <div class="snav-dropdown-section-label">Compliance</div>
               <a href="verifiable-audit-trail.html" class="snav-dropdown-item">Verifiable Audit Trail</a>
             </div>
           </li>
@@ -800,11 +799,22 @@ function injectSharedNav() {
         <li>
           <div class="snav-mobile-platform-label">Platform</div>
           <div class="snav-mobile-sub open">
+            <div class="snav-mobile-section-label">Safety</div>
             <a href="collision-detection-and-prevention.html">Collision Prevention</a>
+            
+            <div class="snav-mobile-section-label">Planning &amp; Optimization</div>
+            <a href="planning.html">Digital Twin Planning</a>
             <a href="auto-stack.html">Auto Stacking</a>
             <a href="path-planning.html">Path Planning</a>
-            <a href="hardware-and-infastructure.html">Hardware &amp; Infrastructure</a>
+            
+            <div class="snav-mobile-section-label">Execution</div>
             <a href="autonomous-tugs.html">Autonomous Tugs</a>
+            <a href="retrofit.html">Retrofit</a>
+            
+            <div class="snav-mobile-section-label">Infrastructure</div>
+            <a href="hardware-and-infastructure.html">Hardware &amp; Infrastructure</a>
+            
+            <div class="snav-mobile-section-label">Compliance</div>
             <a href="verifiable-audit-trail.html">Verifiable Audit Trail</a>
           </div>
         </li>
@@ -1064,6 +1074,21 @@ function injectSharedComponents() {
       .snav--light .snav-dropdown-item { color: rgba(15,23,42,0.7); }
       .snav--light .snav-dropdown-item:hover { background: #F1F5F9; color: #0F172A; }
       .snav--light .snav-dropdown-item.snav-active { background: rgba(37,99,235,0.1); color: #1d4ed8; }
+      .snav-dropdown-section-label {
+        display: block; padding: 0.6rem 0.9rem 0.4rem;
+        font-size: 0.75rem; font-weight: 700;
+        letter-spacing: 0.08em; text-transform: uppercase;
+        color: rgba(255,255,255,0.45);
+        margin-top: 0.5rem;
+      }
+      .snav--light .snav-dropdown-section-label { color: rgba(15,23,42,0.4); }
+      .snav-dropdown-item--disabled {
+        display: block; padding: 0.6rem 0.9rem;
+        font-size: 0.875rem; font-weight: 500;
+        color: rgba(255,255,255,0.45);
+        cursor: not-allowed; border-radius: 8px;
+      }
+      .snav--light .snav-dropdown-item--disabled { color: rgba(15,23,42,0.4); }
       .snav-hamburger {
         display: none; flex-direction: column; gap: 5px;
         width: 40px; height: 40px;
@@ -1121,6 +1146,19 @@ function injectSharedComponents() {
       }
       .snav-mobile-sub a:hover { background: rgba(255,255,255,0.07); color: #fff; }
       .snav-mobile-sub a.snav-active { color: #93C5FD; font-weight: 600; background: rgba(37,99,235,0.15); }
+      .snav-mobile-section-label {
+        display: block; padding: 0.6rem 0.75rem 0.3rem;
+        font-size: 0.7rem; font-weight: 700;
+        letter-spacing: 0.08em; text-transform: uppercase;
+        color: rgba(255,255,255,0.35);
+        margin-top: 0.4rem;
+      }
+      .snav-mobile-item-disabled {
+        display: block; padding: 0.55rem 0.75rem;
+        font-size: 0.875rem; font-weight: 500;
+        color: rgba(255,255,255,0.35);
+        cursor: not-allowed; border-radius: 6px;
+      }
       .snav-mobile-link.snav-active { color: #fff; background: rgba(255,255,255,0.07); }
       .snav-mobile-cta {
         display: block; margin-top: 1.5rem;
@@ -1175,10 +1213,12 @@ function injectSharedComponents() {
             <a href="#" data-open-contact class="sttugs-footer_link">Contact</a>
             <a href="about.html" class="sttugs-footer_link">About</a>
             <a href="collision-detection-and-prevention.html" class="sttugs-footer_link">Collision Prevention</a>
+            <a href="planning.html" class="sttugs-footer_link">Digital Twin Planning</a>
             <a href="auto-stack.html" class="sttugs-footer_link">Auto-Stacking</a>
-              <a href="hardware-and-infastructure.html" class="sttugs-footer_link">Hardware &amp; Infrastructure</a>
             <a href="path-planning.html" class="sttugs-footer_link">Path Planning</a>
+            <a href="hardware-and-infastructure.html" class="sttugs-footer_link">Hardware &amp; Infrastructure</a>
             <a href="autonomous-tugs.html" class="sttugs-footer_link">Autonomous Tugs</a>
+            <a href="retrofit.html" class="sttugs-footer_link">Retrofit</a>
             <a href="verifiable-audit-trail.html" class="sttugs-footer_link">Audit Trail</a>
           </nav>
         </div>
@@ -1313,17 +1353,14 @@ function initHomeNavDropdowns() {
 /* ============================================================
    MOBILE HERO RESET
    On mobile we skip createAnimation entirely, so elements that
-   start off-screen via CSS transforms (mission_wrap-a, hero_subtitle_wrap,
-   overlay) need to be reset to their visible/natural state.
+   start off-screen via CSS transforms (hero_subtitle_wrap, overlay)
+   need to be reset to their visible/natural state.
 ============================================================ */
 function resetHeroForMobile() {
-  const missionWrap   = document.querySelector(".mission_wrap-a");
   const subtitleWrap  = document.querySelector(".hero_subtitle_wrap");
   const overlay       = document.querySelector(".overlay");
   const linesWrap     = document.querySelector(".hero_lines_wrap");
 
-  // Mission section: CSS has translateY(100%) — bring it to natural position
-  if (missionWrap) missionWrap.style.transform = "none";
   // Subtitle: CSS has translateY(80%) — show it
   if (subtitleWrap) subtitleWrap.style.transform = "none";
   // Overlay: darken but don't hide the hero entirely
