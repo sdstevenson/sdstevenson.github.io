@@ -292,3 +292,31 @@ video { display: block; width: 100%; }
   text-decoration: none;
 }
 .btn-primary:hover { background: var(--blue-dark); transform: translateY(-2px); }
+
+/* ============================================================
+   CTA STRIP — Light Variant
+   Use on pages that need a white / light background for the CTA
+============================================================ */
+.cta-strip.light,
+.cta-strip-light {
+  background: var(--light-bg);
+  color: var(--text);
+  padding: 4rem 2rem;
+  text-align: center;
+}
+.cta-strip.light h2,
+.cta-strip-light h2 {
+  color: var(--navy);
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+}
+.cta-strip.light p,
+.cta-strip-light p {
+  color: var(--muted);
+  margin-bottom: 1.25rem;
+}
+.cta-strip.light .btn-primary,
+.cta-strip-light .btn-primary {
+  background: var(--blue);
+  color: #fff;
+}
