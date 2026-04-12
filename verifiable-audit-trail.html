@@ -10,33 +10,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="assets/styles.css"/>
-  <style>
-    /* IMAGE SECTION */
-    .image-section { background: var(--navy-mid); padding: 5rem 2rem; }
-    .image-split { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; max-width: 1100px; margin: 0 auto; }
-    @media (max-width: 768px) { .image-split { grid-template-columns: 1fr; } }
-    .image-text h2 { font-size: clamp(1.5rem, 3vw, 2.125rem); font-weight: 700; color: #fff; line-height: 1.22; letter-spacing: -0.02em; margin-bottom: 1rem; }
-    .image-text p { font-size: 0.9375rem; line-height: 1.75; color: rgba(255,255,255,0.6); }
-    .image-wrap { border-radius: 14px; overflow: hidden; background: var(--navy); box-shadow: 0 20px 60px rgba(0,0,0,0.35); }
-    .image-wrap img { width: 100%; height: auto; display: block; }
-
-    /* WHY IT MATTERS CARDS */
-    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-    @media (max-width: 900px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 480px) { .why-grid { grid-template-columns: 1fr; } }
-    .why-card { background: #fff; border: 1px solid var(--card-border); border-radius: 14px; padding: 2rem; display: flex; flex-direction: column; gap: 1rem; transition: box-shadow 0.2s, transform 0.2s; }
-    .why-card:hover { box-shadow: 0 8px 32px rgba(15,23,42,0.1); transform: translateY(-3px); }
-    .why-icon { width: 44px; height: 44px; background: rgba(37,99,235,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--blue); }
-    .why-card h3 { font-size: 1rem; font-weight: 700; color: var(--navy); }
-    .why-card p { font-size: 0.875rem; line-height: 1.7; color: var(--muted); }
-
-    /* HOW IT WORKS ROWS */
-    .how-grid { display: flex; flex-direction: column; gap: 1.25rem; max-width: 800px; }
-    .how-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 1.75rem; display: flex; gap: 1.25rem; align-items: flex-start; }
-    .how-icon { width: 44px; height: 44px; flex-shrink: 0; background: rgba(37,99,235,0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--blue-faint); }
-    .how-card h3 { font-size: 1.0625rem; font-weight: 700; color: #fff; margin-bottom: 0.4rem; }
-    .how-card p { font-size: 0.9rem; line-height: 1.65; color: rgba(255,255,255,0.55); }
-  </style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DGHZZ8BDEZ"></script>
   <script>
@@ -70,11 +43,11 @@
   </section>
 
   <!-- IMAGE SECTION -->
-  <section class="image-section">
-    <div class="image-split">
-      <div class="image-text">
+  <section class="video-section">
+    <div class="video-split">
+      <div class="video-text">
         <h2>Every Event, Captured Automatically</h2>
-        <p>Designed to run silently in the background, the audit trail will log every aircraft movement, collision warning, operator action, and system event the moment it occurs — with no manual input required from your staff.</p>
+        <p>Designed to run silently in the background, the audit trail will log every aircraft movement, collision warning, and system event the moment it occurs.</p>
       </div>
       <div class="image-wrap">
         <img src="../assets/audit_log_demo_image.jpg" alt="Audit log interface showing timestamped events" loading="lazy"/>
@@ -82,8 +55,8 @@
     </div>
   </section>
 
-  <!-- WHAT GETS LOGGED — dark -->
-  <section class="section-dark">
+  <!-- WHAT GETS LOGGED -->
+  <section class="section-light">
     <div class="section-inner">
       <div class="section-label">What Gets Logged</div>
       <h2 class="section-heading">Complete Event Coverage</h2>
@@ -138,42 +111,34 @@
   <!-- WHY IT MATTERS — light -->
   <section class="section-light">
     <div class="section-inner">
-      <div class="section-label dark-mode">Why It Matters</div>
+      <div class="section-label">Why It Matters</div>
       <h2 class="section-heading light">Protecting Your Business</h2>
-      <p class="section-subheading light" style="color: var(--muted);">The audit trail isn't just a log — it's a business protection tool that pays dividends across insurance, compliance, and operations.</p>
-      <div class="why-grid">
-        <div class="why-card">
-          <div class="why-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
-            </svg>
-          </div>
-          <h3>Insurance Protection</h3>
-          <p>In the event of a ground incident, a complete verifiable record of system state, warnings issued, and operator actions provides objective evidence of due diligence — protecting your FBO from liability.</p>
-        </div>
-        <div class="why-card">
-          <div class="why-icon">
+      <p class="section-subheading">The audit trail isn't just a log — it's a business protection tool that pays dividends across insurance, compliance, and operations.</p>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
               <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
               <path d="M12 11h4"/><path d="M12 16h4"/>
             </svg>
           </div>
-          <h3>Regulatory Compliance</h3>
-          <p>Maintain documentable records for airport authority requirements and insurance audits without any manual paperwork burden on your staff.</p>
+          <h3>Complete Protection</h3>
+          <p>In the event of a ground incident, a complete verifiable record of system state, warnings issued, and operator actions protect your FBO from liability.</p>
         </div>
-        <div class="why-card">
-          <div class="why-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-              <circle cx="9" cy="7" r="4"/>
-            </svg>
+        <div class="feature-card">
+          <div class="feature-icon">
+						<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+							<circle cx="9" cy="7" r="4"/>
+							<path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+						</svg>
           </div>
           <h3>Staff Accountability</h3>
           <p>Tie every action to a named operator. Reinforce safe practices and quickly identify the root cause of any incident during a review.</p>
         </div>
-        <div class="why-card">
-          <div class="why-icon">
+        <div class="feature-card">
+          <div class="feature-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M19.07 4.93A10 10 0 0 0 6.99 3.34"/><path d="M4 6h.01"/>
               <path d="M2.29 9.62A10 10 0 1 0 21.31 8.35"/>
@@ -184,52 +149,17 @@
           <h3>Incident Investigation</h3>
           <p>Replay any event sequence with timestamps and positional data to understand exactly what happened — and prevent it from happening again.</p>
         </div>
-        <div class="why-card">
-          <div class="why-icon">
+        <div class="feature-card">
+          <div class="feature-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>
             </svg>
           </div>
           <h3>Continuous Improvement</h3>
-          <p>Aggregate log data reveals usage patterns, peak congestion times, and recurring near-misses that inform smarter hangar layout and scheduling decisions.</p>
+          <p>Aggregate log data reveals usage patterns and recurring near-misses that inform smarter hangar layout and scheduling decisions.</p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- HOW IT WORKS — dark-mid -->
-  <section class="section-dark-mid">
-    <div class="section-inner">
-      <div class="section-label">How It Works</div>
-      <h2 class="section-heading">Automatic, Secure &amp; Always Available</h2>
-      <p class="section-subheading">No operator effort required — the system handles everything in the background.</p>
-      <div class="how-grid">
-        <div class="how-card">
-          <div class="how-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M10.268 21a2 2 0 0 0 3.464 0"/>
-              <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/>
-            </svg>
-          </div>
-          <div>
-            <h3>Automatic &amp; Secure Logging</h3>
-            <p>The audit trail will run automatically in the background — no operator action required. Every event will be written to a secure, append-only log the moment it occurs. Logs are stored locally and synced to the cloud, ensuring records are preserved even in the event of hardware failure.</p>
-          </div>
-        </div>
-        <div class="how-card">
-          <div class="how-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect width="16" height="20" x="4" y="2" rx="2" ry="2"/>
-              <line x1="12" x2="12.01" y1="18" y2="18"/>
-            </svg>
-          </div>
-          <div>
-            <h3>Search, Filter &amp; Export</h3>
-            <p>Authorized personnel can search, filter, and export logs directly from the tablet interface, generating formatted reports for specific aircraft, date ranges, or event types in seconds.</p>
-          </div>
-        </div>
-        <div class="how-card">
-          <div class="how-icon">
+        <div class="feature-card" style="max-width: 640px;">
+          <div class="feature-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M3 3v16a2 2 0 0 0 2 2h16"/>
               <path d="m19 9-5 5-4-4-3 3"/>
@@ -237,7 +167,7 @@
           </div>
           <div>
             <h3>Composite Safety Score</h3>
-            <p>All collected event data — warnings issued, incidents avoided, operator response times, and system uptime — is processed into a single, standardized safety score. This gives insurance providers an objective, data-backed view of your FBO's operational risk profile, potentially supporting lower premiums.</p>
+            <p>All collected event data — warnings issued, incidents avoided, and operator response times — is processed into a single, standardized safety score. <span class="span_blue">This gives you the data you need to potentially negotiate lower premiums.</span></p>
           </div>
         </div>
       </div>
@@ -264,24 +194,8 @@
           <div class="faq-answer"><div class="faq-answer-inner">Yes. Logs will be written to a secure write-only store. Records cannot be modified or deleted retroactively, ensuring the trail remains admissible as objective evidence in insurance or regulatory proceedings.</div></div>
         </div>
         <div class="faq-item">
-          <button class="faq-question">Can I export records for insurance or regulatory reviews? <span class="faq-icon">+</span></button>
-          <div class="faq-answer"><div class="faq-answer-inner">Yes. Authorized users can export filtered reports — by date range, aircraft, operator, or event type — directly from the tablet or web dashboard. Exports are available in standard formats suitable for submission to insurers or airport authorities.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question">Does the system continue logging if connectivity is lost? <span class="faq-icon">+</span></button>
-          <div class="faq-answer"><div class="faq-answer-inner">Yes. Logs are written locally first, then synced to the cloud. If the internet connection drops, all events continue to be captured on-device and are automatically uploaded once connectivity is restored — with no gaps in the record.</div></div>
-        </div>
-        <div class="faq-item">
           <button class="faq-question">How quickly can I retrieve records for a specific incident? <span class="faq-icon">+</span></button>
           <div class="faq-answer"><div class="faq-answer-inner">Instantly. The search interface lets you filter by timestamp, aircraft tail number, operator, or event type. Relevant records surface in seconds, so incident reviews that previously took hours can be completed in minutes.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question">Does the audit trail integrate with existing hangar management or FBO software? <span class="faq-icon">+</span></button>
-          <div class="faq-answer"><div class="faq-answer-inner">Yes. We plan on providing secure API endpoints so event data can be fed into your existing FBO software, maintenance tracking systems, or reporting tools. Contact us to discuss your specific integration requirements.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question">What events are logged automatically versus manually? <span class="faq-icon">+</span></button>
-          <div class="faq-answer"><div class="faq-answer-inner">All events are logged automatically with no manual input required from staff. Aircraft movements, collision warnings, operator confirmations, overrides, and system health events are all captured the moment they occur.</div></div>
         </div>
       </div>
     </div>
@@ -290,7 +204,7 @@
   <!-- CTA -->
   <div class="cta-strip">
     <h2>Want full accountability in your hangar?</h2>
-    <p>Reach out to join the early access list or see a preview of the demo.</p>
+    <p>Reach out to join the early access list and learn more.</p>
     <a href="#" data-open-contact class="btn-primary">Contact Us</a>
   </div>
 

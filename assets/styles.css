@@ -292,6 +292,7 @@ video { display: block; width: 100%; }
   color: var(--blue);
 }
 .benefit-card p { font-size: 0.9375rem; line-height: 1.65; color: var(--muted); font-weight: 500; }
+.span_blue { color: var(--blue); font-weight: 600; }
 .span_accent { color: var(--accent); font-weight: 600; background: var(--accent-background); }
 
 /* ── FAQ ── */
