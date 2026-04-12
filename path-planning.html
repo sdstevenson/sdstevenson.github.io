@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>Path Planning – Sttugs</title>
+  <title>Tow-Path Planning - Sttugs</title>
   <meta name="description" content="Generate safe, collision-free tow paths for moving aircraft through congested hangar layouts. Sequence multi-aircraft moves with confidence."/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <link rel="icon" href="./favicon/favicon.ico" sizes="any"/>
@@ -11,29 +11,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="assets/styles.css"/>
   <style>
-    /* COMING SOON BLOCK */
-    .coming-soon-section { background: var(--navy-mid); padding: 5rem 2rem; }
-    .coming-soon-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
-    @media (max-width: 768px) { .coming-soon-inner { grid-template-columns: 1fr; } }
-    .coming-soon-text h2 { font-size: clamp(1.5rem, 3vw, 2.125rem); font-weight: 700; color: #fff; line-height: 1.22; letter-spacing: -0.02em; margin-bottom: 1rem; }
-    .coming-soon-text p { font-size: 0.9375rem; line-height: 1.75; color: rgba(255,255,255,0.6); }
-    .coming-soon-visual {
-      border-radius: 14px; overflow: hidden;
-      background: var(--navy);
-      border: 1px solid rgba(255,255,255,0.08);
-      aspect-ratio: 16/9;
-      display: flex; align-items: center; justify-content: center;
-      position: relative;
-    }
-    .coming-soon-visual svg { width: 100%; height: 100%; }
-    .coming-soon-badge {
-      position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
-      background: rgba(245,166,35,0.15); border: 1px solid rgba(245,166,35,0.4);
-      color: var(--accent); font-size: 0.75rem; font-weight: 700;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      padding: 0.35rem 0.9rem; border-radius: 20px;
-    }
-
     /* TWO-PART GRID */
     .two-part-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
     @media (max-width: 700px) { .two-part-grid { grid-template-columns: 1fr; } }
@@ -67,7 +44,7 @@
       </svg>
     </div>
     <!-- <div class="detail-hero-tag">Platform — Intelligence Layer</div> -->
-    <h1>Path Planning</h1>
+    <h1>Tow-Path Planning</h1>
     <p>Generate safe, collision-free tow paths for moving aircraft through congested hangar layouts. Sequence multi-aircraft moves with confidence and eliminate guesswork from ground handling.</p>
     <div class="alpha-badge">
       <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
@@ -77,10 +54,10 @@
   </section>
 
   <!-- COMING SOON VISUAL -->
-  <section class="coming-soon-section">
+  <section class="coming-soon-section section-light">
     <div class="coming-soon-inner">
       <div class="coming-soon-text">
-        <h2>Intelligent Route Generation</h2>
+        <h2>Intelligent Tow-Path Generation</h2>
         <p>Our system generates efficient tow paths that avoid obstacles, maintain safe clearances from other aircraft, and provide clear visual guidance on your tablet for every move. Live demo coming soon.</p>
       </div>
       <div class="coming-soon-visual">
@@ -147,29 +124,42 @@
   </section>
 
   <!-- KEY FEATURES -->
-  <section class="section-dark">
+  <section class="section-light">
     <div class="section-inner">
       <div class="section-label">Capabilities</div>
       <h2 class="section-heading">Key Features</h2>
-      <p class="section-subheading">Advanced path generation for maximum safety and efficiency.</p>
+      <p class="section-subheading">Advanced tow-path generation for maximum safety and efficiency.</p>
       <div class="feature-grid">
-        <div class="feature-card">
+        <!-- <div class="feature-card">
           <div class="feature-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/><path d="M15 3v18"/>
             </svg>
           </div>
           <h3>Optimal Positioning</h3>
-          <p>Smart algorithms determine the most efficient aircraft placement for maximum capacity before paths are generated.</p>
-        </div>
+          <p>Smart algorithms determine the most efficient aircraft placement for maximum capacity before tow-paths are generated.</p>
+        </div> -->
         <div class="feature-card">
           <div class="feature-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/>
             </svg>
           </div>
-          <h3>Dynamic Path Planning</h3>
+          <h3>Dynamic Tow-Path Planning</h3>
           <p>Real-time route calculation that maintains safe clearances from all aircraft and hangar obstacles as conditions change.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/>
+              <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/>
+              <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/>
+              <path d="M6.5 5 L4.5 9.5 L8.5 9.5 L6.5 14"/>
+              <path d="M17.5 5 L15.5 9.5 L19.5 9.5 L17.5 14"/>
+            </svg>
+          </div>
+          <h3>Unburying Headache</h3>
+          <p>When an aircraft at the back of your hangar needs to be moved, our algorithm determines other aircraft that need to be moved, and the tow-paths to safely move them.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">
@@ -178,45 +168,24 @@
             </svg>
           </div>
           <h3>Visual Guidance</h3>
-          <p>Clear path visualization on your tablet gives operators real-time guidance for every aircraft movement — no guesswork required.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/>
-            </svg>
-          </div>
-          <h3>Space Analytics</h3>
-          <p>Continuous monitoring and optimization of hangar utilization, revealing opportunities to improve throughput over time.</p>
+          <p>Operators simply follow the collision-free tow-path shown on screen, making towing safer and more efficient.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- BENEFITS — light -->
+  <!-- BENEFITS -->
   <section class="section-light">
     <div class="section-inner">
       <div class="section-label dark-mode">Benefits</div>
-      <h2 class="section-heading light">How This Helps You</h2>
-      <p class="section-subheading light">Smarter movement decisions that pay off every day.</p>
+      <h2 class="section-heading light">Increase Profits by <span class="span_accent">$12,000</span> Annually</h2>
+      <p class="section-subheading light">Estimated ROI for 4 hours spent stacking per day, 35$ per man hour.</p>
       <div class="benefit-grid">
         <div class="benefit-card">
           <div class="benefit-check">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
           </div>
-          <p>Maximize hangar capacity and revenue by fitting more aircraft into the same footprint.</p>
-        </div>
-        <div class="benefit-card">
-          <div class="benefit-check">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
-          </div>
-          <p>Save time with instant stacking and routing decisions that guide every operator clearly.</p>
-        </div>
-        <div class="benefit-card">
-          <div class="benefit-check">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
-          </div>
-          <p>Eliminate collisions with smart path planning that accounts for every obstacle and wingtip.</p>
+          <p>Reclaim <span class="span_accent">~350 man hours per year</span> (~1.0 man hours per day) spent stacking and unburying aircraft.</p>
         </div>
       </div>
     </div>
@@ -229,14 +198,14 @@
       <h2 class="section-heading" style="text-align:center; margin-bottom:0.5rem;">Frequently Asked Questions</h2>
       <p class="section-subheading" style="max-width:560px; margin:0 auto 3rem; text-align:center;">Everything you need to know about Path Planning and how it fits into your operation.</p>
       <div class="faq-list">
-        <div class="faq-item">
+        <!-- <div class="faq-item">
           <button class="faq-question">How does the system know the current layout of the hangar? <span class="faq-icon">+</span></button>
           <div class="faq-answer"><div class="faq-answer-inner">Our overhead camera array provides a continuous, stitched top-down view of the entire hangar floor. Aircraft positions, obstacles, and open areas are detected and mapped in real-time before each path is generated.</div></div>
-        </div>
-        <div class="faq-item">
+        </div> -->
+        <!-- <div class="faq-item">
           <button class="faq-question">How quickly is a tow path generated? <span class="faq-icon">+</span></button>
           <div class="faq-answer"><div class="faq-answer-inner">Paths are generated in seconds. The operator selects the aircraft and destination on the tablet, and the system immediately returns a safe route accounting for all current obstacles and clearances.</div></div>
-        </div>
+        </div> -->
         <div class="faq-item">
           <button class="faq-question">What if there are aircraft preventing a given tow path? <span class="faq-icon">+</span></button>
           <div class="faq-answer"><div class="faq-answer-inner">Path planning considers all aircraft positions during path planning, determining if other aircraft need to be moved and notifying the user as needed.</div></div>
@@ -245,10 +214,10 @@
           <button class="faq-question">What happens if an obstacle appears after a path has been generated? <span class="faq-icon">+</span></button>
           <div class="faq-answer"><div class="faq-answer-inner">The camera system continuously monitors the hangar during a move. If a new obstacle enters the path corridor, the collision detection layer triggers an alert to the operator immediately, and an updated route can be generated on demand.</div></div>
         </div>
-        <div class="faq-item">
+        <!-- <div class="faq-item">
           <button class="faq-question">Can operators modify a suggested path before executing it? <span class="faq-icon">+</span></button>
           <div class="faq-answer"><div class="faq-answer-inner">Yes. Operators can review the suggested path on the tablet and adjust the destination or request an alternate route before committing to the move. The system always requires operator confirmation before execution.</div></div>
-        </div>
+        </div> -->
         <div class="faq-item">
           <button class="faq-question">Does path planning work with all aircraft types? <span class="faq-icon">+</span></button>
           <div class="faq-answer"><div class="faq-answer-inner">Yes. The system uses aircraft-specific dimensions to calculate clearances. We maintain a growing database of aircraft types and can add custom profiles for your fleet.</div></div>

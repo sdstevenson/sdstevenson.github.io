@@ -159,6 +159,36 @@ video { display: block; width: 100%; }
 }
 .section-subheading.light { color: var(--muted); }
 
+/* ── COMING SOON (Light + Dark variants) ── */
+.coming-soon-section { padding: 5rem 2rem; }
+.coming-soon-section.section-light { background: var(--light-bg); }
+.coming-soon-section.section-dark { background: var(--navy-mid); }
+.coming-soon-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+@media (max-width: 768px) { .coming-soon-inner { grid-template-columns: 1fr; } }
+.coming-soon-text h2 { font-size: clamp(1.5rem, 3vw, 2.125rem); font-weight: 700; line-height: 1.22; letter-spacing: -0.02em; margin-bottom: 1rem; }
+.coming-soon-text p { font-size: 0.9375rem; line-height: 1.75; }
+.coming-soon-section.section-light .coming-soon-text h2 { color: var(--navy); }
+.coming-soon-section.section-light .coming-soon-text p { color: var(--muted); }
+.coming-soon-section.section-dark .coming-soon-text h2 { color: #fff; }
+.coming-soon-section.section-dark .coming-soon-text p { color: rgba(255,255,255,0.6); }
+.coming-soon-visual {
+  border-radius: 14px; overflow: hidden;
+  background: var(--navy);
+  border: 1px solid var(--navy);
+  aspect-ratio: 16/9;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.coming-soon-visual svg { width: 100%; height: 100%; }
+.coming-soon-badge {
+  position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+  background: var(--accent-background); border: 1px solid rgba(245,166,35,0.4);
+  color: var(--accent); font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.35rem 0.9rem; border-radius: 20px;
+}
+
+
 /* ── VIDEO SECTION ── */
 /* Colors from collision-prevention.html */
 .video-section { background: var(--light-bg); padding: 5rem 2rem; }
