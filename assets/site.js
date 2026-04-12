@@ -767,8 +767,8 @@ function injectSharedNav() {
               <a href="path-planning.html" class="snav-dropdown-item">Tow-Path Planning</a>
               
               <div class="snav-dropdown-section-label">Execution</div>
-              <a href="autonomous-tugs.html" class="snav-dropdown-item">Autonomous Tugs</a>
               <a href="retrofit.html" class="snav-dropdown-item">Retrofit</a>
+              <a href="autonomous-tugs.html" class="snav-dropdown-item">Autonomous Tugs</a>
               
               <div class="snav-dropdown-section-label">Infrastructure</div>
               <a href="hardware-and-infastructure.html" class="snav-dropdown-item">Hardware &amp; Infrastructure</a>
@@ -805,8 +805,8 @@ function injectSharedNav() {
             <a href="planning.html">Digital Twin Planning</a>
             <a href="path-planning.html">Tow-Path Planning</a>
             
-            <div class="snav-mobile-section-label">Execution</div>
             <a href="autonomous-tugs.html">Autonomous Tugs</a>
+            <div class="snav-mobile-section-label">Execution</div>
             <a href="retrofit.html">Retrofit</a>
             
             <div class="snav-mobile-section-label">Infrastructure</div>
