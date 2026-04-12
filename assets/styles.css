@@ -15,6 +15,7 @@
   --blue-faint: #93C5FD;
   --accent: #F5A623;
   --accent-hover: #d4891e;
+  --accent-background: rgba(245,166,35,0.12);
   --muted: #64748B;
   --text: #0F172A;
   --bg: #FFFFFF;
@@ -252,6 +253,7 @@ video { display: block; width: 100%; }
   color: var(--blue);
 }
 .benefit-card p { font-size: 0.9375rem; line-height: 1.65; color: var(--muted); font-weight: 500; }
+.span_accent { color: var(--accent); font-weight: 600; background: var(--accent-background); }
 
 /* ── FAQ ── */
 .faq-section { background: var(--navy); padding: 5rem 2rem; }
@@ -286,7 +288,7 @@ video { display: block; width: 100%; }
   align-items: center;
   gap: 0.5rem;
   margin-top: 1.25rem;
-  background: rgba(245,166,35,0.12);
+  background: var(--accent-background);
   border: 1px solid rgba(245,166,35,0.45);
   color: var(--accent);
   font-size: 0.75rem;

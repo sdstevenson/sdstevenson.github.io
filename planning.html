@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>Digital Twin Planning – Sttugs</title>
+  <title>Hangar Planning and Auto-Stack - Sttugs</title>
   <meta name="description" content="Create optimal hangar layouts by dragging aircraft around your hangar on a live camera overlay. View your plan in real-time, make changes from anywhere, and collaborate with your team."/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <link rel="icon" href="./favicon/favicon.ico" sizes="any"/>
@@ -28,12 +28,13 @@
   <section class="detail-hero">
     <div class="detail-hero-icon">
       <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+        <rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/>
+        <rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/>
       </svg>
     </div>
     <!-- <div class="detail-hero-tag">Platform — Planning Layer</div> -->
-    <h1>Digital Twin Planning</h1>
-    <p>Eliminate trial-and-error hangar layouts. Create optimal aircraft positions by dragging mock aircraft around your hangar on a live camera overlay. Plan with confidence, collaborate with your team in real-time, and execute flawlessly.</p>
+    <h1>Smart Hangar Planning & Auto-Stack</h1>
+    <p>Eliminate trial-and-error hangar-tetris. Our software finds the stacking plan that optimizes your hangar space, allowing you to stack more aircraft. Plan with confidence, stack more aircraft, and execute flawlessly.</p>
     <div class="alpha-badge">
       <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
       Alpha Testing Starting June 2026
@@ -41,12 +42,33 @@
     <!-- <a href="index.html#platform" class="back-link">← Back to Platform</a> -->
   </section>
 
-  <!-- VIDEO 1 — Planning demo (placeholder) -->
+  <!-- AutoStack Demo -->
   <div class="video-section">
     <div class="video-split">
       <div class="video-text">
         <h2>See Your Plan Come to Life</h2>
-        <p>Watch how our digital twin planning mode lets you design optimal hangar layouts in real-time. Drag aircraft around your hangar floor, see changes instantly on a live camera overlay, and collaborate with your entire team—all from your tablet.</p>
+        <p>Watch as our algorithm determines the optimal stacking configuration for your aircraft, maximizing your hangar space.
+          This data will stream directly to users' devices, allowing them to view and make changes from anywhere.
+        </p>
+      </div>
+      <div class="video-wrap">
+        <video muted playsinline preload="metadata" id="vid-autostack">
+          <source src="../assets/auto_stack_demo.mp4" type="video/mp4"/>
+        </video>
+        <div class="video-play-overlay" id="play-autostack">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Planning demo -->
+  <div class="video-section">
+    <div class="video-split reverse">
+      <div class="video-text">
+        <h2>Stack With Precision</h2>
+        <p>Through our intuitive live-camera interface, visualize exactly where each aircraft needs to be placed in your hangar. 
+          Test layouts virtually, and ensure aoircraft are placed exactly as planned.</p>
       </div>
       <div class="video-wrap">
         <div style="width: 100%; padding-bottom: 56.25%; position: relative; background: linear-gradient(135deg, rgba(37,99,235,0.15) 0%, rgba(59,130,246,0.1) 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
@@ -62,29 +84,29 @@
   </div>
 
   <!-- HOW IT WORKS — dark -->
-  <section class="section-dark">
+  <section class="section-light">
     <div class="section-inner">
       <div class="section-label">How It Works</div>
       <h2 class="section-heading">Plan Smarter, Execute Flawlessly</h2>
-      <p class="section-subheading">Intuitive planning tools that turn complex hangar layouts into simple, visual operations.</p>
+      <!-- <p class="section-subheading">Intuitive planning tools that turn complex hangar layouts into simple, visual operations.</p> -->
       <div class="feature-grid">
         <div class="feature-card">
           <div class="feature-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/>
+              <circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/>
             </svg>
           </div>
-          <h3>Live Camera Overlay</h3>
-          <p>See proposed aircraft positions overlaid directly onto a live camera stream of your hangar floor, giving you absolute confidence in every placement decision.</p>
+          <h3>Optimal Positioning</h3>
+          <p>Smart algorithms analyze aircraft dimensions, hangar geometry, and arrival/departure schedules to determine the most efficient placement for your hangar.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M5 9l-3 3m0 0l3 3m-3-3h12a4 4 0 010 8h-4m3-11l3-3m0 0l-3-3m3 3H5a4 4 0 000 8h4"/>
+              <polygon points="3 11 22 2 13 21 11 13 3 11"/>
             </svg>
           </div>
-          <h3>Intuitive Drag-and-Drop</h3>
-          <p>Move mock aircraft around your hangar layout using simple, intuitive gestures on your tablet. No training required.</p>
+          <h3>Visual Guidance</h3>
+          <p>See proposed aircraft positions overlaid directly onto a live camera stream of your hangar floor, giving you confidence in every stacking decision.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">
@@ -93,25 +115,16 @@
             </svg>
           </div>
           <h3>Real-Time Collaboration</h3>
-          <p>Multiple team members can edit the plan simultaneously, with changes appearing instantly across all devices for seamless coordination.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="1"/><path d="M19.07 4.93a10 10 0 0 0-14.14 0m0 14.14a10 10 0 0 0 14.14 0M4.93 4.93a10 10 0 0 1 14.14 0m0 14.14a10 10 0 0 1-14.14 0"/>
-            </svg>
-          </div>
-          <h3>Remote Planning</h3>
           <p>Design and adjust hangar configurations from anywhere—your ramp, office, or even off site—without disrupting current operations.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 2.2"/>
+              <path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/>
             </svg>
           </div>
-          <h3>Exact Physical Placement</h3>
-          <p>When moving aircraft on the ramp, see both the aircraft you're towing and its target placement on a single screen, ensuring perfect positioning every time.</p>
+          <h3>Space Analytics</h3>
+          <p>Continuous monitoring and reporting on hangar utilization, revealing patterns and opportunities to further improve capacity and revenue per square foot.</p>
         </div>
       </div>
     </div>
@@ -121,26 +134,20 @@
   <section class="section-light">
     <div class="section-inner">
       <div class="section-label dark-mode">Benefits</div>
-      <h2 class="section-heading light">How This Helps You</h2>
-      <p class="section-subheading light">Transform the way you plan and execute hangar operations.</p>
+      <h2 class="section-heading light">Increase Profits by <span class="span_accent">$280,000</span> Per Year</h2>
+      <p class="section-subheading light">Estimated ROI for 100,000 sq. ft. hangar, 5% utilization boost, 4.5 $/sq. ft. monthly rate, 4 hrs spent stacking per day, 35$ per man hour.</p>
       <div class="benefit-grid">
         <div class="benefit-card">
           <div class="benefit-check">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
           </div>
-          <p>Edit your hangar plan from anywhere—ramp, office, or anywhere else—without having to go back to your desk.</p>
+          <p>Increase hangar occupancy by a conservative 5% with optimized aircraft placement, generating an additional <span class="span_accent">$270,000</span> in annual profits.</p>
         </div>
         <div class="benefit-card">
           <div class="benefit-check">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
           </div>
-          <p>See your exact aircraft plan overlaid directly on your live hangar camera feed, ensuring perfect positioning every time.</p>
-        </div>
-        <div class="benefit-card">
-          <div class="benefit-check">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
-          </div>
-          <p>Eliminate the trial-and-error of "hangar tetris" by planning layouts digitally before moving a single aircraft, saving time and reducing unnecessary moves.</p>
+          <p>Save <span class="span_accent">$12,000</span> on labor costs, by reclaiming 180 man hours per year (or ~0.5 hours per day) spent manually planning and stacking aircraft.</p>
         </div>
       </div>
     </div>
@@ -155,7 +162,7 @@
       <div class="faq-list" id="faq-list">
         <div class="faq-item">
           <button class="faq-question">How accurate are the virtual aircraft positions? <span class="faq-icon">+</span></button>
-          <div class="faq-answer"><div class="faq-answer-inner">Our virtual aircraft models are calibrated to the exact dimensions of your aircraft, and the live camera overlay uses real hangar geometry to ensure 1:1 accuracy between virtual placement and physical positioning.</div></div>
+          <div class="faq-answer"><div class="faq-answer-inner">Our virtual aircraft models are calibrated to the exact dimensions of your aircraft, and the live camera overlay uses real hangar geometry to ensure sub 10 cm accuracy between virtual placement and physical positioning.</div></div>
         </div>
         <div class="faq-item">
           <button class="faq-question">Can multiple people plan at the same time? <span class="faq-icon">+</span></button>
@@ -173,26 +180,26 @@
           <button class="faq-question">How does live camera overlay work? <span class="faq-icon">+</span></button>
           <div class="faq-answer"><div class="faq-answer-inner">The system uses STTUGS' hangar cameras to stream a live view to your tablet. Virtual aircraft are then overlaid on top in real-time, allowing you to see exactly how the plan will look.</div></div>
         </div>
-        <div class="faq-item">
+        <!-- <div class="faq-item">
           <button class="faq-question">What devices can I use for planning? <span class="faq-icon">+</span></button>
           <div class="faq-answer"><div class="faq-answer-inner">You can use any device that supports a modern web browser, including tablets, laptops, and desktop computers.</div></div>
-        </div>
-        <div class="faq-item">
+        </div> -->
+        <!-- <div class="faq-item">
           <button class="faq-question">Can I save multiple layout plans? <span class="faq-icon">+</span></button>
           <div class="faq-answer"><div class="faq-answer-inner">Yes. You can create, save, and manage unlimited layout plans, allowing you to A/B test different configurations or keep historical records of past layouts.</div></div>
-        </div>
-        <div class="faq-item">
+        </div> -->
+        <!-- <div class="faq-item">
           <button class="faq-question">How does this integrate with the rest of the Sttugs platform? <span class="faq-icon">+</span></button>
           <div class="faq-answer"><div class="faq-answer-inner">Your planned layout feeds directly into our Path Planning system, allowing you to create a plan and get collision-free tow paths to finalize it.</div></div>
-        </div>
+        </div> -->
         <div class="faq-item">
           <button class="faq-question">Is there training required to use it? <span class="faq-icon">+</span></button>
           <div class="faq-answer"><div class="faq-answer-inner">The interface is designed to be intuitive with minimal training. We provide onboarding support and documentation to get your team up to speed quickly.</div></div>
         </div>
-        <div class="faq-item">
-          <button class="faq-question">How long does implementation take? <span class="faq-icon">+</span></button>
+        <!-- <div class="faq-item">
+          <button class="faq-question">How long does it take to get started? <span class="faq-icon">+</span></button>
           <div class="faq-answer"><div class="faq-answer-inner">Initial setup typically takes a few days, with camera calibration handled by our team during installation.</div></div>
-        </div>
+        </div> -->
       </div>
     </div>
   </section>

@@ -764,7 +764,6 @@ function injectSharedNav() {
               
               <div class="snav-dropdown-section-label">Planning &amp; Optimization</div>
               <a href="planning.html" class="snav-dropdown-item">Digital Twin Planning</a>
-              <a href="auto-stack.html" class="snav-dropdown-item">Auto Stacking</a>
               <a href="path-planning.html" class="snav-dropdown-item">Path Planning</a>
               
               <div class="snav-dropdown-section-label">Execution</div>
@@ -804,7 +803,6 @@ function injectSharedNav() {
             
             <div class="snav-mobile-section-label">Planning &amp; Optimization</div>
             <a href="planning.html">Digital Twin Planning</a>
-            <a href="auto-stack.html">Auto Stacking</a>
             <a href="path-planning.html">Path Planning</a>
             
             <div class="snav-mobile-section-label">Execution</div>
@@ -1214,7 +1212,6 @@ function injectSharedComponents() {
             <a href="about.html" class="sttugs-footer_link">About</a>
             <a href="collision-prevention.html" class="sttugs-footer_link">Collision Prevention</a>
             <a href="planning.html" class="sttugs-footer_link">Digital Twin Planning</a>
-            <a href="auto-stack.html" class="sttugs-footer_link">Auto-Stacking</a>
             <a href="path-planning.html" class="sttugs-footer_link">Path Planning</a>
             <a href="hardware-and-infastructure.html" class="sttugs-footer_link">Hardware &amp; Infrastructure</a>
             <a href="autonomous-tugs.html" class="sttugs-footer_link">Autonomous Tugs</a>
