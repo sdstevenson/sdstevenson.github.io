@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>Collision Detection &amp; Prevention – Sttugs</title>
+  <title>Collision Prevention – Sttugs</title>
   <meta name="description" content="Constant sensor-based monitoring creates an invisible safety net in your hangar. Real-time alerts and auto-brake triggers prevent accidents before they happen."/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <link rel="icon" href="./favicon/favicon.ico" sizes="any"/>
@@ -32,8 +32,8 @@
       </svg>
     </div>
     <!-- <div class="detail-hero-tag">Platform — Safety Layer</div> -->
-    <h1>Collision Detection &amp; Prevention</h1>
-    <p>The foundation of safe hangar operations. Our advanced sensor technology creates an invisible safety net, alerting operators of potential collisions and automatically stopping them before they happen.</p>
+    <h1>Collision Prevention</h1>
+    <p>Our advanced sensor technology continuously monitors your hangar floor, including aircraft, GPUs, and tugs. Operators receive real-time alerts when objects get too close to eachother, preventing collisions before they happen.</p>
     <div class="alpha-badge">
       <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
       Alpha Testing Starting December 2026
@@ -46,10 +46,11 @@
     <div class="video-split">
       <div class="video-text">
         <h2>Protection From Every Angle</h2>
-        <p>Watch how our multi-sensor system detects collisions in real-time in a simulated hangar environment, stopping them before they happen. The system processes thousands of data points per second to ensure complete hangar safety.</p>
+        <p>Watch how our system detects collisions in real-time in a simulated hangar environment, working in 3D to accurately detect wing-over-wing collisions. 
+          The system processes thousands of data points per second to ensure complete hangar safety.</p>
       </div>
       <div class="video-wrap">
-        <video muted playsinline preload="metadata" id="vid-sim">
+        <video muted playsinline preload="metadata" id="vid-sim" controls>
           <source src="../assets/collision_detection_demo_sim.mp4" type="video/mp4"/>
         </video>
         <div class="video-play-overlay" id="play-sim">
@@ -77,12 +78,11 @@
     </div>
   </div> -->
 
-  <!-- HOW IT WORKS — dark -->
-  <section class="section-dark">
+  <!-- HOW IT WORKS -->
+  <section class="section-light">
     <div class="section-inner">
       <div class="section-label">How It Works</div>
       <h2 class="section-heading">Multi-Layered Protection</h2>
-      <p class="section-subheading">A comprehensive, always-on safety system ensuring zero collision incidents.</p>
       <div class="feature-grid">
         <div class="feature-card">
           <div class="feature-icon">
@@ -97,7 +97,7 @@
             </svg>
           </div>
           <h3>Multi-Camera Array</h3>
-          <p>A comprehensive camera setup provides 360° coverage of every corner of your hangar with no blind spots.</p>
+          <p>Our unique camera setup provides full coverage of every corner of your hangar with no blind spots.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">
@@ -106,18 +106,7 @@
             </svg>
           </div>
           <h3>Real-Time Processing</h3>
-          <p>Instant threat detection with no delay. The system evaluates thousands of data points per second and triggers automatic emergency stops.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/>
-              <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/>
-              <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/>
-            </svg>
-          </div>
-          <h3>Predictive Analysis</h3>
-          <p>AI-powered prediction flags potential collision scenarios before they occur, giving operators time to react safely.</p>
+          <p>STTUGS evaluates thousands of data points per second, providing instant threat detection.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">
@@ -129,12 +118,23 @@
           <h3>Alert System</h3>
           <p>Immediate visual and audio notifications are sent to operators via our tablet interface the moment a risk is detected.</p>
         </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/>
+              <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/>
+              <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/>
+            </svg>
+          </div>
+          <h3>Predictive Analysis</h3>
+          <p>Smart prediction flags potential collision scenarios before they happen, giving operators time to react safely.</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- HOW THIS HELPS YOU — light -->
-  <section class="section-light">
+  <!-- <section class="section-light">
     <div class="section-inner">
       <div class="section-label dark-mode">Benefits</div>
       <h2 class="section-heading light">How This Helps You</h2>
@@ -160,7 +160,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- FAQ -->
   <section class="faq-section">
@@ -181,21 +181,21 @@
           <button class="faq-question">Are wing-walkers required with this system? <span class="faq-icon">+</span></button>
           <div class="faq-answer"><div class="faq-answer-inner">This system eliminates the need for wing walkers, though having one present is still encouraged as an additional safety measure.</div></div>
         </div>
-        <div class="faq-item">
+        <!-- <div class="faq-item">
           <button class="faq-question">Does collision detection work in real-time? <span class="faq-icon">+</span></button>
           <div class="faq-answer"><div class="faq-answer-inner">Yes — the system operates in real-time with no delay. Alerts are triggered the moment a collision risk is detected.</div></div>
-        </div>
+        </div> -->
         <div class="faq-item">
           <button class="faq-question">What sensors do you use? <span class="faq-icon">+</span></button>
           <div class="faq-answer"><div class="faq-answer-inner">Our system uses a series of cameras to ensure full coverage of your hangar floor and airspace.</div></div>
         </div>
-        <div class="faq-item">
+        <!-- <div class="faq-item">
           <button class="faq-question">How many sensors are needed to eliminate blind spots? <span class="faq-icon">+</span></button>
           <div class="faq-answer"><div class="faq-answer-inner">The number depends on your hangar size. We conduct a site survey for every installation and always guarantee full coverage.</div></div>
-        </div>
+        </div> -->
         <div class="faq-item">
           <button class="faq-question">Does the system require special infrastructure? <span class="faq-icon">+</span></button>
-          <div class="faq-answer"><div class="faq-answer-inner">All we require is an indoor hangar with sufficient lighting — no special construction is needed.</div></div>
+          <div class="faq-answer"><div class="faq-answer-inner">All we require is an indoor hangar with sufficient lighting and permission to install cameras— no special construction is needed.</div></div>
         </div>
         <div class="faq-item">
           <button class="faq-question">What is the upfront cost? <span class="faq-icon">+</span></button>
@@ -205,10 +205,10 @@
           <button class="faq-question">Does the system detect the full aircraft surface or just wingtips? <span class="faq-icon">+</span></button>
           <div class="faq-answer"><div class="faq-answer-inner">Our system detects collisions with the entire aircraft surface — wingtips, tail, nose, and fuselage — ensuring complete protection.</div></div>
         </div>
-        <div class="faq-item">
+        <!-- <div class="faq-item">
           <button class="faq-question">Do you support installations across the US and internationally? <span class="faq-icon">+</span></button>
           <div class="faq-answer"><div class="faq-answer-inner">Yes. We support installations across the United States and internationally.</div></div>
-        </div>
+        </div> -->
         <div class="faq-item">
           <button class="faq-question">How long does installation take? <span class="faq-icon">+</span></button>
           <div class="faq-answer"><div class="faq-answer-inner">Installation can be completed in just a few days, with a flexible schedule to minimize disruption to your hangar operations.</div></div>
@@ -219,8 +219,8 @@
 
   <!-- CTA STRIP -->
   <div class="cta-strip">
-    <h2>Ready to protect your hangar?</h2>
-    <p>Reach out to join the early access list or see a preview of the demo.</p>
+    <h2>Protect your assets. Get in contact with us today.</h2>
+    <p>Prevent hangar rash and free up your staff, protecting you against AoG costs and reclaiming hundreds of hours in labor hours.</p>
     <a href="#" data-open-contact class="btn-primary">Contact Us</a>
   </div>
 
