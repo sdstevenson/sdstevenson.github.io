@@ -232,19 +232,25 @@ video { display: block; width: 100%; }
 }
 .video-play-overlay.hidden { display: none; }
 
-/* ── FEATURE CARDS ── */
+/* ── FEATURE CARDS — centered, responsive flex layout ── */
 .feature-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 1.25rem;
+  justify-content: center;
+  align-items: stretch;
 }
-@media (max-width: 900px) { .feature-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 480px) { .feature-grid { grid-template-columns: 1fr; } }
 .feature-card {
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 14px; padding: 1.75rem;
+  border-radius: 14px;
+  padding: 1.75rem;
   transition: background 0.2s, transform 0.2s;
+  flex: 1 1 240px;
+  max-width: 320px;
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
 }
 .feature-card:hover { background: rgba(255,255,255,0.08); transform: translateY(-3px); }
 .feature-icon {
@@ -260,19 +266,22 @@ video { display: block; width: 100%; }
 }
 .feature-card p { font-size: 0.9rem; line-height: 1.65; color: rgba(255,255,255,0.55); }
 
-/* ── BENEFIT GRID ── */
+/* ── BENEFIT GRID — centered, responsive flex layout ── */
 .benefit-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 1.5rem;
+  justify-content: center;
+  align-items: stretch;
 }
-@media (max-width: 700px) { .benefit-grid { grid-template-columns: 1fr; } }
 .benefit-card {
   background: #fff;
   border: 1px solid var(--card-border);
   border-radius: 14px; padding: 2rem;
   display: flex; align-items: flex-start; gap: 1rem;
   transition: box-shadow 0.2s, transform 0.2s;
+  flex: 1 1 300px;
+  max-width: 500px;
 }
 .benefit-card:hover { box-shadow: 0 8px 32px rgba(15,23,42,0.1); transform: translateY(-3px); }
 .benefit-check {
