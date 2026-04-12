@@ -767,7 +767,7 @@ function injectSharedNav() {
               <a href="path-planning.html" class="snav-dropdown-item">Tow-Path Planning</a>
               
               <div class="snav-dropdown-section-label">Execution</div>
-              <a href="retrofit.html" class="snav-dropdown-item">Retrofit</a>
+              <a href="retrofit.html" class="snav-dropdown-item">Retrofit Kit</a>
               <a href="autonomous-tugs.html" class="snav-dropdown-item">Autonomous Tugs</a>
               
               <div class="snav-dropdown-section-label">Infrastructure</div>
@@ -807,7 +807,7 @@ function injectSharedNav() {
             
             <a href="autonomous-tugs.html">Autonomous Tugs</a>
             <div class="snav-mobile-section-label">Execution</div>
-            <a href="retrofit.html">Retrofit</a>
+            <a href="retrofit.html">Retrofit Kit</a>
             
             <div class="snav-mobile-section-label">Infrastructure</div>
             <a href="hardware-and-infastructure.html">Hardware &amp; Infrastructure</a>
@@ -1215,7 +1215,7 @@ function injectSharedComponents() {
             <a href="path-planning.html" class="sttugs-footer_link">Tow-Path Planning</a>
             <a href="hardware-and-infastructure.html" class="sttugs-footer_link">Hardware &amp; Infrastructure</a>
             <a href="autonomous-tugs.html" class="sttugs-footer_link">Autonomous Tugs</a>
-            <a href="retrofit.html" class="sttugs-footer_link">Retrofit</a>
+            <a href="retrofit.html" class="sttugs-footer_link">Retrofit Kit</a>
             <a href="verifiable-audit-trail.html" class="sttugs-footer_link">Audit Trail</a>
           </nav>
         </div>
