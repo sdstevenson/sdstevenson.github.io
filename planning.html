@@ -75,7 +75,7 @@
         </p>
       </div>
       <div class="video-wrap">
-        <video muted playsinline preload="metadata" id="vid-autostack">
+        <video muted playsinline preload="metadata" id="vid-autostack" controls>
           <source src="../assets/auto_stack_demo.mp4" type="video/mp4"/>
         </video>
         <div class="video-play-overlay" id="play-autostack">
@@ -94,13 +94,11 @@
           Test layouts virtually, and ensure aircraft are placed exactly as planned.</p>
       </div>
       <div class="video-wrap">
-        <div style="width: 100%; padding-bottom: 56.25%; position: relative; background: linear-gradient(135deg, rgba(37,99,235,0.15) 0%, rgba(59,130,246,0.1) 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
-          <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: rgba(147,197,253,0.6); font-family: Inter, sans-serif;">
-            <div style="text-align: center;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 0.5rem; opacity: 0.4;"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-              <p style="margin: 0; font-size: 14px; opacity: 0.6;">Video Coming Soon</p>
-            </div>
-          </div>
+        <video muted playsinline preload="metadata" id="vid-planning" controls>
+          <source src="../assets/planning_mode_demo_4_14.mp4" type="video/mp4"/>
+        </video>
+        <div class="video-play-overlay" id="play-planning">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         </div>
       </div>
     </div>
@@ -220,6 +218,15 @@
   <script src="https://cdn.prod.website-files.com/gsap/3.14.2/ScrollSmoother.min.js"></script>
   <script src="./assets/site.js"></script>
   <script>
+    // Video play overlays
+    document.querySelectorAll('.video-play-overlay').forEach(overlay => {
+      overlay.addEventListener('click', () => {
+        const vid = overlay.closest('.video-wrap').querySelector('video');
+        if (vid.paused) { vid.play(); overlay.classList.add('hidden'); }
+        else { vid.pause(); overlay.classList.remove('hidden'); }
+      });
+    });
+
     // FAQ accordion
     document.querySelectorAll('.faq-question').forEach(btn => {
       btn.addEventListener('click', () => {
