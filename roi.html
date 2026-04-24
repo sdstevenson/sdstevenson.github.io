@@ -29,16 +29,30 @@
       border-radius: 14px;
       padding: 1.75rem 2rem;
       margin-bottom: 2rem;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 1rem;
+      display: flex; flex-direction: column; gap: 1.25rem;
     }
+    .roi-result-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 1.5rem; align-items: start; }
+    .roi-result-item { display: flex; flex-direction: column; gap: 0.2rem; }
     .roi-result-label { font-size: 0.875rem; font-weight: 600; color: rgba(255,255,255,0.7); letter-spacing: 0.04em; text-transform: uppercase; }
     .roi-result-value { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; color: #fff; line-height: 1; }
+    .roi-result-item--minor .roi-result-label { color: rgba(255,255,255,0.55); }
+    .roi-result-item--minor .roi-result-value {
+      font-size: clamp(1.25rem, 3.2vw, 1.8rem);
+      font-weight: 700;
+      color: rgba(255,255,255,0.85);
+    }
+    .roi-result-item--minor .roi-result-sub { color: rgba(255,255,255,0.45); }
     .roi-result-sub { font-size: 0.8125rem; color: rgba(255,255,255,0.55); margin-top: 0.25rem; }
-    .roi-breakdown { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .roi-breakdown-list {
+      display: grid; grid-template-columns: 1fr; gap: 0.65rem;
+      border-top: 1px solid rgba(255,255,255,0.15); padding-top: 1rem;
+    }
     .roi-breakdown-item { display: flex; flex-direction: column; gap: 0.2rem; }
+    .roi-breakdown-line { display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; align-items: baseline; }
     .roi-breakdown-label { font-size: 0.75rem; font-weight: 600; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 0.04em; }
     .roi-breakdown-val { font-size: 1.125rem; font-weight: 700; color: #93C5FD; }
+    .roi-breakdown-formula { font-size: 0.75rem; color: rgba(255,255,255,0.45); font-weight: 500; }
+    @media (max-width: 720px) { .roi-result-top { grid-template-columns: 1fr; } }
 
     /* Section divider inside card */
     .roi-divider { border: none; border-top: 1px solid var(--card-border); margin: 1.75rem 0; }
@@ -132,19 +146,51 @@
 
       <!-- Result banner -->
       <div class="roi-result">
-        <div>
-          <div class="roi-result-label">Estimated Annual Benefit</div>
-          <div class="roi-result-value" id="roi-value">$0</div>
-          <div class="roi-result-sub">Labor savings + additional revenue</div>
+        <div class="roi-result-top">
+          <div class="roi-result-item">
+            <div class="roi-result-label">Estimated Annual Benefit</div>
+            <div class="roi-result-value" id="roi-value">$0</div>
+            <div class="roi-result-sub">Sum of category savings</div>
+          </div>
+          <div class="roi-result-item roi-result-item--minor">
+            <div class="roi-result-label">Labor Savings</div>
+            <div class="roi-result-value" id="laborSaving">$0</div>
+            <div class="roi-result-sub">Annual labor savings</div>
+          </div>
+          <div class="roi-result-item roi-result-item--minor">
+            <div class="roi-result-label">Revenue Gain</div>
+            <div class="roi-result-value" id="revenueGain">$0</div>
+            <div class="roi-result-sub">Annual revenue gain</div>
+          </div>
         </div>
-        <div class="roi-breakdown">
+        <div class="roi-breakdown-list">
           <div class="roi-breakdown-item">
-            <span class="roi-breakdown-label">Labor Savings</span>
-            <span class="roi-breakdown-val" id="laborSaving">$0</span>
+            <span class="roi-breakdown-label">Digital Twin Planning Savings</span>
+            <div class="roi-breakdown-line">
+              <span class="roi-breakdown-val" id="digitalTwinSaving">$0</span>
+              <span class="roi-breakdown-formula" id="digitalTwinFormula">Revenue + (0.5 hrs/day x people x wage x 365)</span>
+            </div>
           </div>
           <div class="roi-breakdown-item">
-            <span class="roi-breakdown-label">Revenue Gain</span>
-            <span class="roi-breakdown-val" id="revenueGain">$0</span>
+            <span class="roi-breakdown-label">Collision Prevention Planning</span>
+            <div class="roi-breakdown-line">
+              <span class="roi-breakdown-val" id="collisionPlanningSaving">$0</span>
+              <span class="roi-breakdown-formula" id="collisionPlanningFormula">(4 hrs/day x people x wage x 365)</span>
+            </div>
+          </div>
+          <div class="roi-breakdown-item">
+            <span class="roi-breakdown-label">Tow-Path Planning</span>
+            <div class="roi-breakdown-line">
+              <span class="roi-breakdown-val" id="towPathSaving">$0</span>
+              <span class="roi-breakdown-formula" id="towPathFormula">(2 hrs/day x people x wage x 365)</span>
+            </div>
+          </div>
+          <div class="roi-breakdown-item">
+            <span class="roi-breakdown-label">Autonomous Tugs</span>
+            <div class="roi-breakdown-line">
+              <span class="roi-breakdown-val" id="autonomousTugsSaving">$0</span>
+              <span class="roi-breakdown-formula" id="autonomousTugsFormula">(5.5 hrs/day x people x wage x 365)</span>
+            </div>
           </div>
         </div>
       </div>
@@ -154,20 +200,20 @@
 
       <div class="roi-row">
         <span class="roi-row-label">Hangar size (sqft)</span>
-        <input type="number" id="hangarSqftInput" class="roi-numbox" min="1000" max="200000" step="1000" value="40000">
-        <input type="range" id="hangarSqft" min="1000" max="200000" step="1000" value="40000">
+        <input type="number" id="hangarSqftInput" class="roi-numbox" min="1000" max="200000" step="1000" value="100000">
+        <input type="range" id="hangarSqft" min="1000" max="200000" step="1000" value="100000">
       </div>
 
       <div class="roi-row">
         <span class="roi-row-label">Utilization boost (%)</span>
-        <input type="number" id="utilBoostInput" class="roi-numbox" min="0" max="50" step="1" value="8">
-        <input type="range" id="utilBoost" min="0" max="50" step="1" value="8">
+        <input type="number" id="utilBoostInput" class="roi-numbox" min="0" max="30" step="1" value="5">
+        <input type="range" id="utilBoost" min="0" max="30" step="1" value="5">
       </div>
 
       <div class="roi-row">
         <span class="roi-row-label">Tenant rate (monthly $/sqft)</span>
-        <input type="number" id="tenantRateInput" class="roi-numbox" min="0" max="10" step="0.1" value="2.0">
-        <input type="range" id="tenantRate" min="0" max="10" step="0.1" value="2.0">
+        <input type="number" id="tenantRateInput" class="roi-numbox" min="0.1" max="20" step="0.1" value="4.5">
+        <input type="range" id="tenantRate" min="0.1" max="20" step="0.1" value="4.5">
       </div>
 
       <hr class="roi-divider">
@@ -177,14 +223,14 @@
 
       <div class="roi-row">
         <span class="roi-row-label">People per stack</span>
-        <input type="number" id="peopleInput" class="roi-numbox" min="1" max="20" step="1" value="5">
-        <input type="range" id="peoplePerStack" min="1" max="8" step="1" value="5">
+        <input type="number" id="peopleInput" class="roi-numbox" min="1" max="5" step="1" value="3">
+        <input type="range" id="peoplePerStack" min="1" max="5" step="1" value="3">
       </div>
 
       <div class="roi-row">
         <span class="roi-row-label">Wage per hour ($)</span>
-        <input type="number" id="wageInput" class="roi-numbox" min="0" max="99" step="1" value="25">
-        <input type="range" id="wagePerHour" min="10" max="99" step="1" value="25">
+        <input type="number" id="wageInput" class="roi-numbox" min="0" max="75" step="1" value="35">
+        <input type="range" id="wagePerHour" min="10" max="75" step="1" value="35">
       </div>
 
       <div class="roi-row">
@@ -276,6 +322,14 @@
       return '$' + Math.round(n).toLocaleString('en-US');
     }
 
+    function fmtHours(n) {
+      return Number.isInteger(n) ? n.toString() : n.toFixed(1);
+    }
+
+    function fmtFactor(n) {
+      return n.toFixed(3);
+    }
+
     function getVal(id) {
       return parseFloat(document.getElementById(id).value) || 0;
     }
@@ -290,11 +344,38 @@
 
       const annualLabor   = people * wage * hoursPerDay * 365;
       const annualRevenue = sqft * (Math.max(0, boost) / 100) * tenant * 12;
-      const total         = Math.round(annualLabor + annualRevenue);
 
-      document.getElementById('roi-value').textContent   = fmtDollars(total);
+      // Hangar revenue, 0.5 hours per day
+      const digitalTwinHours = 0.5;
+      const digitalTwinSaving = annualRevenue + annualLabor * (digitalTwinHours / 12);
+      // 4 hours per day, one less wing walker
+      const collisionPlanningHours = 4;
+      const collisionPlanningSaving = annualLabor * (collisionPlanningHours / 12);
+      // 2 hours per day
+      const towPathHours = 2;
+      const towPathSaving = annualLabor * (towPathHours / 12);
+      // 5.5 hours per day, no more manual towing
+      const autonomousTugsHours = 5.5;
+      const autonomousTugsSaving = annualLabor * (autonomousTugsHours / 12);
+      const total = Math.round(
+        annualRevenue + annualLabor
+      );
+
+      document.getElementById('roi-value').textContent = fmtDollars(total);
+      document.getElementById('digitalTwinSaving').textContent = fmtDollars(digitalTwinSaving);
+      document.getElementById('collisionPlanningSaving').textContent = fmtDollars(collisionPlanningSaving);
+      document.getElementById('towPathSaving').textContent = fmtDollars(towPathSaving);
+      document.getElementById('autonomousTugsSaving').textContent = fmtDollars(autonomousTugsSaving);
       document.getElementById('laborSaving').textContent = fmtDollars(annualLabor);
       document.getElementById('revenueGain').textContent = fmtDollars(annualRevenue);
+      document.getElementById('digitalTwinFormula').textContent =
+        `${fmtDollars(annualRevenue)} revenue + (${fmtHours(digitalTwinHours)} hrs/day x ${people} people x ${fmtDollars(wage)}/hr x 365)`;
+      document.getElementById('collisionPlanningFormula').textContent =
+        `(${fmtHours(collisionPlanningHours)} hrs/day x ${people} people x ${fmtDollars(wage)}/hr x 365)`;
+      document.getElementById('towPathFormula').textContent =
+        `(${fmtHours(towPathHours)} hrs/day x ${people} people x ${fmtDollars(wage)}/hr x 365)`;
+      document.getElementById('autonomousTugsFormula').textContent =
+        `(${fmtHours(autonomousTugsHours)} hrs/day x ${people} people x ${fmtDollars(wage)}/hr x 365)`;
     }
 
     // Sync slider ↔ number input pairs
@@ -336,6 +417,10 @@
       if (!emailOk) return;
 
       const roiValue    = document.getElementById('roi-value').textContent;
+      const digitalTwinSaving = document.getElementById('digitalTwinSaving').textContent;
+      const collisionPlanningSaving = document.getElementById('collisionPlanningSaving').textContent;
+      const towPathSaving = document.getElementById('towPathSaving').textContent;
+      const autonomousTugsSaving = document.getElementById('autonomousTugsSaving').textContent;
       const laborSaving = document.getElementById('laborSaving').textContent;
       const revenueGain = document.getElementById('revenueGain').textContent;
       const sqft   = getVal('hangarSqft');
@@ -347,7 +432,10 @@
 
       const fd = new FormData();
       fd.append('entry.191654158', 'ROI Download Request');
-      fd.append('entry.1925679811', `ROI: ${roiValue}, Labor: ${laborSaving}, Revenue: ${revenueGain}`);
+      fd.append(
+        'entry.1925679811',
+        `ROI: ${roiValue}, Digital Twin: ${digitalTwinSaving}, Collision: ${collisionPlanningSaving}, Tow-Path: ${towPathSaving}, Autonomous Tugs: ${autonomousTugsSaving}, Labor: ${laborSaving}, Revenue: ${revenueGain}`
+      );
       fd.append('entry.878160977',  `${emailEl.value.trim()} | Inputs: ${sqft}sqft, ${boost}% boost, $${tenant}/sqft/mo, ${people} people, $${wage}/hr, ${hours}hrs/day`);
 
       fetch(GFORM_URL, { method: 'POST', mode: 'no-cors', body: fd })
