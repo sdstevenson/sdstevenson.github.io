@@ -798,6 +798,17 @@ section, header, footer { position: relative; }
   font-weight: 400;
 }
 
+@media (max-width: 768px) {
+  .hero_title { color: rgba(15,23,42,0.85) !important; }
+  #hero-savings { color: #F59E0B !important; }
+  .svg_circle { transform: translateX(-50%) translateY(calc(var(--vh, 1vh) * 44)) !important; }
+
+  @media (max-width: 420px) {
+    .logo-sun-wrap { width: 200px; height: 200px; }
+  }
+}
+
+
 /* ============================================================
    ROI / CAREERS SECTION
 ============================================================ */
