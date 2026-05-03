@@ -798,17 +798,6 @@ section, header, footer { position: relative; }
   font-weight: 400;
 }
 
-@media (max-width: 768px) {
-  .hero_title { color: rgba(15,23,42,0.85) !important; }
-  #hero-savings { color: #F59E0B !important; }
-  .svg_circle { transform: translateX(-50%) translateY(calc(var(--vh, 1vh) * 44)) !important; }
-
-  @media (max-width: 420px) {
-    .logo-sun-wrap { width: 200px; height: 200px; }
-  }
-}
-
-
 /* ============================================================
    ROI / CAREERS SECTION
 ============================================================ */
@@ -1027,7 +1016,7 @@ section, header, footer { position: relative; }
 ============================================================ */
 @media (max-width: 768px) {
   .nav_contain.home { padding: 1rem 1.25rem; }
-  .hero_title { font-size: clamp(1.75rem, 7vw, 2.5rem); }
+  .hero_title { font-size: clamp(1.75rem, 7vw, 2.5rem); color: rgba(15,23,42,0.85); }
   .mission_inner { padding: 3rem 1.5rem; }
   .product_wrap { padding: 4rem 0 3rem; }
   .autonomous_wrap { padding: 5rem 0; }
