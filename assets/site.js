@@ -259,7 +259,9 @@ function createAnimation(smoother) {
     scrollTrigger: {
       trigger: heroWrap,
       start: "top top",
-      end: () => "+=" + vh * 4,
+      // shorten the pinned scroll distance so the hero animation completes faster
+      // (reduced from 4x viewport height to 2x for a quicker scroll)
+      end: () => "+=" + vh * 2,
       pin: true,
       scrub: 1,
       anticipatePin: 1,
@@ -1359,11 +1361,28 @@ function resetHeroForMobile() {
   const linesWrap     = document.querySelector(".hero_lines_wrap");
 
   // Subtitle: CSS has translateY(80%) — show it
-  if (subtitleWrap) subtitleWrap.style.transform = "none";
-  // Overlay: darken but don't hide the hero entirely
-  if (overlay)    overlay.style.opacity = "0";
+  if (subtitleWrap) {
+    subtitleWrap.style.transform = "none";
+    subtitleWrap.style.opacity = "1";
+  }
+
+  // Overlay: remove dark overlay so hero appears as a normal full white section
+  if (overlay) overlay.style.opacity = "0";
+
   // Lines canvas background: hide it so white hero_wrap shows instead
-  if (linesWrap)  linesWrap.style.opacity = "0";
+  if (linesWrap) linesWrap.style.opacity = "0";
+
+  // Ensure the logo and title are positioned in their final, visible state
+  const svgCircle = document.querySelector('.svg_circle');
+  if (svgCircle) svgCircle.style.transform = 'translateX(-50%) translateY(90px)';
+
+  const logoBase = document.querySelector('.logo-sun-base');
+  const logoFull = document.querySelector('.logo-sun-full');
+  if (logoBase) logoBase.style.opacity = '0';
+  if (logoFull) logoFull.style.opacity = '1';
+
+  const heroTitle = document.querySelector('.hero_title');
+  if (heroTitle) heroTitle.style.opacity = '1';
 }
 
 /* ============================================================
