@@ -1373,15 +1373,27 @@ function resetHeroForMobile() {
   if (linesWrap) linesWrap.style.opacity = "0";
 
   // Ensure the logo and title are positioned in their final, visible state
+  const heroTitle = document.querySelector('.hero_title');
   const svgCircle = document.querySelector('.svg_circle');
-  if (svgCircle) svgCircle.style.transform = 'translateX(-50%) translateY(90px)';
+  
+  if (svgCircle && heroTitle && subtitleWrap) {
+    // Wait for next frame to ensure layout is settled, then position logo
+    requestAnimationFrame(() => {
+      const titleRect = heroTitle.getBoundingClientRect();
+      const subtitleRect = subtitleWrap.getBoundingClientRect();
+      const titleBottom = titleRect.bottom;
+      const subtitleTop = subtitleRect.top;
+      const midpoint = (titleBottom + subtitleTop) / 4;
+      
+      svgCircle.style.transform = `translateX(-50%) translateY(${midpoint}px)`;
+    });
+  }
 
   const logoBase = document.querySelector('.logo-sun-base');
   const logoFull = document.querySelector('.logo-sun-full');
   if (logoBase) logoBase.style.opacity = '0';
   if (logoFull) logoFull.style.opacity = '1';
 
-  const heroTitle = document.querySelector('.hero_title');
   if (heroTitle) heroTitle.style.opacity = '1';
 }
 
