@@ -1,173 +1,22 @@
 /**
  * site.js
- * Sttugs animated landing page — adapted from Sunrise Robotics.
- * Uses GSAP 3.14.2 (ScrollSmoother, ScrollTrigger, DrawSVGPlugin).
+ * Sttugs landing page interactions.
+ * Uses GSAP 3.14.2 with ScrollTrigger.
  */
 
 "use strict";
 
-/* Register GSAP plugins — guard against Club plugins not being loaded on detail pages */
+/* Register GSAP plugins */
 {
   const _plugins = [];
   if (typeof ScrollTrigger  !== 'undefined') _plugins.push(ScrollTrigger);
-  if (typeof DrawSVGPlugin  !== 'undefined') _plugins.push(DrawSVGPlugin);
-  if (typeof ScrollSmoother !== 'undefined') _plugins.push(ScrollSmoother);
   if (_plugins.length) gsap.registerPlugin(..._plugins);
-}
-
-/* ============================================================
-   CONSTANTS
-============================================================ */
-const COLORS = { base: "#FFFFFF", accent: "#2563EB" };
-
-const GRADIENT_STAGES = { start: 0, topComplete: 0.25, bothComplete: 0.5 };
-const NAV_TRIGGER_POINTS = { show: 0.35, hide: 0.55 };
-
-/** Session-storage key for scroll position persistence (Sttugs-namespaced) */
-const KEY = "__sttugs_y";
-
-/* ============================================================
-   VIEWPORT HEIGHT (CSS custom property --vh)
-============================================================ */
-function setupViewportHeight() {
-  function set() {
-    document.documentElement.style.setProperty("--vh", window.innerHeight * 0.01 + "px");
-  }
-  set();
-  window.addEventListener("resize", debounce(set, 100));
-}
-
-/* ============================================================
-   SCROLL SMOOTHER INIT
-============================================================ */
-function initSmoother() {
-  // Only create ScrollSmoother on pages that have the required wrapper elements
-  if (!document.getElementById('smooth-wrapper') || !document.getElementById('smooth-content')) {
-    return null;
-  }
-  // On mobile, skip ScrollSmoother entirely — native browser scroll is
-  // compositor-accelerated (off the main thread). normalizeScroll:true would
-  // replace that with JS-driven scroll, causing severe jank on mobile devices.
-  if (window.matchMedia('(max-width: 768px)').matches) {
-    return null;
-  }
-  return ScrollSmoother.create({
-    wrapper: "#smooth-wrapper",
-    content: "#smooth-content",
-    smooth: 0,
-    normalizeScroll: true,
-    ignoreMobileResize: true,
-  });
-}
-
-/* ============================================================
-   DEBOUNCE
-============================================================ */
-function debounce(fn, delay) {
-  let t;
-  return function (...args) {
-    clearTimeout(t);
-    t = setTimeout(() => fn.apply(this, args), delay);
-  };
-}
-
-/* ============================================================
-   RUNWAY CANVAS — draws horizontal black lines + white center
-   dashes that scroll downward as progress advances (0→1),
-   simulating forward motion along a runway / road.
-============================================================ */
-
-/** Resize canvas pixel buffer to match its CSS size. */
-function initRunwayCanvas() {
-  const canvas = document.getElementById("hero-lines-canvas");
-  if (!canvas) return;
-  canvas.width = canvas.offsetWidth || window.innerWidth;
-  canvas.height = canvas.offsetHeight || window.innerHeight;
-  const logoEl = document.querySelector(".svg_circle");
-  let logoCenterY;
-  if (logoEl) {
-    const r = logoEl.getBoundingClientRect();
-    logoCenterY = (r.top + r.bottom) / 2;
-  }
-  drawRunwayLines(canvas, 0, logoCenterY);
-}
-
-/**
- * Draw the animated runway lines onto the canvas.
- * @param {HTMLCanvasElement} canvas
- * @param {number} progress   0 = scroll start, 1 = scroll end
- * @param {number} [dashTopY] Y coordinate where dashes begin (logo center). Defaults to H*0.65.
- */
-function drawRunwayLines(canvas, progress, dashTopY) {
-  if (!canvas) return;
-  const ctx = canvas.getContext("2d");
-  const W = canvas.width;
-  const H = canvas.height;
-  ctx.clearRect(0, 0, W, H);
-
-  const startY = H * 0.25;     // lines begin at ~25% from top
-  const zoneH  = H - startY;   // visible zone: lower 75% of screen
-
-  // Horizontal line spacing: 4 px at start → 15 px at end
-  const spacing = 4 + 11 * progress;
-
-  // How far lines have scrolled downward (wraps so new lines feed in from top)
-  const scrollOffset = progress * 520;
-  const wrappedOffset = scrollOffset % zoneH;
-
-  // Draw enough lines to always fill the zone at current spacing
-  const numLines = Math.ceil(zoneH / spacing) + 4;
-  ctx.lineWidth = 1;
-  for (let i = 0; i < numLines; i++) {
-    const y = startY + ((i * spacing + wrappedOffset) % zoneH);
-    if (y < startY || y > H) continue;
-    const alpha = Math.max(0.1, 0.75 - progress * 0.35);
-    ctx.strokeStyle = `rgba(15,23,42,${alpha.toFixed(2)})`;
-    ctx.beginPath();
-    ctx.moveTo(0, y);
-    ctx.lineTo(W, y);
-    ctx.stroke();
-  }
-
-  // White center dashes (runway / road lane markings)
-  // dashTopY tracks the live logo center so dashes never overlap the logo.
-  const dashStartY = (dashTopY !== undefined) ? dashTopY : H * 0.65;
-  const dashZoneH  = H - dashStartY;
-  const dashLen    = 22;
-  const dashGap    = 16;
-  const dashPeriod = dashLen + dashGap;
-  const dashOffset = (progress * 650) % dashZoneH;
-  const numDashes  = Math.ceil(dashZoneH / dashPeriod) + 4;
-  const cx = W / 2;
-  ctx.save();
-  ctx.rect(0, dashStartY, W, dashZoneH);  // clip so dashes can never draw above dashStartY
-  ctx.clip();
-  ctx.lineWidth = 2.5;
-  for (let i = 0; i < numDashes; i++) {
-    const dy    = dashStartY + ((i * dashPeriod + dashOffset) % dashZoneH);
-    const dyEnd = dy + dashLen;
-    if (dy > H || dyEnd < dashStartY) continue;
-    const alpha = Math.max(0.05, 0.65 - progress * 0.40);
-    ctx.strokeStyle = `rgba(255,255,255,${alpha.toFixed(2)})`;
-    ctx.beginPath();
-    ctx.moveTo(cx, Math.max(dy, dashStartY));
-    ctx.lineTo(cx, Math.min(dyEnd, H));
-    ctx.stroke();
-  }
-  ctx.restore();
 }
 
 /* ============================================================
    NAV THEME  (dark = navy bg / white text,  light = white bg / navy text)
 ============================================================ */
 function setNavTheme(theme) {
-  // Legacy home nav (kept for safety — no longer present after snav migration)
-  const fixedNav = document.querySelector(".nav_wrap.home.fixed");
-  if (fixedNav) {
-    if (theme === "light") fixedNav.classList.add("nav--light");
-    else fixedNav.classList.remove("nav--light");
-  }
-  // Shared snav header (injected by injectSharedNav on all pages including index)
   const snavHeader = document.getElementById("sttugs-nav-header");
   if (snavHeader) {
     if (theme === "light") snavHeader.classList.add("snav--light");
@@ -187,167 +36,6 @@ function initPostHeroNavTheme() {
       onEnterBack: ()  => setNavTheme(theme),
     });
   });
-}
-
-/* ============================================================
-   LOGO GLOW UPDATE (replaces gradient circle animation)
-   Drives the drop-shadow filter on #logo-sun-wrap:
-   starts as a bright white sun-glow, fades to nothing
-   as the logo settles into its final position.
-============================================================ */
-function updateCircleGradient(progress) {
-  const wrap = document.getElementById("logo-sun-wrap");
-  if (!wrap) return;
-
-  // Glow fades from full (progress=0) to gone (progress≥0.4)
-  const brightness = Math.max(0, 1 - progress * 2.5);
-
-  if (brightness < 0.005) {
-    wrap.style.filter = "none";
-    return;
-  }
-
-  const r1 = Math.round(20 + brightness * 80);
-  const r2 = Math.round(10 + brightness * 150);
-  const a1 = (0.1 + brightness * 0.85).toFixed(2);
-  const a2 = (0.05 + brightness * 0.45).toFixed(2);
-  wrap.style.filter =
-    `drop-shadow(0 0 ${r1}px rgba(255,255,255,${a1})) ` +
-    `drop-shadow(0 0 ${r2}px rgba(255,255,255,${a2}))`;
-}
-
-/* ============================================================
-   MAIN ANIMATION CREATION
-============================================================ */
-function createAnimation(smoother) {
-  const heroWrap = document.querySelector(".hero_wrap");
-  const overlay = document.querySelector(".overlay");
-  const heroLinesWrap = document.querySelector(".hero_lines_wrap");
-  const svgCircle = document.querySelector(".svg_circle");
-  const logoBase = document.querySelector(".logo-sun-base");
-  const logoFull = document.querySelector(".logo-sun-full");
-  const heroTitle = document.querySelector(".hero_title");
-  const linesCanvas = document.getElementById("hero-lines-canvas");
-  const heroSubtitleWrap = document.querySelector(".hero_subtitle_wrap");
-  const heroSubtitle = document.querySelector(".hero_subtitle");
-  const bgCircle = document.querySelector(".bg_circle path");
-  const bgCircleSmall = document.querySelector(".bg_circle_small path");
-
-  if (!heroWrap) return;
-
-  // Initial states
-  initRunwayCanvas();                         // size canvas and draw progress=0 frame
-  gsap.set(heroSubtitleWrap, { y: 40, opacity: 0 });
-  gsap.set(svgCircle, { y: window.innerHeight * 0.4 });
-  if (heroTitle) gsap.set(heroTitle, { opacity: 1 });
-
-  // Draw the background circles with DrawSVGPlugin
-  if (bgCircle) {
-    gsap.set(bgCircle, { drawSVG: "0% 0%" });
-    gsap.to(bgCircle, { drawSVG: "0% 100%", duration: 3, ease: "power2.inOut", delay: 0.5 });
-  }
-  if (bgCircleSmall) {
-    gsap.set(bgCircleSmall, { drawSVG: "0% 0%" });
-    gsap.to(bgCircleSmall, { drawSVG: "0% 100%", duration: 2.5, ease: "power2.inOut", delay: 1 });
-  }
-
-  const vh = window.innerHeight;
-  let lastProgress = -1;
-
-  // Pin the hero section and run the scroll-driven timeline
-  const mainTimeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: heroWrap,
-      start: "top top",
-      // shorten the pinned scroll distance so the hero animation completes faster
-      // (reduced from 4x viewport height to 2x for a quicker scroll)
-      end: () => "+=" + vh * 2,
-      pin: true,
-      scrub: 1,
-      anticipatePin: 1,
-      onUpdate: (self) => {
-        const p = self.progress;
-        if (Math.abs(p - lastProgress) > 0.001) {
-          lastProgress = p;
-          // Compute logo center in viewport coords so dashes always end exactly there.
-          const logoEl = document.querySelector(".svg_circle");
-          let logoCenterY;
-          if (logoEl) {
-            const r = logoEl.getBoundingClientRect();
-            logoCenterY = (r.top + r.bottom) / 2;
-          }
-          drawRunwayLines(linesCanvas, p, logoCenterY);
-          updateCircleGradient(p);
-          // Lines canvas fades out 0.25-0.40 (white bg), white background visible
-          setNavTheme(p >= 0.30 && p < 0.55 ? "light" : "dark");
-        }
-      },
-    },
-  });
-
-  // 0. Hero title fades out as the logo rises past it.
-  //    duration: 0.25 means it finishes at the 25% mark of the total timeline.
-  if (heroTitle) {
-    mainTimeline.to(heroTitle, { opacity: 0, duration: 0.25, ease: "power2.in" }, 0);
-  }
-
-  // 1. Circle: move up and in from the bottom
-  //    Final y is positive so the logo lands clearly below the sticky nav bar.
-  //    Logo element sits naturally at top:0 of hero; logo height ~340px so center = 170px.
-  //    y:90 → logo top = 90px, center = 260px — comfortably below the ~70px nav.
-  mainTimeline.to(
-    svgCircle,
-    {
-      y: 90,
-      ease: "power2.inOut",
-    },
-    0
-  );
-
-  // (Lines are drawn directly on canvas via onUpdate — no GSAP tween needed)
-
-  // 3. Subtitle fades + slides up after lines are gone (starts at 0.3, done by 0.5)
-  mainTimeline.to(
-    heroSubtitleWrap,
-    {
-      y: 0,
-      opacity: 1,
-      duration: 0.2,
-      ease: "power2.out",
-    },
-    0.3
-  );
-
-  // 4a. Fade out the gradient lines-wrap → reveals white hero_wrap background
-  //     Starts at 0.25 (once lines are largely done), completes by 0.4
-  mainTimeline.to(
-    heroLinesWrap,
-    {
-      opacity: 0,
-      duration: 0.15,
-      ease: "power2.inOut",
-    },
-    0.25
-  );
-
-  // 4b. Logo crossfade: inner icon (no hangar) → full logo (with hangar outer bounds)
-  //     duration: 0.08 = snappy crossfade over a small scroll window
-  if (logoBase && logoFull) {
-    mainTimeline.to(logoBase, { opacity: 0, duration: 0.08, ease: "power2.in" }, 0.35);
-    mainTimeline.to(logoFull, { opacity: 1, duration: 0.08, ease: "power2.out" }, 0.35);
-  }
-
-  // 4b. Overlay fades out
-  mainTimeline.to(
-    overlay,
-    {
-      opacity: 0,
-      ease: "power2.inOut",
-    },
-    0
-  );
-
-  return mainTimeline;
 }
 
 /* ============================================================
@@ -388,110 +76,6 @@ function initProductCards() {
 }
 
 /* ============================================================
-   MOBILE MENU
-============================================================ */
-function initMobileMenu() {
-  const toggleBtn = document.querySelector("[data-menu-toggle]");
-  const mobileNav = document.querySelector(".nav_mobile");
-  const hamburger = document.querySelector(".hamburger_6_wrap");
-  if (!toggleBtn || !mobileNav) return;
-
-  let open = false;
-
-  function openMenu() {
-    open = true;
-    mobileNav.setAttribute("data-nav", "open");
-    hamburger && hamburger.classList.add("open");
-    gsap.to(mobileNav, { x: "0%", duration: 0.4, ease: "power3.out" });
-    document.body.classList.add("scroll-locked");
-    gsap.set(mobileNav, { display: "block" });
-  }
-
-  function closeMenu() {
-    open = false;
-    mobileNav.setAttribute("data-nav", "closed");
-    hamburger && hamburger.classList.remove("open");
-    gsap.to(mobileNav, {
-      x: "100%",
-      duration: 0.35,
-      ease: "power3.in",
-      onComplete: () => gsap.set(mobileNav, { display: "none" }),
-    });
-    document.body.classList.remove("scroll-locked");
-  }
-
-  gsap.set(mobileNav, { x: "100%", display: "none" });
-
-  toggleBtn.addEventListener("click", () => (open ? closeMenu() : openMenu()));
-
-  // Close on backdrop click (outside the nav)
-  document.addEventListener("click", (e) => {
-    if (open && !mobileNav.contains(e.target) && !toggleBtn.contains(e.target)) {
-      closeMenu();
-    }
-  });
-
-  // Close mobile contact CTAs
-  mobileNav.querySelectorAll("[data-open-contact]").forEach((el) =>
-    el.addEventListener("click", (e) => { e.preventDefault(); closeMenu(); })
-  );
-}
-
-/* ============================================================
-   CONTACT MODAL
-============================================================ */
-function initContactModal() {
-  const overlay = document.querySelector(".modal_overlay-contact");
-  const modal = document.querySelector(".modal_wrap-contact");
-  const closeBtn = document.querySelector(".modal_close-contact");
-  const openers = document.querySelectorAll("[data-open-contact]");
-
-  if (!overlay || !modal) return;
-
-  function openModal() {
-    overlay.classList.add("active");
-    modal.classList.add("active");
-    document.body.classList.add("scroll-locked");
-    // Reset form state
-    const form = document.getElementById("contact-form");
-    const success = document.getElementById("contact-success");
-    if (form) form.style.display = "";
-    if (success) success.style.display = "none";
-  }
-
-  function closeModal() {
-    overlay.classList.remove("active");
-    modal.classList.remove("active");
-    document.body.classList.remove("scroll-locked");
-  }
-
-  openers.forEach((el) => el.addEventListener("click", (e) => { e.preventDefault(); openModal(); }));
-  if (closeBtn) closeBtn.addEventListener("click", closeModal);
-  overlay.addEventListener("click", closeModal);
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeModal();
-  });
-}
-
-/* ============================================================
-   SCROLL POSITION RESTORE (session storage)
-============================================================ */
-function saveScrollPos(smoother) {
-  if (smoother) {
-    sessionStorage.setItem(KEY, smoother.scrollTop());
-  }
-}
-
-function restoreScrollPos(smoother) {
-  const saved = sessionStorage.getItem(KEY);
-  if (saved && smoother) {
-    smoother.scrollTo(parseFloat(saved), false);
-  }
-  sessionStorage.removeItem(KEY);
-}
-
-/* ============================================================
    YEAR AUTO-UPDATE
 ============================================================ */
 function initYear() {
@@ -501,24 +85,9 @@ function initYear() {
 }
 
 /* ============================================================
-   RESIZE: RE-POSITION LINES
-============================================================ */
-function initResize() {
-  window.addEventListener(
-    "resize",
-    debounce(() => {
-      initRunwayCanvas();
-      ScrollTrigger.refresh(true);
-    }, 200)
-  );
-}
-
-/* ============================================================
    GENERAL SECTION SCROLL REVEALS
 ============================================================ */
 function initScrollReveals() {
-  // Mission section (already animated as part of hero)
-  // Autonomous + Careers sections fade-in
   const reveals = document.querySelectorAll(
     ".autonomous_wrap, .carrers_wrap, .section-headline, .autonomous_paragraph"
   );
@@ -534,35 +103,6 @@ function initScrollReveals() {
       duration: 0.8,
       ease: "power2.out",
     });
-  });
-}
-
-/* ============================================================
-   INITIAL NAV STATE — fixed nav always visible, starts dark
-============================================================ */
-function initNavStates() {
-  // Nav is always on — nothing to hide. CSS handles the default dark theme.
-}
-
-/* ============================================================
-   PAGE VISIBILITY / HISTORY HANDLERS
-============================================================ */
-function initPageHandlers(smoother) {
-  // Intercept same-origin link clicks to save position
-  document.querySelectorAll("a[href]").forEach((a) => {
-    const href = a.getAttribute("href");
-    if (href && !href.startsWith("#") && !href.startsWith("http") && !href.startsWith("mailto")) {
-      a.addEventListener("click", () => saveScrollPos(smoother));
-    }
-  });
-
-  window.addEventListener("pagehide", () => saveScrollPos(smoother));
-
-  window.addEventListener("pageshow", (e) => {
-    if (e.persisted) {
-      restoreScrollPos(smoother);
-      ScrollTrigger.refresh(true);
-    }
   });
 }
 
@@ -1298,79 +838,6 @@ function initSharedContactModal() {
 }
 
 /* ============================================================
-   HOME PAGE: PLATFORM DROPDOWN (fixed nav on index.html)
-============================================================ */
-function initHomeNavDropdowns() {
-  const platformItem    = document.getElementById('home-platform-item');
-  const platformTrigger = document.getElementById('home-platform-trigger');
-  if (!platformItem || !platformTrigger) return;
-
-  // Toggle on click
-  platformTrigger.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const isOpen = platformItem.classList.toggle('open');
-    platformTrigger.setAttribute('aria-expanded', String(isOpen));
-  });
-
-  // Close on outside click
-  document.addEventListener('click', () => {
-    platformItem.classList.remove('open');
-    platformTrigger.setAttribute('aria-expanded', 'false');
-  });
-
-  // Prevent the item's own clicks from bubbling to document
-  platformItem.addEventListener('click', (e) => e.stopPropagation());
-}
-
-/* ============================================================
-   MOBILE HERO RESET
-   On mobile we skip createAnimation entirely, so elements that
-   start off-screen via CSS transforms (hero_subtitle_wrap, overlay)
-   need to be reset to their visible/natural state.
-============================================================ */
-function resetHeroForMobile() {
-  const subtitleWrap  = document.querySelector(".hero_subtitle_wrap");
-  const overlay       = document.querySelector(".overlay");
-  const linesWrap     = document.querySelector(".hero_lines_wrap");
-
-  // Subtitle: CSS has translateY(80%) — show it
-  if (subtitleWrap) {
-    subtitleWrap.style.transform = "none";
-    subtitleWrap.style.opacity = "1";
-  }
-
-  // Overlay: remove dark overlay so hero appears as a normal full white section
-  if (overlay) overlay.style.opacity = "0";
-
-  // Lines canvas background: hide it so white hero_wrap shows instead
-  if (linesWrap) linesWrap.style.opacity = "0";
-
-  // Ensure the logo and title are positioned in their final, visible state
-  const heroTitle = document.querySelector('.hero_title');
-  const svgCircle = document.querySelector('.svg_circle');
-  
-  if (svgCircle && heroTitle && subtitleWrap) {
-    // Wait for next frame to ensure layout is settled, then position logo
-    requestAnimationFrame(() => {
-      const titleRect = heroTitle.getBoundingClientRect();
-      const subtitleRect = subtitleWrap.getBoundingClientRect();
-      const titleBottom = titleRect.bottom;
-      const subtitleTop = subtitleRect.top;
-      const midpoint = (titleBottom + subtitleTop) / 4;
-      
-      svgCircle.style.transform = `translateX(-50%) translateY(${midpoint}px)`;
-    });
-  }
-
-  const logoBase = document.querySelector('.logo-sun-base');
-  const logoFull = document.querySelector('.logo-sun-full');
-  if (logoBase) logoBase.style.opacity = '0';
-  if (logoFull) logoFull.style.opacity = '1';
-
-  if (heroTitle) heroTitle.style.opacity = '1';
-}
-
-/* ============================================================
    MAIN ENTRY POINT
 ============================================================ */
 (function main() {
@@ -1382,10 +849,7 @@ function resetHeroForMobile() {
     }
   }, true); // true = capture phase, fires before other handlers
 
-  // Set CSS --vh immediately
-  setupViewportHeight();
   initYear();
-  initNavStates();
 
   // Inject shared footer + modal as early as possible
   if (document.readyState === 'loading') {
@@ -1394,39 +858,13 @@ function resetHeroForMobile() {
     injectSharedComponents();
   }
 
-  // Detect mobile once — used to skip heavy desktop-only animation work
-  const isMobile = window.matchMedia('(max-width: 768px)').matches;
-
   initPlatformTiles();
 
   // Wait for DOM + layout to be ready
   window.addEventListener("load", function () {
-    const smoother = initSmoother();
-
-    if (!isMobile) {
-      // Desktop only: runway canvas + pinned hero scroll animation
-      initRunwayCanvas();
-      restoreScrollPos(smoother);
-      createAnimation(smoother);
-      initPageHandlers(smoother);
-      initResize();
-    } else {
-      // Mobile: reset elements that start off-screen (normally driven by animation)
-      resetHeroForMobile();
-    }
-
-    // Nav theme for sections below the hero
     initPostHeroNavTheme();
     initProductCards();
-    initMobileMenu();
-    initContactModal();
     initScrollReveals();
-    initHomeNavDropdowns();
-
-    // Only refresh ScrollTrigger on desktop — on mobile this forces a layout
-    // recalculation that blocks the main thread unnecessarily
-    if (!isMobile) {
-      ScrollTrigger.refresh(true);
-    }
+    ScrollTrigger.refresh(true);
   });
 })();

@@ -37,69 +37,75 @@
   <main id="smooth-content" class="page_main">
 
     <!-- ============================================================
-         ABSOLUTE NAV (over the dark hero section, animates with scroll)
-    ============================================================ -->
-    <div class="nav_wrap home absolute">
-      <nav class="nav_contain home">
-        <div class="nav_logo home">
-          <a href="../index.html" class="logo_nav_link home" aria-label="Sttugs">
-            <img src="../assets/logo.svg" class="logo_nav_img" alt="Sttugs" />
-            <div class="logo_nav_text home">STTUGS</div>
-          </a>
-        </div>
-        <div class="nav_links home">
-          <a href="about.html" class="nav_link home">About</a>
-          <a href="#" data-open-contact class="nav_link home cta">Contact Us</a>
-          <button role="button" data-menu-toggle aria-label="open-menu" class="menu-button">
-            <div class="hamburger_6_wrap">
-              <div class="hamburger_6_line home"></div>
-              <div class="hamburger_6_line home"></div>
-              <div class="hamburger_6_line home"></div>
-            </div>
-          </button>
-        </div>
-      </nav>
-
-    </div>
-
-    <!-- ============================================================
          HERO SECTION
     ============================================================ -->
-    <section class="hero_wrap">
-
-      <!-- Overlay (fades out during scroll animation) -->
-      <div class="overlay"></div>
-
-      <!-- Title + animated circle -->
-      <div class="hero_text_wrap">
-        <!-- <h1 class="hero_title">Intelligent hangar management,<br>powered by Sttugs.</h1> -->
-        <!-- <h1 class="hero_title">Autonomous hangar management,<br>for FBOs & Operators</h1> -->
-        <h1 class="hero_title">Save Over <span id="hero-savings">$400,000</span> On Hangar Operations With STTUGS</h1>
-
-        <!-- Logo sun: no-hangar version rises like a sun; full logo with hangar fades in at destination -->
-        <div class="svg_circle">
-          <div class="logo-sun-wrap" id="logo-sun-wrap">
-            <img src="../assets/logo_no_hangar.svg" class="logo-sun logo-sun-base" alt="Sttugs" draggable="false" />
-            <img src="../assets/logo.svg" class="logo-sun logo-sun-full" alt="Sttugs" draggable="false" />
-          </div>
+    <section class="hero_wrap" data-bg-type="dark">
+      <div class="hero_content">
+        <div class="hero_eyebrow">SMART HANGAR PLANNING</div>
+        <h1 class="hero_title">End the Late-Night/Early-Morning Full Re-stacks.</h1>
+        <p class="hero_subtitle">Seamlessly plan every aircraft position with digital Smart Hangar Planning tools.</p>
+        <div class="hero_actions">
+          <a href="#" data-open-contact class="hero_button hero_button-primary">Contact Us</a>
+          <a href="roi.html" class="hero_button hero_button-secondary">ROI Calculator</a>
         </div>
       </div>
+    </section>
 
-      <!-- Lines + subtitle (scroll-animated) -->
-      <div class="hero_lines_wrap">
-        <div class="lines_top">
-          <!-- Runway animation drawn here by JS -->
-          <canvas id="hero-lines-canvas"></canvas>
+    <!-- ============================================================
+         OPERATIONAL PAIN POINTS
+    ============================================================ -->
+    <section class="pain_points_wrap" data-bg-type="light">
+      <div class="pain_points_container">
+        <div class="pain_points_heading">
+          <div class="section-title">THE COST OF MANUAL STACKING</div>
+          <h2 class="section_heading">Build a better plan before the first aircraft moves.</h2>
         </div>
-      </div>
 
-      <!-- Subtitle sits directly on the white hero background, animated in after lines fade -->
-      <div class="hero_subtitle_wrap">
-        <h2 class="hero_subtitle">
-          <span class="span_blue">STTUGS is a new kind of aviation company.</span>
-          We combine smart software with autonomous tugs to <span class="span_blue">maximize your hangar usage,</span> and <span class="span_blue">reclaim lost labor hours</span> spent stacking.
-          STTUGS also provides an active safety system that <span class="span_blue">eliminates hangar rash.</span>
-        </h2>
+        <div class="pain_points_grid">
+          <article class="pain_point_card">
+            <div class="pain_point_problem">
+              <h3>Exhausting Re-stacks</h3>
+              <p>Burning out your crew with inefficient, full-hangar shuffling at all hours.</p>
+            </div>
+            <div class="pain_point_solution">
+              <div class="pain_point_solution_label">How Sttugs Solves It</div>
+              <p>Schedule-aware layouts and planned movement sequences reduce full-hangar reshuffling and keep late-night moves to a minimum.</p>
+            </div>
+          </article>
+
+          <article class="pain_point_card">
+            <div class="pain_point_problem">
+              <h3>Lost Revenue</h3>
+              <p>Leaving money on the table by underutilizing expensive floor space due to manual planning.</p>
+            </div>
+            <div class="pain_point_solution">
+              <div class="pain_point_solution_label">How Sttugs Solves It</div>
+              <p>Optimized aircraft placement reveals usable capacity and helps fit more aircraft safely within the same hangar footprint.</p>
+            </div>
+          </article>
+
+          <article class="pain_point_card">
+            <div class="pain_point_problem">
+              <h3>Hangar Rash</h3>
+              <p>Increasing the risk of expensive aircraft damage every time a plane is unnecessarily moved.</p>
+            </div>
+            <div class="pain_point_solution">
+              <div class="pain_point_solution_label">How Sttugs Solves It</div>
+              <p>Clearance-aware layouts and fewer unnecessary moves reduce aircraft exposure and make every planned movement safer.</p>
+            </div>
+          </article>
+
+          <article class="pain_point_card">
+            <div class="pain_point_problem">
+              <h3>Labor Drains</h3>
+              <p>Pulling staff away from essential operations just to wing-walk or assist with towing.</p>
+            </div>
+            <div class="pain_point_solution">
+              <div class="pain_point_solution_label">How Sttugs Solves It</div>
+              <p>Preplanned move sequences and towing automation reduce manual coordination and return staff to higher-value operational work.</p>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -751,9 +757,6 @@
 ============================================================ -->
 <script defer src="https://cdn.prod.website-files.com/gsap/3.14.2/gsap.min.js"></script>
 <script defer src="https://cdn.prod.website-files.com/gsap/3.14.2/ScrollTrigger.min.js"></script>
-<script defer src="https://cdn.prod.website-files.com/gsap/3.14.2/DrawSVGPlugin.min.js"></script>
-<script defer src="https://cdn.prod.website-files.com/gsap/3.14.2/ScrollSmoother.min.js"></script>
-
 <!-- Main script -->
 <script defer src="./assets/site.js"></script>
 
