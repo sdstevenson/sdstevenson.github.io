@@ -56,26 +56,6 @@ function initPlatformTiles() {
 }
 
 /* ============================================================
-   PRODUCT CARDS: SCROLL-TRIGGERED REVEAL
-============================================================ */
-function initProductCards() {
-  const cards = document.querySelectorAll(".product_card");
-  if (!cards.length) return;
-
-  gsap.from(cards, {
-    scrollTrigger: {
-      trigger: "#w-product-grid",
-      start: "top 80%",
-    },
-    y: 50,
-    opacity: 0,
-    duration: 0.7,
-    stagger: 0.15,
-    ease: "power2.out",
-  });
-}
-
-/* ============================================================
    YEAR AUTO-UPDATE
 ============================================================ */
 function initYear() {
@@ -863,7 +843,6 @@ function initSharedContactModal() {
   // Wait for DOM + layout to be ready
   window.addEventListener("load", function () {
     initPostHeroNavTheme();
-    initProductCards();
     initScrollReveals();
     ScrollTrigger.refresh(true);
   });
