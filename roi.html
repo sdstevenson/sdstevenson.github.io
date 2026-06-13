@@ -168,28 +168,28 @@
             <span class="roi-breakdown-label">Digital Twin Planning Savings</span>
             <div class="roi-breakdown-line">
               <span class="roi-breakdown-val" id="digitalTwinSaving">$0</span>
-              <span class="roi-breakdown-formula" id="digitalTwinFormula">Revenue + (0.5 hrs/day x people x wage x 365)</span>
+              <span class="roi-breakdown-formula" id="digitalTwinFormula">Revenue + (0.5/12 allocation x annual labor baseline)</span>
             </div>
           </div>
           <div class="roi-breakdown-item">
             <span class="roi-breakdown-label">Collision Prevention Planning</span>
             <div class="roi-breakdown-line">
               <span class="roi-breakdown-val" id="collisionPlanningSaving">$0</span>
-              <span class="roi-breakdown-formula" id="collisionPlanningFormula">(4 hrs/day x people x wage x 365)</span>
+              <span class="roi-breakdown-formula" id="collisionPlanningFormula">(4/12 allocation x annual labor baseline)</span>
             </div>
           </div>
           <div class="roi-breakdown-item">
             <span class="roi-breakdown-label">Tow-Path Planning</span>
             <div class="roi-breakdown-line">
               <span class="roi-breakdown-val" id="towPathSaving">$0</span>
-              <span class="roi-breakdown-formula" id="towPathFormula">(2 hrs/day x people x wage x 365)</span>
+              <span class="roi-breakdown-formula" id="towPathFormula">(2/12 allocation x annual labor baseline)</span>
             </div>
           </div>
           <div class="roi-breakdown-item">
             <span class="roi-breakdown-label">Autonomous Tugs</span>
             <div class="roi-breakdown-line">
               <span class="roi-breakdown-val" id="autonomousTugsSaving">$0</span>
-              <span class="roi-breakdown-formula" id="autonomousTugsFormula">(5.5 hrs/day x people x wage x 365)</span>
+              <span class="roi-breakdown-formula" id="autonomousTugsFormula">(5.5/12 allocation x annual labor baseline)</span>
             </div>
           </div>
         </div>
@@ -200,8 +200,8 @@
 
       <div class="roi-row">
         <span class="roi-row-label">Hangar size (sqft)</span>
-        <input type="number" id="hangarSqftInput" class="roi-numbox" min="1000" max="200000" step="1000" value="100000">
-        <input type="range" id="hangarSqft" min="1000" max="200000" step="1000" value="100000">
+        <input type="number" id="hangarSqftInput" class="roi-numbox" min="1000" max="200000" step="1000" value="40000">
+        <input type="range" id="hangarSqft" min="1000" max="200000" step="1000" value="40000">
       </div>
 
       <div class="roi-row">
@@ -212,8 +212,8 @@
 
       <div class="roi-row">
         <span class="roi-row-label">Tenant rate (monthly $/sqft)</span>
-        <input type="number" id="tenantRateInput" class="roi-numbox" min="0.1" max="20" step="0.1" value="4.5">
-        <input type="range" id="tenantRate" min="0.1" max="20" step="0.1" value="4.5">
+        <input type="number" id="tenantRateInput" class="roi-numbox" min="0.1" max="20" step="0.1" value="3.5">
+        <input type="range" id="tenantRate" min="0.1" max="20" step="0.1" value="3.5">
       </div>
 
       <hr class="roi-divider">
@@ -326,10 +326,6 @@
       return Number.isInteger(n) ? n.toString() : n.toFixed(1);
     }
 
-    function fmtFactor(n) {
-      return n.toFixed(3);
-    }
-
     function getVal(id) {
       return parseFloat(document.getElementById(id).value) || 0;
     }
@@ -342,40 +338,34 @@
       const wage        = getVal('wagePerHour');
       const hoursPerDay = getVal('timePerStack');
 
-      const annualLabor   = people * wage * hoursPerDay * 365;
-      const annualRevenue = sqft * (Math.max(0, boost) / 100) * tenant * 12;
-
-      // Hangar revenue, 0.5 hours per day
+      const results = window.STTUGS_ROI.calculate({
+        hangarSqft: sqft,
+        utilizationBoost: boost,
+        tenantRate: tenant,
+        peoplePerStack: people,
+        wagePerHour: wage,
+        hoursPerDay,
+      });
       const digitalTwinHours = 0.5;
-      const digitalTwinSaving = annualRevenue + annualLabor * (digitalTwinHours / 12);
-      // 4 hours per day, one less wing walker
       const collisionPlanningHours = 4;
-      const collisionPlanningSaving = annualLabor * (collisionPlanningHours / 12);
-      // 2 hours per day
       const towPathHours = 2;
-      const towPathSaving = annualLabor * (towPathHours / 12);
-      // 5.5 hours per day, no more manual towing
       const autonomousTugsHours = 5.5;
-      const autonomousTugsSaving = annualLabor * (autonomousTugsHours / 12);
-      const total = Math.round(
-        annualRevenue + annualLabor
-      );
 
-      document.getElementById('roi-value').textContent = fmtDollars(total);
-      document.getElementById('digitalTwinSaving').textContent = fmtDollars(digitalTwinSaving);
-      document.getElementById('collisionPlanningSaving').textContent = fmtDollars(collisionPlanningSaving);
-      document.getElementById('towPathSaving').textContent = fmtDollars(towPathSaving);
-      document.getElementById('autonomousTugsSaving').textContent = fmtDollars(autonomousTugsSaving);
-      document.getElementById('laborSaving').textContent = fmtDollars(annualLabor);
-      document.getElementById('revenueGain').textContent = fmtDollars(annualRevenue);
+      document.getElementById('roi-value').textContent = fmtDollars(results.total);
+      document.getElementById('digitalTwinSaving').textContent = fmtDollars(results.planning);
+      document.getElementById('collisionPlanningSaving').textContent = fmtDollars(results.collisionPrevention);
+      document.getElementById('towPathSaving').textContent = fmtDollars(results.towPathPlanning);
+      document.getElementById('autonomousTugsSaving').textContent = fmtDollars(results.autonomousTugs);
+      document.getElementById('laborSaving').textContent = fmtDollars(results.annualLabor);
+      document.getElementById('revenueGain').textContent = fmtDollars(results.annualRevenue);
       document.getElementById('digitalTwinFormula').textContent =
-        `${fmtDollars(annualRevenue)} revenue + (${fmtHours(digitalTwinHours)} hrs/day x ${people} people x ${fmtDollars(wage)}/hr x 365)`;
+        `${fmtDollars(results.annualRevenue)} revenue + (${fmtHours(digitalTwinHours)}/12 allocation x ${fmtDollars(results.annualLabor)} annual labor baseline)`;
       document.getElementById('collisionPlanningFormula').textContent =
-        `(${fmtHours(collisionPlanningHours)} hrs/day x ${people} people x ${fmtDollars(wage)}/hr x 365)`;
+        `(${fmtHours(collisionPlanningHours)}/12 allocation x ${fmtDollars(results.annualLabor)} annual labor baseline)`;
       document.getElementById('towPathFormula').textContent =
-        `(${fmtHours(towPathHours)} hrs/day x ${people} people x ${fmtDollars(wage)}/hr x 365)`;
+        `(${fmtHours(towPathHours)}/12 allocation x ${fmtDollars(results.annualLabor)} annual labor baseline)`;
       document.getElementById('autonomousTugsFormula').textContent =
-        `(${fmtHours(autonomousTugsHours)} hrs/day x ${people} people x ${fmtDollars(wage)}/hr x 365)`;
+        `(${fmtHours(autonomousTugsHours)}/12 allocation x ${fmtDollars(results.annualLabor)} annual labor baseline)`;
     }
 
     // Sync slider ↔ number input pairs

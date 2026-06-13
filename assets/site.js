@@ -6,6 +6,45 @@
 
 "use strict";
 
+/* ============================================================
+   SHARED ROI DEFAULTS
+   Update these values to keep the calculator and ROI claims in sync.
+============================================================ */
+const STTUGS_ROI_DEFAULTS = Object.freeze({
+  hangarSqft: 40000,
+  utilizationBoost: 5,
+  tenantRate: 3.5,
+  peoplePerStack: 3,
+  wagePerHour: 35,
+  hoursPerDay: 4,
+});
+
+function calculateSttugsRoi(values = STTUGS_ROI_DEFAULTS) {
+  const annualLabor =
+    values.peoplePerStack * values.wagePerHour * values.hoursPerDay * 365;
+  const annualRevenue =
+    values.hangarSqft * (Math.max(0, values.utilizationBoost) / 100) *
+    values.tenantRate * 12;
+  const digitalTwinLaborSaving = annualLabor * (0.5 / 12);
+
+  return {
+    annualLabor,
+    annualRevenue,
+    total: annualRevenue + annualLabor,
+    planning: annualRevenue + digitalTwinLaborSaving,
+    planningLabor: digitalTwinLaborSaving,
+    planningLaborHours: digitalTwinLaborSaving / values.wagePerHour,
+    collisionPrevention: annualLabor * (4 / 12),
+    towPathPlanning: annualLabor * (2 / 12),
+    autonomousTugs: annualLabor * (5.5 / 12),
+  };
+}
+
+window.STTUGS_ROI = Object.freeze({
+  defaults: STTUGS_ROI_DEFAULTS,
+  calculate: calculateSttugsRoi,
+});
+
 /* Register GSAP plugins */
 {
   const _plugins = [];
@@ -62,6 +101,72 @@ function initYear() {
   const els = document.querySelectorAll("[data-current-year]");
   const year = new Date().getFullYear();
   els.forEach((el) => (el.textContent = year));
+}
+
+function formatRoiDollars(value) {
+  return '$' + Math.round(value).toLocaleString('en-US');
+}
+
+function formatRoiRate(value) {
+  return '$' + value.toFixed(2);
+}
+
+function formatRoiNumber(value, maximumFractionDigits = 1) {
+  return value.toLocaleString('en-US', { maximumFractionDigits });
+}
+
+function initRoiDefaults() {
+  const defaults = STTUGS_ROI_DEFAULTS;
+  const results = calculateSttugsRoi(defaults);
+  const inputDefaults = {
+    hangarSqft: defaults.hangarSqft,
+    hangarSqftInput: defaults.hangarSqft,
+    utilBoost: defaults.utilizationBoost,
+    utilBoostInput: defaults.utilizationBoost,
+    tenantRate: defaults.tenantRate,
+    tenantRateInput: defaults.tenantRate,
+    peoplePerStack: defaults.peoplePerStack,
+    peopleInput: defaults.peoplePerStack,
+    wagePerHour: defaults.wagePerHour,
+    wageInput: defaults.wagePerHour,
+    timePerStack: defaults.hoursPerDay,
+    timeInput: defaults.hoursPerDay,
+  };
+
+  Object.entries(inputDefaults).forEach(([id, value]) => {
+    const input = document.getElementById(id);
+    if (input) input.value = value;
+  });
+
+  const profitValues = {
+    planning: results.planning,
+    collision: results.collisionPrevention,
+    path: results.towPathPlanning,
+    retrofit: results.autonomousTugs,
+  };
+  document.querySelectorAll('[data-roi-profit]').forEach((element) => {
+    const value = profitValues[element.dataset.roiProfit];
+    if (value !== undefined) element.textContent = formatRoiDollars(value);
+  });
+
+  document.querySelectorAll('[data-roi-revenue]').forEach((element) => {
+    element.textContent = formatRoiDollars(results.annualRevenue);
+  });
+  document.querySelectorAll('[data-roi-planning-labor]').forEach((element) => {
+    element.textContent = formatRoiDollars(results.planningLabor);
+  });
+  document.querySelectorAll('[data-roi-planning-hours]').forEach((element) => {
+    element.textContent = formatRoiNumber(results.planningLaborHours, 0);
+  });
+  document.querySelectorAll('[data-roi-assumptions]').forEach((element) => {
+    element.textContent =
+      `Estimated ROI using a ${formatRoiNumber(defaults.hangarSqft, 0)} sq. ft. hangar, ` +
+      `${formatRoiNumber(defaults.utilizationBoost)}% utilization boost, ` +
+      `${formatRoiRate(defaults.tenantRate)}/sq. ft. monthly tenant rate, ` +
+      `${formatRoiNumber(defaults.hoursPerDay)} hours spent stacking per day, ` +
+      `${formatRoiDollars(defaults.wagePerHour)} per labor hour, and ` +
+      `${formatRoiNumber(defaults.peoplePerStack, 0)} crew members.`;
+  });
 }
 
 /* ============================================================
@@ -830,6 +935,7 @@ function initSharedContactModal() {
   }, true); // true = capture phase, fires before other handlers
 
   initYear();
+  initRoiDefaults();
 
   // Inject shared footer + modal as early as possible
   if (document.readyState === 'loading') {
