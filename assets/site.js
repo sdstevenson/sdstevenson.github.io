@@ -351,46 +351,19 @@ function createAnimation(smoother) {
 }
 
 /* ============================================================
-   PRODUCT ACCORDION
+   PLATFORM TILES
 ============================================================ */
-function initProductAccordion() {
+function initPlatformTiles() {
   const items = document.querySelectorAll(".accordion_item");
-  const visuals = document.querySelectorAll(".tab-visual");
   if (!items.length) return;
 
-  function openItem(item) {
-    // Close all others
-    items.forEach((el) => {
-      if (el !== item) el.classList.remove("active");
-    });
-    // Hide all visuals
-    visuals.forEach((v) => v.classList.remove("active"));
-
-    // Toggle clicked item
-    item.classList.toggle("active");
-
-    // Show matching visual only when opening
-    if (item.classList.contains("active")) {
-      const visualId = item.getAttribute("data-visual");
-      if (visualId) {
-        const panel = document.getElementById(visualId);
-        if (panel) panel.classList.add("active");
-      }
-    } else {
-      // If collapsed, show the first visual as fallback
-      if (visuals.length) visuals[0].classList.add("active");
-    }
-  }
-
-  // Open first item by default
-  items[0].classList.add("active");
-  if (visuals.length) visuals[0].classList.add("active");
-
   items.forEach((item) => {
-    const title = item.querySelector(".tab_title");
-    if (title) {
-      title.addEventListener("click", () => openItem(item));
-    }
+    const visualId = item.getAttribute("data-visual");
+    const visual = visualId && document.getElementById(visualId);
+    if (visual) item.prepend(visual);
+
+    item.classList.remove("active");
+    item.removeAttribute("data-visual");
   });
 }
 
@@ -1424,6 +1397,8 @@ function resetHeroForMobile() {
   // Detect mobile once — used to skip heavy desktop-only animation work
   const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
+  initPlatformTiles();
+
   // Wait for DOM + layout to be ready
   window.addEventListener("load", function () {
     const smoother = initSmoother();
@@ -1442,7 +1417,6 @@ function resetHeroForMobile() {
 
     // Nav theme for sections below the hero
     initPostHeroNavTheme();
-    initProductAccordion();
     initProductCards();
     initMobileMenu();
     initContactModal();
