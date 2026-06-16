@@ -130,13 +130,15 @@ section, header, footer { position: relative; }
 .pain_points_grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1.25rem;
+  grid-template-rows: auto auto;
+  column-gap: 1.25rem;
 }
 .pain_point_card {
   min-width: 0;
   min-height: 390px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 2;
   background: #F8FAFC;
   border: 1px solid var(--card-border);
   border-radius: 16px;
@@ -144,7 +146,6 @@ section, header, footer { position: relative; }
   box-shadow: 0 10px 30px rgba(15,23,42,0.06);
 }
 .pain_point_problem {
-  flex: 1;
   padding: 1.75rem;
 }
 .pain_point_problem::before {
@@ -183,12 +184,32 @@ section, header, footer { position: relative; }
   text-transform: uppercase;
 }
 @media (max-width: 1000px) {
-  .pain_points_grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pain_points_grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto;
+    gap: 1.25rem;
+  }
+  .pain_point_card {
+    display: flex;
+    flex-direction: column;
+    grid-row: auto;
+  }
+  .pain_point_problem { flex: 1; }
 }
 @media (max-width: 620px) {
   .pain_points_wrap { padding: 4rem 1.25rem; }
-  .pain_points_grid { grid-template-columns: 1fr; }
-  .pain_point_card { min-height: 0; }
+  .pain_points_grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 1.25rem;
+  }
+  .pain_point_card {
+    display: flex;
+    flex-direction: column;
+    grid-row: auto;
+    min-height: 0;
+  }
+  .pain_point_problem { flex: 1; }
 }
 .outlined_button {
   display: inline-flex;
