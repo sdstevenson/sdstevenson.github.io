@@ -94,15 +94,6 @@ function initPlatformTiles() {
   });
 }
 
-/* ============================================================
-   YEAR AUTO-UPDATE
-============================================================ */
-function initYear() {
-  const els = document.querySelectorAll("[data-current-year]");
-  const year = new Date().getFullYear();
-  els.forEach((el) => (el.textContent = year));
-}
-
 function formatRoiDollars(value) {
   return '$' + Math.round(value).toLocaleString('en-US');
 }
@@ -803,7 +794,7 @@ function injectSharedComponents() {
         <div class="sttugs-footer_left">
           <a href="../index.html" class="sttugs-site_name">STTUGS</a>
           <div class="sttugs-copyright">
-            © <span data-current-year></span> Sttugs. Patent Pending.
+            © Sttugs. Patent Pending.
           </div>
         </div>
         <div class="sttugs-footer_right">
@@ -916,10 +907,6 @@ function initSharedContactModal() {
     });
   }
 
-  // Re-run year stamp on freshly injected footer
-  document.querySelectorAll('[data-current-year]').forEach(el =>
-    el.textContent = new Date().getFullYear()
-  );
 }
 
 /* ============================================================
@@ -934,7 +921,6 @@ function initSharedContactModal() {
     }
   }, true); // true = capture phase, fires before other handlers
 
-  initYear();
   initRoiDefaults();
 
   // Inject shared footer + modal as early as possible
