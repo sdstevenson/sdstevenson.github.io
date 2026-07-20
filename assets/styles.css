@@ -292,8 +292,38 @@ video { display: block; width: 100%; }
   color: var(--blue);
 }
 .benefit-card p { font-size: 0.9375rem; line-height: 1.65; color: var(--muted); font-weight: 500; }
-.span_blue { color: var(--blue); font-weight: 600; }
-.span_accent { color: var(--accent); font-weight: 600; background: var(--accent-background); }
+.span_blue {
+  color: var(--navy);
+  font-weight: 700;
+  background: rgba(79,113,134,0.12);
+  border-bottom: 2px solid rgba(79,113,134,0.45);
+  padding: 0 0.12em;
+}
+.span_accent {
+  display: inline-block;
+  color: var(--navy);
+  font-weight: 800;
+  background: linear-gradient(180deg, rgba(255,255,255,0) 40%, rgba(184,194,203,0.5) 40%);
+  border-radius: 6px;
+  padding: 0 0.18em;
+}
+.section-heading .span_accent {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 0.12em;
+  padding: 0.12em 0.28em 0.16em;
+  background: linear-gradient(135deg, #071424 0%, #0E2336 100%);
+  color: #F6F8FA;
+  border: 1px solid rgba(184,194,203,0.55);
+  box-shadow: 0 12px 30px rgba(7,20,36,0.16);
+  line-height: 1;
+  white-space: nowrap;
+}
+.benefit-card .span_accent {
+  background: rgba(184,194,203,0.26);
+  border: 1px solid rgba(184,194,203,0.48);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.7) inset;
+}
 
 /* ── FAQ ── */
 .faq-section { background: var(--navy); padding: 5rem 2rem; }
