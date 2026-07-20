@@ -25,8 +25,8 @@ section, header, footer { position: relative; }
   min-height: 100svh;
   padding: 10rem 2rem 7rem;
   background:
-    linear-gradient(rgba(15,23,42,0.78), rgba(15,23,42,0.84)),
-    radial-gradient(circle at 50% 20%, rgba(37,99,235,0.18), transparent 42%),
+    linear-gradient(rgba(7,20,36,0.78), rgba(7,20,36,0.84)),
+    radial-gradient(circle at 50% 20%, rgba(79,113,134,0.18), transparent 42%),
     url("praetor_sunset.JPEG") center center / cover no-repeat;
   overflow: hidden;
   display: flex;
@@ -65,7 +65,7 @@ section, header, footer { position: relative; }
   font-size: clamp(2.75rem, 6vw, 5.25rem);
   font-weight: 800;
   line-height: 1.04;
-  letter-spacing: -0.045em;
+  letter-spacing: 0;
 }
 .hero_subtitle {
   max-width: 720px;
@@ -102,14 +102,14 @@ section, header, footer { position: relative; }
 }
 .hero_button-primary:hover { background: var(--blue-dark); }
 .hero_button-secondary {
-  border-color: rgba(147,197,253,0.55);
+  border-color: rgba(183,202,214,0.55);
   color: var(--blue-faint);
   background: rgba(255,255,255,0.02);
 }
 .hero_button-secondary:hover {
   border-color: var(--blue-faint);
   color: #FFFFFF;
-  background: rgba(37,99,235,0.15);
+  background: rgba(79,113,134,0.15);
 }
 
 /* ============================================================
@@ -139,11 +139,11 @@ section, header, footer { position: relative; }
   display: grid;
   grid-template-rows: subgrid;
   grid-row: span 2;
-  background: #F8FAFC;
+  background: #F6F8FA;
   border: 1px solid var(--card-border);
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(15,23,42,0.06);
+  box-shadow: 0 10px 30px rgba(7,20,36,0.06);
 }
 .pain_point_problem {
   padding: 1.75rem;
@@ -226,16 +226,16 @@ section, header, footer { position: relative; }
   transition: all 0.25s ease;
   text-decoration: none;
 }
-.outlined_button:hover { border-color: var(--blue-faint); background: rgba(37,99,235,0.12); }
-.outlined_button.light-blue { border-color: rgba(147,197,253,0.4); color: var(--blue-faint); }
-.outlined_button.light-blue:hover { background: rgba(37,99,235,0.15); border-color: var(--blue-faint); }
+.outlined_button:hover { border-color: var(--blue-faint); background: rgba(79,113,134,0.12); }
+.outlined_button.light-blue { border-color: rgba(183,202,214,0.4); color: var(--blue-faint); }
+.outlined_button.light-blue:hover { background: rgba(79,113,134,0.15); border-color: var(--blue-faint); }
 
 /* ============================================================
    PRODUCT SECTION
 ============================================================ */
 .product_wrap {
   position: relative;
-  background: #F1F5F9;
+  background: #EEF3F6;
   padding: 6rem 0 4rem;
   overflow: hidden;
 }
@@ -261,7 +261,7 @@ section, header, footer { position: relative; }
   font-weight: 800;
   color: var(--navy);
   line-height: 1.1;
-  letter-spacing: -0.025em;
+  letter-spacing: 0;
 }
 
 .animation_container {
@@ -291,13 +291,13 @@ section, header, footer { position: relative; }
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 8px 30px rgba(15,23,42,0.06);
+  box-shadow: 0 8px 30px rgba(7,20,36,0.06);
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 .accordion_item:hover {
   transform: translateY(-4px);
-  border-color: rgba(37,99,235,0.25);
-  box-shadow: 0 16px 40px rgba(15,23,42,0.12);
+  border-color: rgba(79,113,134,0.25);
+  box-shadow: 0 16px 40px rgba(7,20,36,0.12);
 }
 .tab_title {
   font-size: 1.125rem;
@@ -335,7 +335,7 @@ section, header, footer { position: relative; }
   transition: background 0.18s, color 0.18s;
   align-self: flex-start;
 }
-.tab-learn-more:hover { background: var(--accent); color: #0F172A; }
+.tab-learn-more:hover { background: var(--accent); color: #071424; }
 
 .animation_video_container { display: none; }
 .tab-visual {
@@ -399,7 +399,7 @@ section, header, footer { position: relative; }
   font-weight: 800;
   color: #FFFFFF;
   line-height: 1.1;
-  letter-spacing: -0.025em;
+  letter-spacing: 0;
 }
 .text-span { display: block; }
 
@@ -416,7 +416,7 @@ section, header, footer { position: relative; }
    ROI / CAREERS SECTION
 ============================================================ */
 .carrers_wrap {
-  background: #F8FAFC;
+  background: #F6F8FA;
   padding: 7rem 0;
 }
 .careers-container {
@@ -451,8 +451,8 @@ section, header, footer { position: relative; }
   position: absolute;
   bottom: 0; left: 0; right: 0;
   height: 45%;
-  background: rgba(37,99,235,0.15);
-  border-top: 1px solid rgba(37,99,235,0.3);
+  background: rgba(79,113,134,0.15);
+  border-top: 1px solid rgba(79,113,134,0.3);
 }
 .mission-graphic-text {
   position: relative;

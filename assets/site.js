@@ -1,6 +1,6 @@
 /**
  * site.js
- * Sttugs landing page interactions.
+ * Starlight Hangars landing page interactions.
  * Uses GSAP 3.14.2 with ScrollTrigger.
  */
 
@@ -335,9 +335,9 @@ function injectSharedNav() {
     <nav class="snav">
       <div class="snav-inner">
         <div class="snav-logo">
-          <a href="index.html" class="snav-logo-link" aria-label="STTUGS home">
-            <img src="../assets/logo.svg" class="snav-logo-img" alt="STTUGS"/>
-            <span class="snav-logo-text">STTUGS</span>
+          <a href="index.html" class="snav-logo-link" aria-label="Starlight Hangars home">
+            <img src="../assets/logo.svg" class="snav-logo-img" alt="Starlight Hangars"/>
+            <span class="snav-logo-text">Starlight Hangars</span>
           </a>
         </div>
         <ul class="snav-links" role="list">
@@ -432,7 +432,7 @@ function injectSharedComponents() {
     style.textContent = `
       /* Shared footer */
       .sttugs-footer {
-        background: #0F172A;
+        background: #071424;
         padding: 3rem 0;
         position: relative;
       }
@@ -451,7 +451,7 @@ function injectSharedComponents() {
         font-size: 1.25rem;
         font-weight: 800;
         color: #FFFFFF;
-        letter-spacing: -0.02em;
+        letter-spacing: 0;
         text-decoration: none;
       }
       .sttugs-copyright { font-size: 0.8125rem; color: rgba(255,255,255,0.4); }
@@ -473,7 +473,7 @@ function injectSharedComponents() {
         display: none;
         position: fixed;
         inset: 0;
-        background: rgba(15,23,42,0.7);
+        background: rgba(7,20,36,0.7);
         z-index: 9000;
         backdrop-filter: blur(4px);
       }
@@ -488,46 +488,46 @@ function injectSharedComponents() {
         border-radius: 16px;
         z-index: 9001;
         overflow: hidden;
-        box-shadow: 0 24px 80px rgba(15,23,42,0.3);
+        box-shadow: 0 24px 80px rgba(7,20,36,0.3);
       }
       .sttugs-modal-wrap.active { display: block; }
       .sttugs-modal-inner { padding: 2.25rem 2.5rem 2.5rem; }
       .sttugs-modal-title {
         font-size: 1.25rem;
         font-weight: 700;
-        color: #0F172A;
+        color: #071424;
         margin-bottom: 1.25rem;
       }
-      .sttugs-modal-divider { height: 1px; background: rgba(15,23,42,0.1); margin: 0 0 1.25rem; }
+      .sttugs-modal-divider { height: 1px; background: rgba(7,20,36,0.1); margin: 0 0 1.25rem; }
       .sttugs-modal-form { display: flex; flex-direction: column; gap: 1.1rem; }
       .sttugs-field-label {
         display: block;
         font-size: 0.8125rem;
         font-weight: 600;
-        color: #64748B;
+        color: #657586;
         margin-bottom: 0.35rem;
       }
       .sttugs-text-field, .sttugs-textarea {
         width: 100%;
         padding: 0.7rem 0.9rem;
-        border: 1.5px solid #CBD5E1;
+        border: 1.5px solid #B8C2CB;
         border-radius: 8px;
         font-family: inherit;
         font-size: 0.9375rem;
-        color: #0F172A;
-        background: #F8FAFC;
+        color: #071424;
+        background: #F6F8FA;
         transition: border-color 0.2s;
         box-sizing: border-box;
       }
       .sttugs-text-field:focus, .sttugs-textarea:focus {
         outline: none;
-        border-color: #2563EB;
+        border-color: #4F7186;
         background: #FFFFFF;
       }
       .sttugs-textarea { min-height: 110px; resize: vertical; }
       .sttugs-submit {
         padding: 0.8rem 1.5rem;
-        background: #2563EB;
+        background: #4F7186;
         color: #FFFFFF;
         border: none;
         border-radius: 8px;
@@ -537,11 +537,11 @@ function injectSharedComponents() {
         transition: background 0.2s;
         align-self: flex-start;
       }
-      .sttugs-submit:hover { background: #1d4ed8; }
+      .sttugs-submit:hover { background: #3B5A6D; }
       .sttugs-modal-success { display: none; padding: 2rem; text-align: center; }
       .sttugs-modal-success.visible { display: block; }
-      .sttugs-success-big { font-size: 1.5rem; font-weight: 700; color: #0F172A; margin-bottom: 0.5rem; }
-      .sttugs-success-small { font-size: 0.9375rem; color: #64748B; }
+      .sttugs-success-big { font-size: 1.5rem; font-weight: 700; color: #071424; margin-bottom: 0.5rem; }
+      .sttugs-success-small { font-size: 0.9375rem; color: #657586; }
       .sttugs-modal-close {
         position: absolute;
         top: 1rem; right: 1rem;
@@ -551,17 +551,17 @@ function injectSharedComponents() {
         border: none;
         display: flex; align-items: center; justify-content: center;
         cursor: pointer;
-        color: #64748B;
+        color: #657586;
         transition: background 0.2s, color 0.2s;
       }
-      .sttugs-modal-close:hover { background: rgba(15,23,42,0.08); color: #0F172A; }
+      .sttugs-modal-close:hover { background: rgba(7,20,36,0.08); color: #071424; }
 
       /* ═══ SHARED NAV ═══ */
       .snav {
         position: fixed;
         top: 0; left: 0; right: 0;
         z-index: 2000;
-        background: rgba(15,23,42,0.96);
+        background: rgba(7,20,36,0.96);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
         border-bottom: 1px solid rgba(255,255,255,0.08);
@@ -569,7 +569,7 @@ function injectSharedComponents() {
       }
       .snav--light .snav {
         background: rgba(255,255,255,0.97);
-        border-bottom-color: rgba(15,23,42,0.1);
+        border-bottom-color: rgba(7,20,36,0.1);
       }
       .snav-inner {
         display: flex; align-items: center; justify-content: space-between;
@@ -586,12 +586,12 @@ function injectSharedComponents() {
       }
       .snav--light .snav-logo-img { filter: none; }
       .snav-logo-text {
-        font-size: 1.1rem; font-weight: 800; letter-spacing: -0.02em;
+        font-size: 1rem; font-weight: 800; letter-spacing: 0.02em; text-transform: uppercase; white-space: nowrap;
         color: #fff; transition: color 0.35s ease;
       }
-      .snav--light .snav-logo-text { color: #0F172A; }
+      .snav--light .snav-logo-text { color: #071424; }
       .snav-links {
-        display: flex; align-items: center; gap: 1.5rem;
+        display: flex; align-items: center; gap: 1.1rem;
         list-style: none; margin: 0; padding: 0;
       }
       .snav-item { position: relative; }
@@ -606,23 +606,23 @@ function injectSharedComponents() {
         font-family: inherit;
       }
       .snav-link:hover { color: #fff; }
-      .snav--light .snav-link { color: rgba(15,23,42,0.65); }
-      .snav--light .snav-link:hover { color: #0F172A; }
+      .snav--light .snav-link { color: rgba(7,20,36,0.65); }
+      .snav--light .snav-link:hover { color: #071424; }
       .snav-link.snav-active, .snav-dropdown-trigger.snav-active--parent { color: #fff; }
-      .snav--light .snav-link.snav-active, .snav--light .snav-dropdown-trigger.snav-active--parent { color: #0F172A; }
+      .snav--light .snav-link.snav-active, .snav--light .snav-dropdown-trigger.snav-active--parent { color: #071424; }
       .snav-cta {
-        background: #F5A623 !important; color: #0F172A !important;
+        background: #B8C2CB !important; color: #071424 !important;
         padding: 0.45rem 1.1rem !important; border-radius: 7px; font-weight: 700;
       }
-      .snav-cta:hover { background: #d4891e !important; color: #fff !important; }
+      .snav-cta:hover { background: #7D93A2 !important; color: #fff !important; }
       .snav-roi-link {
-        border: 1.5px solid rgba(37,99,235,0.5) !important;
+        border: 1.5px solid rgba(79,113,134,0.5) !important;
         padding: 0.4rem 1rem !important; border-radius: 7px;
-        color: rgba(147,197,253,0.9) !important;
+        color: rgba(183,202,214,0.9) !important;
       }
-      .snav-roi-link:hover { border-color: #3B82F6 !important; color: #fff !important; background: rgba(37,99,235,0.12) !important; }
-      .snav--light .snav-roi-link { border-color: rgba(37,99,235,0.4) !important; color: #1d4ed8 !important; }
-      .snav--light .snav-roi-link:hover { border-color: var(--blue) !important; background: rgba(37,99,235,0.08) !important; }
+      .snav-roi-link:hover { border-color: #5F8399 !important; color: #fff !important; background: rgba(79,113,134,0.12) !important; }
+      .snav--light .snav-roi-link { border-color: rgba(79,113,134,0.4) !important; color: #3B5A6D !important; }
+      .snav--light .snav-roi-link:hover { border-color: var(--blue) !important; background: rgba(79,113,134,0.08) !important; }
       .snav-chevron {
         width: 12px; height: 12px;
         transition: transform 0.25s; flex-shrink: 0;
@@ -632,7 +632,7 @@ function injectSharedComponents() {
         position: absolute;
         top: calc(100% + 0.625rem); left: 50%;
         transform: translateX(-50%) translateY(-8px);
-        background: #1E293B;
+        background: #0E2336;
         border: 1px solid rgba(255,255,255,0.1);
         border-radius: 12px;
         padding: 0.5rem;
@@ -644,8 +644,8 @@ function injectSharedComponents() {
       }
       .snav--light .snav-dropdown {
         background: #fff;
-        border-color: rgba(15,23,42,0.1);
-        box-shadow: 0 16px 48px rgba(15,23,42,0.15);
+        border-color: rgba(7,20,36,0.1);
+        box-shadow: 0 16px 48px rgba(7,20,36,0.15);
       }
       .snav-item--dropdown.open .snav-dropdown {
         opacity: 1; pointer-events: auto;
@@ -659,10 +659,10 @@ function injectSharedComponents() {
         transition: background 0.15s, color 0.15s;
       }
       .snav-dropdown-item:hover { background: rgba(255,255,255,0.08); color: #fff; }
-      .snav-dropdown-item.snav-active { background: rgba(37,99,235,0.2); color: #93C5FD; font-weight: 600; }
-      .snav--light .snav-dropdown-item { color: rgba(15,23,42,0.7); }
-      .snav--light .snav-dropdown-item:hover { background: #F1F5F9; color: #0F172A; }
-      .snav--light .snav-dropdown-item.snav-active { background: rgba(37,99,235,0.1); color: #1d4ed8; }
+      .snav-dropdown-item.snav-active { background: rgba(79,113,134,0.2); color: #B7CAD6; font-weight: 600; }
+      .snav--light .snav-dropdown-item { color: rgba(7,20,36,0.7); }
+      .snav--light .snav-dropdown-item:hover { background: #EEF3F6; color: #071424; }
+      .snav--light .snav-dropdown-item.snav-active { background: rgba(79,113,134,0.1); color: #3B5A6D; }
       .snav-dropdown-section-label {
         display: block; padding: 0.6rem 0.9rem 0.4rem;
         font-size: 0.75rem; font-weight: 700;
@@ -670,14 +670,14 @@ function injectSharedComponents() {
         color: rgba(255,255,255,0.45);
         margin-top: 0.5rem;
       }
-      .snav--light .snav-dropdown-section-label { color: rgba(15,23,42,0.4); }
+      .snav--light .snav-dropdown-section-label { color: rgba(7,20,36,0.4); }
       .snav-dropdown-item--disabled {
         display: block; padding: 0.6rem 0.9rem;
         font-size: 0.875rem; font-weight: 500;
         color: rgba(255,255,255,0.45);
         cursor: not-allowed; border-radius: 8px;
       }
-      .snav--light .snav-dropdown-item--disabled { color: rgba(15,23,42,0.4); }
+      .snav--light .snav-dropdown-item--disabled { color: rgba(7,20,36,0.4); }
       .snav-hamburger {
         display: none; flex-direction: column; gap: 5px;
         width: 40px; height: 40px;
@@ -689,7 +689,7 @@ function injectSharedComponents() {
         background: rgba(255,255,255,0.8); border-radius: 2px;
         transition: background 0.3s;
       }
-      .snav--light .snav-hamburger span { background: rgba(15,23,42,0.8); }
+      .snav--light .snav-hamburger span { background: rgba(7,20,36,0.8); }
       .snav-mobile-overlay {
         display: none; position: fixed; inset: 0;
         background: rgba(0,0,0,0.45); z-index: 2050; backdrop-filter: blur(2px);
@@ -698,7 +698,7 @@ function injectSharedComponents() {
       .snav-mobile {
         position: fixed; top: 0; right: 0; bottom: 0;
         width: min(320px, 90vw);
-        background: #1E293B; z-index: 2100;
+        background: #0E2336; z-index: 2100;
         padding: 4.5rem 1.5rem 2rem;
         box-shadow: -8px 0 40px rgba(0,0,0,0.4);
         overflow-y: auto;
@@ -723,7 +723,7 @@ function injectSharedComponents() {
         max-height: 0; overflow: hidden;
         transition: max-height 0.32s ease;
         padding-left: 0.75rem;
-        border-left: 2px solid rgba(37,99,235,0.4);
+        border-left: 2px solid rgba(79,113,134,0.4);
         margin: 0.125rem 0 0.375rem 1rem;
       }
       .snav-mobile-sub.open { max-height: 500px; }
@@ -734,7 +734,7 @@ function injectSharedComponents() {
         border-radius: 6px; transition: background 0.15s, color 0.15s;
       }
       .snav-mobile-sub a:hover { background: rgba(255,255,255,0.07); color: #fff; }
-      .snav-mobile-sub a.snav-active { color: #93C5FD; font-weight: 600; background: rgba(37,99,235,0.15); }
+      .snav-mobile-sub a.snav-active { color: #B7CAD6; font-weight: 600; background: rgba(79,113,134,0.15); }
       .snav-mobile-section-label {
         display: block; padding: 0.6rem 0.75rem 0.3rem;
         font-size: 0.7rem; font-weight: 700;
@@ -752,11 +752,11 @@ function injectSharedComponents() {
       .snav-mobile-cta {
         display: block; margin-top: 1.5rem;
         padding: 0.85rem 1rem; text-align: center;
-        background: #2563EB; color: #fff;
+        background: #4F7186; color: #fff;
         border-radius: 8px; font-weight: 700;
         text-decoration: none; transition: background 0.2s;
       }
-      .snav-mobile-cta:hover { background: #1d4ed8; }
+      .snav-mobile-cta:hover { background: #3B5A6D; }
       .snav-mobile-close {
         position: absolute; top: 1rem; right: 1rem;
         width: 36px; height: 36px; border-radius: 8px;
@@ -792,9 +792,9 @@ function injectSharedComponents() {
     footer.innerHTML = `
       <div class="sttugs-footer_container">
         <div class="sttugs-footer_left">
-          <a href="../index.html" class="sttugs-site_name">STTUGS</a>
+          <a href="../index.html" class="sttugs-site_name">Starlight Hangars</a>
           <div class="sttugs-copyright">
-            © Sttugs. Patent Pending.
+            © Starlight Hangars. Patent Pending.
           </div>
         </div>
         <div class="sttugs-footer_right">
@@ -829,7 +829,7 @@ function injectSharedComponents() {
           </svg>
         </button>
         <div class="sttugs-modal-inner">
-          <div class="sttugs-modal-title" id="sttugs-modal-title">Contact Sttugs</div>
+          <div class="sttugs-modal-title" id="sttugs-modal-title">Contact Starlight Hangars</div>
           <div class="sttugs-modal-divider"></div>
           <form id="sttugs-contact-form" class="sttugs-modal-form">
             <div>
