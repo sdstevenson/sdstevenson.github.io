@@ -136,15 +136,15 @@ section, header, footer { position: relative; }
 
 /* ── Page colour tokens ── */
 :root {
-  --sttugs-navy:        #0F172A;
-  --sttugs-navy-mid:    #1E293B;
-  --sttugs-blue:        #2563EB;
-  --sttugs-blue-dark:   #1d4ed8;
-  --sttugs-accent:      #F5A623;
-  --sttugs-accent-hov:  #d4891e;
-  --sttugs-muted:       #94A3B8;
+  --sttugs-navy:        #071424;
+  --sttugs-navy-mid:    #0E2336;
+  --sttugs-blue:        #4F7186;
+  --sttugs-blue-dark:   #3B5A6D;
+  --sttugs-accent:      #B8C2CB;
+  --sttugs-accent-hov:  #7D93A2;
+  --sttugs-muted:       #8392A0;
   --sttugs-white:       #FFFFFF;
-  --sttugs-light-bg:    #F8FAFC;
+  --sttugs-light-bg:    #F6F8FA;
   --sttugs-card:        rgba(255,255,255,0.06);
   --sttugs-card-border: rgba(255,255,255,0.12);
 }
@@ -161,7 +161,7 @@ section, header, footer { position: relative; }
 .values_paragraph  { color: var(--sttugs-muted) !important; }
 
 .values_asset path, .values_asset circle, .values_asset ellipse {
-  stroke: rgba(37,99,235,0.4) !important;
+  stroke: rgba(79,113,134,0.4) !important;
 }
 .values_asset circle[fill="#D9D9D9"],
 .values_asset ellipse[fill="#E5E5DF"],
@@ -195,7 +195,7 @@ section, header, footer { position: relative; }
   margin-bottom: 1rem !important;
   display: block !important;
 }
-.story_paragraph { color: #475569 !important; }
+.story_paragraph { color: #536171 !important; }
 
 .team_profile_grid {
   display: flex;
@@ -214,12 +214,12 @@ section, header, footer { position: relative; }
   .team_profile_grid .team_card    { flex: none; width: 100%; }
 }
 
-.team_card        { background: var(--sttugs-white) !important; border: 1px solid rgba(15,23,42,0.1) !important; border-radius: 12px; padding: 1.5rem; }
+.team_card        { background: var(--sttugs-white) !important; border: 1px solid rgba(7,20,36,0.1) !important; border-radius: 12px; padding: 1.5rem; }
 .team_name        { color: var(--sttugs-navy) !important; }
 .team_position    { color: var(--sttugs-blue) !important; }
 .team_position::before { content: "" !important; }
 .team_position::after  { content: "" !important; }
-.team_description { color: #475569 !important; }
+.team_description { color: #536171 !important; }
 .team_image       { border-radius: 8px; width: 100%; }
 
 /* ── Hamburger ── */

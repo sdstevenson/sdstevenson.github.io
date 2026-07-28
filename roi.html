@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>ROI Calculator – Sttugs</title>
-  <meta name="description" content="Calculate projected annual savings with STTUGS at your hangar — labor, revenue, and efficiency all in one place."/>
+  <title>ROI Calculator – Starlight Hangars</title>
+  <meta name="description" content="Calculate projected annual savings with Starlight Hangars at your hangar — labor, revenue, and efficiency all in one place."/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <link rel="icon" href="./favicon/favicon.ico" sizes="any"/>
+  <link rel="icon" href="./favicon/favicon.svg" type="image/svg+xml"/>
   <link rel="apple-touch-icon" href="./favicon/apple-touch-icon.png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
@@ -19,13 +19,13 @@
       border: 1px solid var(--card-border);
       border-radius: 20px;
       padding: 2.5rem;
-      box-shadow: 0 4px 32px rgba(15,23,42,0.07);
+      box-shadow: 0 4px 32px rgba(7,20,36,0.07);
     }
     @media (max-width: 600px) { .roi-card { padding: 1.5rem; } }
 
     /* Result banner */
     .roi-result {
-      background: linear-gradient(135deg, #1e3a5f 0%, #1d4ed8 100%);
+      background: linear-gradient(135deg, #1e3a5f 0%, #3B5A6D 100%);
       border-radius: 14px;
       padding: 1.75rem 2rem;
       margin-bottom: 2rem;
@@ -50,7 +50,7 @@
     .roi-breakdown-item { display: flex; flex-direction: column; gap: 0.2rem; }
     .roi-breakdown-line { display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; align-items: baseline; }
     .roi-breakdown-label { font-size: 0.75rem; font-weight: 600; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 0.04em; }
-    .roi-breakdown-val { font-size: 1.125rem; font-weight: 700; color: #93C5FD; }
+    .roi-breakdown-val { font-size: 1.125rem; font-weight: 700; color: #B7CAD6; }
     .roi-breakdown-formula { font-size: 0.75rem; color: rgba(255,255,255,0.45); font-weight: 500; }
     @media (max-width: 720px) { .roi-result-top { grid-template-columns: 1fr; } }
 
@@ -73,7 +73,7 @@
     .roi-row input[type="range"]::-webkit-slider-thumb {
       -webkit-appearance: none; width: 18px; height: 18px;
       border-radius: 50%; background: var(--blue);
-      box-shadow: 0 1px 4px rgba(37,99,235,0.4); cursor: pointer;
+      box-shadow: 0 1px 4px rgba(79,113,134,0.4); cursor: pointer;
     }
     .roi-numbox {
       width: 88px; text-align: right;
@@ -81,7 +81,7 @@
       padding: 0.4rem 0.5rem; font-size: 0.875rem; font-weight: 600;
       color: var(--navy); font-family: inherit; background: #fff; outline: none;
     }
-    .roi-numbox:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,0.12); }
+    .roi-numbox:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(79,113,134,0.12); }
 
     /* Email form */
     .roi-form-wrap { margin-top: 2rem; text-align: center; }
@@ -97,7 +97,7 @@
       font-size: 0.9rem; font-family: inherit; color: var(--navy);
       outline: none; box-sizing: border-box;
     }
-    .roi-email-wrap input[type="email"]:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,0.12); }
+    .roi-email-wrap input[type="email"]:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(79,113,134,0.12); }
     .roi-email-error { display: none; font-size: 0.8rem; color: #dc2626; margin-top: 0.35rem; text-align: left; }
     .roi-email-error.visible { display: block; }
     .roi-submit {
@@ -105,7 +105,7 @@
       border: none; border-radius: 8px; font-size: 0.9rem; font-weight: 700;
       font-family: inherit; cursor: pointer; white-space: nowrap; transition: background 0.2s;
     }
-    .roi-submit:hover { background: #1d4ed8; }
+    .roi-submit:hover { background: #3B5A6D; }
     .roi-submit:disabled { background: var(--muted); cursor: not-allowed; }
     .roi-success { display: none; font-size: 0.9rem; color: #16a34a; font-weight: 600; margin-top: 1rem; }
 
@@ -137,7 +137,7 @@
       </svg>
     </div>
     <h1>ROI Calculator</h1>
-    <p>Estimate your projected annual savings with STTUGS — based on your labor costs and revenue opportunity.</p>
+    <p>Estimate your projected annual savings with Starlight Hangars — based on your labor costs and revenue opportunity.</p>
   </section>
 
   <!-- CALCULATOR -->
@@ -304,7 +304,7 @@
 
   <!-- CTA -->
   <div class="cta-strip">
-    <h2>Ready to see STTUGS in action?</h2>
+    <h2>Ready to see Starlight Hangars in action?</h2>
     <p>Reach out to join the early access list or see a preview of the demo.</p>
     <a href="#" data-open-contact class="btn-primary">Contact Us</a>
   </div>

@@ -1,5 +1,5 @@
 /* ============================================================
-   SHARED STYLESHEET — Sttugs / Sunrise detail pages
+   SHARED STYLESHEET — Starlight Hangars detail pages
    All common styles shared across detail page templates.
 ============================================================ */
 
@@ -8,21 +8,21 @@
 
 /* ── CSS VARIABLES ── */
 :root {
-  --navy: #0F172A;
-  --navy-mid: #1E293B;
-  --blue: #2563EB;
-  --blue-dark: #1d4ed8;
-  --blue-faint: #93C5FD;
-  --accent: #F5A623;
-  --accent-hover: #d4891e;
-  --accent-background: rgba(245,166,35,0.12);
-  --muted: #64748B;
-  --text: #0F172A;
+  --navy: #071424;
+  --navy-mid: #0E2336;
+  --blue: #4F7186;
+  --blue-dark: #3B5A6D;
+  --blue-faint: #B7CAD6;
+  --accent: #B8C2CB;
+  --accent-hover: #7D93A2;
+  --accent-background: rgba(184,194,203,0.12);
+  --muted: #657586;
+  --text: #071424;
   --bg: #FFFFFF;
-  --light-bg: #F1F5F9;
-  --card-bg: rgba(248,250,252,0.9);
-  --card-border: rgba(15,23,42,0.1);
-  --navy-glass: rgba(15,23,42,0.97);
+  --light-bg: #EEF3F6;
+  --card-bg: rgba(246,248,250,0.9);
+  --card-border: rgba(7,20,36,0.1);
+  --navy-glass: rgba(7,20,36,0.97);
   --text-light-muted: rgba(255,255,255,0.6);
   --font: Inter, ui-sans-serif, system-ui, sans-serif;
 }
@@ -39,7 +39,7 @@ video { display: block; width: 100%; }
 /* ── NAV ── */
 .nav_wrap {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  background: rgba(15,23,42,0.96);
+  background: rgba(7,20,36,0.96);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255,255,255,0.08);
@@ -51,7 +51,7 @@ video { display: block; width: 100%; }
 }
 .nav_logo a { display: flex; align-items: center; gap: 0.5rem; color: #fff; text-decoration: none; }
 .nav_logo img { height: 36px; filter: brightness(0) invert(1); }
-.nav_logo span { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.02em; }
+.nav_logo span { font-size: 1rem; font-weight: 800; letter-spacing: 0.02em; text-transform: uppercase; white-space: nowrap; }
 .nav_links { display: flex; align-items: center; gap: 1.5rem; }
 .nav_link {
   font-size: 0.9rem; font-weight: 500; color: rgba(255,255,255,0.75);
@@ -76,8 +76,8 @@ video { display: block; width: 100%; }
 }
 .detail-hero-icon {
   width: 64px; height: 64px; margin: 0 auto 1.5rem;
-  background: rgba(37,99,235,0.15);
-  border: 1px solid rgba(37,99,235,0.3);
+  background: rgba(79,113,134,0.15);
+  border: 1px solid rgba(79,113,134,0.3);
   border-radius: 16px;
   display: flex; align-items: center; justify-content: center;
   color: var(--blue-faint);
@@ -90,7 +90,7 @@ video { display: block; width: 100%; }
 .detail-hero h1 {
   font-size: clamp(2rem, 5vw, 3.25rem);
   font-weight: 800; color: #fff;
-  line-height: 1.12; letter-spacing: -0.025em;
+  line-height: 1.12; letter-spacing: 0;
   max-width: 700px; margin: 0 auto 1.25rem;
 }
 .detail-hero p {
@@ -127,8 +127,8 @@ video { display: block; width: 100%; }
 .section-light .feature-card h3 { color: var(--navy); }
 .section-light .feature-card p { color: var(--muted); }
 .section-light .feature-icon {
-  background: rgba(37,99,235,0.06);
-  border: 1px solid rgba(37,99,235,0.08);
+  background: rgba(79,113,134,0.06);
+  border: 1px solid rgba(79,113,134,0.08);
   color: var(--blue);
 }
 
@@ -148,7 +148,7 @@ video { display: block; width: 100%; }
 .section-heading {
   font-size: clamp(1.75rem, 3.5vw, 2.5rem);
   font-weight: 800; color: #fff;
-  line-height: 1.18; letter-spacing: -0.02em;
+  line-height: 1.18; letter-spacing: 0;
   margin-bottom: 0.875rem;
 }
 .section-heading.light { color: var(--navy); }
@@ -165,7 +165,7 @@ video { display: block; width: 100%; }
 .coming-soon-section.section-dark { background: var(--navy-mid); }
 .coming-soon-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
 @media (max-width: 768px) { .coming-soon-inner { grid-template-columns: 1fr; } }
-.coming-soon-text h2 { font-size: clamp(1.5rem, 3vw, 2.125rem); font-weight: 700; line-height: 1.22; letter-spacing: -0.02em; margin-bottom: 1rem; }
+.coming-soon-text h2 { font-size: clamp(1.5rem, 3vw, 2.125rem); font-weight: 700; line-height: 1.22; letter-spacing: 0; margin-bottom: 1rem; }
 .coming-soon-text p { font-size: 0.9375rem; line-height: 1.75; }
 .coming-soon-section.section-light .coming-soon-text h2 { color: var(--navy); }
 .coming-soon-section.section-light .coming-soon-text p { color: var(--muted); }
@@ -182,7 +182,7 @@ video { display: block; width: 100%; }
 .coming-soon-visual svg { width: 100%; height: 100%; }
 .coming-soon-badge {
   position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
-  background: var(--accent-background); border: 1px solid rgba(245,166,35,0.4);
+  background: var(--accent-background); border: 1px solid rgba(184,194,203,0.4);
   color: var(--accent); font-size: 0.75rem; font-weight: 700;
   letter-spacing: 0.1em; text-transform: uppercase;
   padding: 0.35rem 0.9rem; border-radius: 20px;
@@ -209,7 +209,7 @@ video { display: block; width: 100%; }
 .video-text h2 {
   font-size: clamp(1.5rem, 3vw, 2.125rem);
   font-weight: 700; color: #000; line-height: 1.22;
-  letter-spacing: -0.02em; margin-bottom: 1rem;
+  letter-spacing: 0; margin-bottom: 1rem;
 }
 .video-text p { font-size: 0.9375rem; line-height: 1.75; color: var(--muted); }
 .video-wrap {
@@ -222,10 +222,10 @@ video { display: block; width: 100%; }
 .video-play-overlay {
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
-  background: rgba(15,23,42,0.35);
+  background: rgba(7,20,36,0.35);
   cursor: pointer; transition: background 0.2s;
 }
-.video-play-overlay:hover { background: rgba(15,23,42,0.15); }
+.video-play-overlay:hover { background: rgba(7,20,36,0.15); }
 .video-play-overlay svg {
   width: 52px; height: 52px;
   fill: rgba(255,255,255,0.9);
@@ -255,7 +255,7 @@ video { display: block; width: 100%; }
 .feature-card:hover { background: rgba(255,255,255,0.08); transform: translateY(-3px); }
 .feature-icon {
   width: 44px; height: 44px; margin-bottom: 1rem;
-  background: rgba(37,99,235,0.15);
+  background: rgba(79,113,134,0.15);
   border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
   color: var(--blue-faint);
@@ -283,17 +283,47 @@ video { display: block; width: 100%; }
   flex: 1 1 300px;
   max-width: 500px;
 }
-.benefit-card:hover { box-shadow: 0 8px 32px rgba(15,23,42,0.1); transform: translateY(-3px); }
+.benefit-card:hover { box-shadow: 0 8px 32px rgba(7,20,36,0.1); transform: translateY(-3px); }
 .benefit-check {
   width: 36px; height: 36px; flex-shrink: 0;
-  background: rgba(37,99,235,0.1);
+  background: rgba(79,113,134,0.1);
   border-radius: 8px;
   display: flex; align-items: center; justify-content: center;
   color: var(--blue);
 }
 .benefit-card p { font-size: 0.9375rem; line-height: 1.65; color: var(--muted); font-weight: 500; }
-.span_blue { color: var(--blue); font-weight: 600; }
-.span_accent { color: var(--accent); font-weight: 600; background: var(--accent-background); }
+.span_blue {
+  color: var(--navy);
+  font-weight: 700;
+  background: rgba(79,113,134,0.12);
+  border-bottom: 2px solid rgba(79,113,134,0.45);
+  padding: 0 0.12em;
+}
+.span_accent {
+  display: inline-block;
+  color: var(--navy);
+  font-weight: 800;
+  background: linear-gradient(180deg, rgba(255,255,255,0) 40%, rgba(184,194,203,0.5) 40%);
+  border-radius: 6px;
+  padding: 0 0.18em;
+}
+.section-heading .span_accent {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 0.12em;
+  padding: 0.12em 0.28em 0.16em;
+  background: linear-gradient(135deg, #071424 0%, #0E2336 100%);
+  color: #F6F8FA;
+  border: 1px solid rgba(184,194,203,0.55);
+  box-shadow: 0 12px 30px rgba(7,20,36,0.16);
+  line-height: 1;
+  white-space: nowrap;
+}
+.benefit-card .span_accent {
+  background: rgba(184,194,203,0.26);
+  border: 1px solid rgba(184,194,203,0.48);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.7) inset;
+}
 
 /* ── FAQ ── */
 .faq-section { background: var(--navy); padding: 5rem 2rem; }
@@ -329,7 +359,7 @@ video { display: block; width: 100%; }
   gap: 0.5rem;
   margin-top: 1.25rem;
   background: var(--accent-background);
-  border: 1px solid rgba(245,166,35,0.45);
+  border: 1px solid rgba(184,194,203,0.45);
   color: var(--accent);
   font-size: 0.75rem;
   font-weight: 700;
