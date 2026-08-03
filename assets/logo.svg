@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-labelledby="title desc">
-  <title id="title">Starlight Hangars compass star</title>
-  <desc id="desc">A four-point compass star in deep navy and steel blue.</desc>
-  <path fill="#071424" d="M48 5 56.5 38.2 91 48 56.5 57.8 48 91 39.5 57.8 5 48 39.5 38.2 48 5Z"/>
-  <path fill="#F6F8FA" d="M48 26.5 52.2 42.9 69 48 52.2 53.1 48 69.5 43.8 53.1 27 48 43.8 42.9 48 26.5Z"/>
-  <path fill="#5F788C" d="M48 5 52.6 39.7 48 48 43.4 39.7 48 5ZM91 48 56.3 52.6 48 48 56.3 43.4 91 48ZM48 91 43.4 56.3 48 48 52.6 56.3 48 91ZM5 48 39.7 43.4 48 48 39.7 52.6 5 48Z" opacity=".55"/>
-  <path fill="#071424" d="M48 35.5 50.6 45.4 61 48 50.6 50.6 48 60.5 45.4 50.6 35 48 45.4 45.4 48 35.5Z"/>
-</svg>

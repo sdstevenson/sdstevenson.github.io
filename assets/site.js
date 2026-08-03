@@ -336,7 +336,7 @@ function injectSharedNav() {
       <div class="snav-inner">
         <div class="snav-logo">
           <a href="index.html" class="snav-logo-link" aria-label="Starlight Hangars home">
-            <img src="../assets/logo.svg" class="snav-logo-img" alt="Starlight Hangars"/>
+            <img src="../assets/starlight_logo_notext.svg" class="snav-logo-img" alt="Starlight Hangars"/>
             <span class="snav-logo-text">Starlight Hangars</span>
           </a>
         </div>

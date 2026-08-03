@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <!-- Main Star Shape -->
+  <path d="M 200,30 
+           C 200,95 245,150 315,150 
+           C 245,150 200,205 200,270 
+           C 200,205 155,150 85,150 
+           C 155,150 200,95 200,30 Z" 
+        fill="#0D1321"/>
+  
+  <!-- Inner Flare Cutout -->
+  <path d="M 200,115 
+           C 200,138 215,150 235,150 
+           C 215,150 200,162 200,185 
+           C 200,162 185,150 165,150 
+           C 185,150 200,138 200,115 Z" 
+        fill="#FFFFFF"/>
+  
+  <!-- Typography -->
+  <text x="204" y="325" 
+        font-family="-apple-system, BlinkMacSystemFont, 'Montserrat', 'Segoe UI', sans-serif" 
+        font-size="26" 
+        font-weight="700" 
+        fill="#0D1321" 
+        text-anchor="middle" 
+        letter-spacing="14">STARLIGHT</text>
+        
+  <text x="202" y="355" 
+        font-family="-apple-system, BlinkMacSystemFont, 'Montserrat', 'Segoe UI', sans-serif" 
+        font-size="14" 
+        font-weight="600" 
+        fill="#0D1321" 
+        text-anchor="middle" 
+        letter-spacing="10">HANGARS</text>
+</svg>
