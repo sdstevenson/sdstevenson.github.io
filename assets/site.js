@@ -336,7 +336,10 @@ function injectSharedNav() {
       <div class="snav-inner">
         <div class="snav-logo">
           <a href="index.html" class="snav-logo-link" aria-label="Starlight Hangars home">
-            <img src="../assets/starlight_logo_notext.svg" class="snav-logo-img" alt="Starlight Hangars"/>
+            <svg class="snav-logo-mark" viewBox="0 0 400 400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+              <path class="snav-logo-outer" d="M 200,30 C 200,95 245,150 315,150 C 245,150 200,205 200,270 C 200,205 155,150 85,150 C 155,150 200,95 200,30 Z"/>
+              <path class="snav-logo-inner" d="M 200,115 C 200,138 215,150 235,150 C 215,150 200,162 200,185 C 200,162 185,150 165,150 C 185,150 200,138 200,115 Z"/>
+            </svg>
             <span class="snav-logo-text">Starlight Hangars</span>
           </a>
         </div>
@@ -370,7 +373,7 @@ function injectSharedNav() {
           </li>
           <li class="snav-item"><a href="about.html" class="snav-link snav-about-link">About</a></li>
           <li class="snav-item"><a href="roi.html" class="snav-link snav-roi-link">ROI Calculator</a></li>
-          <li class="snav-item"><a href="#" data-open-contact class="snav-link snav-cta">Contact Us</a></li>
+          <li class="snav-item"><a href="#" data-open-contact class="snav-link snav-cta">Schedule a Demo</a></li>
         </ul>
         <button class="snav-hamburger" id="sttugs-nav-hamburger" aria-label="Open menu">
           <span></span><span></span><span></span>
@@ -410,7 +413,7 @@ function injectSharedNav() {
         <li><a href="about.html" class="snav-mobile-link snav-about-link">About</a></li>
         <li><a href="roi.html" class="snav-mobile-link snav-roi-link">ROI Calculator</a></li>
       </ul>
-      <a href="#" data-open-contact class="snav-mobile-cta">Contact Us</a>
+      <a href="#" data-open-contact class="snav-mobile-cta">Schedule a Demo</a>
     </div>
   `;
   initSharedNavBehavior(header);
@@ -579,12 +582,18 @@ function injectSharedComponents() {
       .snav-logo-link {
         display: flex; align-items: center; gap: 0.5rem; text-decoration: none;
       }
-      .snav-logo-img {
-        height: 36px;
-        filter: brightness(0) invert(1);
-        transition: filter 0.35s ease;
+      .snav-logo-mark {
+        --logo-outer-color: #fff;
+        --logo-inner-color: #071424;
+        width: 44px; height: 44px; flex-shrink: 0;
       }
-      .snav--light .snav-logo-img { filter: none; }
+      .snav-logo-outer, .snav-logo-inner { transition: fill 0.35s ease; }
+      .snav-logo-outer { fill: var(--logo-outer-color); }
+      .snav-logo-inner { fill: var(--logo-inner-color); }
+      .snav--light .snav-logo-mark {
+        --logo-outer-color: #071424;
+        --logo-inner-color: #fff;
+      }
       .snav-logo-text {
         font-size: 1rem; font-weight: 800; letter-spacing: 0.02em; text-transform: uppercase; white-space: nowrap;
         color: #fff; transition: color 0.35s ease;
@@ -829,7 +838,7 @@ function injectSharedComponents() {
           </svg>
         </button>
         <div class="sttugs-modal-inner">
-          <div class="sttugs-modal-title" id="sttugs-modal-title">Contact Starlight Hangars</div>
+          <div class="sttugs-modal-title" id="sttugs-modal-title">Schedule a Demo</div>
           <div class="sttugs-modal-divider"></div>
           <form id="sttugs-contact-form" class="sttugs-modal-form">
             <div>

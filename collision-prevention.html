@@ -14,7 +14,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DGHZZ8BDEZ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);} 
+    function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-DGHZZ8BDEZ');
@@ -64,42 +64,139 @@
     </div>
   </section>
 
-  <!-- VIDEO 1 — Simulation demo -->
-  <div class="video-section">
-    <div class="video-split">
-      <div class="video-text">
+  <!-- Collision Prevention visualization -->
+  <section class="media-section">
+    <div class="media-split">
+      <div class="media-text">
         <h2>Protection From Every Angle</h2>
-        <p>Watch how our system detects collisions in real-time in a simulated hangar environment, working in 3D to accurately detect wing-over-wing collisions. 
-          The system processes thousands of data points per second to ensure complete hangar safety.</p>
+        <p>The system continuously evaluates 3D clearances, including wing-over-wing risks, and alerts operators before contact.</p>
       </div>
-      <div class="video-wrap">
-        <video muted playsinline preload="metadata" id="vid-sim" controls>
-          <source src="../assets/collision_detection_demo_sim.mp4" type="video/mp4"/>
-        </video>
-        <div class="video-play-overlay" id="play-sim">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        </div>
-      </div>
-    </div>
-  </div>
+      <div class="media-visual" id="collision-visual">
+        <svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="400" height="320" fill="#071424"/>
 
-  <!-- VIDEO 2 — Live hangar demo -->
-  <!-- <div class="video-section" style="background: var(--navy); padding-top: 0;">
-    <div class="video-split reverse" style="max-width:1100px; margin:0 auto; padding-top:4rem;">
-      <div class="video-text">
-        <h2>Tested in the Real World</h2>
-        <p>Beyond simulation, our system has been validated in live hangar environments. See how it performs under real-world conditions with production aircraft.</p>
-      </div>
-      <div class="video-wrap">
-        <video muted playsinline preload="metadata" id="vid-hangar">
-          <source src="../assets/collision_detection_demo_hangar.mp4" type="video/mp4"/>
-        </video>
-        <div class="video-play-overlay" id="play-hangar">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        </div>
+                            <rect x="30" y="40" width="340" height="240" rx="4" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" fill="rgba(255,255,255,0.02)"/>
+
+                            <path d="M 86 40 L 86 280 M 143 40 L 143 280 M 200 40 L 200 280 M 256 40 L 256 280 M 313 40 L 313 280" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+                            <path d="M 30 88 L 370 88 M 30 136 L 370 136 M 30 184 L 370 184 M 30 232 L 370 232" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+
+                            <defs>
+                              <g id="realistic-aircraft">
+                                <path d="M 0,-28 C 4,-28 6,-18 6,-8 L 6,10 L -6,10 L -6,-8 C -6,-18 -4,-28 0,-28 Z" fill="rgba(183,202,214,0.2)" stroke="rgba(183,202,214,0.8)" stroke-width="1.2"/>
+                                <rect x="-6" y="10" width="12" height="30" fill="rgba(183,202,214,0.2)" stroke="rgba(183,202,214,0.8)" stroke-width="1.2"/>
+                                <path d="M 6,-2 L 40,18 L 40,24 L 6,14 Z" fill="rgba(183,202,214,0.2)" stroke="rgba(183,202,214,0.8)" stroke-width="1.2"/>
+                                <path d="M -6,-2 L -40,18 L -40,24 L -6,14 Z" fill="rgba(183,202,214,0.2)" stroke="rgba(183,202,214,0.8)" stroke-width="1.2"/>
+                                <path d="M 4,32 L 18,42 L 18,46 L 4,40 Z" fill="rgba(183,202,214,0.3)" stroke="rgba(183,202,214,0.8)" stroke-width="1.2"/>
+                                <path d="M -4,32 L -18,42 L -18,46 L -4,40 Z" fill="rgba(183,202,214,0.3)" stroke="rgba(183,202,214,0.8)" stroke-width="1.2"/>
+                              </g>
+                            </defs>
+
+                            <g transform="translate(270, 140) rotate(-60)">
+                              <circle cx="0" cy="0" r="60" fill="rgba(183,202,214,0.03)" stroke="rgba(183,202,214,0.2)" stroke-width="1" stroke-dasharray="4 8"/>
+
+                              <use href="#realistic-aircraft" />
+
+                              <circle cx="-18" cy="44" r="3" fill="#657586"/> <circle cx="18" cy="44" r="3" fill="#657586"/>  <circle cx="0" cy="42" r="3" fill="#657586"/>   <circle cx="0" cy="20" r="3" fill="#657586"/>   <circle cx="0" cy="5" r="3" fill="#657586"/>    <circle cx="40" cy="20" r="3" fill="#657586"/>  <circle cx="20" cy="10" r="3" fill="#657586"/>  <g>
+                                <animate attributeName="fill" calcMode="linear"
+                                        values="#657586; #657586; #DDE5EA; #DDE5EA; #DDE5EA; #DDE5EA; #657586"
+                                        keyTimes="0; 0.25; 0.35; 0.60; 0.70; 0.95; 1"
+                                        dur="7s" repeatCount="indefinite"/>
+                                <circle cx="-20" cy="10" r="3"/> <circle cx="0" cy="-10" r="3"/>  </g>
+
+                              <g>
+                                <animate attributeName="fill" calcMode="linear"
+                                        values="#657586; #657586; #DDE5EA; #DDE5EA; #EF4444; #EF4444; #657586"
+                                        keyTimes="0; 0.25; 0.35; 0.60; 0.70; 0.95; 1"
+                                        dur="7s" repeatCount="indefinite"/>
+                                <circle cx="0" cy="-28" r="3"/>  <circle cx="-40" cy="20" r="3"/> </g>
+                            </g>
+
+                            <g>
+                              <animate attributeName="opacity" calcMode="linear"
+                                      values="0; 1; 1; 1; 1; 1; 0; 0"
+                                      keyTimes="0; 0.05; 0.25; 0.35; 0.60; 0.90; 0.95; 1"
+                                      dur="7s" repeatCount="indefinite"/>
+
+                              <animateTransform attributeName="transform" type="translate" calcMode="spline"
+                                                values="100,250; 100,250; 165,200; 165,200; 210,165; 210,165; 100,250"
+                                                keyTimes="0; 0.25; 0.35; 0.60; 0.70; 0.95; 1"
+                                                keySplines="0 0 1 1; 0.4 0 0.2 1; 0 0 1 1; 0.4 0 0.2 1; 0 0 1 1; 1 0 1 1"
+                                                dur="7s" repeatCount="indefinite"/>
+
+                              <g transform="rotate(45)">
+                                <use href="#realistic-aircraft" />
+
+                                <circle cx="-18" cy="44" r="3" fill="#657586"/> <circle cx="18" cy="44" r="3" fill="#657586"/>  <circle cx="0" cy="42" r="3" fill="#657586"/>   <circle cx="0" cy="20" r="3" fill="#657586"/>   <circle cx="0" cy="5" r="3" fill="#657586"/>    <circle cx="-40" cy="20" r="3" fill="#657586"/> <circle cx="-20" cy="10" r="3" fill="#657586"/> <g>
+                                  <animate attributeName="fill" calcMode="linear"
+                                          values="#657586; #657586; #DDE5EA; #DDE5EA; #DDE5EA; #DDE5EA; #657586"
+                                          keyTimes="0; 0.25; 0.35; 0.60; 0.70; 0.95; 1"
+                                          dur="7s" repeatCount="indefinite"/>
+                                  <circle cx="20" cy="10" r="3"/> <circle cx="0" cy="-10" r="3"/> </g>
+
+                                <g>
+                                  <animate attributeName="fill" calcMode="linear"
+                                          values="#657586; #657586; #DDE5EA; #DDE5EA; #EF4444; #EF4444; #657586"
+                                          keyTimes="0; 0.25; 0.35; 0.60; 0.70; 0.95; 1"
+                                          dur="7s" repeatCount="indefinite"/>
+                                  <circle cx="0" cy="-28" r="3"/> <circle cx="40" cy="20" r="3"/> </g>
+
+                                <g opacity="0">
+                                  <animate attributeName="opacity" calcMode="discrete"
+                                          values="0; 0; 0; 0; 1; 1; 0"
+                                          keyTimes="0; 0.25; 0.35; 0.60; 0.70; 0.95; 1"
+                                          dur="7s" repeatCount="indefinite"/>
+
+                                  <circle cx="0" cy="-28" r="12" fill="none" stroke="#EF4444" stroke-width="1.5">
+                                    <animate attributeName="r" values="3; 14; 3" dur="1s" repeatCount="indefinite"/>
+                                    <animate attributeName="opacity" values="1; 0; 0" dur="1s" repeatCount="indefinite"/>
+                                  </circle>
+
+                                  <circle cx="40" cy="20" r="12" fill="none" stroke="#EF4444" stroke-width="1.5">
+                                    <animate attributeName="r" values="3; 14; 3" dur="1s" repeatCount="indefinite"/>
+                                    <animate attributeName="opacity" values="1; 0; 0" dur="1s" repeatCount="indefinite"/>
+                                  </circle>
+                                </g>
+                              </g>
+                            </g>
+
+                            <g transform="translate(148, 268)">
+                              <rect x="0" y="0" width="104" height="22" rx="4" fill="#0E2336" stroke="rgba(255,255,255,0.1)"/>
+
+                              <rect x="0" y="0" width="104" height="22" rx="4">
+                                <animate attributeName="fill" calcMode="linear"
+                                        values="rgba(30,41,59,0); rgba(30,41,59,0); rgba(250,204,21,0.9); rgba(250,204,21,0.9); rgba(239,68,68,0.9); rgba(239,68,68,0.9); rgba(30,41,59,0)"
+                                        keyTimes="0; 0.25; 0.35; 0.60; 0.70; 0.95; 1"
+                                        dur="7s" repeatCount="indefinite"/>
+                              </rect>
+
+                              <text x="52" y="15" text-anchor="middle" fill="#8392A0" font-size="10" font-weight="700" font-family="Inter, sans-serif">
+                                STATUS: CLEAR
+                                <animate attributeName="opacity" calcMode="discrete"
+                                        values="1; 1; 0; 0; 0; 0; 1"
+                                        keyTimes="0; 0.25; 0.35; 0.60; 0.70; 0.95; 1"
+                                        dur="7s" repeatCount="indefinite"/>
+                              </text>
+
+                              <text x="52" y="15" text-anchor="middle" fill="#071424" font-size="10" font-weight="700" font-family="Inter, sans-serif" opacity="0">
+                                PROXIMITY ALERT
+                                <animate attributeName="opacity" calcMode="discrete"
+                                        values="0; 0; 1; 1; 0; 0; 0"
+                                        keyTimes="0; 0.25; 0.35; 0.60; 0.70; 0.95; 1"
+                                        dur="7s" repeatCount="indefinite"/>
+                              </text>
+
+                              <text x="52" y="15" text-anchor="middle" fill="white" font-size="10" font-weight="700" font-family="Inter, sans-serif" opacity="0">
+                                COLLISION RISK
+                                <animate attributeName="opacity" calcMode="discrete"
+                                        values="0; 0; 0; 0; 1; 1; 0"
+                                        keyTimes="0; 0.25; 0.35; 0.60; 0.70; 0.95; 1"
+                                        dur="7s" repeatCount="indefinite"/>
+                              </text>
+                            </g>
+                          </svg>
       </div>
     </div>
-  </div> -->
+  </section>
 
   <!-- HOW IT WORKS -->
   <section class="section-light">
@@ -215,7 +312,7 @@
   <div class="cta-strip">
     <h2>Protect your assets. Get in touch with us today.</h2>
     <p>Prevent hangar rash and free up your staff, protecting you against AoG costs and reclaiming hundreds of hours of labor.</p>
-    <a href="#" data-open-contact class="btn-primary">Contact Us</a>
+    <a href="#" data-open-contact class="btn-primary">Schedule a Demo</a>
   </div>
 
   <footer></footer>
@@ -227,15 +324,6 @@
   <script src="https://cdn.prod.website-files.com/gsap/3.14.2/ScrollSmoother.min.js"></script>
   <script src="./assets/site.js"></script>
   <script>
-    // Video play overlays
-    document.querySelectorAll('.video-play-overlay').forEach(overlay => {
-      overlay.addEventListener('click', () => {
-        const vid = overlay.closest('.video-wrap').querySelector('video');
-        if (vid.paused) { vid.play(); overlay.classList.add('hidden'); }
-        else { vid.pause(); overlay.classList.remove('hidden'); }
-      });
-    });
-
     // FAQ accordion
     document.querySelectorAll('.faq-question').forEach(btn => {
       btn.addEventListener('click', () => {

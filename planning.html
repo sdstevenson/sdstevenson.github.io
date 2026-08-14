@@ -14,7 +14,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DGHZZ8BDEZ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);} 
+    function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-DGHZZ8BDEZ');
@@ -65,44 +65,102 @@
     </div>
   </section>
 
-  <!-- AutoStack Demo -->
-  <div class="video-section">
-    <div class="video-split">
-      <div class="video-text">
-        <h2>See Your Plan Come to Life</h2>
-        <p>Watch as our algorithm determines the optimal stacking configuration for your aircraft, maximizing your hangar space.
-          This data will stream directly to users' devices, allowing them to view and make changes from anywhere.
-        </p>
+  <!-- Auto-Stack visualization -->
+  <section class="media-section">
+    <div class="media-split">
+      <div class="media-text">
+        <h2>Optimized for Your Operation</h2>
+        <p>Starlight Hangars generates an optimized arrangement from aircraft dimensions, hangar geometry, and operating needs, then makes the plan available to your crew.</p>
       </div>
-      <div class="video-wrap">
-        <video muted playsinline preload="metadata" id="vid-autostack" controls>
-          <source src="../assets/auto_stack_demo.mp4" type="video/mp4"/>
-        </video>
-        <div class="video-play-overlay" id="play-autostack">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        </div>
-      </div>
-    </div>
-  </div>
+      <div class="media-visual" id="autostack-visual">
+        <svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="400" height="320" fill="#071424"/>
 
-  <!-- Planning demo -->
-  <div class="video-section">
-    <div class="video-split reverse">
-      <div class="video-text">
-        <h2>Stack With Precision</h2>
-        <p>Through our intuitive live-camera interface, visualize exactly where each aircraft needs to be placed in your hangar. 
-          Test layouts virtually, and ensure aircraft are placed exactly as planned.</p>
-      </div>
-      <div class="video-wrap">
-        <video muted playsinline preload="metadata" id="vid-planning" controls>
-          <source src="../assets/planning_mode_demo_4_14.mp4" type="video/mp4"/>
-        </video>
-        <div class="video-play-overlay" id="play-planning">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        </div>
+                            <defs>
+                              <g id="realistic-aircraft">
+                                <path d="M 0,-28 C 4,-28 6,-18 6,-8 L 6,10 L -6,10 L -6,-8 C -6,-18 -4,-28 0,-28 Z" fill="rgba(183,202,214,0.3)" stroke="rgba(183,202,214,0.9)" stroke-width="1.2"/>
+                                <rect x="-6" y="10" width="12" height="30" fill="rgba(183,202,214,0.3)" stroke="rgba(183,202,214,0.9)" stroke-width="1.2"/>
+                                <path d="M 6,-2 L 40,18 L 40,24 L 6,14 Z" fill="rgba(183,202,214,0.3)" stroke="rgba(183,202,214,0.9)" stroke-width="1.2"/>
+                                <path d="M -6,-2 L -40,18 L -40,24 L -6,14 Z" fill="rgba(183,202,214,0.3)" stroke="rgba(183,202,214,0.9)" stroke-width="1.2"/>
+                                <path d="M 4,32 L 18,42 L 18,46 L 4,40 Z" fill="rgba(183,202,214,0.4)" stroke="rgba(183,202,214,0.9)" stroke-width="1.2"/>
+                                <path d="M -4,32 L -18,42 L -18,46 L -4,40 Z" fill="rgba(183,202,214,0.4)" stroke="rgba(183,202,214,0.9)" stroke-width="1.2"/>
+                              </g>
+                            </defs>
+
+                            <rect x="20" y="20" width="160" height="180" rx="4" stroke="rgba(255,255,255,0.08)" fill="rgba(255,255,255,0.02)"/>
+                            <text x="100" y="38" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="9" font-family="Inter,sans-serif">BEFORE</text>
+
+                            <g transform="translate(60, 65) rotate(-15) scale(0.55)" opacity="0.6">
+                              <use href="#realistic-aircraft" />
+                            </g>
+                            <g transform="translate(125, 55) rotate(25) scale(0.55)" opacity="0.6">
+                              <use href="#realistic-aircraft" />
+                            </g>
+                            <g transform="translate(150, 110) rotate(55) scale(0.55)" opacity="0.6">
+                              <use href="#realistic-aircraft" />
+                            </g>
+                            <g transform="translate(55, 125) rotate(-5) scale(0.55)" opacity="0.6">
+                              <use href="#realistic-aircraft" />
+                            </g>
+                            <g transform="translate(105, 145) rotate(15) scale(0.55)" opacity="0.6">
+                              <use href="#realistic-aircraft" />
+                            </g>
+                            <g transform="translate(145, 170) rotate(-35) scale(0.55)" opacity="0.6">
+                              <use href="#realistic-aircraft" />
+                            </g>
+
+                            <path d="M190,110 L210,110 M205,105 L212,110 L205,115" stroke="rgba(79,113,134,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <animate attributeName="stroke-opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+                            </path>
+
+                            <rect x="220" y="20" width="160" height="180" rx="4" stroke="rgba(79,113,134,0.4)" fill="rgba(79,113,134,0.06)"/>
+                            <text x="300" y="38" text-anchor="middle" fill="rgba(183,202,214,0.8)" font-size="9" font-family="Inter,sans-serif">AFTER — OPTIMIZED STACKING</text>
+
+                            <g transform="translate(250, 60) scale(0.55)">
+                              <use href="#realistic-aircraft" />
+                            </g>
+                            <g transform="translate(300, 60) scale(0.55)">
+                              <use href="#realistic-aircraft" />
+                            </g>
+                            <g transform="translate(350, 60) scale(0.55)">
+                              <use href="#realistic-aircraft" />
+                            </g>
+
+                            <g transform="translate(275, 85) scale(0.55)">
+                              <use href="#realistic-aircraft" />
+                            </g>
+                            <g transform="translate(325, 85) scale(0.55)">
+                              <use href="#realistic-aircraft" />
+                            </g>
+
+                            <g transform="translate(250, 110) scale(0.55)">
+                              <use href="#realistic-aircraft" />
+                            </g>
+                            <g transform="translate(300, 110) scale(0.55)">
+                              <use href="#realistic-aircraft" />
+                            </g>
+                            <g transform="translate(350, 110) scale(0.55)">
+                              <use href="#realistic-aircraft" />
+                            </g>
+
+                            <g transform="translate(275, 135) scale(0.55)">
+                              <use href="#realistic-aircraft" />
+                            </g>
+                            <g transform="translate(325, 135) scale(0.55)">
+                              <use href="#realistic-aircraft" />
+                            </g>
+
+                            <rect x="138" y="238" width="124" height="34" rx="6" fill="rgba(79,113,134,0.15)" stroke="rgba(79,113,134,0.5)"/>
+                            <rect x="138" y="238" width="124" height="34" rx="6" fill="none" stroke="rgba(183,202,214,0.8)" stroke-width="1">
+                              <animate attributeName="opacity" values="0; 1; 0" dur="2s" repeatCount="indefinite"/>
+                            </rect>
+
+                            <text x="200" y="259" text-anchor="middle" fill="#FFFFFF" font-size="12" font-family="Inter,sans-serif" font-weight="700" letter-spacing="1">CAPACITY BOOST</text>
+
+                          </svg>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- HOW IT WORKS — dark -->
   <section class="section-light">
@@ -206,7 +264,7 @@
   <div class="cta-strip">
     <h2>Ready to plan smarter?</h2>
     <p>Join the early access program to see digital twin planning in action.</p>
-    <a href="#" data-open-contact class="btn-primary">Contact Us</a>
+    <a href="#" data-open-contact class="btn-primary">Schedule a Demo</a>
   </div>
 
   <footer></footer>
@@ -218,15 +276,6 @@
   <script src="https://cdn.prod.website-files.com/gsap/3.14.2/ScrollSmoother.min.js"></script>
   <script src="./assets/site.js"></script>
   <script>
-    // Video play overlays
-    document.querySelectorAll('.video-play-overlay').forEach(overlay => {
-      overlay.addEventListener('click', () => {
-        const vid = overlay.closest('.video-wrap').querySelector('video');
-        if (vid.paused) { vid.play(); overlay.classList.add('hidden'); }
-        else { vid.pause(); overlay.classList.remove('hidden'); }
-      });
-    });
-
     // FAQ accordion
     document.querySelectorAll('.faq-question').forEach(btn => {
       btn.addEventListener('click', () => {
