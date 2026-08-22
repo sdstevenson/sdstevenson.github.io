@@ -40,30 +40,17 @@
     </div>
   </section>
 
-  <!-- SCREENSHOT -->
+  <!-- INTERACTIVE CALENDAR -->
   <section class="section-light">
     <div class="section-inner">
-      <h2 class="section-heading light">One calendar for your whole hangar</h2>
-      <p class="section-subheading light">View, edit, and import — no re-entering data.</p>
-      <figure class="stage-media" data-stage="1-calendar">
-        <div class="stage-media-slot">
-          <img src="assets/screens/1-calendar.jpg" alt="Calendar view" />
-        </div>
-        <figcaption>Calendar view — plan and modify your schedule.</figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <!-- INTERACTIVE DEMO -->
-  <section class="section-white">
-    <div class="section-inner">
+      <div class="section-label dark-mode">Live plan · Aug 18, 2026</div>
       <h2 class="section-heading light">Drag the bar to step through the day</h2>
-      <p class="section-subheading light">Watch the hangar fill and empty as aircraft arrive, park, and depart.</p>
+      <p class="section-subheading light">Real positions from your operations plan — watch aircraft arrive, restack, and depart as you scrub time.</p>
       <div class="cal-demo" id="interactive-cal">
         <div class="cal-demo-layout">
           <div class="cal-panel">
             <h3>Today's plan</h3>
-            <p class="cal-sub">Click or drag anywhere on the timeline to move the red preview bar.</p>
+            <p class="cal-sub">Click or drag on the timeline to move the red bar.</p>
             <div class="cal-time"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>24:00</span></div>
             <div class="cal-track-wrap">
               <div class="cal-rows"></div>
@@ -71,22 +58,16 @@
             </div>
             <p class="cal-legend">
               <span class="cal-dot hangar"></span>In hangar
-              <span class="cal-dot ramp"></span>Ramp
+              <span class="cal-dot ramp"></span>On ramp
               <span class="cal-dot away"></span>Away
             </p>
+            <p class="cal-legend-note">Ramp = outside on the apron · Away = off-site</p>
           </div>
           <div class="mini-hangar">
             <h3>Hangar at a glance</h3>
             <div class="mini-sub">Aircraft in the hangar at the selected time</div>
-            <div class="mini-hangar-grid">
-              <div class="hangar-slot"><span class="slot-tail"></span></div>
-              <div class="hangar-slot"><span class="slot-tail"></span></div>
-              <div class="hangar-slot"><span class="slot-tail"></span></div>
-              <div class="hangar-slot"><span class="slot-tail"></span></div>
-              <div class="hangar-slot"><span class="slot-tail"></span></div>
-              <div class="hangar-slot"><span class="slot-tail"></span></div>
-            </div>
-            <div class="mini-status">Drag the red bar to see the hangar change.</div>
+            <div class="mini-hangar-grid" id="hangar-grid"></div>
+            <div class="mini-status" id="mini-status">Drag the red bar to see aircraft move.</div>
           </div>
         </div>
       </div>
@@ -148,16 +129,35 @@
     </div>
   </section>
 
-  <!-- PREV / NEXT -->
-  <div class="stage-nav">
-    <div class="stage-nav-inner">
-      <a href="index.html#how-it-works" class="stage-nav-link muted">← How it works</a>
-      <a href="auto-stack.html" class="stage-nav-link">Next: Auto-Stack →</a>
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="section-inner">
+      <div class="section-label" style="text-align:center; margin-bottom:0.5rem;">Got Questions?</div>
+      <h2 class="section-heading" style="text-align:center; margin-bottom:0.5rem;">Frequently Asked Questions</h2>
+      <p class="section-subheading" style="max-width:560px; margin:0 auto 3rem; text-align:center;">Everything you need to know about the calendar view.</p>
+      <div class="faq-list" id="faq-list">
+        <div class="faq-item">
+          <button class="faq-question">Where does the schedule data come from? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">You can import arrivals, departures, and priorities directly from the management tools you already use — no manual re-entry.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Can multiple people view and edit the schedule at the same time? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Yes. Changes are shared instantly across your team on any device, so everyone always sees the current plan.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Does the calendar update in real time? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Yes. Any change made by your team is pushed to every device immediately.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Can I adjust the plan without rebuilding it? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Absolutely. Drag and adjust individual aircraft, and the rest of the plan updates in seconds.</div></div>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 
   <!-- CTA -->
-  <div class="cta-strip light">
+  <div class="cta-strip">
     <h2>Ready to plan smarter?</h2>
     <p>Schedule a demo to see the full six-step workflow in action.</p>
     <a href="#" data-open-contact class="btn-primary">Schedule a Demo</a>
@@ -168,7 +168,20 @@
   <script src="https://cdn.prod.website-files.com/gsap/3.14.2/gsap.min.js"></script>
   <script src="https://cdn.prod.website-files.com/gsap/3.14.2/ScrollTrigger.min.js"></script>
   <script src="./assets/site.js"></script>
+  <script src="./assets/calendar-data.js"></script>
   <script src="./assets/calendar-demo.js"></script>
+  <script>
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const answer = item.querySelector('.faq-answer');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(o => { o.classList.remove('open'); o.querySelector('.faq-answer').style.height = '0'; });
+        if (!isOpen) { item.classList.add('open'); answer.style.height = answer.querySelector('.faq-answer-inner').offsetHeight + 'px'; }
+      });
+    });
+  </script>
   <script>
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
       gsap.utils.toArray('.feature-card, .benefit-card, .stage-media').forEach((el, i) => {

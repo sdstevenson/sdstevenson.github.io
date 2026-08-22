@@ -311,6 +311,11 @@ function initSharedNavBehavior(navHeader) {
       document.querySelectorAll('.snav-roi-link').forEach(a => a.classList.add('snav-active'));
     }
 
+    // System & Installation page
+    if (filename === 'hardware-and-infrastructure.html') {
+      document.querySelectorAll('.snav-system-link').forEach(a => a.classList.add('snav-active'));
+    }
+
     // Home link (detail pages showing Home)
     if (filename === '' || filename === 'index.html') {
       document.querySelectorAll('.snav-home-link').forEach(a => a.classList.add('snav-active'));
@@ -367,6 +372,7 @@ function injectSharedNav() {
               <a href="audit-log.html" class="snav-dropdown-item">Audit Log</a>
             </div>
           </li>
+          <li class="snav-item"><a href="hardware-and-infrastructure.html" class="snav-link snav-system-link">System &amp; Installation</a></li>
           <li class="snav-item"><a href="about.html" class="snav-link snav-about-link">About</a></li>
           <li class="snav-item"><a href="roi.html" class="snav-link snav-roi-link">ROI Calculator</a></li>
           <li class="snav-item"><a href="#" data-open-contact class="snav-link snav-cta">Schedule a Demo</a></li>
@@ -405,6 +411,7 @@ function injectSharedNav() {
             <a href="audit-log.html">Audit Log</a>
           </div>
         </li>
+        <li><a href="hardware-and-infrastructure.html" class="snav-mobile-link snav-system-link">System &amp; Installation</a></li>
         <li><a href="about.html" class="snav-mobile-link snav-about-link">About</a></li>
         <li><a href="roi.html" class="snav-mobile-link snav-roi-link">ROI Calculator</a></li>
       </ul>
@@ -842,6 +849,7 @@ function injectSharedComponents() {
             <a href="collision-prevention.html" class="sttugs-footer_link">Collision Prevention</a>
             <a href="tug-integration.html" class="sttugs-footer_link">Tug Integration</a>
             <a href="audit-log.html" class="sttugs-footer_link">Audit Log</a>
+            <a href="hardware-and-infrastructure.html" class="sttugs-footer_link">System &amp; Installation</a>
             <a href="roi.html" class="sttugs-footer_link">ROI Calculator</a>
             <a href="about.html" class="sttugs-footer_link">About</a>
             <a href="#" data-open-contact class="sttugs-footer_link">Contact</a>

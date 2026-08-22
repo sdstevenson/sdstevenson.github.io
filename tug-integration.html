@@ -50,7 +50,6 @@
           <!-- Screenshot: <img src="assets/screens/5-tug-integration.png" alt="Tug integration" /> -->
           <svg class="stage-media-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
           <span class="stage-media-label">Screenshot coming soon</span>
-          <span class="stage-media-hint">16:10 · PNG (or MP4 video later)</span>
         </div>
         <figcaption>Tug integration — smart tugs move aircraft automatically.</figcaption>
       </figure>
@@ -108,20 +107,57 @@
           <h3>Real-time tracking</h3>
           <p>Follow every tug and aircraft on the hangar map in real time.</p>
         </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 4v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z"/><polyline points="10 12 11.5 13.5 14.5 10.5"/></svg>
+          </div>
+          <h3>Redundant Safety</h3>
+          <p>Multiple onboard sensors, dead-man switches, and integration with collision prevention provide comprehensive safety coverage.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="4" y1="21" y2="14"/><line x1="4" x2="4" y1="10" y2="3"/><line x1="12" x2="12" y1="21" y2="12"/><line x1="12" x2="12" y1="8" y2="3"/><line x1="20" x2="20" y1="21" y2="16"/><line x1="20" x2="20" y1="12" y2="3"/><line x1="2" x2="6" y1="14" y2="14"/><line x1="10" x2="14" y1="8" y2="8"/><line x1="18" x2="22" y1="16" y2="16"/></svg>
+          </div>
+          <h3>Operator Override</h3>
+          <p>Operators can drive tugs manually or let the system guide them — with override switches to disable auto-steer or auto-braking at any time.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- PREV / NEXT -->
-  <div class="stage-nav">
-    <div class="stage-nav-inner">
-      <a href="collision-prevention.html" class="stage-nav-link muted">← Collision Prevention</a>
-      <a href="audit-log.html" class="stage-nav-link">Next: Audit Log →</a>
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="section-inner">
+      <div class="section-label" style="text-align:center; margin-bottom:0.5rem;">Got Questions?</div>
+      <h2 class="section-heading" style="text-align:center; margin-bottom:0.5rem;">Frequently Asked Questions</h2>
+      <p class="section-subheading" style="max-width:560px; margin:0 auto 3rem; text-align:center;">Everything you need to know about smart tug integration and retrofitting your fleet.</p>
+      <div class="faq-list" id="faq-list">
+        <div class="faq-item">
+          <button class="faq-question">What tugs can be retrofitted? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Our retrofit kit is designed to work with most modern tugs. Contact us for a compatibility assessment of your specific equipment.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Can operators switch between manual and autonomous modes? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Yes. Operators can switch seamlessly, and override switches are always accessible for immediate manual takeover.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">What safety features are built in? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">All tugs come with a dead-man's switch, multiple hardware and software stops, and native integration with our collision detection system.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Does the tug work with all aircraft types? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Yes. Our towbar-less design works with any aircraft — from single-engine pistons to large jets.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">What are the insurance and liability considerations? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">We provide safety reports, maintenance logs, and integration documentation to support your discussions with insurers.</div></div>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 
   <!-- CTA -->
-  <div class="cta-strip light">
+  <div class="cta-strip">
     <h2>Ready to automate your moves?</h2>
     <p>Schedule a demo to see smart tug integration in action.</p>
     <a href="#" data-open-contact class="btn-primary">Schedule a Demo</a>
@@ -132,6 +168,18 @@
   <script src="https://cdn.prod.website-files.com/gsap/3.14.2/gsap.min.js"></script>
   <script src="https://cdn.prod.website-files.com/gsap/3.14.2/ScrollTrigger.min.js"></script>
   <script src="./assets/site.js"></script>
+  <script>
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const answer = item.querySelector('.faq-answer');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(o => { o.classList.remove('open'); o.querySelector('.faq-answer').style.height = '0'; });
+        if (!isOpen) { item.classList.add('open'); answer.style.height = answer.querySelector('.faq-answer-inner').offsetHeight + 'px'; }
+      });
+    });
+  </script>
   <script>
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
       gsap.utils.toArray('.feature-card, .benefit-card, .stage-media').forEach((el, i) => {

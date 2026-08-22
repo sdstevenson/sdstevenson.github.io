@@ -98,13 +98,19 @@
   padding: 1.5rem;
   overflow: hidden;
 }
-.stage-media-slot img {
+.stage-media-slot img,
+.stage-media-slot video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 12px;
+}
+/* Calendar screenshot is a wide strip — fit its full width with a
+   small buffer at the top and bottom instead of cropping the sides. */
+.stage-media[data-stage="1-calendar"] img {
+  object-fit: contain;
 }
 .stage-media-icon { width: 46px; height: 46px; color: #8392A0; }
 .stage-media-label { font-size: 1.05rem; font-weight: 700; color: #657586; }
@@ -314,8 +320,16 @@
   border-radius: 4px;
 }
 .cal-bar.hangar { background: var(--blue); }
-.cal-bar.ramp { background: #D7DEE5; }
-.cal-bar.away { background: #E9EDF1; }
+.cal-bar.ramp { background: #E3A33D; }
+.cal-bar.away {
+  background: repeating-linear-gradient(
+    45deg,
+    #C9D3DB 0,
+    #C9D3DB 4px,
+    #AAB9C4 4px,
+    #AAB9C4 8px
+  );
+}
 
 .cal-cursor {
   position: absolute;
@@ -351,6 +365,12 @@
   font-size: 0.75rem;
   color: var(--muted);
 }
+.cal-legend-note {
+  margin-top: 0.35rem;
+  font-size: 0.72rem;
+  color: var(--muted);
+  opacity: 0.85;
+}
 .cal-dot {
   display: inline-block;
   width: 10px; height: 10px;
@@ -359,8 +379,16 @@
   vertical-align: middle;
 }
 .cal-dot.hangar { background: var(--blue); }
-.cal-dot.ramp { background: #D7DEE5; }
-.cal-dot.away { background: #E9EDF1; }
+.cal-dot.ramp { background: #E3A33D; }
+.cal-dot.away {
+  background: repeating-linear-gradient(
+    45deg,
+    #C9D3DB 0,
+    #C9D3DB 2px,
+    #AAB9C4 2px,
+    #AAB9C4 4px
+  );
+}
 
 .mini-hangar {
   background: var(--navy);
@@ -371,11 +399,11 @@
 .mini-sub { font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-bottom: 1rem; }
 .mini-hangar-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.7rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
 }
 .hangar-slot {
-  height: 64px;
+  height: 56px;
   border-radius: 10px;
   border: 1.5px dashed rgba(255,255,255,0.25);
   background: rgba(255,255,255,0.03);

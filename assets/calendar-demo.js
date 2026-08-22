@@ -1,42 +1,22 @@
 /* ============================================================
    calendar-demo.js
-   Interactive calendar + mini hangar prototype.
-   Drag the red bar to step through the day; the mini hangar
-   shows which aircraft are inside at that time.
+   Interactive calendar + mini hangar using real plan data
+   (see assets/calendar-data.js). Drag the red bar to scrub time;
+   aircraft glide between event keyframes.
 ============================================================ */
 (function () {
   "use strict";
 
   const root = document.getElementById("interactive-cal");
-  if (!root) return;
-
-  // Each aircraft: segments of [startHour, endHour, state]
-  // state is one of: 'hangar', 'ramp', 'away' (not arrived / departed)
-  const schedule = [
-    { tail: "N122CV", segments: [[0, 6, "away"], [6, 16, "ramp"], [16, 24, "hangar"]] },
-    { tail: "N220SR", segments: [[0, 24, "hangar"]] },
-    { tail: "N228L", segments: [[0, 4, "away"], [4, 10, "ramp"], [10, 20, "hangar"], [20, 24, "ramp"]] },
-    { tail: "N4238C", segments: [[0, 24, "hangar"]] },
-    { tail: "N512SP", segments: [[0, 8, "hangar"], [8, 24, "ramp"]] },
-    { tail: "N608RP", segments: [[0, 12, "ramp"], [12, 24, "hangar"]] },
-    { tail: "N6869R", segments: [[0, 18, "hangar"], [18, 24, "away"]] },
-    { tail: "N818LL", segments: [[0, 24, "hangar"]] },
-  ];
+  const data = window.CALENDAR_DATA;
+  if (!root || !data) return;
 
   const rowsEl = root.querySelector(".cal-rows");
   const cursor = root.querySelector(".cal-cursor");
   const cursorLabel = root.querySelector(".cal-cursor-label");
   const trackWrap = root.querySelector(".cal-track-wrap");
-  const hangarSlots = Array.from(root.querySelectorAll(".hangar-slot"));
-  const statusEl = root.querySelector(".mini-status");
-
-  function stateAt(segments, hour) {
-    for (let i = 0; i < segments.length; i++) {
-      const s = segments[i][0], e = segments[i][1], state = segments[i][2];
-      if (hour >= s && hour < e) return state;
-    }
-    return "away";
-  }
+  const gridEl = root.querySelector("#hangar-grid");
+  const statusEl = root.querySelector("#mini-status");
 
   function pad(n) { return String(n).padStart(2, "0"); }
   function formatHour(hour) {
@@ -45,8 +25,8 @@
     return pad(h) + ":" + pad(m);
   }
 
-  // Build the timeline rows once.
-  schedule.forEach(function (ac) {
+  // Build timeline rows.
+  data.aircraft.forEach(function (ac) {
     const row = document.createElement("div");
     row.className = "cal-row";
 
@@ -69,41 +49,63 @@
     rowsEl.appendChild(row);
   });
 
+  // Build hangar slots (one per possible in-hangar aircraft).
+  const slots = [];
+  for (let i = 0; i < 9; i++) {
+    const slot = document.createElement("div");
+    slot.className = "hangar-slot";
+    const tailEl = document.createElement("span");
+    tailEl.className = "slot-tail";
+    slot.appendChild(tailEl);
+    gridEl.appendChild(slot);
+    slots.push({ slot: slot, tailEl: tailEl });
+  }
+
   let hour = 12;
+
+  function stateAt(t) {
+    let state = data.events[0];
+    for (let i = 0; i < data.events.length; i++) {
+      if (data.events[i].t <= t) state = data.events[i];
+      else break;
+    }
+    return state;
+  }
 
   function placeCursor() {
     const firstTrack = root.querySelector(".cal-track");
     const wrapRect = trackWrap.getBoundingClientRect();
     const trackRect = firstTrack.getBoundingClientRect();
-    const left = (trackRect.left - wrapRect.left) + (hour / 24) * trackRect.width;
-    cursor.style.left = left + "px";
+    cursor.style.left = ((trackRect.left - wrapRect.left) + (hour / 24) * trackRect.width) + "px";
     cursorLabel.textContent = formatHour(hour);
   }
 
   function render() {
     placeCursor();
+    const state = stateAt(hour);
+    const positions = state.positions;
+    const outside = state.outside;
+    const inHangarTails = Object.keys(positions);
 
-    const inHangar = schedule.filter(function (a) { return stateAt(a.segments, hour) === "hangar"; });
-    const onRamp = schedule.filter(function (a) { return stateAt(a.segments, hour) === "ramp"; });
-    const away = schedule.filter(function (a) { return stateAt(a.segments, hour) === "away"; });
-
-    hangarSlots.forEach(function (slot, i) {
-      const ac = inHangar[i];
-      const tailEl = slot.querySelector(".slot-tail");
-      if (ac) {
-        slot.classList.add("filled");
-        tailEl.textContent = ac.tail;
+    slots.forEach(function (s, i) {
+      const tail = inHangarTails[i];
+      if (tail) {
+        s.slot.classList.add("filled");
+        s.tailEl.textContent = tail;
       } else {
-        slot.classList.remove("filled");
-        tailEl.textContent = "";
+        s.slot.classList.remove("filled");
+        s.tailEl.textContent = "";
       }
     });
 
+    const inHangar = inHangarTails.length;
+    const onRamp = outside.length;
+    const away = data.aircraft.length - inHangar - onRamp;
     statusEl.innerHTML =
       "At <strong>" + formatHour(hour) + "</strong> — " +
-      "<strong>" + inHangar.length + "</strong> in hangar, " +
-      "<strong>" + onRamp.length + "</strong> on ramp, " +
-      "<strong>" + away.length + "</strong> away.";
+      "<strong>" + inHangar + "</strong> in hangar, " +
+      "<strong>" + onRamp + "</strong> on ramp, " +
+      "<strong>" + away + "</strong> away.";
   }
 
   function setHourFromClientX(clientX) {
