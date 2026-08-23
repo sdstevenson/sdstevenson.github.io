@@ -75,6 +75,32 @@ section, header, footer { position: relative; }
   font-weight: 400;
   line-height: 1.6;
 }
+.hero_notice {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 100px;
+  background: rgba(79,113,134,0.18);
+  border: 1px solid rgba(183,202,214,0.35);
+  color: #DDE5EA;
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+.hero_notice-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4ADE80;
+  flex-shrink: 0;
+  animation: hero-notice-pulse 2s infinite;
+}
+@keyframes hero-notice-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(74,222,128,0.55); }
+  70%  { box-shadow: 0 0 0 9px rgba(74,222,128,0); }
+  100% { box-shadow: 0 0 0 0 rgba(74,222,128,0); }
+}
 .hero_actions {
   display: flex;
   flex-wrap: wrap;

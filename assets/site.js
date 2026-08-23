@@ -165,7 +165,7 @@ function initRoiDefaults() {
 ============================================================ */
 function initScrollReveals() {
   const reveals = document.querySelectorAll(
-    ".autonomous_wrap, .carrers_wrap, .section-headline, .autonomous_paragraph"
+    ".autonomous_wrap, .carrers_wrap, .section-headline, .autonomous_paragraph, .step_item"
   );
   reveals.forEach((el) => {
     gsap.from(el, {
@@ -311,6 +311,11 @@ function initSharedNavBehavior(navHeader) {
       document.querySelectorAll('.snav-roi-link').forEach(a => a.classList.add('snav-active'));
     }
 
+    // System & Installation page
+    if (filename === 'hardware-and-infrastructure.html') {
+      document.querySelectorAll('.snav-system-link').forEach(a => a.classList.add('snav-active'));
+    }
+
     // Home link (detail pages showing Home)
     if (filename === '' || filename === 'index.html') {
       document.querySelectorAll('.snav-home-link').forEach(a => a.classList.add('snav-active'));
@@ -336,10 +341,7 @@ function injectSharedNav() {
       <div class="snav-inner">
         <div class="snav-logo">
           <a href="index.html" class="snav-logo-link" aria-label="Starlight Hangars home">
-            <svg class="snav-logo-mark" viewBox="0 0 400 400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-              <path class="snav-logo-outer" d="M 200,30 C 200,95 245,150 315,150 C 245,150 200,205 200,270 C 200,205 155,150 85,150 C 155,150 200,95 200,30 Z"/>
-              <path class="snav-logo-inner" d="M 200,115 C 200,138 215,150 235,150 C 215,150 200,162 200,185 C 200,162 185,150 165,150 C 185,150 200,138 200,115 Z"/>
-            </svg>
+            <img class="snav-logo-mark" src="assets/starlight_logo_notext.svg" alt="" aria-hidden="true"/>
             <span class="snav-logo-text">Starlight Hangars</span>
           </a>
         </div>
@@ -347,30 +349,30 @@ function injectSharedNav() {
           <li class="snav-item"><a href="index.html" class="snav-link snav-home-link">Home</a></li>
           <li class="snav-item snav-item--dropdown" id="sttugs-platform-item">
             <button class="snav-link snav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
-              Platform
+              How it works
               <svg class="snav-chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </button>
             <div class="snav-dropdown">
-              <div class="snav-dropdown-section-label">Safety</div>
+              <a href="index.html#how-it-works" class="snav-dropdown-item">Overview</a>
+
+              <div class="snav-dropdown-section-label">Plan</div>
+              <a href="calendar.html" class="snav-dropdown-item">Calendar View</a>
+              <a href="auto-stack.html" class="snav-dropdown-item">Auto-Stack</a>
+
+              <div class="snav-dropdown-section-label">Verify</div>
+              <a href="path-planning.html" class="snav-dropdown-item">Paths</a>
               <a href="collision-prevention.html" class="snav-dropdown-item">Collision Prevention</a>
-              
-              <div class="snav-dropdown-section-label">Planning &amp; Optimization</div>
-              <a href="planning.html" class="snav-dropdown-item">Digital Twin Planning</a>
-              <a href="path-planning.html" class="snav-dropdown-item">Tow-Path Planning</a>
-              
-              <div class="snav-dropdown-section-label">Execution</div>
-              <a href="retrofit.html" class="snav-dropdown-item">Retrofit Kit</a>
-              <!-- Autonomous Tugs link intentionally removed -->
-              
-              <div class="snav-dropdown-section-label">Infrastructure</div>
-              <a href="hardware-and-infrastructure.html" class="snav-dropdown-item">Hardware &amp; Infrastructure</a>
-              
-              <div class="snav-dropdown-section-label">Compliance</div>
-              <a href="verifiable-audit-trail.html" class="snav-dropdown-item">Verifiable Audit Trail</a>
+
+              <div class="snav-dropdown-section-label">Execute</div>
+              <a href="tug-integration.html" class="snav-dropdown-item">Tug Integration</a>
+
+              <div class="snav-dropdown-section-label">Record</div>
+              <a href="audit-log.html" class="snav-dropdown-item">Audit Log</a>
             </div>
           </li>
+          <li class="snav-item"><a href="hardware-and-infrastructure.html" class="snav-link snav-system-link">System &amp; Installation</a></li>
           <li class="snav-item"><a href="about.html" class="snav-link snav-about-link">About</a></li>
           <li class="snav-item"><a href="roi.html" class="snav-link snav-roi-link">ROI Calculator</a></li>
           <li class="snav-item"><a href="#" data-open-contact class="snav-link snav-cta">Schedule a Demo</a></li>
@@ -390,26 +392,26 @@ function injectSharedNav() {
       <ul class="snav-mobile-links">
         <li><a href="index.html" class="snav-mobile-link snav-home-link">Home</a></li>
         <li>
-          <div class="snav-mobile-platform-label">Platform</div>
+          <div class="snav-mobile-platform-label">How it works</div>
           <div class="snav-mobile-sub open">
-            <div class="snav-mobile-section-label">Safety</div>
+            <a href="index.html#how-it-works">Overview</a>
+
+            <div class="snav-mobile-section-label">Plan</div>
+            <a href="calendar.html">Calendar View</a>
+            <a href="auto-stack.html">Auto-Stack</a>
+
+            <div class="snav-mobile-section-label">Verify</div>
+            <a href="path-planning.html">Paths</a>
             <a href="collision-prevention.html">Collision Prevention</a>
-            
-            <div class="snav-mobile-section-label">Planning &amp; Optimization</div>
-            <a href="planning.html">Digital Twin Planning</a>
-            <a href="path-planning.html">Tow-Path Planning</a>
-            
-            <!-- Autonomous Tugs link intentionally removed -->
-            <div class="snav-mobile-section-label">Execution</div>
-            <a href="retrofit.html">Retrofit Kit</a>
-            
-            <div class="snav-mobile-section-label">Infrastructure</div>
-            <a href="hardware-and-infrastructure.html">Hardware &amp; Infrastructure</a>
-            
-            <div class="snav-mobile-section-label">Compliance</div>
-            <a href="verifiable-audit-trail.html">Verifiable Audit Trail</a>
+
+            <div class="snav-mobile-section-label">Execute</div>
+            <a href="tug-integration.html">Tug Integration</a>
+
+            <div class="snav-mobile-section-label">Record</div>
+            <a href="audit-log.html">Audit Log</a>
           </div>
         </li>
+        <li><a href="hardware-and-infrastructure.html" class="snav-mobile-link snav-system-link">System &amp; Installation</a></li>
         <li><a href="about.html" class="snav-mobile-link snav-about-link">About</a></li>
         <li><a href="roi.html" class="snav-mobile-link snav-roi-link">ROI Calculator</a></li>
       </ul>
@@ -450,6 +452,11 @@ function injectSharedComponents() {
         flex-wrap: wrap;
       }
       .sttugs-footer_left { display: flex; flex-direction: column; gap: 0.5rem; }
+      .sttugs-footer_brand {
+        display: inline-flex; align-items: center; gap: 0.5rem;
+        text-decoration: none; color: #FFFFFF;
+      }
+      .sttugs-footer-logo { width: 34px; height: 34px; filter: invert(1); }
       .sttugs-site_name {
         font-size: 1.25rem;
         font-weight: 800;
@@ -559,6 +566,38 @@ function injectSharedComponents() {
       }
       .sttugs-modal-close:hover { background: rgba(7,20,36,0.08); color: #071424; }
 
+      /* ═══ STAGE IMAGE LIGHTBOX ═══ */
+      .stage-media-slot { cursor: zoom-in; }
+      .stage-media-slot img, .stage-media-slot video { cursor: zoom-in; }
+      .stage-lightbox {
+        display: none;
+        position: fixed; inset: 0;
+        z-index: 9500;
+        background: rgba(7,20,36,0.92);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        align-items: center; justify-content: center;
+        padding: 2rem;
+      }
+      .stage-lightbox.open { display: flex; }
+      .stage-lightbox img,
+      .stage-lightbox video {
+        max-width: 100%; max-height: 100%;
+        object-fit: contain;
+        border-radius: 10px;
+        box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+      }
+      .stage-lightbox video { display: none; background: #071424; }
+      .stage-lightbox-close {
+        position: absolute; top: 1.25rem; right: 1.5rem;
+        width: 42px; height: 42px; border-radius: 50%;
+        background: rgba(255,255,255,0.12); border: none; cursor: pointer;
+        color: #fff; font-size: 1.6rem; line-height: 1;
+        display: flex; align-items: center; justify-content: center;
+        transition: background 0.2s;
+      }
+      .stage-lightbox-close:hover { background: rgba(255,255,255,0.28); }
+
       /* ═══ SHARED NAV ═══ */
       .snav {
         position: fixed;
@@ -583,17 +622,11 @@ function injectSharedComponents() {
         display: flex; align-items: center; gap: 0.5rem; text-decoration: none;
       }
       .snav-logo-mark {
-        --logo-outer-color: #fff;
-        --logo-inner-color: #071424;
         width: 44px; height: 44px; flex-shrink: 0;
+        filter: invert(1);
+        transition: filter 0.35s ease;
       }
-      .snav-logo-outer, .snav-logo-inner { transition: fill 0.35s ease; }
-      .snav-logo-outer { fill: var(--logo-outer-color); }
-      .snav-logo-inner { fill: var(--logo-inner-color); }
-      .snav--light .snav-logo-mark {
-        --logo-outer-color: #071424;
-        --logo-inner-color: #fff;
-      }
+      .snav--light .snav-logo-mark { filter: none; }
       .snav-logo-text {
         font-size: 1rem; font-weight: 800; letter-spacing: 0.02em; text-transform: uppercase; white-space: nowrap;
         color: #fff; transition: color 0.35s ease;
@@ -801,22 +834,27 @@ function injectSharedComponents() {
     footer.innerHTML = `
       <div class="sttugs-footer_container">
         <div class="sttugs-footer_left">
-          <a href="../index.html" class="sttugs-site_name">Starlight Hangars</a>
+          <a href="index.html" class="sttugs-footer_brand">
+            <img class="sttugs-footer-logo" src="assets/starlight_logo_notext.svg" alt="" aria-hidden="true"/>
+            <span class="sttugs-site_name">Starlight Hangars</span>
+          </a>
           <div class="sttugs-copyright">
             © Starlight Hangars. Patent Pending.
           </div>
         </div>
         <div class="sttugs-footer_right">
           <nav class="sttugs-footer_nav">
-            <a href="#" data-open-contact class="sttugs-footer_link">Contact</a>
-            <a href="about.html" class="sttugs-footer_link">About</a>
+            <a href="index.html#how-it-works" class="sttugs-footer_link">How it works</a>
+            <a href="calendar.html" class="sttugs-footer_link">Calendar View</a>
+            <a href="auto-stack.html" class="sttugs-footer_link">Auto-Stack</a>
+            <a href="path-planning.html" class="sttugs-footer_link">Paths</a>
             <a href="collision-prevention.html" class="sttugs-footer_link">Collision Prevention</a>
-            <a href="planning.html" class="sttugs-footer_link">Digital Twin Planning</a>
-            <a href="path-planning.html" class="sttugs-footer_link">Tow-Path Planning</a>
-            <a href="hardware-and-infrastructure.html" class="sttugs-footer_link">Hardware &amp; Infrastructure</a>
-            <!-- Autonomous Tugs link intentionally removed -->
-            <a href="retrofit.html" class="sttugs-footer_link">Retrofit Kit</a>
-            <a href="verifiable-audit-trail.html" class="sttugs-footer_link">Audit Trail</a>
+            <a href="tug-integration.html" class="sttugs-footer_link">Tug Integration</a>
+            <a href="audit-log.html" class="sttugs-footer_link">Audit Log</a>
+            <a href="hardware-and-infrastructure.html" class="sttugs-footer_link">System &amp; Installation</a>
+            <a href="roi.html" class="sttugs-footer_link">ROI Calculator</a>
+            <a href="about.html" class="sttugs-footer_link">About</a>
+            <a href="#" data-open-contact class="sttugs-footer_link">Contact</a>
           </nav>
         </div>
       </div>
@@ -919,6 +957,153 @@ function initSharedContactModal() {
 }
 
 /* ============================================================
+   STAGE IMAGE LIGHTBOX
+   Clicking a screenshot opens it full-size in an overlay.
+============================================================ */
+function initStageLightbox() {
+  if (document.getElementById('sttugs-stage-lightbox')) return;
+
+  const lb = document.createElement('div');
+  lb.id = 'sttugs-stage-lightbox';
+  lb.className = 'stage-lightbox';
+  lb.setAttribute('role', 'dialog');
+  lb.setAttribute('aria-modal', 'true');
+  lb.innerHTML = `
+    <button class="stage-lightbox-close" id="sttugs-stage-lightbox-close" aria-label="Close">&times;</button>
+    <img id="sttugs-stage-lightbox-img" src="" alt="" />
+    <video id="sttugs-stage-lightbox-video" muted loop playsinline></video>
+  `;
+  document.body.appendChild(lb);
+
+  const img = document.getElementById('sttugs-stage-lightbox-img');
+  const vid = document.getElementById('sttugs-stage-lightbox-video');
+  let scrollY = 0;
+
+  function showImage(src, alt) {
+    vid.pause();
+    vid.removeAttribute('src');
+    vid.load();
+    vid.style.display = 'none';
+    img.style.display = 'block';
+    img.src = src;
+    img.alt = alt || '';
+  }
+
+  function showVideo(src) {
+    img.style.display = 'none';
+    img.removeAttribute('src');
+    vid.style.display = 'block';
+    vid.src = src;
+    vid.currentTime = 0;
+    vid.play().catch(() => {});
+  }
+
+  function open(src, alt, isVideo) {
+    scrollY = window.scrollY;
+    if (isVideo) showVideo(src); else showImage(src, alt);
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.dispatchEvent(new CustomEvent('sttugs:lightbox-open'));
+  }
+
+  function close() {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+    vid.pause();
+    vid.removeAttribute('src');
+    vid.load();
+    img.removeAttribute('src');
+    document.dispatchEvent(new CustomEvent('sttugs:lightbox-close'));
+    window.scrollTo(0, scrollY);
+  }
+
+  document.addEventListener('click', (e) => {
+    const video = e.target.closest('.stage-media-slot video');
+    if (video && video.getAttribute('src')) {
+      e.preventDefault();
+      open(video.getAttribute('src'), '', true);
+      return;
+    }
+    const image = e.target.closest('.stage-media-slot img');
+    if (image && image.getAttribute('src')) {
+      e.preventDefault();
+      open(image.src, image.alt, false);
+    }
+  });
+
+  document.getElementById('sttugs-stage-lightbox-close').addEventListener('click', close);
+  lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+}
+
+/* ============================================================
+   STAGE VIDEO MANAGER
+   Only the video closest to the vertical center of the viewport
+   plays; all other stage videos stay paused.
+============================================================ */
+function initStageVideoManager() {
+  const videos = Array.from(document.querySelectorAll('.stage-media-slot video'));
+  if (!videos.length) return;
+
+  let active = null;
+  let lightboxOpen = false;
+  let ticking = false;
+
+  function refresh() {
+    if (lightboxOpen) return;
+
+    const viewportCenter = window.innerHeight / 2;
+    let closest = null;
+    let closestDistance = Infinity;
+
+    for (const video of videos) {
+      const rect = video.getBoundingClientRect();
+      // Ignore videos that are fully above or below the viewport.
+      if (rect.bottom <= 0 || rect.top >= window.innerHeight) continue;
+      const center = rect.top + rect.height / 2;
+      const distance = Math.abs(center - viewportCenter);
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closest = video;
+      }
+    }
+
+    if (closest !== active) {
+      if (active) active.pause();
+      active = closest;
+      if (active) active.play().catch(() => {});
+    }
+  }
+
+  function schedule() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      ticking = false;
+      refresh();
+    });
+  }
+
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule);
+
+  document.addEventListener('sttugs:lightbox-open', () => {
+    lightboxOpen = true;
+    if (active) { active.pause(); active = null; }
+  });
+  document.addEventListener('sttugs:lightbox-close', () => {
+    lightboxOpen = false;
+    refresh();
+  });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', refresh);
+  } else {
+    refresh();
+  }
+}
+
+/* ============================================================
    MAIN ENTRY POINT
 ============================================================ */
 (function main() {
@@ -940,6 +1125,8 @@ function initSharedContactModal() {
   }
 
   initPlatformTiles();
+  initStageLightbox();
+  initStageVideoManager();
 
   // Wait for DOM + layout to be ready
   window.addEventListener("load", function () {
