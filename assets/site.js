@@ -568,7 +568,7 @@ function injectSharedComponents() {
 
       /* ═══ STAGE IMAGE LIGHTBOX ═══ */
       .stage-media-slot { cursor: zoom-in; }
-      .stage-media-slot img { cursor: zoom-in; }
+      .stage-media-slot img, .stage-media-slot video { cursor: zoom-in; }
       .stage-lightbox {
         display: none;
         position: fixed; inset: 0;
@@ -580,12 +580,14 @@ function injectSharedComponents() {
         padding: 2rem;
       }
       .stage-lightbox.open { display: flex; }
-      .stage-lightbox img {
+      .stage-lightbox img,
+      .stage-lightbox video {
         max-width: 100%; max-height: 100%;
         object-fit: contain;
         border-radius: 10px;
         box-shadow: 0 24px 80px rgba(0,0,0,0.5);
       }
+      .stage-lightbox video { display: none; background: #071424; }
       .stage-lightbox-close {
         position: absolute; top: 1.25rem; right: 1.5rem;
         width: 42px; height: 42px; border-radius: 50%;
@@ -967,38 +969,138 @@ function initStageLightbox() {
   lb.setAttribute('role', 'dialog');
   lb.setAttribute('aria-modal', 'true');
   lb.innerHTML = `
-    <button class="stage-lightbox-close" id="sttugs-stage-lightbox-close" aria-label="Close image">&times;</button>
+    <button class="stage-lightbox-close" id="sttugs-stage-lightbox-close" aria-label="Close">&times;</button>
     <img id="sttugs-stage-lightbox-img" src="" alt="" />
+    <video id="sttugs-stage-lightbox-video" muted loop playsinline></video>
   `;
   document.body.appendChild(lb);
 
   const img = document.getElementById('sttugs-stage-lightbox-img');
+  const vid = document.getElementById('sttugs-stage-lightbox-video');
   let scrollY = 0;
-  function open(src, alt) {
+
+  function showImage(src, alt) {
+    vid.pause();
+    vid.removeAttribute('src');
+    vid.load();
+    vid.style.display = 'none';
+    img.style.display = 'block';
     img.src = src;
     img.alt = alt || '';
+  }
+
+  function showVideo(src) {
+    img.style.display = 'none';
+    img.removeAttribute('src');
+    vid.style.display = 'block';
+    vid.src = src;
+    vid.currentTime = 0;
+    vid.play().catch(() => {});
+  }
+
+  function open(src, alt, isVideo) {
     scrollY = window.scrollY;
+    if (isVideo) showVideo(src); else showImage(src, alt);
     lb.classList.add('open');
     document.body.style.overflow = 'hidden';
+    document.dispatchEvent(new CustomEvent('sttugs:lightbox-open'));
   }
+
   function close() {
     lb.classList.remove('open');
     document.body.style.overflow = '';
+    vid.pause();
+    vid.removeAttribute('src');
+    vid.load();
     img.removeAttribute('src');
+    document.dispatchEvent(new CustomEvent('sttugs:lightbox-close'));
     window.scrollTo(0, scrollY);
   }
 
   document.addEventListener('click', (e) => {
-    const target = e.target.closest('.stage-media-slot img');
-    if (target && target.getAttribute('src')) {
+    const video = e.target.closest('.stage-media-slot video');
+    if (video && video.getAttribute('src')) {
       e.preventDefault();
-      open(target.src, target.alt);
+      open(video.getAttribute('src'), '', true);
+      return;
+    }
+    const image = e.target.closest('.stage-media-slot img');
+    if (image && image.getAttribute('src')) {
+      e.preventDefault();
+      open(image.src, image.alt, false);
     }
   });
 
   document.getElementById('sttugs-stage-lightbox-close').addEventListener('click', close);
   lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+}
+
+/* ============================================================
+   STAGE VIDEO MANAGER
+   Only the video closest to the vertical center of the viewport
+   plays; all other stage videos stay paused.
+============================================================ */
+function initStageVideoManager() {
+  const videos = Array.from(document.querySelectorAll('.stage-media-slot video'));
+  if (!videos.length) return;
+
+  let active = null;
+  let lightboxOpen = false;
+  let ticking = false;
+
+  function refresh() {
+    if (lightboxOpen) return;
+
+    const viewportCenter = window.innerHeight / 2;
+    let closest = null;
+    let closestDistance = Infinity;
+
+    for (const video of videos) {
+      const rect = video.getBoundingClientRect();
+      // Ignore videos that are fully above or below the viewport.
+      if (rect.bottom <= 0 || rect.top >= window.innerHeight) continue;
+      const center = rect.top + rect.height / 2;
+      const distance = Math.abs(center - viewportCenter);
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closest = video;
+      }
+    }
+
+    if (closest !== active) {
+      if (active) active.pause();
+      active = closest;
+      if (active) active.play().catch(() => {});
+    }
+  }
+
+  function schedule() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      ticking = false;
+      refresh();
+    });
+  }
+
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule);
+
+  document.addEventListener('sttugs:lightbox-open', () => {
+    lightboxOpen = true;
+    if (active) { active.pause(); active = null; }
+  });
+  document.addEventListener('sttugs:lightbox-close', () => {
+    lightboxOpen = false;
+    refresh();
+  });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', refresh);
+  } else {
+    refresh();
+  }
 }
 
 /* ============================================================
@@ -1024,6 +1126,7 @@ function initStageLightbox() {
 
   initPlatformTiles();
   initStageLightbox();
+  initStageVideoManager();
 
   // Wait for DOM + layout to be ready
   window.addEventListener("load", function () {

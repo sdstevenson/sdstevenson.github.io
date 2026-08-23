@@ -107,9 +107,10 @@
   object-fit: cover;
   border-radius: 12px;
 }
-/* Calendar screenshot is a wide strip — fit its full width with a
-   small buffer at the top and bottom instead of cropping the sides. */
-.stage-media[data-stage="1-calendar"] img {
+/* Calendar and audit-log screenshots are wide strips — fit their full
+   width with a small buffer at the top and bottom instead of cropping. */
+.stage-media[data-stage="1-calendar"] img,
+.stage-media[data-stage="6-audit-log"] img {
   object-fit: contain;
 }
 .stage-media-icon { width: 46px; height: 46px; color: #8392A0; }
