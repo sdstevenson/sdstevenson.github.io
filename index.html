@@ -2,882 +2,238 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>Starlight Hangars - Intelligent Hangar Automation</title>
-  <meta content="Starlight Hangars transforms how hangars operate — preventing collisions, optimizing aircraft positions, and enabling full autonomous tug operations." name="description"/>
-  <meta content="Starlight Hangars - Intelligent Hangar Automation" property="og:title"/>
+  <title>Hangar Planning Software | Starlight Hangars</title>
+  <meta name="description" content="Plan aircraft positions around arrivals and departures, spend less time stacking, and make better use of your hangar space."/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <link rel="icon" href="./favicon/favicon.svg" type="image/svg+xml"/>
   <link rel="apple-touch-icon" href="./favicon/apple-touch-icon.png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-  <link rel="preconnect" href="https://cdn.prod.website-files.com"/>
   <link rel="dns-prefetch" href="https://www.googletagmanager.com"/>
   <link rel="stylesheet" href="assets/styles.css"/>
-  <link rel="stylesheet" href="assets/index.css"/>
+  <!-- stages.css before index.css: the page sheet has to win over the shared
+       .stage-media placeholder rules, same order every other page uses. -->
   <link rel="stylesheet" href="assets/stages.css"/>
-
-  <!-- Google tag (gtag.js) -->
+  <link rel="stylesheet" href="assets/index.css"/>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DGHZZ8BDEZ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-DGHZZ8BDEZ');
-  </script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-DGHZZ8BDEZ');</script>
 </head>
 <body>
 <div id="smooth-wrapper" class="page_wrap">
-
-  <!-- ═══ NAV — populated by site.js injectSharedNav() ═══ -->
   <header class="nav_wrap"></header>
-
-  <!-- ============================================================
-       MAIN CONTENT
-  ============================================================ -->
   <main id="smooth-content" class="page_main">
-
-    <!-- ============================================================
-         HERO SECTION
-    ============================================================ -->
     <section class="hero_wrap" data-bg-type="dark">
       <div class="hero_content">
-        <div class="hero_eyebrow">HANGAR WORKFLOW PLATFORM</div>
-        <h1 class="hero_title">Plan. Verify. Move.<br/>One connected workflow.</h1>
-        <p class="hero_subtitle">Plan and manage your hangar around aircraft arrivals and departures to minimize the tine you spend stacking hangars.</p>
-        <div class="hero_notice">
-          <span class="hero_notice-pulse"></span>
-          No cost during alpha testing
-        </div>
-        <div class="hero_actions">
-          <a href="#" data-open-contact class="hero_button hero_button-primary">Schedule a Demo</a>
-          <a href="#how-it-works" class="hero_button hero_button-secondary">See How It Works</a>
-        </div>
+        <h1 class="hero_title">Spend less time stacking aircraft. Make more of your hangar space.</h1>
+        <p class="hero_subtitle">Plan around arrivals and departures, reduce aircraft moves, and fit more aircraft to increase your hangar’s revenue potential.</p>
+        <div class="hero_notice"><span class="hero_notice-pulse"></span>Available now · No cost during alpha</div>
+        <div class="hero_actions"><a href="#" data-open-contact class="hero_button hero_button-primary">Schedule a Demo</a><a href="#how-it-works" class="hero_button hero_button-secondary">See How It Works</a></div>
       </div>
-      <a href="#how-it-works" class="hero_scroll" aria-label="Scroll to How it works">
-        <span>Scroll</span>
-        <svg class="hero_scroll_icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-      </a>
+      <a href="#how-it-works" class="hero_scroll" aria-label="Scroll to how it works"><span>Explore</span><svg class="hero_scroll_icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>
     </section>
 
-    <!-- ============================================================
-         HOW IT WORKS — 6-STAGE JOURNEY
-    ============================================================ -->
-    <section class="how_it_works" data-bg-type="light" id="how-it-works">
-      <div class="how_it_works_container">
-        <div class="how_it_works_heading">
+    <!-- HOW IT WORKS — six numbered steps on one spine, split into what
+         runs today and what is being built. -->
+    <section class="timeline_wrap" id="how-it-works" data-bg-type="light">
+      <div class="home_container">
+        <div class="section_intro">
           <div class="section-title">HOW IT WORKS</div>
-          <h2 class="section_heading">Six steps, one workflow.</h2>
-          <p class="how_it_works_sub">From planning to stacking — every stage is connected and verified, with a live view of your system at each step.</p>
+          <h2 class="section_heading">Six steps, from the schedule to the record.</h2>
+          <p>Four of them are running in hangars today. Two are being built now, on the same plan the first four produce — so nothing you adopt today gets thrown away later.</p>
         </div>
 
-        <div class="steps_list">
+        <div class="timeline_divider">Running today</div>
 
-          <div class="step_item">
-            <div class="step_content">
-              <div class="step_number">1</div>
-              <h3 class="step_title">Calendar View</h3>
-              <p class="step_description">View and modify your hangar at a glance. Import flight schedules from your existing management tools.</p>
-              <a href="calendar.html" class="step_learn_more">Learn more →</a>
-            </div>
-            <figure class="stage-media" data-stage="1-calendar">
-              <div class="stage-media-slot">
-                <img src="assets/screens/1-calendar.jpg" alt="Calendar view" />
+        <ol class="timeline_list timeline_list-live">
+
+          <li class="timeline_step">
+            <div class="timeline_node">01</div>
+            <div class="timeline_copy">
+              <div class="timeline_product">Calendar view</div>
+              <h3>Know what the hangar needs next</h3>
+              <p>Arrivals and departures live in one shared calendar, imported from the tools you already run. No more three versions of today’s plan.</p>
+              <div class="timeline_foot">
+                <a href="calendar.html">Explore the calendar →</a>
+                <span class="status_pill status_pill-live">Available now</span>
               </div>
-              <figcaption>Calendar view — plan and modify your schedule.</figcaption>
-            </figure>
-          </div>
-
-          <div class="step_item">
-            <div class="step_content">
-              <div class="step_number">2</div>
-              <h3 class="step_title">Auto-Stack</h3>
-              <p class="step_description">Stacking configurations generated in minutes, using aircraft arrival, departure, and user assigned priority to minimize work for every plan.</p>
-              <a href="auto-stack.html" class="step_learn_more">Learn more →</a>
             </div>
-            <figure class="stage-media" data-stage="2-auto-stack">
-              <div class="stage-media-slot">
-                <video src="assets/screens/2-auto-stack.mp4" muted loop playsinline></video>
-                <!-- <svg class="stage-media-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg> -->
-                <!-- <span class="stage-media-label">Screenshot coming soon</span> -->
+            <figure class="timeline_media stage-media" data-stage="1-calendar">
+              <div class="screen_frame">
+                <div class="screen_frame_bar"><i></i><i></i><i></i><strong>Calendar</strong></div>
+                <button type="button" class="stage-media-slot media-open-button" data-media-open style="--screen-ratio: 1479/558" aria-label="Enlarge the calendar screenshot">
+                  <img src="assets/screens/1-calendar.jpg" loading="lazy" alt="Calendar view showing scheduled aircraft arrivals and departures"/>
+                </button>
               </div>
-              <figcaption>Auto-stack — a stacking plan generated in minutes.</figcaption>
+              <div class="timeline_hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg>Tap to enlarge</div>
             </figure>
-          </div>
+          </li>
 
-          <div class="step_item">
-            <div class="step_content">
-              <div class="step_number">3</div>
-              <h3 class="step_title">Tow Paths</h3>
-              <p class="step_description">A verified path for every aircraft, showing exactly how each move will happen. Guaranteed to be collision free.</p>
-              <a href="path-planning.html" class="step_learn_more">Learn more →</a>
+          <li class="timeline_step">
+            <div class="timeline_node">02</div>
+            <div class="timeline_copy">
+              <div class="timeline_product">Auto-Stack</div>
+              <h3>Stop solving hangar tetris by hand</h3>
+              <p>Auto-Stack builds the layout in minutes, weighing departure times and the priority you assign each aircraft, then hands you a plan to review.</p>
+              <div class="timeline_foot">
+                <a href="auto-stack.html">Explore Auto-Stack →</a>
+                <span class="status_pill status_pill-live">Available now</span>
+              </div>
             </div>
-            <figure class="stage-media" data-stage="3-paths">
-              <div class="stage-media-slot">
-                <video src="assets/screens/3-path-planning.mp4" muted loop playsinline></video>
+            <figure class="timeline_media stage-media" data-stage="2-auto-stack">
+              <div class="screen_frame">
+                <div class="screen_frame_bar"><i></i><i></i><i></i><strong>Auto-Stack</strong></div>
+                <button type="button" class="stage-media-slot media-open-button" data-media-open aria-label="Enlarge the Auto-Stack planning video">
+                  <video src="assets/screens/2-auto-stack.mp4" poster="assets/screens/2-auto-stack-poster.jpg" muted loop playsinline preload="metadata"></video>
+                </button>
               </div>
-              <figcaption>Paths — verified routes for every aircraft.</figcaption>
+              <div class="timeline_hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg>Tap to enlarge</div>
             </figure>
-          </div>
+          </li>
 
-          <div class="step_item">
-            <div class="step_content">
-              <div class="step_number">4</div>
-              <h3 class="step_title">Collision Prevention</h3>
-              <p class="step_description">Track every aircraft in real time and prevent collisions before they happen. Mixed stacking is supported, with wing-over-wing stacking detected.</p>
-              <a href="collision-prevention.html" class="step_learn_more">Learn more →</a>
+          <li class="timeline_step">
+            <div class="timeline_node">03</div>
+            <div class="timeline_copy">
+              <div class="timeline_product">Tow paths</div>
+              <h3>Settle the moves before the first tow</h3>
+              <p>Every aircraft gets a reviewed route and a place in the movement order, so the sequence is agreed on before anyone hooks up a tug.</p>
+              <div class="timeline_foot">
+                <a href="path-planning.html">Explore tow paths →</a>
+                <span class="status_pill status_pill-live">Available now</span>
+              </div>
             </div>
-            <figure class="stage-media" data-stage="4-collision-prevention">
-              <div class="stage-media-slot">
-                <video src="assets/screens/4-collision-prevention.mp4" muted loop playsinline></video>
+            <figure class="timeline_media stage-media" data-stage="3-path-planning">
+              <div class="screen_frame">
+                <div class="screen_frame_bar"><i></i><i></i><i></i><strong>Tow paths</strong></div>
+                <button type="button" class="stage-media-slot media-open-button" data-media-open aria-label="Enlarge the tow-path video">
+                  <video src="assets/screens/3-path-planning.mp4" poster="assets/screens/3-path-planning-poster.jpg" muted loop playsinline preload="metadata"></video>
+                </button>
               </div>
-              <figcaption>Collision prevention — real-time collision prevention.</figcaption>
+              <div class="timeline_hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg>Tap to enlarge</div>
             </figure>
-          </div>
+          </li>
 
-          <div class="step_item">
-            <div class="step_content">
-              <div class="step_number">5</div>
-              <h3 class="step_title">Autonomous Tugs</h3>
-              <p class="step_description">Retrofit existing tugs to fully automate your towing operations, just press a button and watch your hangar pack itself.</p>
-              <a href="tug-integration.html" class="step_learn_more">Learn more →</a>
+          <li class="timeline_step">
+            <div class="timeline_node">04</div>
+            <div class="timeline_copy">
+              <div class="timeline_product">Audit log</div>
+              <h3>Show exactly what happened, and when</h3>
+              <p>Movements are time-stamped as the day is worked, leaving a clean history you can hand to a customer, a tenant, or an insurer.</p>
+              <div class="timeline_foot">
+                <a href="audit-log.html">Explore the audit log →</a>
+                <span class="status_pill status_pill-live">Available now</span>
+              </div>
             </div>
-            <figure class="stage-media" data-stage="5-tug-integration">
-              <div class="stage-media-slot">
-                <img src="assets/screens/5-autonomous-tugs.png" alt="Autonomous tugs" />
+            <figure class="timeline_media stage-media" data-stage="6-audit-log">
+              <div class="screen_frame">
+                <div class="screen_frame_bar"><i></i><i></i><i></i><strong>Audit log</strong></div>
+                <button type="button" class="stage-media-slot media-open-button" data-media-open aria-label="Enlarge the audit log screenshot">
+                  <img src="assets/screens/6-audit-log.svg" loading="lazy" alt="Audit log showing recorded hangar movements"/>
+                </button>
               </div>
-              <figcaption>Tug integration — smart tugs move aircraft automatically.</figcaption>
+              <div class="timeline_hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg>Tap to enlarge</div>
             </figure>
-          </div>
+          </li>
 
-          <div class="step_item">
-            <div class="step_content">
-              <div class="step_number">6</div>
-              <h3 class="step_title">Audit Log</h3>
-              <p class="step_description">A complete, time-stamped record of all activity, ready for your insurer.</p>
-              <a href="audit-log.html" class="step_learn_more">Learn more →</a>
+        </ol>
+
+        <div class="timeline_divider">Being built now</div>
+
+        <ol class="timeline_list timeline_list-next">
+
+          <li class="timeline_step timeline_step-next">
+            <div class="timeline_node">05</div>
+            <div class="timeline_copy">
+              <div class="timeline_product">Hangar rash prevention</div>
+              <h3>Catch a wingtip before it catches you</h3>
+              <p>Live aircraft tracking and proximity alerts while aircraft are in motion, with mixed and wing-over-wing stacking accounted for.</p>
+              <div class="timeline_foot">
+                <a href="collision-prevention.html">Explore collision prevention →</a>
+                <span class="status_pill status_pill-next">In development</span>
+              </div>
             </div>
-            <figure class="stage-media" data-stage="6-audit-log">
-              <div class="stage-media-slot">
-                <img src="assets/screens/6-audit-log.svg" alt="Audit log" />
+            <figure class="timeline_media stage-media" data-stage="4-collision-prevention">
+              <div class="screen_frame">
+                <div class="screen_frame_bar"><i></i><i></i><i></i><strong>Hangar rash prevention</strong></div>
+                <button type="button" class="stage-media-slot media-open-button" data-media-open aria-label="Enlarge the hangar rash prevention video">
+                  <video src="assets/screens/4-collision-prevention.mp4" poster="assets/screens/4-collision-prevention-poster.jpg" muted loop playsinline preload="none"></video>
+                </button>
               </div>
-              <figcaption>Audit log — every activity, ready for your insurer.</figcaption>
+              <div class="timeline_hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg>Tap to enlarge</div>
             </figure>
-          </div>
+          </li>
 
-        </div>
+          <li class="timeline_step timeline_step-next">
+            <div class="timeline_node">06</div>
+            <div class="timeline_copy">
+              <div class="timeline_product">Tug integration</div>
+              <h3>Take the crew out of the tow loop</h3>
+              <p>Retrofit the tugs you already own and hand them an approved plan, so the same reviewed paths and clearances get driven without a wing-walker on every move.</p>
+              <div class="timeline_foot">
+                <a href="tug-integration.html">Explore tug integration →</a>
+                <span class="status_pill status_pill-next">In development</span>
+              </div>
+            </div>
+            <figure class="timeline_media stage-media" data-stage="5-tug-integration">
+              <div class="screen_frame">
+                <div class="screen_frame_bar"><i></i><i></i><i></i><strong>Tug integration</strong></div>
+                <button type="button" class="stage-media-slot media-open-button" data-media-open style="--screen-ratio: 3/2" aria-label="Enlarge the tug automation concept image">
+                  <img src="assets/screens/5-autonomous-tugs.png" loading="lazy" alt="Concept image for autonomous tug integration"/>
+                </button>
+              </div>
+              <div class="timeline_hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg>Tap to enlarge</div>
+            </figure>
+          </li>
+
+        </ol>
       </div>
     </section>
 
-    <!-- ============================================================
-         OPERATIONAL PAIN POINTS
-    ============================================================ -->
-    <section class="pain_points_wrap" data-bg-type="light">
-      <div class="pain_points_container">
-        <div class="pain_points_heading">
+    <!-- OUTCOMES — restated after the walkthrough, before the ROI block. -->
+    <section class="outcomes_wrap" id="outcomes" data-bg-type="dark">
+      <div class="home_container">
+        <div class="section_intro section_intro-light">
           <div class="section-title">BUILT FOR YOUR HANGAR OPERATIONS</div>
-          <h2 class="section_heading">Made for the problems you deal with every day.</h2>
+          <h2 class="section_heading">Made for the work your hangar does every day.</h2>
+          <p>Six steps, four things they add up to.</p>
         </div>
-
-        <div class="pain_points_grid">
-          <article class="pain_point_card">
-            <div class="pain_point_problem">
-              <h3>Exhausting Re-stacks</h3>
-              <p>Burning out your crew with inefficient, full-hangar shuffling at all hours.</p>
-            </div>
-            <div class="pain_point_solution">
-              <div class="pain_point_solution_label">How We Solve It</div>
-              <p>Schedule-aware layouts and planned movements <span class="span_blue">reduce full-hangar reshuffling</span> and keep late-night moves to a minimum.</p>
-            </div>
+        <div class="outcomes_grid">
+          <article class="outcome_card">
+            <span>01</span>
+            <h3>Spend less time stacking</h3>
+            <p>Schedule-aware layouts help crews reduce unnecessary aircraft moves and repeated full-hangar shuffles.</p>
           </article>
-
-          <article class="pain_point_card">
-            <div class="pain_point_problem">
-              <h3>Lost Revenue</h3>
-              <p>Leaving money on the table by underutilizing expensive floor space due to manual planning.</p>
-            </div>
-            <div class="pain_point_solution">
-              <div class="pain_point_solution_label">How We Solve It</div>
-              <p>Optimized aircraft placement adds usable capacity and helps <span class="span_blue">fit more aircraft safely</span> within the same hangar footprint.</p>
-            </div>
+          <article class="outcome_card">
+            <span>02</span>
+            <h3>Fit more aircraft safely</h3>
+            <p>Better placement makes more of the available floor space usable for additional aircraft and potential rental revenue.</p>
           </article>
-
-          <article class="pain_point_card">
-            <div class="pain_point_problem">
-              <h3>Hangar Rash</h3>
-              <p>Increasing the risk of expensive aircraft damage every time a plane is moved.</p>
-            </div>
-            <div class="pain_point_solution">
-              <div class="pain_point_solution_label">How We Solve It</div>
-              <p>Collision monitoring and prevention <span class="span_blue">reduces the risk of hangar rash</span> and makes every movement safer.</p>
-            </div>
+          <article class="outcome_card">
+            <span>03</span>
+            <span class="status_pill status_pill-next-dark">In development</span>
+            <h3>Reduce hangar rash risk</h3>
+            <p>Aircraft tracking and proximity-risk alerts help crews prevent collisions while aircraft move.</p>
           </article>
-
-          <article class="pain_point_card">
-            <div class="pain_point_problem">
-              <h3>Labor Drains</h3>
-              <p>Pulling staff away from essential operations just to wing-walk or assist with towing.</p>
-            </div>
-            <div class="pain_point_solution">
-              <div class="pain_point_solution_label">How We Solve It</div>
-              <p>Towing automation reduces manual coordination and <span class="span_blue">allows staff to return to higher-value work.</span><br></p>
-            </div>
+          <article class="outcome_card">
+            <span>04</span>
+            <span class="status_pill status_pill-next-dark">In development</span>
+            <h3>Free your staff for higher-value work</h3>
+            <p>Future tug automation can reduce the manual towing and coordination required from your crew.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- ============================================================
-         (Legacy product accordion retained for reference — hidden)
-    ============================================================ -->
-    <section class="product_wrap" hidden aria-hidden="true">
-
-      <div class="product_container">
-        <div class="section-headline">
-          <div class="section-title">PLATFORM</div>
-          <!-- <div class="section_heading">Safety.<br/>Intelligence.<br/>Automation.</div> -->
-          <div class="section_heading">Maximize Efficiency.</div>
-        </div>
-
-        <div class="product_tabs">
-          <div class="animation_container">
-
-            <!-- Platform capability tiles -->
-            <div class="accordion_container">
-              <div class="accordion_wrapper">
-
-                <div class="accordion_item" data-visual="visual-autostack">
-                  <h3 class="tab_title">Smart Hangar Planning and Auto-Stack</h3>
-                  <div class="accordion_content">
-                    <p class="tab_description">
-                      Eliminate the hangar-tetris that limits your operations. Auto-Stack calculates the ideal layout for your aircraft mix, maximizing every square foot of hangar space and
-                      allowing you to <span class="span_blue">accommodate more aircraft.</span>
-                    </p>
-                    <a href="planning.html" class="tab-learn-more">Learn More →</a>
-                  </div>
-                </div>
-
-                <div class="accordion_item" data-visual="visual-collision">
-                  <h3 class="tab_title">Collision Prevention</h3>
-                  <div class="accordion_content">
-                    <p class="tab_description">
-                      Starlight Hangars continuously monitors the hangar floor, including aircraft, GPUs, and tugs, alerting users to prevent incidents before they happen, <span class="span_blue">protecting your assets and your team.</span>
-                    </p>
-                    <a href="collision-prevention.html" class="tab-learn-more">Learn More →</a>
-                  </div>
-                </div>
-
-                <div class="accordion_item" data-visual="visual-pathplan">
-                  <h3 class="tab_title">Tow-Path Planning</h3>
-                  <div class="accordion_content">
-                    <p class="tab_description">
-                      Generate safe, collision-free tow paths for moving aircraft through congested hangar layouts. Sequence multi-aircraft moves with confidence, <span class="span_blue">making towing easier and safer.</span>
-                    </p>
-                    <a href="path-planning.html" class="tab-learn-more">Learn More →</a>
-                  </div>
-                </div>
-
-                <div class="accordion_item" data-visual="visual-tugs">
-                  <h3 class="tab_title">Autonomous Tug Retrofits</h3>
-                  <div class="accordion_content">
-                    <p class="tab_description">
-                      Retrofit your existing fleet with autonomous capabilities, with just minimal upfront investment. Featuring redundant obstacle detection and emergency stop systems, this solution <span class="span_blue">enables safe, unmanned aircraft movements.</span>
-                    </p>
-                    <!-- <p class="tab_description">
-                      Deploy fully autonomous tug vehicles equipped with redundant safety systems, or retrofit your existing fleet with autonomous capabilities. Both options feature redundant obstacle detection and emergency stop systems, enabling safe, unmanned aircraft movements.
-                    </p> -->
-                    <a href="retrofit.html" class="tab-learn-more">Learn More →</a>
-                    <!-- <a href="autonomous-tugs.html" class="tab-learn-more">Learn More About Autonomous Tugs →</a> -->
-                  </div>
-                </div>
-
-                <div class="accordion_item" data-visual="visual-audit">
-                  <h3 class="tab_title">Verifiable Audit Trail</h3>
-                  <div class="accordion_content">
-                    <p class="tab_description">
-                      Every aircraft movement, command, and safety event is time-stamped and recorded. <span class="span_blue">Full accountability for compliance, insurance, and operational review</span> — always on, always accurate.
-                    </p>
-                    <a href="verifiable-audit-trail.html" class="tab-learn-more">Learn More →</a>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-            <!-- Visuals are paired with their matching tiles by site.js -->
-            <div class="animation_video_container">
-              <div class="video_animation">
-
-                <!-- Visual 1: Auto-Stacking -->
-                <div class="tab-visual" id="visual-autostack">
-                  <svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="400" height="320" fill="#071424"/>
-
-                    <defs>
-                      <g id="realistic-aircraft">
-                        <path d="M 0,-28 C 4,-28 6,-18 6,-8 L 6,10 L -6,10 L -6,-8 C -6,-18 -4,-28 0,-28 Z" fill="rgba(183,202,214,0.3)" stroke="rgba(183,202,214,0.9)" stroke-width="1.2"/>
-                        <rect x="-6" y="10" width="12" height="30" fill="rgba(183,202,214,0.3)" stroke="rgba(183,202,214,0.9)" stroke-width="1.2"/>
-                        <path d="M 6,-2 L 40,18 L 40,24 L 6,14 Z" fill="rgba(183,202,214,0.3)" stroke="rgba(183,202,214,0.9)" stroke-width="1.2"/>
-                        <path d="M -6,-2 L -40,18 L -40,24 L -6,14 Z" fill="rgba(183,202,214,0.3)" stroke="rgba(183,202,214,0.9)" stroke-width="1.2"/>
-                        <path d="M 4,32 L 18,42 L 18,46 L 4,40 Z" fill="rgba(183,202,214,0.4)" stroke="rgba(183,202,214,0.9)" stroke-width="1.2"/>
-                        <path d="M -4,32 L -18,42 L -18,46 L -4,40 Z" fill="rgba(183,202,214,0.4)" stroke="rgba(183,202,214,0.9)" stroke-width="1.2"/>
-                      </g>
-                    </defs>
-
-                    <rect x="20" y="20" width="160" height="180" rx="4" stroke="rgba(255,255,255,0.08)" fill="rgba(255,255,255,0.02)"/>
-                    <text x="100" y="38" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="9" font-family="Inter,sans-serif">BEFORE</text>
-
-                    <g transform="translate(60, 65) rotate(-15) scale(0.55)" opacity="0.6">
-                      <use href="#realistic-aircraft" />
-                    </g>
-                    <g transform="translate(125, 55) rotate(25) scale(0.55)" opacity="0.6">
-                      <use href="#realistic-aircraft" />
-                    </g>
-                    <g transform="translate(150, 110) rotate(55) scale(0.55)" opacity="0.6">
-                      <use href="#realistic-aircraft" />
-                    </g>
-                    <g transform="translate(55, 125) rotate(-5) scale(0.55)" opacity="0.6">
-                      <use href="#realistic-aircraft" />
-                    </g>
-                    <g transform="translate(105, 145) rotate(15) scale(0.55)" opacity="0.6">
-                      <use href="#realistic-aircraft" />
-                    </g>
-                    <g transform="translate(145, 170) rotate(-35) scale(0.55)" opacity="0.6">
-                      <use href="#realistic-aircraft" />
-                    </g>
-
-                    <path d="M190,110 L210,110 M205,105 L212,110 L205,115" stroke="rgba(79,113,134,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <animate attributeName="stroke-opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
-                    </path>
-
-                    <rect x="220" y="20" width="160" height="180" rx="4" stroke="rgba(79,113,134,0.4)" fill="rgba(79,113,134,0.06)"/>
-                    <text x="300" y="38" text-anchor="middle" fill="rgba(183,202,214,0.8)" font-size="9" font-family="Inter,sans-serif">AFTER — OPTIMIZED STACKING</text>
-
-                    <g transform="translate(250, 60) scale(0.55)">
-                      <use href="#realistic-aircraft" />
-                    </g>
-                    <g transform="translate(300, 60) scale(0.55)">
-                      <use href="#realistic-aircraft" />
-                    </g>
-                    <g transform="translate(350, 60) scale(0.55)">
-                      <use href="#realistic-aircraft" />
-                    </g>
-
-                    <g transform="translate(275, 85) scale(0.55)">
-                      <use href="#realistic-aircraft" />
-                    </g>
-                    <g transform="translate(325, 85) scale(0.55)">
-                      <use href="#realistic-aircraft" />
-                    </g>
-
-                    <g transform="translate(250, 110) scale(0.55)">
-                      <use href="#realistic-aircraft" />
-                    </g>
-                    <g transform="translate(300, 110) scale(0.55)">
-                      <use href="#realistic-aircraft" />
-                    </g>
-                    <g transform="translate(350, 110) scale(0.55)">
-                      <use href="#realistic-aircraft" />
-                    </g>
-
-                    <g transform="translate(275, 135) scale(0.55)">
-                      <use href="#realistic-aircraft" />
-                    </g>
-                    <g transform="translate(325, 135) scale(0.55)">
-                      <use href="#realistic-aircraft" />
-                    </g>
-
-                    <rect x="138" y="238" width="124" height="34" rx="6" fill="rgba(79,113,134,0.15)" stroke="rgba(79,113,134,0.5)"/>
-                    <rect x="138" y="238" width="124" height="34" rx="6" fill="none" stroke="rgba(183,202,214,0.8)" stroke-width="1">
-                      <animate attributeName="opacity" values="0; 1; 0" dur="2s" repeatCount="indefinite"/>
-                    </rect>
-
-                    <text x="200" y="259" text-anchor="middle" fill="#FFFFFF" font-size="12" font-family="Inter,sans-serif" font-weight="700" letter-spacing="1">CAPACITY BOOST</text>
-
-                  </svg>
-                </div>
-
-                <!-- Visual 2: Collision Prevention -->
-                <div class="tab-visual" id="visual-collision">
-                  <svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="400" height="320" fill="#071424"/>
-
-                    <rect x="30" y="40" width="340" height="240" rx="4" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" fill="rgba(255,255,255,0.02)"/>
-
-                    <path d="M 86 40 L 86 280 M 143 40 L 143 280 M 200 40 L 200 280 M 256 40 L 256 280 M 313 40 L 313 280" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
-                    <path d="M 30 88 L 370 88 M 30 136 L 370 136 M 30 184 L 370 184 M 30 232 L 370 232" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
-
-                    <defs>
-                      <g id="realistic-aircraft">
-                        <path d="M 0,-28 C 4,-28 6,-18 6,-8 L 6,10 L -6,10 L -6,-8 C -6,-18 -4,-28 0,-28 Z" fill="rgba(183,202,214,0.2)" stroke="rgba(183,202,214,0.8)" stroke-width="1.2"/>
-                        <rect x="-6" y="10" width="12" height="30" fill="rgba(183,202,214,0.2)" stroke="rgba(183,202,214,0.8)" stroke-width="1.2"/>
-                        <path d="M 6,-2 L 40,18 L 40,24 L 6,14 Z" fill="rgba(183,202,214,0.2)" stroke="rgba(183,202,214,0.8)" stroke-width="1.2"/>
-                        <path d="M -6,-2 L -40,18 L -40,24 L -6,14 Z" fill="rgba(183,202,214,0.2)" stroke="rgba(183,202,214,0.8)" stroke-width="1.2"/>
-                        <path d="M 4,32 L 18,42 L 18,46 L 4,40 Z" fill="rgba(183,202,214,0.3)" stroke="rgba(183,202,214,0.8)" stroke-width="1.2"/>
-                        <path d="M -4,32 L -18,42 L -18,46 L -4,40 Z" fill="rgba(183,202,214,0.3)" stroke="rgba(183,202,214,0.8)" stroke-width="1.2"/>
-                      </g>
-                    </defs>
-
-                    <g transform="translate(270, 140) rotate(-60)">
-                      <circle cx="0" cy="0" r="60" fill="rgba(183,202,214,0.03)" stroke="rgba(183,202,214,0.2)" stroke-width="1" stroke-dasharray="4 8"/>
-
-                      <use href="#realistic-aircraft" />
-
-                      <circle cx="-18" cy="44" r="3" fill="#657586"/> <circle cx="18" cy="44" r="3" fill="#657586"/>  <circle cx="0" cy="42" r="3" fill="#657586"/>   <circle cx="0" cy="20" r="3" fill="#657586"/>   <circle cx="0" cy="5" r="3" fill="#657586"/>    <circle cx="40" cy="20" r="3" fill="#657586"/>  <circle cx="20" cy="10" r="3" fill="#657586"/>  <g>
-                        <animate attributeName="fill" calcMode="linear"
-                                values="#657586; #657586; #DDE5EA; #DDE5EA; #DDE5EA; #DDE5EA; #657586"
-                                keyTimes="0; 0.25; 0.35; 0.60; 0.70; 0.95; 1"
-                                dur="7s" repeatCount="indefinite"/>
-                        <circle cx="-20" cy="10" r="3"/> <circle cx="0" cy="-10" r="3"/>  </g>
-
-                      <g>
-                        <animate attributeName="fill" calcMode="linear"
-                                values="#657586; #657586; #DDE5EA; #DDE5EA; #EF4444; #EF4444; #657586"
-                                keyTimes="0; 0.25; 0.35; 0.60; 0.70; 0.95; 1"
-                                dur="7s" repeatCount="indefinite"/>
-                        <circle cx="0" cy="-28" r="3"/>  <circle cx="-40" cy="20" r="3"/> </g>
-                    </g>
-
-                    <g>
-                      <animate attributeName="opacity" calcMode="linear"
-                              values="0; 1; 1; 1; 1; 1; 0; 0"
-                              keyTimes="0; 0.05; 0.25; 0.35; 0.60; 0.90; 0.95; 1"
-                              dur="7s" repeatCount="indefinite"/>
-
-                      <animateTransform attributeName="transform" type="translate" calcMode="spline"
-                                        values="100,250; 100,250; 165,200; 165,200; 210,165; 210,165; 100,250"
-                                        keyTimes="0; 0.25; 0.35; 0.60; 0.70; 0.95; 1"
-                                        keySplines="0 0 1 1; 0.4 0 0.2 1; 0 0 1 1; 0.4 0 0.2 1; 0 0 1 1; 1 0 1 1"
-                                        dur="7s" repeatCount="indefinite"/>
-
-                      <g transform="rotate(45)">
-                        <use href="#realistic-aircraft" />
-
-                        <circle cx="-18" cy="44" r="3" fill="#657586"/> <circle cx="18" cy="44" r="3" fill="#657586"/>  <circle cx="0" cy="42" r="3" fill="#657586"/>   <circle cx="0" cy="20" r="3" fill="#657586"/>   <circle cx="0" cy="5" r="3" fill="#657586"/>    <circle cx="-40" cy="20" r="3" fill="#657586"/> <circle cx="-20" cy="10" r="3" fill="#657586"/> <g>
-                          <animate attributeName="fill" calcMode="linear"
-                                  values="#657586; #657586; #DDE5EA; #DDE5EA; #DDE5EA; #DDE5EA; #657586"
-                                  keyTimes="0; 0.25; 0.35; 0.60; 0.70; 0.95; 1"
-                                  dur="7s" repeatCount="indefinite"/>
-                          <circle cx="20" cy="10" r="3"/> <circle cx="0" cy="-10" r="3"/> </g>
-
-                        <g>
-                          <animate attributeName="fill" calcMode="linear"
-                                  values="#657586; #657586; #DDE5EA; #DDE5EA; #EF4444; #EF4444; #657586"
-                                  keyTimes="0; 0.25; 0.35; 0.60; 0.70; 0.95; 1"
-                                  dur="7s" repeatCount="indefinite"/>
-                          <circle cx="0" cy="-28" r="3"/> <circle cx="40" cy="20" r="3"/> </g>
-
-                        <g opacity="0">
-                          <animate attributeName="opacity" calcMode="discrete"
-                                  values="0; 0; 0; 0; 1; 1; 0"
-                                  keyTimes="0; 0.25; 0.35; 0.60; 0.70; 0.95; 1"
-                                  dur="7s" repeatCount="indefinite"/>
-
-                          <circle cx="0" cy="-28" r="12" fill="none" stroke="#EF4444" stroke-width="1.5">
-                            <animate attributeName="r" values="3; 14; 3" dur="1s" repeatCount="indefinite"/>
-                            <animate attributeName="opacity" values="1; 0; 0" dur="1s" repeatCount="indefinite"/>
-                          </circle>
-
-                          <circle cx="40" cy="20" r="12" fill="none" stroke="#EF4444" stroke-width="1.5">
-                            <animate attributeName="r" values="3; 14; 3" dur="1s" repeatCount="indefinite"/>
-                            <animate attributeName="opacity" values="1; 0; 0" dur="1s" repeatCount="indefinite"/>
-                          </circle>
-                        </g>
-                      </g>
-                    </g>
-
-                    <g transform="translate(148, 268)">
-                      <rect x="0" y="0" width="104" height="22" rx="4" fill="#0E2336" stroke="rgba(255,255,255,0.1)"/>
-
-                      <rect x="0" y="0" width="104" height="22" rx="4">
-                        <animate attributeName="fill" calcMode="linear"
-                                values="rgba(30,41,59,0); rgba(30,41,59,0); rgba(250,204,21,0.9); rgba(250,204,21,0.9); rgba(239,68,68,0.9); rgba(239,68,68,0.9); rgba(30,41,59,0)"
-                                keyTimes="0; 0.25; 0.35; 0.60; 0.70; 0.95; 1"
-                                dur="7s" repeatCount="indefinite"/>
-                      </rect>
-
-                      <text x="52" y="15" text-anchor="middle" fill="#8392A0" font-size="10" font-weight="700" font-family="Inter, sans-serif">
-                        STATUS: CLEAR
-                        <animate attributeName="opacity" calcMode="discrete"
-                                values="1; 1; 0; 0; 0; 0; 1"
-                                keyTimes="0; 0.25; 0.35; 0.60; 0.70; 0.95; 1"
-                                dur="7s" repeatCount="indefinite"/>
-                      </text>
-
-                      <text x="52" y="15" text-anchor="middle" fill="#071424" font-size="10" font-weight="700" font-family="Inter, sans-serif" opacity="0">
-                        PROXIMITY ALERT
-                        <animate attributeName="opacity" calcMode="discrete"
-                                values="0; 0; 1; 1; 0; 0; 0"
-                                keyTimes="0; 0.25; 0.35; 0.60; 0.70; 0.95; 1"
-                                dur="7s" repeatCount="indefinite"/>
-                      </text>
-
-                      <text x="52" y="15" text-anchor="middle" fill="white" font-size="10" font-weight="700" font-family="Inter, sans-serif" opacity="0">
-                        COLLISION RISK
-                        <animate attributeName="opacity" calcMode="discrete"
-                                values="0; 0; 0; 0; 1; 1; 0"
-                                keyTimes="0; 0.25; 0.35; 0.60; 0.70; 0.95; 1"
-                                dur="7s" repeatCount="indefinite"/>
-                      </text>
-                    </g>
-                  </svg>
-                </div>
-
-                <!-- Visual 3: Tow-Path Planning -->
-                <div class="tab-visual" id="visual-pathplan">
-                  <svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="400" height="320" fill="#071424"/>
-
-                    <defs>
-                      <g id="realistic-aircraft">
-                        <path d="M 0,-28 C 4,-28 6,-18 6,-8 L 6,10 L -6,10 L -6,-8 C -6,-18 -4,-28 0,-28 Z" fill="rgba(183,202,214,0.3)" stroke="rgba(183,202,214,0.9)" stroke-width="1.2"/>
-                        <rect x="-6" y="10" width="12" height="30" fill="rgba(183,202,214,0.3)" stroke="rgba(183,202,214,0.9)" stroke-width="1.2"/>
-                        <path d="M 6,-2 L 40,18 L 40,24 L 6,14 Z" fill="rgba(183,202,214,0.3)" stroke="rgba(183,202,214,0.9)" stroke-width="1.2"/>
-                        <path d="M -6,-2 L -40,18 L -40,24 L -6,14 Z" fill="rgba(183,202,214,0.3)" stroke="rgba(183,202,214,0.9)" stroke-width="1.2"/>
-                        <path d="M 4,32 L 18,42 L 18,46 L 4,40 Z" fill="rgba(183,202,214,0.4)" stroke="rgba(183,202,214,0.9)" stroke-width="1.2"/>
-                        <path d="M -4,32 L -18,42 L -18,46 L -4,40 Z" fill="rgba(183,202,214,0.4)" stroke="rgba(183,202,214,0.9)" stroke-width="1.2"/>
-                      </g>
-
-                      <path id="tow-path" d="M 80,280 C 80,230 200,240 200,180 C 200,140 185,135 185,115" fill="none"/>
-                    </defs>
-
-                    <rect x="30" y="20" width="340" height="280" rx="4" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" fill="rgba(255,255,255,0.02)"/>
-                    <path d="M 30 90 L 370 90 M 30 160 L 370 160 M 30 230 L 370 230" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
-                    <path d="M 115 20 L 115 300 M 200 20 L 200 300 M 285 20 L 285 300" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
-
-                    <g transform="translate(120, 150) rotate(30) scale(0.6)">
-                      <use href="#realistic-aircraft" opacity="0.7"/>
-                      <rect x="-45" y="-35" width="90" height="90" fill="none" stroke="rgba(239,68,68,0.3)" stroke-width="1" stroke-dasharray="4 2"/>
-                    </g>
-
-                    <g transform="translate(250, 90) rotate(-45) scale(0.6)">
-                      <use href="#realistic-aircraft" opacity="0.7"/>
-                      <rect x="-45" y="-35" width="90" height="90" fill="none" stroke="rgba(239,68,68,0.3)" stroke-width="1" stroke-dasharray="4 2"/>
-                    </g>
-
-                    <use href="#tow-path" stroke="#5F8399" stroke-width="2.5" stroke-dasharray="6 4" stroke-linecap="round">
-                      <animate attributeName="stroke-dashoffset" values="20;0" dur="0.5s" repeatCount="indefinite" calcMode="linear"/>
-                    </use>
-
-                    <g transform="translate(80,280)">
-                      <circle r="6" fill="#10B981" stroke="#071424" stroke-width="1.5"/>
-                      <text y="15" text-anchor="middle" fill="#10B981" font-size="9" font-family="Inter,sans-serif" font-weight="700">START</text>
-                    </g>
-
-                    <g transform="translate(185,115)">
-                      <circle r="6" fill="#B8C2CB" stroke="#071424" stroke-width="1.5"/>
-                      <text y="-10" text-anchor="middle" fill="#B8C2CB" font-size="9" font-family="Inter,sans-serif" font-weight="700">END</text>
-                    </g>
-
-                    <g>
-                      <animateMotion dur="5s" repeatCount="indefinite" rotate="auto">
-                        <mpath href="#tow-path"/>
-                      </animateMotion>
-
-                      <g transform="scale(0.55) rotate(90)">
-                        <use href="#realistic-aircraft" />
-                        <use href="#realistic-aircraft" fill="none" stroke="#CFDBE2" stroke-width="1" opacity="0.5"/>
-                      </g>
-                    </g>
-
-                    <rect x="130" y="285" width="140" height="20" rx="4" fill="rgba(79,113,134,0.15)" stroke="rgba(79,113,134,0.3)"/>
-                    <text x="200" y="298" text-anchor="middle" fill="#B7CAD6" font-size="9" font-family="Inter,sans-serif" font-weight="600">COLLISION-FREE TOW PATH</text>
-
-                  </svg>
-                </div>
-
-                <!-- Visual 4: Autonomous Tugs -->
-                <div class="tab-visual" id="visual-tugs">
-                  <svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="400" height="320" fill="#071424"/>
-
-                    <defs>
-                      <g id="realistic-aircraft">
-                        <path d="M 0,-28 C 4,-28 6,-18 6,-8 L 6,10 L -6,10 L -6,-8 C -6,-18 -4,-28 0,-28 Z" fill="rgba(183,202,214,0.3)" stroke="rgba(183,202,214,0.9)" stroke-width="1.2"/>
-                        <rect x="-6" y="10" width="12" height="30" fill="rgba(183,202,214,0.3)" stroke="rgba(183,202,214,0.9)" stroke-width="1.2"/>
-                        <path d="M 6,-2 L 40,18 L 40,24 L 6,14 Z" fill="rgba(183,202,214,0.3)" stroke="rgba(183,202,214,0.9)" stroke-width="1.2"/>
-                        <path d="M -6,-2 L -40,18 L -40,24 L -6,14 Z" fill="rgba(183,202,214,0.3)" stroke="rgba(183,202,214,0.9)" stroke-width="1.2"/>
-                        <path d="M 4,32 L 18,42 L 18,46 L 4,40 Z" fill="rgba(183,202,214,0.4)" stroke="rgba(183,202,214,0.9)" stroke-width="1.2"/>
-                        <path d="M -4,32 L -18,42 L -18,46 L -4,40 Z" fill="rgba(183,202,214,0.4)" stroke="rgba(183,202,214,0.9)" stroke-width="1.2"/>
-                      </g>
-                    </defs>
-
-                    <rect x="30" y="40" width="340" height="240" rx="4" stroke="rgba(255,255,255,0.07)" fill="rgba(255,255,255,0.02)"/>
-
-                    <line x1="200" y1="140" x2="200" y2="150" stroke="rgba(255,255,255,0.6)" stroke-width="3" stroke-linecap="round"/>
-
-                    <g transform="translate(200, 190) scale(1.5)">
-                      <use href="#realistic-aircraft" />
-                    </g>
-
-                    <g transform="translate(200, 130) scale(0.8)">
-                      <rect x="-18" y="-10" width="36" height="20" rx="4" fill="#4F7186" stroke="rgba(183,202,214,0.6)" stroke-width="1">
-                        <animate attributeName="x" values="-18.5;-17.5;-18.5" dur="0.2s" repeatCount="indefinite"/>
-                      </rect>
-                      <circle cx="-12" cy="12" r="4" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
-                      <circle cx="12" cy="12" r="4" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
-                      <circle cx="0" cy="-14" r="3" fill="#B8C2CB">
-                        <animate attributeName="opacity" values="1;0.3;1" dur="1s" repeatCount="indefinite"/>
-                      </circle>
-                    </g>
-
-                    <!-- Tug and glowing light on top -->
-                    <circle cx="200" cy="130" r="45" stroke="rgba(79,113,134,0.25)" stroke-width="1.5" stroke-dasharray="4 3" fill="none">
-                      <animate attributeName="r" values="40;55;40" dur="2s" repeatCount="indefinite"/>
-                      <animate attributeName="opacity" values="0.6;0.2;0.6" dur="2s" repeatCount="indefinite"/>
-                    </circle>
-                    <circle cx="200" cy="130" r="65" stroke="rgba(79,113,134,0.1)" stroke-width="1" fill="none">
-                      <animate attributeName="r" values="60;80;60" dur="2.5s" repeatCount="indefinite"/>
-                    </circle>
-
-                    <path d="M 200,150 L 200,60" stroke="rgba(79,113,134,0.4)" stroke-width="2" stroke-dasharray="4 3" stroke-linecap="round">
-                      <animate attributeName="stroke-dashoffset" values="0;14" dur="0.8s" repeatCount="indefinite"/>
-                    </path>
-
-                    <rect x="40" y="265" width="110" height="48" rx="6" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)"/>
-                    <text x="95" y="282" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Inter,sans-serif">STATUS</text>
-                    <text x="95" y="300" text-anchor="middle" fill="#4ADE80" font-size="11" font-family="Inter,sans-serif" font-weight="700">● AUTONOMOUS</text>
-
-                    <rect x="250" y="265" width="110" height="48" rx="6" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)"/>
-                    <text x="305" y="282" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="8" font-family="Inter,sans-serif">SAFETY</text>
-                    <text x="305" y="300" text-anchor="middle" fill="#4ADE80" font-size="11" font-family="Inter,sans-serif" font-weight="700">● ALL CLEAR</text>
-                  </svg>
-                </div>
-
-                <!-- Visual 5: Audit Trail -->
-                <div class="tab-visual" id="visual-audit">
-                  <svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="400" height="320" fill="#071424"/>
-                    <!-- Timeline container -->
-                    <rect x="30" y="30" width="340" height="260" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.07)"/>
-                    <!-- Header -->
-                    <text x="50" y="57" fill="rgba(255,255,255,0.35)" font-size="10" font-family="Inter,sans-serif" font-weight="600">AUDIT LOG</text>
-                    <text x="350" y="57" text-anchor="end" fill="rgba(183,202,214,0.5)" font-size="9" font-family="Inter,sans-serif">LIVE</text>
-                    <circle cx="360" cy="53" r="4" fill="#4ADE80"><animate attributeName="opacity" values="1;0.3;1" dur="1.2s" repeatCount="indefinite"/></circle>
-                    <line x1="30" y1="65" x2="370" y2="65" stroke="rgba(255,255,255,0.06)"/>
-                    <!-- Timeline line -->
-                    <line x1="65" y1="80" x2="65" y2="275" stroke="rgba(79,113,134,0.3)" stroke-width="1.5"/>
-                    <!-- Entry 1 -->
-                    <circle cx="65" cy="95" r="5" fill="#4ADE80" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-                    <text x="82" y="91" fill="rgba(255,255,255,0.85)" font-size="10" font-family="Inter,sans-serif" font-weight="600">Aircraft Tow Complete — N12345</text>
-                    <text x="82" y="104" fill="rgba(255,255,255,0.35)" font-size="9" font-family="Inter,sans-serif">14:32:08 — Path logged, 0 incidents</text>
-                    <!-- Entry 2 -->
-                    <circle cx="65" cy="135" r="5" fill="#4F7186" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-                    <text x="82" y="131" fill="rgba(255,255,255,0.85)" font-size="10" font-family="Inter,sans-serif" font-weight="600">Auto-Stack triggered</text>
-                    <text x="82" y="144" fill="rgba(255,255,255,0.35)" font-size="9" font-family="Inter,sans-serif">14:35:22 — 6 aircraft placed</text>
-                    <!-- Entry 3 -->
-                    <circle cx="65" cy="175" r="5" fill="#B8C2CB" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-                    <text x="82" y="171" fill="rgba(255,255,255,0.85)" font-size="10" font-family="Inter,sans-serif" font-weight="600">Proximity alert — high</text>
-                    <text x="82" y="184" fill="rgba(255,255,255,0.35)" font-size="9" font-family="Inter,sans-serif">15:10:44 — Auto-brake engaged</text>
-                    <!-- Entry 4 -->
-                    <circle cx="65" cy="215" r="5" fill="#4ADE80" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-                    <text x="82" y="211" fill="rgba(255,255,255,0.85)" font-size="10" font-family="Inter,sans-serif" font-weight="600">Aircraft Tow Starting — N234AB</text>
-                    <text x="82" y="224" fill="rgba(255,255,255,0.35)" font-size="9" font-family="Inter,sans-serif">16:02:17 — Logging path</text>
-                    <!-- Entry 5 (live, pulsing) -->
-                    <circle cx="65" cy="255" r="5" fill="#B7CAD6" stroke="rgba(255,255,255,0.2)" stroke-width="1">
-                      <animate attributeName="r" values="5;7;5" dur="1.5s" repeatCount="indefinite"/>
-                    </circle>
-                    <text x="82" y="251" fill="rgba(255,255,255,0.85)" font-size="10" font-family="Inter,sans-serif" font-weight="600">Monitoring active...</text>
-                    <text x="82" y="264" fill="rgba(183,202,214,0.5)" font-size="9" font-family="Inter,sans-serif">16:08:55 — All systems nominal</text>
-                  </svg>
-                </div>
-
-              </div><!-- .video_animation -->
-            </div><!-- .animation_video_container -->
-
-          </div><!-- .animation_container -->
-        </div><!-- .product_tabs -->
-      </div><!-- .product_container -->
-
+    <section class="roi_wrap" data-bg-type="light">
+      <div class="home_container roi_grid"><div class="roi_copy"><div class="section-title">EXPLORE THE POTENTIAL</div><h2 class="section_heading">Put your hangar assumptions into the calculator.</h2><p>Estimate how additional usable space and reduced stacking labor could affect annual operations. Results depend on your inputs and represent estimated benefit before costs.</p><a href="roi.html" class="text_link">Open the ROI calculator →</a></div><a href="roi.html" class="roi_example" aria-label="View or change ROI calculator assumptions"><span>Illustrative annual benefit before costs</span><strong data-roi-profit="planning">$91,665</strong><div class="roi_breakdown"><p><b data-roi-revenue>$84,000</b>Annual revenue potential</p><p><b data-roi-planning-labor>$7,665</b>Planning labor savings</p></div><small data-roi-assumptions>Estimated ROI using a 40,000 sq. ft. hangar, 5% utilization boost, $3.50/sq. ft. monthly tenant rate, 4 hours spent stacking per day, $35 per labor hour, and 3 crew members.</small><span class="roi_action">View/change assumptions →</span></a></div>
     </section>
 
-    <!-- ============================================================
-         ROI SECTION
-    ============================================================ -->
-    <section class="autonomous_wrap" data-bg-type="dark">
-      <div class="autonomous_container">
-
-        <div class="title_and_graphic">
-          <div class="autonomous_title">
-            <h2 class="dark_section_heading">
-              <span class="text-span">See Your ROI Today.</span>
-            </h2>
-          </div>
-
-          <!-- Animated graphic -->
-          <svg viewBox="0 0 600 450" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-            <defs>
-              <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#071424" />
-                <stop offset="100%" stop-color="#0E2336" />
-              </linearGradient>
-
-              <pattern id="dot-pattern" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
-                <circle cx="15" cy="15" r="1.5" fill="rgba(255,255,255,0.05)"/>
-              </pattern>
-
-              <g id="realistic-aircraft">
-                <path d="M 0,-35 C 5,-35 7,-22 7,-10 L 7,12 L -7,12 L -7,-10 C -7,-22 -5,-35 0,-35 Z" fill="rgba(183,202,214,0.15)" stroke="rgba(183,202,214,0.6)" stroke-width="1.5"/>
-                <rect x="-7" y="12" width="14" height="38" fill="rgba(183,202,214,0.15)" stroke="rgba(183,202,214,0.6)" stroke-width="1.5"/>
-                <path d="M 7,-2 L 50,22 L 50,30 L 7,18 Z" fill="rgba(183,202,214,0.15)" stroke="rgba(183,202,214,0.6)" stroke-width="1.5"/>
-                <path d="M -7,-2 L -50,22 L -50,30 L -7,18 Z" fill="rgba(183,202,214,0.15)" stroke="rgba(183,202,214,0.6)" stroke-width="1.5"/>
-                <path d="M 5,40 L 22,52 L 22,58 L 5,50 Z" fill="rgba(183,202,214,0.2)" stroke="rgba(183,202,214,0.6)" stroke-width="1.5"/>
-                <path d="M -5,40 L -22,52 L -22,58 L -5,50 Z" fill="rgba(183,202,214,0.2)" stroke="rgba(183,202,214,0.6)" stroke-width="1.5"/>
-              </g>
-
-              <path id="tug-path" d="M 90,380 C 90,280 280,320 320,200 C 350,110 400,100 480,100" fill="none"/>
-            </defs>
-
-            <rect width="600" height="450" rx="16" fill="url(#bg-gradient)"/>
-            <rect width="600" height="450" rx="16" fill="url(#dot-pattern)"/>
-
-            <g transform="translate(160, 130) rotate(-55) scale(0.8)">
-              <use href="#realistic-aircraft" />
-            </g>
-            <g transform="translate(440, 270) rotate(-150) scale(0.8)">
-              <use href="#realistic-aircraft" />
-            </g>
-
-            <line x1="0" y1="0" x2="600" y2="0" stroke="rgba(95,131,153,0.5)" stroke-width="3" opacity="0">
-              <animate attributeName="opacity" values="0; 1; 1; 0; 0" keyTimes="0; 0.01; 0.29; 0.3; 1" dur="20s" repeatCount="indefinite"/>
-              <animate attributeName="y1" values="0; 450; 450; 0" keyTimes="0; 0.3; 0.95; 1" dur="20s" repeatCount="indefinite"/>
-              <animate attributeName="y2" values="0; 450; 450; 0" keyTimes="0; 0.3; 0.95; 1" dur="20s" repeatCount="indefinite"/>
-            </line>
-
-            <use href="#tug-path" stroke="#B8C2CB" stroke-width="3" stroke-dasharray="8 6" stroke-linecap="round" opacity="0">
-              <animate attributeName="opacity" values="0; 0; 0.8; 0.8; 0" keyTimes="0; 0.3; 0.35; 0.9; 1" dur="20s" repeatCount="indefinite"/>
-              <animate attributeName="stroke-dashoffset" values="40; 0" dur="1s" repeatCount="indefinite" calcMode="linear"/>
-            </use>
-
-            <g transform="translate(480, 100)" opacity="0">
-              <animate attributeName="opacity" values="0; 0; 1; 1; 0" keyTimes="0; 0.3; 0.35; 0.9; 1" dur="20s" repeatCount="indefinite"/>
-              <circle r="12" fill="none" stroke="#B8C2CB" stroke-width="2" stroke-dasharray="4 2">
-                <animateTransform attributeName="transform" type="rotate" values="0; 360" dur="4s" repeatCount="indefinite" calcMode="linear"/>
-              </circle>
-              <circle r="4" fill="#B8C2CB"/>
-            </g>
-
-            <g>
-              <animateMotion dur="20s" repeatCount="indefinite" rotate="auto"
-                            keyTimes="0; 0.5; 0.88; 1"
-                            keyPoints="0; 0; 1; 1"
-                            calcMode="spline" keySplines="0 0 1 1; 0.4 0 0.2 1; 0 0 1 1">
-                <mpath href="#tug-path"/>
-              </animateMotion>
-
-              <g transform="rotate(90) scale(0.8)">
-
-                <use href="#realistic-aircraft" />
-
-                <g transform="translate(0, -45)">
-                  <circle cx="0" cy="0" r="30" fill="none" stroke="#5F8399" stroke-width="1.5" opacity="0">
-                    <animate attributeName="r" values="10; 55" dur="2s" repeatCount="indefinite"/>
-                    <animate attributeName="opacity" values="0.6; 0" dur="2s" repeatCount="indefinite"/>
-                  </circle>
-                  <circle cx="0" cy="0" r="30" fill="none" stroke="#5F8399" stroke-width="1.5" opacity="0">
-                    <animate attributeName="r" values="10; 55" begin="1s" dur="2s" repeatCount="indefinite"/>
-                    <animate attributeName="opacity" values="0.6; 0" begin="1s" dur="2s" repeatCount="indefinite"/>
-                  </circle>
-
-                  <rect x="-12" y="-15" width="24" height="30" rx="4" fill="#4F7186" stroke="#B7CAD6" stroke-width="1.5"/>
-                  <rect x="-12" y="-8" width="24" height="4" fill="#CFDBE2"/>
-                  <circle cx="0" cy="0" r="3" fill="#10B981">
-                    <animate attributeName="opacity" values="1; 0.4; 1" dur="0.5s" repeatCount="indefinite"/>
-                  </circle>
-                </g>
-              </g>
-            </g>
-
-            <g transform="translate(260, 360)">
-              <rect width="300" height="50" rx="8" fill="rgba(7,20,36,0.8)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-
-              <g opacity="0">
-                <animate attributeName="opacity" values="1; 1; 0; 0; 0" keyTimes="0; 0.29; 0.3; 0.99; 1" dur="20s" repeatCount="indefinite"/>
-                <circle cx="25" cy="25" r="4" fill="#5F8399">
-                  <animate attributeName="opacity" values="1; 0.2; 1" dur="0.5s" repeatCount="indefinite"/>
-                </circle>
-                <text x="45" y="21" fill="#B7CAD6" font-size="10" font-weight="700" letter-spacing="0.1em">PERCEPTION</text>
-                <text x="45" y="37" fill="#8392A0" font-size="11" font-weight="500">Scanning hanger layout...</text>
-              </g>
-
-              <g opacity="0">
-                <animate attributeName="opacity" values="0; 0; 1; 1; 0; 0" keyTimes="0; 0.29; 0.3; 0.49; 0.5; 1" dur="20s" repeatCount="indefinite"/>
-                <circle cx="25" cy="25" r="4" fill="#B8C2CB">
-                  <animate attributeName="opacity" values="1; 0.2; 1" dur="0.5s" repeatCount="indefinite"/>
-                </circle>
-                <text x="45" y="21" fill="#DDE5EA" font-size="10" font-weight="700" letter-spacing="0.1em">PLANNING</text>
-                <text x="45" y="37" fill="#8392A0" font-size="11" font-weight="500">Generating optimal placement and route...</text>
-              </g>
-
-              <g opacity="0">
-                <animate attributeName="opacity" values="0; 0; 1; 1; 0" keyTimes="0; 0.49; 0.5; 0.95; 1" dur="20s" repeatCount="indefinite"/>
-                <circle cx="25" cy="25" r="4" fill="#10B981">
-                  <animate attributeName="opacity" values="1; 0.2; 1" dur="0.5s" repeatCount="indefinite"/>
-                </circle>
-                <text x="45" y="21" fill="#6EE7B7" font-size="10" font-weight="700" letter-spacing="0.1em">EXECUTION</text>
-                <text x="45" y="37" fill="#8392A0" font-size="11" font-weight="500">Autonomous towing.</text>
-              </g>
-            </g>
-          </svg>
-        </div>
-
-        <div class="autonomous_content">
-          <div class="autonomous_description">
-            <p class="autonomous_paragraph">
-              At Starlight Hangars, we've built a unique software and hardware platform designed specifically for ground handling.
-              Our algorithm generates realistic hangar layouts and movement patterns — and is continuously improving.<br/><br/>
-              Each installation is designed for your operation's specific needs, quickly configured for your hangar footprint.
-              By uniting perception, planning, and execution in one integrated system, we unlock unprecedented safety, efficiency, and ROI for any FBO or MRO operation.
-            </p>
-            <a href="../roi.html" class="outlined_button light-blue">Open Our ROI Calculator</a>
-          </div>
-        </div>
-
-      </div>
+    <section class="buyer_wrap" data-bg-type="dark">
+      <div class="home_container buyer_grid"><div><div class="section-title">START WITH YOUR HANGAR</div><h2 class="section_heading">See what a plan could look like for your operation.</h2></div><div class="buyer_questions"><p>How much time does your crew spend stacking aircraft?</p><p>Could a schedule-aware layout make more floor space usable?</p><p>Which movements create the most friction during the day?</p></div></div>
+      <div class="home_container closing_cta"><p>Bring your hangar footprint and operating schedule. We’ll walk through the planning workflow with you.</p><a href="#" data-open-contact class="hero_button hero_button-primary">Schedule a Demo</a></div>
     </section>
-
-    <!-- ============================================================
-         CONTACT CTA
-    ============================================================ -->
-    <div class="cta-strip">
-      <h2>Ready to bring your hangar operations to the next level?</h2>
-      <p>Get in touch to see how we can increase your hangar's safety, efficiency, and profitability.</p>
-      <a href="#" data-open-contact class="btn-primary">Schedule a Demo</a>
-    </div>
-
-    <!-- ============================================================
-         FOOTER
-    ============================================================ -->
-    <footer class="footer" data-bg-type="dark">
-      <div class="footer_container">
-        <div class="footer_left">
-          <a href="../index.html" class="site_name">Starlight Hangars</a>
-          <div class="copyright">© Starlight Hangars. Patent Pending.</div>
-        </div>
-        <div class="footer_right">
-          <nav class="footer_nav">
-            <a href="#" data-open-contact class="footer_link">Contact</a>
-            <a href="about.html" class="footer_link">About</a>
-            <a href="collision-prevention.html" class="footer_link">Collision Prevention</a>
-            <a href="path-planning.html" class="footer_link">Tow-Path Planning</a>
-            <a href="retrofit.html" class="footer_link">Retrofit Kit</a>
-            <a href="verifiable-audit-trail.html" class="footer_link">Audit Trail</a>
-          </nav>
-        </div>
-      </div>
-    </footer>
-
-  </main><!-- #smooth-content -->
-
-</div><!-- #smooth-wrapper -->
-
-<!-- ============================================================
-     SCRIPTS: GSAP (Club CDN via Webflow — same as sunrise.html)
-============================================================ -->
-<script defer src="https://cdn.prod.website-files.com/gsap/3.14.2/gsap.min.js"></script>
-<script defer src="https://cdn.prod.website-files.com/gsap/3.14.2/ScrollTrigger.min.js"></script>
-<!-- Main script -->
+    <footer></footer>
+  </main>
+</div>
 <script defer src="./assets/site.js"></script>
-
 </body>
 </html>

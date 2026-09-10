@@ -25,7 +25,7 @@ function calculateSttugsRoi(values = STTUGS_ROI_DEFAULTS) {
   const annualRevenue =
     values.hangarSqft * (Math.max(0, values.utilizationBoost) / 100) *
     values.tenantRate * 12;
-  const digitalTwinLaborSaving = annualLabor * (0.5 / 12);
+  const digitalTwinLaborSaving = annualLabor * (5 / 100);
 
   return {
     annualLabor,
@@ -34,9 +34,9 @@ function calculateSttugsRoi(values = STTUGS_ROI_DEFAULTS) {
     planning: annualRevenue + digitalTwinLaborSaving,
     planningLabor: digitalTwinLaborSaving,
     planningLaborHours: digitalTwinLaborSaving / values.wagePerHour,
-    collisionPrevention: annualLabor * (4 / 12),
-    towPathPlanning: annualLabor * (2 / 12),
-    autonomousTugs: annualLabor * (5.5 / 12),
+    collisionPrevention: annualLabor * (30 / 100),
+    towPathPlanning: annualLabor * (20 / 100),
+    autonomousTugs: annualLabor * (45 / 100),
   };
 }
 
@@ -49,32 +49,7 @@ window.STTUGS_ROI = Object.freeze({
 {
   const _plugins = [];
   if (typeof ScrollTrigger  !== 'undefined') _plugins.push(ScrollTrigger);
-  if (_plugins.length) gsap.registerPlugin(..._plugins);
-}
-
-/* ============================================================
-   NAV THEME  (dark = navy bg / white text,  light = white bg / navy text)
-============================================================ */
-function setNavTheme(theme) {
-  const snavHeader = document.getElementById("sttugs-nav-header");
-  if (snavHeader) {
-    if (theme === "light") snavHeader.classList.add("snav--light");
-    else snavHeader.classList.remove("snav--light");
-  }
-}
-
-/* Set up ScrollTriggers for sections after the hero */
-function initPostHeroNavTheme() {
-  document.querySelectorAll("[data-bg-type]").forEach((section) => {
-    const theme = section.dataset.bgType; // "light" or "dark"
-    ScrollTrigger.create({
-      trigger: section,
-      start: "top top+=1",
-      end: "bottom top+=1",
-      onEnter: ()      => setNavTheme(theme),
-      onEnterBack: ()  => setNavTheme(theme),
-    });
-  });
+  if (_plugins.length && typeof gsap !== 'undefined') gsap.registerPlugin(..._plugins);
 }
 
 /* ============================================================
@@ -149,6 +124,14 @@ function initRoiDefaults() {
   document.querySelectorAll('[data-roi-planning-hours]').forEach((element) => {
     element.textContent = formatRoiNumber(results.planningLaborHours, 0);
   });
+  document.querySelectorAll('[data-roi-labor-hours]').forEach((element) => {
+    const value = profitValues[element.dataset.roiLaborHours];
+    if (value !== undefined) element.textContent = formatRoiNumber(value / defaults.wagePerHour, 0);
+  });
+  document.querySelectorAll('[data-roi-daily-hours]').forEach((element) => {
+    const value = profitValues[element.dataset.roiDailyHours];
+    if (value !== undefined) element.textContent = formatRoiNumber(value / defaults.wagePerHour / 365, 1);
+  });
   document.querySelectorAll('[data-roi-assumptions]').forEach((element) => {
     element.textContent =
       `Estimated ROI using a ${formatRoiNumber(defaults.hangarSqft, 0)} sq. ft. hangar, ` +
@@ -157,28 +140,6 @@ function initRoiDefaults() {
       `${formatRoiNumber(defaults.hoursPerDay)} hours spent stacking per day, ` +
       `${formatRoiDollars(defaults.wagePerHour)} per labor hour, and ` +
       `${formatRoiNumber(defaults.peoplePerStack, 0)} crew members.`;
-  });
-}
-
-/* ============================================================
-   GENERAL SECTION SCROLL REVEALS
-============================================================ */
-function initScrollReveals() {
-  const reveals = document.querySelectorAll(
-    ".autonomous_wrap, .carrers_wrap, .section-headline, .autonomous_paragraph, .step_item"
-  );
-  reveals.forEach((el) => {
-    gsap.from(el, {
-      scrollTrigger: {
-        trigger: el,
-        start: "top 85%",
-        once: true,
-      },
-      y: 30,
-      opacity: 0,
-      duration: 0.8,
-      ease: "power2.out",
-    });
   });
 }
 
@@ -246,38 +207,6 @@ function initSharedNavBehavior(navHeader) {
     }
   });
 
-  // ── Color-switch: go light-mode when a light section is under the nav ──
-  // Uses a scroll listener (not ScrollTrigger) so the state correctly reverts
-  // when scrolling back into a dark section from any direction.
-  function setupNavColorSwitch() {
-    const LIGHT_SELECTOR = '[data-bg-type="light"], .section-light, .section-white, .faq-section';
-    const NAV_H = navHeader.offsetHeight || 72;
-
-    let rafPending = false;
-    function checkTheme() {
-      rafPending = false;
-      const midY = NAV_H / 2;
-      let isLight = false;
-      document.querySelectorAll(LIGHT_SELECTOR).forEach(el => {
-        const r = el.getBoundingClientRect();
-        if (r.top <= midY && r.bottom > midY) isLight = true;
-      });
-      navHeader.classList.toggle('snav--light', isLight);
-    }
-
-    function onScroll() {
-      if (!rafPending) {
-        rafPending = true;
-        requestAnimationFrame(checkTheme);
-      }
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    // Run immediately and after full load (fonts/images may shift layout)
-    checkTheme();
-    window.addEventListener('load', checkTheme);
-  }
-
   // ── Highlight active page in nav ──
   function highlightCurrentPage() {
     const filename = window.location.pathname.split('/').pop() || 'index.html';
@@ -323,7 +252,6 @@ function initSharedNavBehavior(navHeader) {
   }
 
   highlightCurrentPage();
-  setupNavColorSwitch();
 }
 
 function injectSharedNav() {
@@ -456,8 +384,8 @@ function injectSharedComponents() {
         display: inline-flex; align-items: center; gap: 0.5rem;
         text-decoration: none; color: #FFFFFF;
       }
-      .sttugs-footer-logo { width: 34px; height: 34px; filter: invert(1); }
       .sttugs-site_name {
+        line-height: 1;
         font-size: 1.25rem;
         font-weight: 800;
         color: #FFFFFF;
@@ -603,15 +531,11 @@ function injectSharedComponents() {
         position: fixed;
         top: 0; left: 0; right: 0;
         z-index: 2000;
-        background: rgba(7,20,36,0.96);
+        background: var(--navy);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
         border-bottom: 1px solid rgba(255,255,255,0.08);
         transition: background 0.35s ease, border-color 0.35s ease;
-      }
-      .snav--light .snav {
-        background: rgba(255,255,255,0.97);
-        border-bottom-color: rgba(7,20,36,0.1);
       }
       .snav-inner {
         display: flex; align-items: center; justify-content: space-between;
@@ -621,17 +545,17 @@ function injectSharedComponents() {
       .snav-logo-link {
         display: flex; align-items: center; gap: 0.5rem; text-decoration: none;
       }
-      .snav-logo-mark {
-        width: 44px; height: 44px; flex-shrink: 0;
+      .snav-logo-mark, .sttugs-footer-logo {
+        width: 52.8px; height: 52.8px; flex-shrink: 0;
         filter: invert(1);
+        transform: translateY(6.6px);
         transition: filter 0.35s ease;
       }
-      .snav--light .snav-logo-mark { filter: none; }
       .snav-logo-text {
         font-size: 1rem; font-weight: 800; letter-spacing: 0.02em; text-transform: uppercase; white-space: nowrap;
+        line-height: 1;
         color: #fff; transition: color 0.35s ease;
       }
-      .snav--light .snav-logo-text { color: #071424; }
       .snav-links {
         display: flex; align-items: center; gap: 1.1rem;
         list-style: none; margin: 0; padding: 0;
@@ -648,10 +572,7 @@ function injectSharedComponents() {
         font-family: inherit;
       }
       .snav-link:hover { color: #fff; }
-      .snav--light .snav-link { color: rgba(7,20,36,0.65); }
-      .snav--light .snav-link:hover { color: #071424; }
       .snav-link.snav-active, .snav-dropdown-trigger.snav-active--parent { color: #fff; }
-      .snav--light .snav-link.snav-active, .snav--light .snav-dropdown-trigger.snav-active--parent { color: #071424; }
       .snav-cta {
         background: #B8C2CB !important; color: #071424 !important;
         padding: 0.45rem 1.1rem !important; border-radius: 7px; font-weight: 700;
@@ -663,8 +584,6 @@ function injectSharedComponents() {
         color: rgba(183,202,214,0.9) !important;
       }
       .snav-roi-link:hover { border-color: #5F8399 !important; color: #fff !important; background: rgba(79,113,134,0.12) !important; }
-      .snav--light .snav-roi-link { border-color: rgba(79,113,134,0.4) !important; color: #3B5A6D !important; }
-      .snav--light .snav-roi-link:hover { border-color: var(--blue) !important; background: rgba(79,113,134,0.08) !important; }
       .snav-chevron {
         width: 12px; height: 12px;
         transition: transform 0.25s; flex-shrink: 0;
@@ -684,11 +603,6 @@ function injectSharedComponents() {
         transition: opacity 0.2s, transform 0.2s;
         z-index: 100;
       }
-      .snav--light .snav-dropdown {
-        background: #fff;
-        border-color: rgba(7,20,36,0.1);
-        box-shadow: 0 16px 48px rgba(7,20,36,0.15);
-      }
       .snav-item--dropdown.open .snav-dropdown {
         opacity: 1; pointer-events: auto;
         transform: translateX(-50%) translateY(0);
@@ -702,9 +616,6 @@ function injectSharedComponents() {
       }
       .snav-dropdown-item:hover { background: rgba(255,255,255,0.08); color: #fff; }
       .snav-dropdown-item.snav-active { background: rgba(79,113,134,0.2); color: #B7CAD6; font-weight: 600; }
-      .snav--light .snav-dropdown-item { color: rgba(7,20,36,0.7); }
-      .snav--light .snav-dropdown-item:hover { background: #EEF3F6; color: #071424; }
-      .snav--light .snav-dropdown-item.snav-active { background: rgba(79,113,134,0.1); color: #3B5A6D; }
       .snav-dropdown-section-label {
         display: block; padding: 0.6rem 0.9rem 0.4rem;
         font-size: 0.75rem; font-weight: 700;
@@ -712,14 +623,12 @@ function injectSharedComponents() {
         color: rgba(255,255,255,0.45);
         margin-top: 0.5rem;
       }
-      .snav--light .snav-dropdown-section-label { color: rgba(7,20,36,0.4); }
       .snav-dropdown-item--disabled {
         display: block; padding: 0.6rem 0.9rem;
         font-size: 0.875rem; font-weight: 500;
         color: rgba(255,255,255,0.45);
         cursor: not-allowed; border-radius: 8px;
       }
-      .snav--light .snav-dropdown-item--disabled { color: rgba(7,20,36,0.4); }
       .snav-hamburger {
         display: none; flex-direction: column; gap: 5px;
         width: 40px; height: 40px;
@@ -731,7 +640,6 @@ function injectSharedComponents() {
         background: rgba(255,255,255,0.8); border-radius: 2px;
         transition: background 0.3s;
       }
-      .snav--light .snav-hamburger span { background: rgba(7,20,36,0.8); }
       .snav-mobile-overlay {
         display: none; position: fixed; inset: 0;
         background: rgba(0,0,0,0.45); z-index: 2050; backdrop-filter: blur(2px);
@@ -968,6 +876,7 @@ function initStageLightbox() {
   lb.className = 'stage-lightbox';
   lb.setAttribute('role', 'dialog');
   lb.setAttribute('aria-modal', 'true');
+  lb.setAttribute('aria-label', 'Enlarged product media');
   lb.innerHTML = `
     <button class="stage-lightbox-close" id="sttugs-stage-lightbox-close" aria-label="Close">&times;</button>
     <img id="sttugs-stage-lightbox-img" src="" alt="" />
@@ -977,7 +886,10 @@ function initStageLightbox() {
 
   const img = document.getElementById('sttugs-stage-lightbox-img');
   const vid = document.getElementById('sttugs-stage-lightbox-video');
+  const closeButton = document.getElementById('sttugs-stage-lightbox-close');
   let scrollY = 0;
+  let bodyOverflow = '';
+  let trigger = null;
 
   function showImage(src, alt) {
     vid.pause();
@@ -998,42 +910,57 @@ function initStageLightbox() {
     vid.play().catch(() => {});
   }
 
-  function open(src, alt, isVideo) {
+  function open(src, alt, isVideo, sourceTrigger) {
     scrollY = window.scrollY;
+    bodyOverflow = document.body.style.overflow;
+    trigger = sourceTrigger;
     if (isVideo) showVideo(src); else showImage(src, alt);
     lb.classList.add('open');
     document.body.style.overflow = 'hidden';
     document.dispatchEvent(new CustomEvent('sttugs:lightbox-open'));
+    closeButton.focus();
   }
 
   function close() {
+    if (!lb.classList.contains('open')) return;
     lb.classList.remove('open');
-    document.body.style.overflow = '';
+    document.body.style.overflow = bodyOverflow;
     vid.pause();
     vid.removeAttribute('src');
     vid.load();
     img.removeAttribute('src');
     document.dispatchEvent(new CustomEvent('sttugs:lightbox-close'));
     window.scrollTo(0, scrollY);
+    if (trigger && trigger.isConnected) trigger.focus();
+    trigger = null;
   }
 
   document.addEventListener('click', (e) => {
-    const video = e.target.closest('.stage-media-slot video');
+    const mediaTrigger = e.target.closest('[data-media-open], .stage-media-slot');
+    if (!mediaTrigger || mediaTrigger.closest('a')) return;
+    const video = mediaTrigger.querySelector('video');
     if (video && video.getAttribute('src')) {
       e.preventDefault();
-      open(video.getAttribute('src'), '', true);
+      open(video.getAttribute('src'), '', true, mediaTrigger);
       return;
     }
-    const image = e.target.closest('.stage-media-slot img');
+    const image = mediaTrigger.querySelector('img');
     if (image && image.getAttribute('src')) {
       e.preventDefault();
-      open(image.src, image.alt, false);
+      open(image.src, image.alt, false, mediaTrigger);
     }
   });
 
-  document.getElementById('sttugs-stage-lightbox-close').addEventListener('click', close);
+  closeButton.addEventListener('click', close);
   lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+  document.addEventListener('keydown', (e) => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      closeButton.focus();
+    }
+  });
 }
 
 /* ============================================================
@@ -1048,9 +975,33 @@ function initStageVideoManager() {
   let active = null;
   let lightboxOpen = false;
   let ticking = false;
+  let playRequest = 0;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function pauseAll() {
+    playRequest += 1;
+    videos.forEach((video) => video.pause());
+    active = null;
+  }
+
+  function playExclusively(video) {
+    const request = ++playRequest;
+    videos.forEach((candidate) => {
+      if (candidate !== video) candidate.pause();
+    });
+    active = video;
+    if (!video) return;
+    const promise = video.play();
+    if (promise) promise.then(() => {
+      if (request !== playRequest || active !== video || lightboxOpen || document.hidden) video.pause();
+    }).catch(() => {});
+  }
 
   function refresh() {
-    if (lightboxOpen) return;
+    if (lightboxOpen || document.hidden || reducedMotion.matches) {
+      pauseAll();
+      return;
+    }
 
     const viewportCenter = window.innerHeight / 2;
     let closest = null;
@@ -1069,9 +1020,7 @@ function initStageVideoManager() {
     }
 
     if (closest !== active) {
-      if (active) active.pause();
-      active = closest;
-      if (active) active.play().catch(() => {});
+      playExclusively(closest);
     }
   }
 
@@ -1089,12 +1038,16 @@ function initStageVideoManager() {
 
   document.addEventListener('sttugs:lightbox-open', () => {
     lightboxOpen = true;
-    if (active) { active.pause(); active = null; }
+    pauseAll();
   });
   document.addEventListener('sttugs:lightbox-close', () => {
     lightboxOpen = false;
     refresh();
   });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) pauseAll(); else refresh();
+  });
+  reducedMotion.addEventListener('change', refresh);
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', refresh);
@@ -1130,8 +1083,6 @@ function initStageVideoManager() {
 
   // Wait for DOM + layout to be ready
   window.addEventListener("load", function () {
-    initPostHeroNavTheme();
-    initScrollReveals();
-    ScrollTrigger.refresh(true);
+    if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh(true);
   });
 })();
