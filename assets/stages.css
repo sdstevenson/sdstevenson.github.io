@@ -98,6 +98,12 @@
   padding: 1.5rem;
   overflow: hidden;
 }
+.stage-media-slot.media-open-button {
+  width: 100%;
+  padding: 0;
+  border-style: solid;
+  cursor: zoom-in;
+}
 .stage-media-slot img,
 .stage-media-slot video {
   position: absolute;

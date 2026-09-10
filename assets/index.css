@@ -1,588 +1,214 @@
+body{-moz-osx-font-smoothing:grayscale}section,header,footer{position:relative}.page_wrap,.page_main{width:100%}.home_container{width:min(1180px,calc(100% - 4rem));margin:0 auto}.hero_wrap{min-height:100svh;padding:10rem 2rem 7rem;background:linear-gradient(100deg,rgba(7,20,36,.96) 8%,rgba(7,20,36,.76) 62%,rgba(7,20,36,.72)),url("praetor_sunset.JPEG") center/cover no-repeat;display:flex;align-items:center;overflow:hidden}.hero_wrap:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px);background-size:72px 72px;mask-image:linear-gradient(to bottom,black,transparent)}.hero_content{position:relative;z-index:1;width:min(1180px,100%);margin:0 auto}.section-title{margin-bottom:1rem;color:var(--blue-faint);font-size:.75rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase}.hero_title{max-width:970px;margin:0;color:#fff;font-size:clamp(3rem,6vw,5.7rem);font-weight:800;line-height:1.01;letter-spacing:-.04em}.hero_subtitle{max-width:760px;margin:1.75rem 0 0;color:rgba(255,255,255,.75);font-size:clamp(1.05rem,1.7vw,1.3rem);line-height:1.65}.hero_actions{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2.25rem}.hero_button{display:inline-flex;align-items:center;justify-content:center;padding:.9rem 1.6rem;border:1px solid transparent;border-radius:8px;font-size:.95rem;font-weight:700;transition:.2s}.hero_button:hover{transform:translateY(-2px)}.hero_button-primary{background:var(--blue);color:#fff}.hero_button-secondary{border-color:rgba(183,202,214,.55);color:#fff;background:rgba(255,255,255,.04)}
+.roi_wrap{padding:7rem 0;background:#f5f7f9}.section_intro{max-width:780px}.section_intro .section-title,.roi_copy .section-title{color:var(--blue)}.section_heading{margin:0;color:var(--navy);font-size:clamp(2.15rem,4vw,3.65rem);line-height:1.08;letter-spacing:-.03em}.section_intro>p,.roi_copy>p{margin-top:1.25rem;color:var(--muted);font-size:1.05rem;line-height:1.75}
+.buyer_wrap{padding:6rem 0;background:var(--navy);color:#fff}.section_intro-light .section_heading,.buyer_wrap .section_heading{color:#fff}.section_intro-light>p{color:rgba(255,255,255,.66)}.text_link{margin-top:auto;color:var(--blue-faint);font-size:.9rem;font-weight:700}
+.roi_wrap{background:#fff}.roi_grid{display:grid;grid-template-columns:1.15fr .85fr;gap:5rem;align-items:center}.roi_example{padding:2.5rem;border-radius:16px;background:var(--navy);color:#fff;box-shadow:0 20px 55px rgba(7,20,36,.16)}.roi_example span{display:block;color:var(--blue-faint);font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.roi_example strong{display:block;margin:1rem 0;font-size:2.4rem}.roi_example p{color:rgba(255,255,255,.72);line-height:1.7}.roi_example small{display:block;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.15);color:#91a5b3;line-height:1.5}.text_link{display:inline-block;margin-top:1.5rem;color:var(--blue)}.buyer_grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem}.buyer_questions p{padding:1.1rem 0;border-bottom:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.76);font-size:1.05rem}.closing_cta{display:flex;justify-content:space-between;align-items:center;gap:2rem;margin-top:4rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.16)}.closing_cta p{max-width:650px;color:rgba(255,255,255,.72);line-height:1.7}
+@media(max-width:900px){.home_container{width:min(100% - 2.5rem,720px)}.roi_grid,.buyer_grid{grid-template-columns:1fr;gap:1.5rem}}
+@media(max-width:600px){.hero_wrap{padding:8rem 1.25rem 5rem;align-items:flex-end}.hero_title{font-size:2.7rem}.hero_subtitle{font-size:1rem}.hero_actions{align-items:stretch}.hero_button{width:100%}.outcomes_wrap,.roi_wrap,.buyer_wrap{padding:5rem 0}.section_heading{font-size:2.2rem}.outcome_card,.roi_example{padding:1.5rem}.closing_cta{align-items:stretch;flex-direction:column}.closing_cta .hero_button{width:100%}.hero_scroll{display:none!important}}
+
+/* Alpha availability label on the dark hero. */
+.hero_notice { display: flex; align-items: center; gap: 0.65rem; color: var(--blue-faint); font-size: 0.875rem; line-height: 1.5; margin-top: 1.25rem; }
+.hero_notice-pulse { width: 0.45rem; height: 0.45rem; flex: 0 0 auto; border-radius: 50%; background: var(--blue-faint); }
+
+.media-open-button { width: 100%; height: 100%; display: block; margin: 0; padding: 0; border: 0; border-radius: inherit; background: transparent; color: inherit; cursor: zoom-in; font: inherit; }
+.media-open-button:focus-visible { outline: 3px solid var(--blue-faint); outline-offset: -3px; }
+
+.roi_example { display: block; text-decoration: none; transition: transform 180ms ease, box-shadow 180ms ease; }
+.roi_example:hover, .roi_example:focus-visible { transform: translateY(-3px); box-shadow: 0 26px 65px rgba(7,20,36,.24); }
+.roi_example:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+.roi_breakdown { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.25rem; }
+.roi_breakdown p { margin: 0; font-size: 0.8rem; }
+.roi_breakdown b { display: block; margin-bottom: 0.25rem; color: #fff; font-size: 1.15rem; }
+.roi_action { margin-top: 1.25rem; color: #fff !important; letter-spacing: 0 !important; text-transform: none !important; }
+
+@media (max-width: 600px) {
+  .roi_breakdown { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .roi_example { transition: none; }
+}
+
 /* ============================================================
-   INDEX.CSS — Homepage-specific styles
-   Shared base styles (reset, :root vars, element defaults)
-   live in styles.css; this file contains only page-specific rules.
+   HOW IT WORKS — numbered timeline
+   Six steps on one spine, split by availability: a solid line for
+   what ships today, dashed for what is still being built. Replaces
+   the six-card overview grid, which shrank every screenshot to a
+   third of the row and lost the sense of one connected workflow.
 ============================================================ */
-
-body { -moz-osx-font-smoothing: grayscale; }
-
-img::selection { background: transparent; }
-section, header, footer { position: relative; }
-
-.scroll-locked { overflow: hidden; touch-action: none; position: fixed; width: 100%; height: 100vh; }
-
-/* ============================================================
-   PAGE WRAPPER
-============================================================ */
-.page_wrap { position: relative; }
-.page_main { width: 100%; }
-
-/* ============================================================
-   HERO SECTION
-============================================================ */
-.hero_wrap {
-  min-height: 100vh;
-  min-height: 100svh;
-  padding: 10rem 2rem 7rem;
+.timeline_wrap { position: relative; padding: 7rem 0 7.5rem; background: #f5f7f9; overflow: hidden; }
+.timeline_wrap::before { /* faint grid, echoes the hero */
+  content: "";
+  position: absolute;
+  inset: 0;
   background:
-    linear-gradient(rgba(7,20,36,0.78), rgba(7,20,36,0.84)),
-    radial-gradient(circle at 50% 20%, rgba(79,113,134,0.18), transparent 42%),
-    url("praetor_sunset.JPEG") center center / cover no-repeat;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.hero_wrap::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px);
-  background-size: 64px 64px;
+    linear-gradient(90deg, rgba(7,20,36,0.035) 1px, transparent 1px),
+    linear-gradient(rgba(7,20,36,0.028) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(120% 70% at 50% 0%, black, transparent);
   pointer-events: none;
 }
-.hero_content {
-  position: relative;
-  z-index: 1;
-  max-width: 1050px;
-  margin: 0 auto;
-  text-align: center;
-}
-.hero_eyebrow {
-  margin-bottom: 1.25rem;
-  color: var(--blue-faint);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-.hero_title {
-  max-width: 1000px;
-  margin: 0 auto;
-  color: #FFFFFF;
-  font-size: clamp(2.75rem, 6vw, 5.25rem);
-  font-weight: 800;
-  line-height: 1.04;
-  letter-spacing: 0;
-}
-.hero_subtitle {
-  max-width: 720px;
-  margin: 1.75rem auto 0;
-  color: rgba(255,255,255,0.72);
-  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
-  font-weight: 400;
-  line-height: 1.6;
-}
-.hero_notice {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin-top: 1.5rem;
-  padding: 0.55rem 1.15rem;
-  border-radius: 100px;
-  background: rgba(79,113,134,0.18);
-  border: 1px solid rgba(183,202,214,0.35);
-  color: #DDE5EA;
-  font-size: 0.9375rem;
-  font-weight: 600;
-}
-.hero_notice-pulse {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #4ADE80;
-  flex-shrink: 0;
-  animation: hero-notice-pulse 2s infinite;
-}
-@keyframes hero-notice-pulse {
-  0%   { box-shadow: 0 0 0 0 rgba(74,222,128,0.55); }
-  70%  { box-shadow: 0 0 0 9px rgba(74,222,128,0); }
-  100% { box-shadow: 0 0 0 0 rgba(74,222,128,0); }
-}
-.hero_actions {
+.timeline_wrap > .home_container { position: relative; z-index: 1; }
+
+/* --muted (#657586) is 4.4:1 on #f5f7f9, just under AA for body copy.
+   Two steps darker clears 4.5:1 and still reads as the same grey. */
+.timeline_wrap .section_intro > p, .timeline_copy > p { color: #5c6a7a; }
+
+.timeline_divider {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
   gap: 1rem;
-  margin-top: 2.25rem;
-}
-.hero_button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 155px;
-  padding: 0.85rem 1.6rem;
-  border: 1.5px solid transparent;
-  border-radius: 8px;
-  font-size: 0.9375rem;
-  font-weight: 700;
-  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
-}
-.hero_button:hover { transform: translateY(-2px); }
-.hero_button-primary {
-  background: var(--blue);
-  color: #FFFFFF;
-}
-.hero_button-primary:hover { background: var(--blue-dark); }
-.hero_button-secondary {
-  border-color: rgba(183,202,214,0.55);
-  color: var(--blue-faint);
-  background: rgba(255,255,255,0.02);
-}
-.hero_button-secondary:hover {
-  border-color: var(--blue-faint);
-  color: #FFFFFF;
-  background: rgba(79,113,134,0.15);
-}
-
-/* ============================================================
-   PAIN POINTS
-============================================================ */
-.pain_points_wrap {
-  padding: 6rem 2rem;
-  background: #FFFFFF;
-}
-.pain_points_container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.pain_points_heading {
-  max-width: 760px;
-  margin-bottom: 3rem;
-}
-.pain_points_grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  grid-template-rows: auto auto;
-  column-gap: 1.25rem;
-}
-.pain_point_card {
-  min-width: 0;
-  min-height: 390px;
-  display: grid;
-  grid-template-rows: subgrid;
-  grid-row: span 2;
-  background: #F6F8FA;
-  border: 1px solid var(--card-border);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(7,20,36,0.06);
-}
-.pain_point_problem {
-  padding: 1.75rem;
-}
-.pain_point_problem::before {
-  content: '';
-  display: block;
-  width: 42px;
-  height: 3px;
-  margin-bottom: 1.25rem;
-  border-radius: 2px;
-  background: var(--accent);
-}
-.pain_point_problem h3 {
-  margin-bottom: 0.75rem;
-  color: var(--navy);
-  font-size: 1.25rem;
-  font-weight: 700;
-  line-height: 1.3;
-}
-.pain_point_problem p,
-.pain_point_solution p {
-  color: var(--muted);
-  font-size: 0.925rem;
-  line-height: 1.7;
-}
-.pain_point_solution {
-  padding: 1.5rem 1.75rem 1.75rem;
-  background: #FFFFFF;
-  border-top: 1px solid var(--card-border);
-}
-.pain_point_solution_label {
-  margin-bottom: 0.65rem;
+  margin: 4rem 0 2.5rem;
   color: var(--blue);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-@media (max-width: 1000px) {
-  .pain_points_grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: auto;
-    gap: 1.25rem;
-  }
-  .pain_point_card {
-    display: flex;
-    flex-direction: column;
-    grid-row: auto;
-  }
-  .pain_point_problem { flex: 1; }
-}
-@media (max-width: 620px) {
-  .pain_points_wrap { padding: 4rem 1.25rem; }
-  .pain_points_grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    gap: 1.25rem;
-  }
-  .pain_point_card {
-    display: flex;
-    flex-direction: column;
-    grid-row: auto;
-    min-height: 0;
-  }
-  .pain_point_problem { flex: 1; }
-}
-.outlined_button {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.7rem 1.5rem;
-  border: 1.5px solid rgba(255,255,255,0.3);
-  border-radius: 8px;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: #FFFFFF;
-  background: transparent;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  text-decoration: none;
-}
-.outlined_button:hover { border-color: var(--blue-faint); background: rgba(79,113,134,0.12); }
-.outlined_button.light-blue { border-color: rgba(183,202,214,0.4); color: var(--blue-faint); }
-.outlined_button.light-blue:hover { background: rgba(79,113,134,0.15); border-color: var(--blue-faint); }
-
-/* ============================================================
-   PRODUCT SECTION
-============================================================ */
-.product_wrap {
-  position: relative;
-  background: #EEF3F6;
-  padding: 6rem 0 4rem;
-  overflow: hidden;
-}
-
-.product_container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  position: relative;
-  z-index: 1;
-}
-.section-headline { margin-bottom: 3rem; }
-.section-title {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--blue);
-  margin-bottom: 0.75rem;
-}
-.section_heading {
-  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-size: 0.7rem;
   font-weight: 800;
-  color: var(--navy);
-  line-height: 1.1;
-  letter-spacing: 0;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
 }
+.timeline_divider::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(7,20,36,0.18), transparent); }
+.timeline_divider:first-of-type { margin-top: 3.5rem; }
 
-.animation_container {
+.timeline_list { list-style: none; margin: 0; padding: 0; }
+.timeline_step {
+  position: relative;
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 1.5rem;
-}
-.accordion_item { grid-column: span 2; }
-.accordion_item:nth-child(4) { grid-column: 2 / span 2; }
-@media (max-width: 900px) {
-  .animation_container { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .accordion_item,
-  .accordion_item:nth-child(4) { grid-column: auto; }
-}
-@media (max-width: 620px) {
-  .animation_container { grid-template-columns: 1fr; }
-}
-
-.accordion_container,
-.accordion_wrapper { display: contents; }
-
-.accordion_item {
-  min-width: 0;
-  background: #FFFFFF;
-  border: 1px solid var(--card-border);
-  border-radius: 16px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 8px 30px rgba(7,20,36,0.06);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-}
-.accordion_item:hover {
-  transform: translateY(-4px);
-  border-color: rgba(79,113,134,0.25);
-  box-shadow: 0 16px 40px rgba(7,20,36,0.12);
-}
-.tab_title {
-  font-size: 1.125rem;
-  font-weight: 700;
-  line-height: 1.35;
-  color: var(--navy);
-  padding: 1.5rem 1.5rem 0.75rem;
-}
-
-.accordion_content {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-}
-.tab_description {
-  flex: 1;
-  font-size: 0.9375rem;
-  line-height: 1.7;
-  color: var(--muted);
-  padding: 0 1.5rem 1.25rem;
-}
-.tab-learn-more {
-  display: inline-flex;
   align-items: center;
-  gap: 0.375rem;
-  margin: 0 1.5rem 1.5rem;
-  padding: 0.45rem 1rem;
-  border: 1.5px solid var(--accent);
-  border-radius: 6px;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--accent);
-  text-decoration: none;
-  letter-spacing: 0.02em;
-  transition: background 0.18s, color 0.18s;
-  align-self: flex-start;
+  padding: 0 0 3rem 3.25rem;
 }
-.tab-learn-more:hover { background: var(--accent); color: #071424; }
+.timeline_list-next .timeline_step:last-child { padding-bottom: 0; }
+.timeline_step::before { /* spine */
+  content: "";
+  position: absolute;
+  left: 19px;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  border-left: 2px solid rgba(7,20,36,0.15);
+}
+.timeline_step-next::before { border-left-style: dashed; }
+.timeline_list-live .timeline_step:first-child::before { top: 22px; }
+.timeline_list-next .timeline_step:last-child::before { bottom: auto; height: 22px; }
 
-.animation_video_container { display: none; }
-.tab-visual {
-  position: relative;
-  height: 220px;
-  opacity: 1;
-  background: var(--navy);
+.timeline_node {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 40px; height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
-  order: -1;
-}
-.tab-visual svg { width: 100%; height: 100%; max-height: 200px; }
-
-/* ============================================================
-   AUTONOMOUS SECTION
-============================================================ */
-.autonomous_wrap {
-  background: var(--navy);
-  padding: 7rem 0;
-  position: relative;
-  overflow: hidden;
-}
-.autonomous_wrap::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-image:
-    linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
-  pointer-events: none;
-}
-.autonomous_container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5rem;
-  align-items: center;
-}
-@media (max-width: 900px) {
-  .autonomous_container { grid-template-columns: 1fr; gap: 3rem; }
-}
-.title_and_graphic { display: flex; flex-direction: column; gap: 2.5rem; }
-.autonomous_title { position: relative; }
-.autonomous_title::before {
-  content: '';
-  position: absolute;
-  left: -2rem; top: 0; bottom: 0;
-  width: 3px;
-  background: linear-gradient(180deg, var(--blue) 0%, var(--accent) 100%);
-  border-radius: 2px;
-}
-.dark_section_heading {
-  font-size: clamp(2rem, 4vw, 3.25rem);
+  border: 3px solid #f5f7f9; /* punches a gap in the spine */
+  border-radius: 50%;
+  background: var(--blue);
+  color: #fff;
+  font-size: 0.82rem;
   font-weight: 800;
-  color: #FFFFFF;
-  line-height: 1.1;
-  letter-spacing: 0;
+  box-shadow: 0 0 0 1px rgba(7,20,36,0.14);
 }
-.text-span { display: block; }
+.timeline_step-next .timeline_node { background: #fff; color: var(--blue); }
 
-.autonomous_content { display: flex; flex-direction: column; gap: 2rem; }
-.autonomous_description { display: flex; flex-direction: column; gap: 1.5rem; }
-.autonomous_paragraph {
-  font-size: 1.125rem;
-  line-height: 1.75;
-  color: rgba(255, 255, 255, 0.85);
-  font-weight: 400;
+.timeline_product { margin-bottom: 0.6rem; color: var(--blue); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; }
+.timeline_copy h3 { color: var(--navy); font-size: clamp(1.55rem, 2.5vw, 2.1rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; }
+.timeline_copy > p { max-width: 46ch; margin-top: 0.9rem; line-height: 1.75; }
+.timeline_foot { display: flex; align-items: center; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
+.timeline_foot a { color: var(--blue); font-size: 0.92rem; font-weight: 700; }
+.timeline_foot a:hover { color: var(--navy); }
+.timeline_media { margin: 0; min-width: 0; }
+
+/* Two columns from tablet up. The track reversal and the order swap both
+   have to stay inside the query: :nth-child is (0,2,0) and would otherwise
+   beat the single-column rule and leave alternating rows at half width. */
+@media (min-width: 901px) {
+  .timeline_step { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 3.5rem; padding: 0 0 4rem 4.5rem; }
+  .timeline_step:nth-child(even) { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); }
+  .timeline_step:nth-child(even) .timeline_copy { order: 2; }
+  .timeline_step:nth-child(even) .timeline_media { order: 1; }
 }
 
-/* ============================================================
-   ROI / CAREERS SECTION
-============================================================ */
-.carrers_wrap {
-  background: #F6F8FA;
-  padding: 7rem 0;
-}
-.careers-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-.section-headline.light .section-title { color: var(--blue); }
-.section-headline.light .section_heading { color: var(--navy); }
+/* "Tap to enlarge" cue - phone only, where even a full-width screenshot is
+   too small to read detail in. Declared before the media query that turns
+   it on, or the later rule at equal specificity keeps it hidden. */
+.timeline_hint { display: none; align-items: center; gap: 0.4rem; padding: 0.7rem 1.25rem 0; color: var(--blue); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; }
+.timeline_hint svg { width: 14px; height: 14px; flex: 0 0 auto; }
 
-.mission_content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
-  margin-top: 3rem;
+/* The spine indents each step by 3.25rem, which left the screenshots at
+   281px of a 375px screen. Cancel the indent so they take the full width. */
+@media (max-width: 900px) {
+  .timeline_wrap { padding: 5rem 0; }
+  .timeline_step::before { left: 15px; }
+  .timeline_node { width: 32px; height: 32px; font-size: 0.72rem; }
+  .timeline_media { margin-left: -3.25rem; }
 }
-@media (max-width: 900px) { .mission_content { grid-template-columns: 1fr; gap: 2.5rem; } }
 
-.mission-graphic {
+/* Below 700px .home_container is exactly `100% - 2.5rem`, so a known
+   1.25rem gutter sits either side: cancel that too and the screenshots run
+   edge to edge. Nothing is cropped at any width - each slot carries its
+   source's own ratio, so the frame changes shape per step rather than the
+   image losing its edges. */
+@media (max-width: 700px) {
+  .timeline_media { margin-inline: -4.5rem -1.25rem; }
+  .timeline_media .screen_frame { border-radius: 0; border-left: 0; border-right: 0; }
+  .timeline_hint { display: flex; }
+}
+
+/* ── Screenshot frame ── */
+.screen_frame { position: relative; overflow: hidden; border: 1px solid rgba(7,20,36,0.12); border-radius: 14px; background: var(--navy); box-shadow: 0 22px 60px rgba(7,20,36,0.14); }
+.screen_frame_bar { height: 38px; display: flex; align-items: center; gap: 7px; padding: 0 16px; background: #10283c; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.screen_frame_bar i { width: 8px; height: 8px; flex: 0 0 auto; border-radius: 50%; background: #4f7186; }
+.screen_frame_bar strong { margin-left: 8px; color: #b7cad6; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* Neutralise the stages.css placeholder styling inside a frame. Each slot
+   sets --screen-ratio to its source's native ratio, so nothing ever crops. */
+.screen_frame .stage-media-slot {
   position: relative;
-  height: 360px;
-  border-radius: 20px;
-  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.mission-graphic::before {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 45%;
-  background: rgba(79,113,134,0.15);
-  border-top: 1px solid rgba(79,113,134,0.3);
-}
-.mission-graphic-text {
-  position: relative;
-  text-align: center;
-  z-index: 2;
-}
-.mission-graphic-icon {
-  font-size: 4rem;
   display: block;
-  margin-bottom: 1rem;
-  color: rgba(255,255,255,0.15);
+  width: 100%;
+  aspect-ratio: var(--screen-ratio, 16 / 9);
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: #071424;
+  cursor: zoom-in;
 }
-.mission-graphic-label {
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--blue-faint);
-}
-.mission-graphic-number {
-  font-size: 3.5rem;
-  font-weight: 800;
-  color: #FFFFFF;
-  line-height: 1;
-}
-.mission-graphic-sublabel {
-  font-size: 0.875rem;
-  color: rgba(255,255,255,0.5);
-  margin-top: 0.25rem;
-}
-.mission-graphic-dots {
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
-  background-size: 24px 24px;
+.screen_frame .stage-media-slot img,
+.screen_frame .stage-media-slot video { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 0; object-fit: cover; }
+.screen_frame .stage-media-slot:focus-visible { outline: 3px solid var(--blue-faint); outline-offset: -3px; }
+/* Belt and braces: if an asset is ever swapped for one with a different
+   ratio, it letterboxes against the slot background rather than losing its
+   edges on the screen with the least room to spare. */
+@media (max-width: 700px) {
+  .screen_frame .stage-media-slot img,
+  .screen_frame .stage-media-slot video { object-fit: contain; }
 }
 
-.mission-description-2 { display: flex; flex-direction: column; gap: 1.5rem; }
-.mission_home_paragraph {
-  font-size: 1rem;
-  line-height: 1.8;
-  color: var(--muted);
-}
-.outlined_button-4 {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.75rem 1.5rem;
-  border: 1.5px solid var(--navy);
-  border-radius: 8px;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: var(--navy);
-  background: transparent;
-  transition: all 0.25s ease;
-  text-decoration: none;
-  align-self: flex-start;
-}
-.outlined_button-4:hover { background: var(--navy); color: #fff; }
+/* ── Availability pill ── */
+.status_pill { display: inline-flex; align-items: center; gap: 0.4rem; width: max-content; padding: 0.3rem 0.65rem; border-radius: 999px; font-size: 0.65rem; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; }
+.status_pill::before { content: ""; width: 0.4rem; height: 0.4rem; border-radius: 50%; background: currentColor; }
+/* On #f5f7f9 the neutral fill is nearly the section colour, so the light
+   pills carry a hairline to read as pills rather than as tinted text. */
+.status_pill-live { background: #e6efe9; color: #2f7a52; box-shadow: inset 0 0 0 1px rgba(7,20,36,0.09); }
+.status_pill-next { background: #fff; color: var(--blue); box-shadow: inset 0 0 0 1px rgba(7,20,36,0.09); }
+.status_pill-next-dark { background: rgba(183,202,214,0.12); color: var(--blue-faint); }
 
 /* ============================================================
-   FOOTER
+   OUTCOMES — restated after the walkthrough, before the ROI block
+   Reads promise (hero) > mechanism (timeline) > outcomes > money
+   (ROI) > ask (CTA). Navy so it breaks up what would otherwise be
+   one long light stretch from the timeline through the calculator.
 ============================================================ */
-.footer {
-  background: var(--navy);
-  padding: 3rem 2rem 2rem;
-}
-.footer_container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-}
-@media (max-width: 600px) { .footer_container { flex-direction: column; align-items: flex-start; } }
-.footer_left { display: flex; flex-direction: column; gap: 0.5rem; }
-.site_name {
-  font-size: 1.1rem;
-  font-weight: 800;
-  color: #FFFFFF;
-  letter-spacing: 0.05em;
-  text-decoration: none;
-}
-.copyright { font-size: 0.8125rem; color: rgba(255,255,255,0.4); }
-.footer_nav { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-.footer_link { font-size: 0.875rem; font-weight: 500; color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; }
-.footer_link:hover { color: #FFFFFF; }
+.outcomes_wrap { padding: 6rem 0 7rem; background: var(--navy-mid); color: #fff; }
+.outcomes_grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin: 3rem 0 0; }
+.outcome_card { padding: 2rem; border: 1px solid rgba(183,202,214,0.18); border-radius: 14px; background: rgba(255,255,255,0.03); box-shadow: none; }
+/* :first-child so this only styles the step number, not the pill span. */
+.outcome_card > span:first-child { display: block; color: var(--blue-faint); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.15em; }
+.outcome_card h3 { margin: 0.75rem 0; color: #fff; font-size: 1.3rem; }
+.outcome_card p { color: rgba(255,255,255,0.68); line-height: 1.7; }
+.outcome_card .status_pill { margin-bottom: 0.85rem; }
 
-/* ============================================================
-   RESPONSIVE UTILITIES
-============================================================ */
-@media (max-width: 768px) {
-  .hero_wrap {
-    min-height: 100vh;
-    min-height: 100svh;
-    padding: 8rem 1.25rem 5rem;
-    background-position: center center;
-  }
-  .hero_title { font-size: clamp(2.4rem, 11vw, 3.75rem); }
-  .hero_actions { align-items: stretch; flex-direction: column; }
-  .hero_button { width: 100%; }
-  .product_wrap { padding: 4rem 0 3rem; }
-  .autonomous_wrap { padding: 5rem 0; }
-  .autonomous_title::before { display: none; }
-  .carrers_wrap { padding: 5rem 0; }
-  .footer_nav { gap: 1rem; }
+@media (max-width: 700px) {
+  .outcomes_wrap { padding: 4.5rem 0 5rem; }
+  .outcomes_grid { grid-template-columns: 1fr; }
+  .outcome_card { padding: 1.5rem; }
 }

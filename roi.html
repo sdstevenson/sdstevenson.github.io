@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>ROI Calculator – Starlight Hangars</title>
-  <meta name="description" content="Calculate projected annual savings with Starlight Hangars at your hangar — labor, revenue, and efficiency all in one place."/>
+  <title>Hangar Space &amp; Labor ROI Calculator | Starlight Hangars</title>
+  <meta name="description" content="Estimate potential annual revenue and labor savings using your hangar’s assumptions."/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <link rel="icon" href="./favicon/favicon.svg" type="image/svg+xml"/>
   <link rel="apple-touch-icon" href="./favicon/apple-touch-icon.png"/>
@@ -31,7 +31,7 @@
       margin-bottom: 2rem;
       display: flex; flex-direction: column; gap: 1.25rem;
     }
-    .roi-result-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 1.5rem; align-items: start; }
+    .roi-result-top { display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.5rem; align-items: start; }
     .roi-result-item { display: flex; flex-direction: column; gap: 0.2rem; }
     .roi-result-label { font-size: 0.875rem; font-weight: 600; color: rgba(255,255,255,0.7); letter-spacing: 0.04em; text-transform: uppercase; }
     .roi-result-value { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; color: #fff; line-height: 1; }
@@ -43,6 +43,10 @@
     }
     .roi-result-item--minor .roi-result-sub { color: rgba(255,255,255,0.45); }
     .roi-result-sub { font-size: 0.8125rem; color: rgba(255,255,255,0.55); margin-top: 0.25rem; }
+    .roi-development-label {
+      display: inline-block; padding: 0.15rem 0.4rem; border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 999px; font-size: 0.625rem; color: rgba(255,255,255,0.7); vertical-align: middle;
+    }
     .roi-breakdown-list {
       display: grid; grid-template-columns: 1fr; gap: 0.65rem;
       border-top: 1px solid rgba(255,255,255,0.15); padding-top: 1rem;
@@ -113,6 +117,20 @@
     .how-calc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
     @media (max-width: 900px) { .how-calc-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 560px) { .how-calc-grid { grid-template-columns: 1fr; } }
+    .roi-inputs { min-width: 0; }
+    .roi-result-top { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .roi-result-top > .roi-result-item:first-child { grid-column: 1 / -1; }
+    .roi-row { grid-template-columns: 88px minmax(0, 1fr); }
+    @media (min-width: 1000px) {
+      .roi-card { max-width: 1200px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2rem; align-items: start; }
+      .roi-result { margin-bottom: 0; }
+      .roi-inputs > .roi-divider:last-child { display: none; }
+      .roi-form-wrap { grid-column: 1 / -1; margin-top: 0; padding-top: 1.5rem; border-top: 1px solid var(--card-border); }
+    }
+    @media (max-width: 600px) {
+      .roi-result { padding: 1.5rem; }
+      .roi-result-top { grid-template-columns: 1fr; }
+    }
   </style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DGHZZ8BDEZ"></script>
@@ -137,7 +155,7 @@
       </svg>
     </div>
     <h1>ROI Calculator</h1>
-    <p>Estimate your projected annual savings with Starlight Hangars — based on your labor costs and revenue opportunity.</p>
+    <p>Estimate potential annual revenue and labor savings using your hangar’s assumptions.</p>
   </section>
 
   <!-- CALCULATOR -->
@@ -148,53 +166,55 @@
       <div class="roi-result">
         <div class="roi-result-top">
           <div class="roi-result-item">
-            <div class="roi-result-label">Estimated Annual Benefit</div>
+            <div class="roi-result-label">Illustrative Annual Benefit</div>
             <div class="roi-result-value" id="roi-value">$0</div>
-            <div class="roi-result-sub">Sum of category savings</div>
+            <div class="roi-result-sub">Before system costs</div>
           </div>
           <div class="roi-result-item roi-result-item--minor">
-            <div class="roi-result-label">Labor Savings</div>
+            <div class="roi-result-label">Estimated Labor Savings</div>
             <div class="roi-result-value" id="laborSaving">$0</div>
             <div class="roi-result-sub">Annual labor savings</div>
           </div>
           <div class="roi-result-item roi-result-item--minor">
-            <div class="roi-result-label">Revenue Gain</div>
+            <div class="roi-result-label">Potential Revenue Gain</div>
             <div class="roi-result-value" id="revenueGain">$0</div>
             <div class="roi-result-sub">Annual revenue gain</div>
           </div>
         </div>
         <div class="roi-breakdown-list">
           <div class="roi-breakdown-item">
-            <span class="roi-breakdown-label">Digital Twin Planning Savings</span>
+            <span class="roi-breakdown-label">Auto-Stack</span>
             <div class="roi-breakdown-line">
               <span class="roi-breakdown-val" id="digitalTwinSaving">$0</span>
-              <span class="roi-breakdown-formula" id="digitalTwinFormula">Revenue + (0.5/12 allocation x annual labor baseline)</span>
+              <span class="roi-breakdown-formula" id="digitalTwinFormula">Revenue + 5% of annual stacking labor</span>
             </div>
           </div>
           <div class="roi-breakdown-item">
-            <span class="roi-breakdown-label">Collision Prevention Planning</span>
-            <div class="roi-breakdown-line">
-              <span class="roi-breakdown-val" id="collisionPlanningSaving">$0</span>
-              <span class="roi-breakdown-formula" id="collisionPlanningFormula">(4/12 allocation x annual labor baseline)</span>
-            </div>
-          </div>
-          <div class="roi-breakdown-item">
-            <span class="roi-breakdown-label">Tow-Path Planning</span>
+            <span class="roi-breakdown-label">Tow Paths</span>
             <div class="roi-breakdown-line">
               <span class="roi-breakdown-val" id="towPathSaving">$0</span>
-              <span class="roi-breakdown-formula" id="towPathFormula">(2/12 allocation x annual labor baseline)</span>
+              <span class="roi-breakdown-formula" id="towPathFormula">20% of annual stacking labor</span>
             </div>
           </div>
           <div class="roi-breakdown-item">
-            <span class="roi-breakdown-label">Autonomous Tugs</span>
+            <span class="roi-breakdown-label">Hangar Rash Prevention <span class="roi-development-label">In development</span></span>
+            <div class="roi-breakdown-line">
+              <span class="roi-breakdown-val" id="collisionPlanningSaving">$0</span>
+              <span class="roi-breakdown-formula" id="collisionPlanningFormula">30% of annual stacking labor</span>
+            </div>
+          </div>
+          <div class="roi-breakdown-item">
+            <span class="roi-breakdown-label">Tug Automation <span class="roi-development-label">In development</span></span>
             <div class="roi-breakdown-line">
               <span class="roi-breakdown-val" id="autonomousTugsSaving">$0</span>
-              <span class="roi-breakdown-formula" id="autonomousTugsFormula">(5.5/12 allocation x annual labor baseline)</span>
+              <span class="roi-breakdown-formula" id="autonomousTugsFormula">45% of annual stacking labor</span>
             </div>
           </div>
         </div>
+        <div class="roi-result-sub">The full-system scenario allocates 100% of entered stacking labor across the four categories. This is an illustrative assumption, not validated savings. Potential revenue is counted once.</div>
       </div>
 
+      <div class="roi-inputs">
       <!-- Revenue inputs -->
       <p class="roi-group-label">Hangar Revenue</p>
 
@@ -229,7 +249,7 @@
 
       <div class="roi-row">
         <span class="roi-row-label">Wage per hour ($)</span>
-        <input type="number" id="wageInput" class="roi-numbox" min="0" max="75" step="1" value="35">
+        <input type="number" id="wageInput" class="roi-numbox" min="10" max="75" step="1" value="35">
         <input type="range" id="wagePerHour" min="10" max="75" step="1" value="35">
       </div>
 
@@ -240,6 +260,8 @@
       </div>
 
       <hr class="roi-divider">
+
+      </div>
 
       <!-- Email form -->
       <div class="roi-form-wrap">
@@ -272,8 +294,8 @@
               <polyline points="16 7 22 7 22 13"/>
             </svg>
           </div>
-          <h3>Increased Hangar Capacity</h3>
-          <p>Our auto-stacking algorithm is designed to optimally position aircraft to maximize utilization. The revenue estimate uses your hangar size, utilization boost, and monthly tenant rate to project additional annual income.</p>
+          <h3>Potential Annual Revenue</h3>
+          <p>Revenue = hangar area × utilization boost % × monthly tenant rate × 12.</p>
         </div>
 
         <div class="feature-card">
@@ -283,8 +305,8 @@
               <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
             </svg>
           </div>
-          <h3>Labor Cost Reduction</h3>
-          <p>Autonomous tugs and guided tow-path planning are designed to reduce the staff hours needed for stacking. The labor estimate multiplies your staff count, hourly wage, and daily stacking hours across 365 days per year.</p>
+          <h3>Estimated Labor Savings</h3>
+          <p>The annual stacking labor baseline = crew count × hourly wage × stacking hours per day × 365. It is allocated by fixed shares: Auto-Stack 5%, Tow Paths 20%, Hangar Rash Prevention 30%, and Tug Automation 45%.</p>
         </div>
 
         <div class="feature-card">
@@ -294,8 +316,8 @@
               <polyline points="12 6 12 12 16 14"/>
             </svg>
           </div>
-          <h3>Conservative by Design</h3>
-          <p>These figures don't account for incident cost avoidance, insurance benefits from the audit trail, or staff redeployment to higher-value tasks. Real-world impact is typically higher.</p>
+          <h3>What the Estimate Excludes</h3>
+          <p>System costs, incident cost avoidance, potential insurance savings, and value of staff reassignment are excluded. Actual results depend on your operation.</p>
         </div>
 
       </div>
@@ -305,7 +327,7 @@
   <!-- CTA -->
   <div class="cta-strip">
     <h2>Ready to see Starlight Hangars in action?</h2>
-    <p>Reach out to join the early access list or see a preview of the demo.</p>
+    <p>Schedule a demo to review your hangar assumptions and see the available planning features.</p>
     <a href="#" data-open-contact class="btn-primary">Schedule a Demo</a>
   </div>
 
@@ -320,10 +342,6 @@
 
     function fmtDollars(n) {
       return '$' + Math.round(n).toLocaleString('en-US');
-    }
-
-    function fmtHours(n) {
-      return Number.isInteger(n) ? n.toString() : n.toFixed(1);
     }
 
     function getVal(id) {
@@ -346,10 +364,6 @@
         wagePerHour: wage,
         hoursPerDay,
       });
-      const digitalTwinHours = 0.5;
-      const collisionPlanningHours = 4;
-      const towPathHours = 2;
-      const autonomousTugsHours = 5.5;
 
       document.getElementById('roi-value').textContent = fmtDollars(results.total);
       document.getElementById('digitalTwinSaving').textContent = fmtDollars(results.planning);
@@ -359,13 +373,13 @@
       document.getElementById('laborSaving').textContent = fmtDollars(results.annualLabor);
       document.getElementById('revenueGain').textContent = fmtDollars(results.annualRevenue);
       document.getElementById('digitalTwinFormula').textContent =
-        `${fmtDollars(results.annualRevenue)} revenue + (${fmtHours(digitalTwinHours)}/12 allocation x ${fmtDollars(results.annualLabor)} annual labor baseline)`;
+        `${fmtDollars(results.annualRevenue)} revenue + 5% of ${fmtDollars(results.annualLabor)} annual stacking labor`;
       document.getElementById('collisionPlanningFormula').textContent =
-        `(${fmtHours(collisionPlanningHours)}/12 allocation x ${fmtDollars(results.annualLabor)} annual labor baseline)`;
+        `30% of ${fmtDollars(results.annualLabor)} annual stacking labor`;
       document.getElementById('towPathFormula').textContent =
-        `(${fmtHours(towPathHours)}/12 allocation x ${fmtDollars(results.annualLabor)} annual labor baseline)`;
+        `20% of ${fmtDollars(results.annualLabor)} annual stacking labor`;
       document.getElementById('autonomousTugsFormula').textContent =
-        `(${fmtHours(autonomousTugsHours)}/12 allocation x ${fmtDollars(results.annualLabor)} annual labor baseline)`;
+        `45% of ${fmtDollars(results.annualLabor)} annual stacking labor`;
     }
 
     // Sync slider ↔ number input pairs
@@ -387,6 +401,7 @@
         if (!isNaN(v)) {
           v = Math.min(parseFloat(slider.max), Math.max(parseFloat(slider.min), v));
           slider.value = v;
+          numbox.value = v;
         }
         update();
       });
@@ -424,7 +439,7 @@
       fd.append('entry.191654158', 'ROI Download Request');
       fd.append(
         'entry.1925679811',
-        `ROI: ${roiValue}, Digital Twin: ${digitalTwinSaving}, Collision: ${collisionPlanningSaving}, Tow-Path: ${towPathSaving}, Autonomous Tugs: ${autonomousTugsSaving}, Labor: ${laborSaving}, Revenue: ${revenueGain}`
+        `Estimated annual benefit: ${roiValue}, Auto-Stack: ${digitalTwinSaving}, Hangar Rash Prevention: ${collisionPlanningSaving}, Tow Paths: ${towPathSaving}, Tug Automation: ${autonomousTugsSaving}, Full-system labor: ${laborSaving}, Potential annual revenue: ${revenueGain}`
       );
       fd.append('entry.878160977',  `${emailEl.value.trim()} | Inputs: ${sqft}sqft, ${boost}% boost, $${tenant}/sqft/mo, ${people} people, $${wage}/hr, ${hours}hrs/day`);
 
