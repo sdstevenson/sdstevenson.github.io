@@ -340,8 +340,8 @@ video { display: block; width: 100%; }
 }
 .faq-answer-inner { padding-bottom: 1.25rem; }
 
-/* ── ALPHA BADGE ── */
-.alpha-badge {
+/* ── AVAILABILITY BADGE ── */
+.availability-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -356,7 +356,7 @@ video { display: block; width: 100%; }
   padding: 0.4rem 0.9rem;
   border-radius: 20px;
 }
-.alpha-badge svg { flex-shrink: 0; }
+.availability-badge svg { flex-shrink: 0; }
 
 /* ── CTA STRIP ── */
 .cta-strip {
