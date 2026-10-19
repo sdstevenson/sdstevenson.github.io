@@ -144,9 +144,11 @@ function initRoiDefaults() {
 }
 
 /* ============================================================
-   SHARED NAV INJECTION
+   SHARED NAVIGATION
 ============================================================ */
 function initSharedNavBehavior(navHeader) {
+  if (!navHeader || navHeader.dataset.navInitialized === 'true') return;
+  navHeader.dataset.navInitialized = 'true';
   const platformItem  = document.getElementById('sttugs-platform-item');
   const dropTrigger   = platformItem && platformItem.querySelector('.snav-dropdown-trigger');
   const hamburger     = document.getElementById('sttugs-nav-hamburger');
@@ -240,6 +242,14 @@ function initSharedNavBehavior(navHeader) {
       document.querySelectorAll('.snav-roi-link').forEach(a => a.classList.add('snav-active'));
     }
 
+    // The Updates index and all article pages share one navigation section.
+    if (document.body.dataset.navSection === 'updates') {
+      document.querySelectorAll('.snav-updates-link').forEach(a => {
+        a.classList.add('snav-active');
+        a.setAttribute('aria-current', filename === 'updates.html' ? 'page' : 'true');
+      });
+    }
+
     // System & Installation page
     if (filename === 'hardware-and-infrastructure.html') {
       document.querySelectorAll('.snav-system-link').forEach(a => a.classList.add('snav-active'));
@@ -254,522 +264,19 @@ function initSharedNavBehavior(navHeader) {
   highlightCurrentPage();
 }
 
-function injectSharedNav() {
-  const header = document.querySelector('header');
-  if (!header) return;
-  // Skip index.html — it manages its own animated nav
-  if (header.classList.contains('home')) return;
-  // Idempotent guard
-  if (document.getElementById('sttugs-nav-header')) return;
-
-  header.id        = 'sttugs-nav-header';
-  header.className = '';
-  header.innerHTML = `
-    <nav class="snav">
-      <div class="snav-inner">
-        <div class="snav-logo">
-          <a href="index.html" class="snav-logo-link" aria-label="Starlight Hangars home">
-            <img class="snav-logo-mark" src="assets/starlight_logo_notext.svg" alt="" aria-hidden="true"/>
-            <span class="snav-logo-text">Starlight Hangars</span>
-          </a>
-        </div>
-        <ul class="snav-links" role="list">
-          <li class="snav-item"><a href="index.html" class="snav-link snav-home-link">Home</a></li>
-          <li class="snav-item snav-item--dropdown" id="sttugs-platform-item">
-            <button class="snav-link snav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
-              How it works
-              <svg class="snav-chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
-            <div class="snav-dropdown">
-              <a href="index.html#how-it-works" class="snav-dropdown-item">Overview</a>
-
-              <div class="snav-dropdown-section-label">Plan</div>
-              <a href="calendar.html" class="snav-dropdown-item">Calendar View</a>
-              <a href="auto-stack.html" class="snav-dropdown-item">Auto-Stack</a>
-
-              <div class="snav-dropdown-section-label">Verify</div>
-              <a href="path-planning.html" class="snav-dropdown-item">Paths</a>
-              <a href="collision-prevention.html" class="snav-dropdown-item">Collision Prevention</a>
-
-              <div class="snav-dropdown-section-label">Execute</div>
-              <a href="tug-integration.html" class="snav-dropdown-item">Tug Integration</a>
-
-              <div class="snav-dropdown-section-label">Record</div>
-              <a href="audit-log.html" class="snav-dropdown-item">Audit Log</a>
-            </div>
-          </li>
-          <li class="snav-item"><a href="hardware-and-infrastructure.html" class="snav-link snav-system-link">System &amp; Installation</a></li>
-          <li class="snav-item"><a href="about.html" class="snav-link snav-about-link">About</a></li>
-          <li class="snav-item"><a href="roi.html" class="snav-link snav-roi-link">ROI Calculator</a></li>
-          <li class="snav-item"><a href="#" data-open-contact class="snav-link snav-cta">Schedule a Demo</a></li>
-        </ul>
-        <button class="snav-hamburger" id="sttugs-nav-hamburger" aria-label="Open menu">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </nav>
-    <div class="snav-mobile-overlay" id="sttugs-nav-overlay"></div>
-    <div class="snav-mobile" id="sttugs-nav-mobile">
-      <button class="snav-mobile-close" id="sttugs-nav-mobile-close" aria-label="Close menu">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-          <path d="M1 1L13 13M13 1L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </button>
-      <ul class="snav-mobile-links">
-        <li><a href="index.html" class="snav-mobile-link snav-home-link">Home</a></li>
-        <li>
-          <div class="snav-mobile-platform-label">How it works</div>
-          <div class="snav-mobile-sub open">
-            <a href="index.html#how-it-works">Overview</a>
-
-            <div class="snav-mobile-section-label">Plan</div>
-            <a href="calendar.html">Calendar View</a>
-            <a href="auto-stack.html">Auto-Stack</a>
-
-            <div class="snav-mobile-section-label">Verify</div>
-            <a href="path-planning.html">Paths</a>
-            <a href="collision-prevention.html">Collision Prevention</a>
-
-            <div class="snav-mobile-section-label">Execute</div>
-            <a href="tug-integration.html">Tug Integration</a>
-
-            <div class="snav-mobile-section-label">Record</div>
-            <a href="audit-log.html">Audit Log</a>
-          </div>
-        </li>
-        <li><a href="hardware-and-infrastructure.html" class="snav-mobile-link snav-system-link">System &amp; Installation</a></li>
-        <li><a href="about.html" class="snav-mobile-link snav-about-link">About</a></li>
-        <li><a href="roi.html" class="snav-mobile-link snav-roi-link">ROI Calculator</a></li>
-      </ul>
-      <a href="#" data-open-contact class="snav-mobile-cta">Schedule a Demo</a>
-    </div>
-  `;
-  initSharedNavBehavior(header);
-}
 
 /* ============================================================
-   SHARED FOOTER + CONTACT MODAL INJECTION
+   SHARED NAV BEHAVIOR + CONTACT MODAL
    -----------------------------------------------------------
-   Called on every page that loads this script.  Finds the
-   <footer> element and populates it, then injects the shared
-   contact modal and the minimal CSS both need (idempotent —
-   safe to call multiple times).
+   The shared nav and footer are generated into each HTML page.
+   This initializes the nav and injects the contact modal when
+   needed (idempotent — safe to call multiple times).
 ============================================================ */
-function injectSharedComponents() {
-  /* ── 1. Shared CSS (inject once) ── */
-  if (!document.getElementById('sttugs-shared-styles')) {
-    const style = document.createElement('style');
-    style.id = 'sttugs-shared-styles';
-    style.textContent = `
-      /* Shared footer */
-      .sttugs-footer {
-        background: #071424;
-        padding: 3rem 0;
-        position: relative;
-      }
-      .sttugs-footer_container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 2rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 2rem;
-        flex-wrap: wrap;
-      }
-      .sttugs-footer_left { display: flex; flex-direction: column; gap: 0.5rem; }
-      .sttugs-footer_brand {
-        display: inline-flex; align-items: center; gap: 0.5rem;
-        text-decoration: none; color: #FFFFFF;
-      }
-      .sttugs-site_name {
-        line-height: 1;
-        font-size: 1.25rem;
-        font-weight: 800;
-        color: #FFFFFF;
-        letter-spacing: 0;
-        text-decoration: none;
-      }
-      .sttugs-copyright { font-size: 0.8125rem; color: rgba(255,255,255,0.4); }
-      .sttugs-footer_nav { display: flex; gap: 1.25rem; flex-wrap: wrap; align-items: center; }
-      .sttugs-footer_link {
-        font-size: 0.875rem;
-        font-weight: 500;
-        color: rgba(255,255,255,0.55);
-        text-decoration: none;
-        transition: color 0.2s;
-      }
-      .sttugs-footer_link:hover { color: #FFFFFF; }
-      @media (max-width: 600px) {
-        .sttugs-footer_container { flex-direction: column; align-items: flex-start; }
-      }
+function initSharedComponents() {
+  const navHeader = document.getElementById('sttugs-nav-header');
+  if (navHeader) initSharedNavBehavior(navHeader);
 
-      /* Shared contact modal */
-      .sttugs-modal-overlay {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(7,20,36,0.7);
-        z-index: 9000;
-        backdrop-filter: blur(4px);
-      }
-      .sttugs-modal-overlay.active { display: block; }
-      .sttugs-modal-wrap {
-        display: none;
-        position: fixed;
-        top: 50%; left: 50%;
-        transform: translate(-50%, -50%);
-        width: min(520px, 92vw);
-        background: #FFFFFF;
-        border-radius: 16px;
-        z-index: 9001;
-        overflow: hidden;
-        box-shadow: 0 24px 80px rgba(7,20,36,0.3);
-      }
-      .sttugs-modal-wrap.active { display: block; }
-      .sttugs-modal-inner { padding: 2.25rem 2.5rem 2.5rem; }
-      .sttugs-modal-title {
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: #071424;
-        margin-bottom: 1.25rem;
-      }
-      .sttugs-modal-divider { height: 1px; background: rgba(7,20,36,0.1); margin: 0 0 1.25rem; }
-      .sttugs-modal-form { display: flex; flex-direction: column; gap: 1.1rem; }
-      .sttugs-field-label {
-        display: block;
-        font-size: 0.8125rem;
-        font-weight: 600;
-        color: #657586;
-        margin-bottom: 0.35rem;
-      }
-      .sttugs-text-field, .sttugs-textarea {
-        width: 100%;
-        padding: 0.7rem 0.9rem;
-        border: 1.5px solid #B8C2CB;
-        border-radius: 8px;
-        font-family: inherit;
-        font-size: 0.9375rem;
-        color: #071424;
-        background: #F6F8FA;
-        transition: border-color 0.2s;
-        box-sizing: border-box;
-      }
-      .sttugs-text-field:focus, .sttugs-textarea:focus {
-        outline: none;
-        border-color: #4F7186;
-        background: #FFFFFF;
-      }
-      .sttugs-textarea { min-height: 110px; resize: vertical; }
-      .sttugs-submit {
-        padding: 0.8rem 1.5rem;
-        background: #4F7186;
-        color: #FFFFFF;
-        border: none;
-        border-radius: 8px;
-        font-size: 0.9375rem;
-        font-weight: 700;
-        cursor: pointer;
-        transition: background 0.2s;
-        align-self: flex-start;
-      }
-      .sttugs-submit:hover { background: #3B5A6D; }
-      .sttugs-modal-success { display: none; padding: 2rem; text-align: center; }
-      .sttugs-modal-success.visible { display: block; }
-      .sttugs-success-big { font-size: 1.5rem; font-weight: 700; color: #071424; margin-bottom: 0.5rem; }
-      .sttugs-success-small { font-size: 0.9375rem; color: #657586; }
-      .sttugs-modal-close {
-        position: absolute;
-        top: 1rem; right: 1rem;
-        width: 32px; height: 32px;
-        border-radius: 50%;
-        background: transparent;
-        border: none;
-        display: flex; align-items: center; justify-content: center;
-        cursor: pointer;
-        color: #657586;
-        transition: background 0.2s, color 0.2s;
-      }
-      .sttugs-modal-close:hover { background: rgba(7,20,36,0.08); color: #071424; }
-
-      /* ═══ STAGE IMAGE LIGHTBOX ═══ */
-      .stage-media-slot { cursor: zoom-in; }
-      .stage-media-slot img, .stage-media-slot video { cursor: zoom-in; }
-      .stage-lightbox {
-        display: none;
-        position: fixed; inset: 0;
-        z-index: 9500;
-        background: rgba(7,20,36,0.92);
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
-        align-items: center; justify-content: center;
-        padding: 2rem;
-      }
-      .stage-lightbox.open { display: flex; }
-      .stage-lightbox img,
-      .stage-lightbox video {
-        max-width: 100%; max-height: 100%;
-        object-fit: contain;
-        border-radius: 10px;
-        box-shadow: 0 24px 80px rgba(0,0,0,0.5);
-      }
-      .stage-lightbox video { display: none; background: #071424; }
-      .stage-lightbox-close {
-        position: absolute; top: 1.25rem; right: 1.5rem;
-        width: 42px; height: 42px; border-radius: 50%;
-        background: rgba(255,255,255,0.12); border: none; cursor: pointer;
-        color: #fff; font-size: 1.6rem; line-height: 1;
-        display: flex; align-items: center; justify-content: center;
-        transition: background 0.2s;
-      }
-      .stage-lightbox-close:hover { background: rgba(255,255,255,0.28); }
-
-      /* ═══ SHARED NAV ═══ */
-      .snav {
-        position: fixed;
-        top: 0; left: 0; right: 0;
-        z-index: 2000;
-        background: var(--navy);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-bottom: 1px solid rgba(255,255,255,0.08);
-        transition: background 0.35s ease, border-color 0.35s ease;
-      }
-      .snav-inner {
-        display: flex; align-items: center; justify-content: space-between;
-        padding: 1.25rem 2.5rem;
-        max-width: 1440px; margin: 0 auto;
-      }
-      .snav-logo-link {
-        display: flex; align-items: center; gap: 0.5rem; text-decoration: none;
-      }
-      .snav-logo-mark, .sttugs-footer-logo {
-        width: 52.8px; height: 52.8px; flex-shrink: 0;
-        filter: invert(1);
-        transform: translateY(6.6px);
-        transition: filter 0.35s ease;
-      }
-      .snav-logo-text {
-        font-size: 1rem; font-weight: 800; letter-spacing: 0.02em; text-transform: uppercase; white-space: nowrap;
-        line-height: 1;
-        color: #fff; transition: color 0.35s ease;
-      }
-      .snav-links {
-        display: flex; align-items: center; gap: 1.1rem;
-        list-style: none; margin: 0; padding: 0;
-      }
-      .snav-item { position: relative; }
-      .snav-link {
-        display: flex; align-items: center; gap: 0.3rem;
-        font-size: 0.9375rem; font-weight: 600;
-        color: rgba(255,255,255,0.75);
-        background: none; border: none; cursor: pointer;
-        padding: 0.4rem 0.75rem; border-radius: 6px;
-        text-decoration: none;
-        transition: color 0.35s ease;
-        font-family: inherit;
-      }
-      .snav-link:hover { color: #fff; }
-      .snav-link.snav-active, .snav-dropdown-trigger.snav-active--parent { color: #fff; }
-      .snav-cta {
-        background: #B8C2CB !important; color: #071424 !important;
-        padding: 0.45rem 1.1rem !important; border-radius: 7px; font-weight: 700;
-      }
-      .snav-cta:hover { background: #7D93A2 !important; color: #fff !important; }
-      .snav-roi-link {
-        border: 1.5px solid rgba(79,113,134,0.5) !important;
-        padding: 0.4rem 1rem !important; border-radius: 7px;
-        color: rgba(183,202,214,0.9) !important;
-      }
-      .snav-roi-link:hover { border-color: #5F8399 !important; color: #fff !important; background: rgba(79,113,134,0.12) !important; }
-      .snav-chevron {
-        width: 12px; height: 12px;
-        transition: transform 0.25s; flex-shrink: 0;
-      }
-      .snav-item--dropdown.open .snav-chevron { transform: rotate(180deg); }
-      .snav-dropdown {
-        position: absolute;
-        top: calc(100% + 0.625rem); left: 50%;
-        transform: translateX(-50%) translateY(-8px);
-        background: #0E2336;
-        border: 1px solid rgba(255,255,255,0.1);
-        border-radius: 12px;
-        padding: 0.5rem;
-        min-width: 270px;
-        box-shadow: 0 16px 48px rgba(0,0,0,0.4);
-        opacity: 0; pointer-events: none;
-        transition: opacity 0.2s, transform 0.2s;
-        z-index: 100;
-      }
-      .snav-item--dropdown.open .snav-dropdown {
-        opacity: 1; pointer-events: auto;
-        transform: translateX(-50%) translateY(0);
-      }
-      .snav-dropdown-item {
-        display: block; padding: 0.6rem 0.9rem;
-        font-size: 0.875rem; font-weight: 500;
-        color: rgba(255,255,255,0.75);
-        text-decoration: none; border-radius: 8px;
-        transition: background 0.15s, color 0.15s;
-      }
-      .snav-dropdown-item:hover { background: rgba(255,255,255,0.08); color: #fff; }
-      .snav-dropdown-item.snav-active { background: rgba(79,113,134,0.2); color: #B7CAD6; font-weight: 600; }
-      .snav-dropdown-section-label {
-        display: block; padding: 0.6rem 0.9rem 0.4rem;
-        font-size: 0.75rem; font-weight: 700;
-        letter-spacing: 0.08em; text-transform: uppercase;
-        color: rgba(255,255,255,0.45);
-        margin-top: 0.5rem;
-      }
-      .snav-dropdown-item--disabled {
-        display: block; padding: 0.6rem 0.9rem;
-        font-size: 0.875rem; font-weight: 500;
-        color: rgba(255,255,255,0.45);
-        cursor: not-allowed; border-radius: 8px;
-      }
-      .snav-hamburger {
-        display: none; flex-direction: column; gap: 5px;
-        width: 40px; height: 40px;
-        align-items: center; justify-content: center;
-        background: none; border: none; cursor: pointer; border-radius: 8px;
-      }
-      .snav-hamburger span {
-        display: block; width: 22px; height: 2px;
-        background: rgba(255,255,255,0.8); border-radius: 2px;
-        transition: background 0.3s;
-      }
-      .snav-mobile-overlay {
-        display: none; position: fixed; inset: 0;
-        background: rgba(0,0,0,0.45); z-index: 2050; backdrop-filter: blur(2px);
-      }
-      .snav-mobile-overlay.open { display: block; }
-      .snav-mobile {
-        position: fixed; top: 0; right: 0; bottom: 0;
-        width: min(320px, 90vw);
-        background: #0E2336; z-index: 2100;
-        padding: 4.5rem 1.5rem 2rem;
-        box-shadow: -8px 0 40px rgba(0,0,0,0.4);
-        overflow-y: auto;
-        transform: translateX(100%);
-        transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
-      }
-      .snav-mobile.open { transform: translateX(0); }
-      .snav-mobile-links {
-        list-style: none; margin: 0; padding: 0;
-        display: flex; flex-direction: column; gap: 0.125rem;
-      }
-      .snav-mobile-link {
-        display: block; padding: 0.85rem 1rem;
-        font-size: 1rem; font-weight: 600;
-        color: rgba(255,255,255,0.8); text-decoration: none;
-        border-radius: 8px; transition: background 0.15s, color 0.15s;
-        background: none; border: none; cursor: pointer;
-        text-align: left; font-family: inherit; width: 100%;
-      }
-      .snav-mobile-link:hover { background: rgba(255,255,255,0.07); color: #fff; }
-      .snav-mobile-sub {
-        max-height: 0; overflow: hidden;
-        transition: max-height 0.32s ease;
-        padding-left: 0.75rem;
-        border-left: 2px solid rgba(79,113,134,0.4);
-        margin: 0.125rem 0 0.375rem 1rem;
-      }
-      .snav-mobile-sub.open { max-height: 500px; }
-      .snav-mobile-sub a {
-        display: block; padding: 0.55rem 0.75rem;
-        font-size: 0.875rem; font-weight: 500;
-        color: rgba(255,255,255,0.6); text-decoration: none;
-        border-radius: 6px; transition: background 0.15s, color 0.15s;
-      }
-      .snav-mobile-sub a:hover { background: rgba(255,255,255,0.07); color: #fff; }
-      .snav-mobile-sub a.snav-active { color: #B7CAD6; font-weight: 600; background: rgba(79,113,134,0.15); }
-      .snav-mobile-section-label {
-        display: block; padding: 0.6rem 0.75rem 0.3rem;
-        font-size: 0.7rem; font-weight: 700;
-        letter-spacing: 0.08em; text-transform: uppercase;
-        color: rgba(255,255,255,0.35);
-        margin-top: 0.4rem;
-      }
-      .snav-mobile-item-disabled {
-        display: block; padding: 0.55rem 0.75rem;
-        font-size: 0.875rem; font-weight: 500;
-        color: rgba(255,255,255,0.35);
-        cursor: not-allowed; border-radius: 6px;
-      }
-      .snav-mobile-link.snav-active { color: #fff; background: rgba(255,255,255,0.07); }
-      .snav-mobile-cta {
-        display: block; margin-top: 1.5rem;
-        padding: 0.85rem 1rem; text-align: center;
-        background: #4F7186; color: #fff;
-        border-radius: 8px; font-weight: 700;
-        text-decoration: none; transition: background 0.2s;
-      }
-      .snav-mobile-cta:hover { background: #3B5A6D; }
-      .snav-mobile-close {
-        position: absolute; top: 1rem; right: 1rem;
-        width: 36px; height: 36px; border-radius: 8px;
-        background: rgba(255,255,255,0.07);
-        border: none; cursor: pointer;
-        display: flex; align-items: center; justify-content: center;
-        color: rgba(255,255,255,0.7);
-        transition: background 0.15s, color 0.15s;
-      }
-      .snav-mobile-close:hover { background: rgba(255,255,255,0.14); color: #fff; }
-      .snav-mobile-platform-label {
-        padding: 0.85rem 1rem 0.4rem;
-        font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.1em;
-        text-transform: uppercase; color: rgba(255,255,255,0.35);
-      }
-      @media (max-width: 768px) {
-        .snav-links { display: none; }
-        .snav-hamburger { display: flex; }
-        .snav-inner { padding: 1rem 1.25rem; }
-      }
-    `;
-    document.head.appendChild(style);
-  }
-
-  /* ── 2. Shared Nav ── */
-  injectSharedNav();
-
-  /* ── 3. Footer HTML ── */
-  const footer = document.querySelector('footer');
-  if (footer) {
-    footer.setAttribute('data-bg-type', 'dark');
-    footer.className = 'sttugs-footer';
-    footer.innerHTML = `
-      <div class="sttugs-footer_container">
-        <div class="sttugs-footer_left">
-          <a href="index.html" class="sttugs-footer_brand">
-            <img class="sttugs-footer-logo" src="assets/starlight_logo_notext.svg" alt="" aria-hidden="true"/>
-            <span class="sttugs-site_name">Starlight Hangars</span>
-          </a>
-          <div class="sttugs-copyright">
-            © Starlight Hangars. Patent Pending.
-          </div>
-        </div>
-        <div class="sttugs-footer_right">
-          <nav class="sttugs-footer_nav">
-            <a href="index.html#how-it-works" class="sttugs-footer_link">How it works</a>
-            <a href="calendar.html" class="sttugs-footer_link">Calendar View</a>
-            <a href="auto-stack.html" class="sttugs-footer_link">Auto-Stack</a>
-            <a href="path-planning.html" class="sttugs-footer_link">Paths</a>
-            <a href="collision-prevention.html" class="sttugs-footer_link">Collision Prevention</a>
-            <a href="tug-integration.html" class="sttugs-footer_link">Tug Integration</a>
-            <a href="audit-log.html" class="sttugs-footer_link">Audit Log</a>
-            <a href="hardware-and-infrastructure.html" class="sttugs-footer_link">System &amp; Installation</a>
-            <a href="roi.html" class="sttugs-footer_link">ROI Calculator</a>
-            <a href="about.html" class="sttugs-footer_link">About</a>
-            <a href="#" data-open-contact class="sttugs-footer_link">Contact</a>
-          </nav>
-        </div>
-      </div>
-    `;
-  }
-
-  /* ── 3. Contact Modal HTML (inject once, only on pages that don't
+  /* ── Contact Modal HTML (inject once, only on pages that don't
             have their own Webflow-style .modal_wrap-contact) ── */
   const hasLegacyModal = !!document.querySelector('.modal_wrap-contact');
   if (!hasLegacyModal && !document.getElementById('sttugs-shared-modal')) {
@@ -807,9 +314,9 @@ function injectSharedComponents() {
     document.body.appendChild(modalWrap);
   }
 
-  /* ── 4. Wire up the shared modal ── */
   initSharedContactModal();
 }
+
 
 function initSharedContactModal() {
   const overlay  = document.getElementById('sttugs-modal-overlay');
@@ -1070,11 +577,11 @@ function initStageVideoManager() {
 
   initRoiDefaults();
 
-  // Inject shared footer + modal as early as possible
+  // Initialize shared components as early as possible
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', injectSharedComponents);
+    document.addEventListener('DOMContentLoaded', initSharedComponents);
   } else {
-    injectSharedComponents();
+    initSharedComponents();
   }
 
   initPlatformTiles();

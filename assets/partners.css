@@ -1,0 +1,87 @@
+/* Integrated into the existing hero; all rules are scoped to this addition. */
+.partner_band {
+  display: grid;
+  grid-template-columns: 0.65fr 1.25fr 1.25fr;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 3rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid rgba(183, 202, 214, 0.35);
+  scroll-margin-top: 8rem;
+}
+
+.partner_band-title {
+  margin: 0;
+  color: var(--blue-faint);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.partner_band-logo {
+  display: block;
+  width: min(100%, 320px);
+}
+
+.partner_band-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.partner_band-copy {
+  padding-left: 1.75rem;
+  border-left: 1px solid rgba(183, 202, 214, 0.35);
+}
+
+.partner_band-copy strong {
+  display: block;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.partner_band-copy p {
+  margin: 0.35rem 0 0;
+  color: var(--blue-faint);
+  font-size: 0.8125rem;
+  line-height: 1.65;
+}
+
+.partner_band-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.65rem;
+  color: #d2e0e9;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.partner_band-link:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.partner_band a:focus-visible {
+  outline: 2px solid var(--blue-faint);
+  outline-offset: 6px;
+}
+
+@media (max-width: 900px) {
+  .partner_band { gap: 1.25rem; }
+  .partner_band-copy { padding-left: 1.25rem; }
+}
+
+@media (max-width: 600px) {
+  .partner_band { grid-template-columns: 1fr; gap: 1.25rem; margin-top: 2rem; padding-top: 1.5rem; }
+  .partner_band-logo { width: min(100%, 280px); }
+  .partner_band-copy { padding-left: 0; border-left: 0; }
+}
+
+@media (pointer: coarse) {
+  .partner_band-link { min-height: 44px; }
+}
