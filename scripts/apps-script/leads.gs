@@ -8,7 +8,9 @@
  * success or error message.
  *
  * Setup (once):
- *   1. Create a Google Sheet (e.g. "Starlight Hangars website leads").
+ *   1. Open the "06 Website Leads" sheet in Google Drive (02 Outreach folder).
+ *      It already has the "Leads" tab and header row. Any other Sheet works too;
+ *      setup() creates the tab and header if they are missing.
  *   2. In the Sheet: Extensions → Apps Script. Replace Code.gs with this file and save.
  *   3. Optional: set NOTIFY_EMAIL below (blank = the Google account that deploys it).
  *   4. Select `setup` in the function menu and click Run. Approve the permissions
@@ -59,7 +61,7 @@ function doPost(e) {
   const lock = LockService.getScriptLock();
   try {
     lock.waitLock(10000);
-    getSheet_().appendRow([new Date()].concat(FIELDS.map(([key]) => sheetSafe_(lead[key]))));
+    getSheet_().appendRow([new Date()].concat(FIELDS.map(([key]) => asText_(lead[key]))));
   } catch (err) {
     console.error(err);
     return json_({ ok: false, error: 'storage_failed' });
@@ -119,9 +121,11 @@ function clean_(value) {
   return String(value == null ? '' : value).trim().slice(0, MAX_FIELD_LENGTH);
 }
 
-// Stop values such as "=HYPERLINK(...)" from running as spreadsheet formulas.
-function sheetSafe_(value) {
-  return /^[=+\-@]/.test(value) ? `'${value}` : value;
+// A leading apostrophe stores the value as plain text: "=HYPERLINK(...)" can't run
+// as a formula, and phone numbers or codes aren't turned into numbers or dates.
+// Sheets hides the apostrophe.
+function asText_(value) {
+  return value ? `'${value}` : value;
 }
 
 function json_(data) {
