@@ -110,7 +110,15 @@
     }
     .roi-submit:hover { background: #3B5A6D; }
     .roi-submit:disabled { background: var(--muted); cursor: not-allowed; }
-    .roi-success { display: none; font-size: 0.9rem; color: #16a34a; font-weight: 600; margin-top: 1rem; }
+    .roi-status { font-size: 0.9rem; margin-top: 1rem; color: var(--muted); }
+    .roi-status:empty { display: none; }
+    .roi-status[data-state="success"] { color: #15803d; font-weight: 600; }
+    .roi-status[data-state="error"] { color: #b42318; }
+    .roi-status a { color: inherit; font-weight: 600; }
+    .roi-visually-hidden {
+      position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+      overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+    }
 
     /* How we calculate */
     .how-calc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
@@ -394,12 +402,17 @@
         <p>Want a detailed breakdown of your ROI calculation?</p>
         <form id="roiDownloadForm" class="roi-form" novalidate>
           <div class="roi-email-wrap">
-            <input type="email" id="roi-email" placeholder="Enter your email" required>
+            <label for="roi-email" class="roi-visually-hidden">Email address</label>
+            <input type="email" id="roi-email" name="email" placeholder="Enter your email" autocomplete="email" maxlength="150" required>
             <div class="roi-email-error" id="roi-email-error">Please enter a valid email address.</div>
+          </div>
+          <div class="sttugs-hp" aria-hidden="true">
+            <label for="roi-website">Website</label>
+            <input type="text" id="roi-website" name="website" tabindex="-1" autocomplete="off">
           </div>
           <button type="submit" class="roi-submit" id="roi-submit-btn">Get Report</button>
         </form>
-        <div class="roi-success" id="roiDownloadSuccess">Thanks! We'll be in touch with your ROI report.</div>
+        <div class="roi-status" id="roiDownloadStatus" role="status" aria-live="polite"></div>
       </div>
 
     </div>
@@ -489,11 +502,9 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="./assets/site.js?v=20261017-3"></script>
+  <script src="./assets/site.js?v=20261027-1"></script>
   <script>
     // ── ROI Calculator ──────────────────────────────────────────────
-    const GFORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSeESQcxH3hDUXmJm-tc7mCYc3_EB9Ef9Iv3A_ha_a9wWfpoYg/formResponse';
-
     function fmtDollars(n) {
       return '$' + Math.round(n).toLocaleString('en-US');
     }
@@ -564,16 +575,44 @@
     update(); // initial render
 
     // ── Form submission ─────────────────────────────────────────────
-    document.getElementById('roiDownloadForm').addEventListener('submit', function(e) {
+    // Sent through the shared lead handler in assets/site.js.
+    const roiPageLoadedAt = Date.now();
+    let roiSending = false;
+
+    document.getElementById('roiDownloadForm').addEventListener('submit', async function(e) {
       e.preventDefault();
+      if (roiSending) return;
       const emailEl   = document.getElementById('roi-email');
       const errorEl   = document.getElementById('roi-email-error');
       const submitBtn = document.getElementById('roi-submit-btn');
-      const successEl = document.getElementById('roiDownloadSuccess');
+      const statusEl  = document.getElementById('roiDownloadStatus');
+      const honeypot  = document.getElementById('roi-website');
+      const leads     = window.STTUGS_LEADS;
 
-      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim());
+      const email = emailEl.value.trim();
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
       errorEl.classList.toggle('visible', !emailOk);
-      if (!emailOk) return;
+      emailEl.setAttribute('aria-invalid', String(!emailOk));
+      if (emailOk) emailEl.removeAttribute('aria-describedby');
+      else emailEl.setAttribute('aria-describedby', 'roi-email-error');
+      if (!emailOk) { emailEl.focus(); return; }
+
+      function showStatus(state, message) {
+        statusEl.dataset.state = state;
+        statusEl.textContent = message;
+      }
+      function succeed() {
+        showStatus('success', "Thanks! We'll be in touch with your ROI report.");
+        submitBtn.disabled = true;
+      }
+
+      // Hidden honeypot: only bots fill it. Pretend success and send nothing.
+      if (honeypot.value) { succeed(); return; }
+      const elapsed = Date.now() - roiPageLoadedAt;
+      if (elapsed < leads.config.minFillMs) {
+        showStatus('error', 'That was quick! Please check your email address, then try again.');
+        return;
+      }
 
       const roiValue    = document.getElementById('roi-value').textContent;
       const digitalTwinSaving = document.getElementById('digitalTwinSaving').textContent;
@@ -589,19 +628,32 @@
       const wage   = getVal('wagePerHour');
       const hours  = getVal('timePerStack');
 
-      const fd = new FormData();
-      fd.append('entry.191654158', 'ROI Download Request');
-      fd.append(
-        'entry.1925679811',
-        `Potential annual benefit: ${roiValue}, Auto-Stack: ${digitalTwinSaving}, Hangar Rash Prevention: ${collisionPlanningSaving}, Tow Paths: ${towPathSaving}, Tug Automation: ${autonomousTugsSaving}, Full-system labor: ${laborSaving}, Potential annual revenue: ${revenueGain}`
-      );
-      fd.append('entry.878160977',  `${emailEl.value.trim()} | Inputs: ${sqft}sqft, ${boost}% boost, $${tenant}/sqft/mo, ${people} people, $${wage}/hr, ${hours}hrs/day`);
-
-      fetch(GFORM_URL, { method: 'POST', mode: 'no-cors', body: fd })
-        .finally(() => {
-          successEl.style.display = 'block';
-          submitBtn.disabled = true;
+      roiSending = true;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+      showStatus('pending', 'Sending…');
+      try {
+        await leads.submit({
+          type: 'ROI report request',
+          email,
+          message:
+            `Potential annual benefit: ${roiValue}, Auto-Stack: ${digitalTwinSaving}, Hangar Rash Prevention: ${collisionPlanningSaving}, Tow Paths: ${towPathSaving}, Tug Automation: ${autonomousTugsSaving}, Full-system labor: ${laborSaving}, Potential annual revenue: ${revenueGain}
+` +
+            `Inputs: ${sqft} sq ft, ${boost}% boost, $${tenant}/sq ft/mo, ${people} people, $${wage}/hr, ${hours} hrs/day`,
+          hangar: `${sqft} sq ft`,
+          plan: new URLSearchParams(window.location.search).get('plan') || '',
+          page: 'roi.html (calculator)',
+          elapsed,
         });
+        succeed();
+      } catch (err) {
+        showStatus('error', leads.errorMessage(err));
+        leads.appendFallbackEmail(statusEl, 'Starlight Hangars ROI report');
+        submitBtn.disabled = false;
+      } finally {
+        roiSending = false;
+        submitBtn.textContent = 'Get Report';
+      }
     });
 
     // ── Scroll reveal ───────────────────────────────────────────────

@@ -266,47 +266,180 @@ function initSharedNavBehavior(navHeader) {
 
 
 /* ============================================================
+   LEAD SUBMISSION
+   -----------------------------------------------------------
+   The "Schedule a Demo" modal and the ROI report form both send
+   leads through submitSttugsLead().
+
+   endpoint: the Google Apps Script web app URL (/exec) from
+   scripts/apps-script/leads.gs. It answers with JSON, so the
+   forms can show a real success or error message.
+   While it is empty, leads go to the legacy Google Form. That
+   request uses no-cors, so only network failures are visible.
+============================================================ */
+const STTUGS_LEAD_CONFIG = {
+  endpoint: '',
+  legacyFormUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSeESQcxH3hDUXmJm-tc7mCYc3_EB9Ef9Iv3A_ha_a9wWfpoYg/formResponse',
+  fallbackEmail: '',   // offered as a mailto link when sending fails
+  minFillMs: 3000,     // faster submissions are treated as bots
+  timeoutMs: 20000,
+};
+
+const STTUGS_LEAD_LABELS = {
+  name: 'Name',
+  company: 'Company / FBO',
+  airport: 'Airport',
+  role: 'Role',
+  phone: 'Phone',
+  hangar: 'Hangar size / aircraft',
+  message: 'Message',
+  plan: 'Interest',
+  page: 'Page',
+};
+
+function submitSttugsLead(lead) {
+  const config = STTUGS_LEAD_CONFIG;
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), config.timeoutMs);
+  let request;
+
+  if (config.endpoint) {
+    // A URL-encoded body keeps this a "simple" CORS request (no preflight),
+    // which Apps Script web apps can answer.
+    const body = new URLSearchParams();
+    Object.entries(lead).forEach(([key, value]) => body.append(key, value == null ? '' : String(value)));
+    request = fetch(config.endpoint, { method: 'POST', body, signal: controller.signal })
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then(data => {
+        if (!data || data.ok !== true) throw new Error((data && data.error) || 'rejected');
+        return data;
+      });
+  } else {
+    const details = Object.keys(STTUGS_LEAD_LABELS)
+      .filter(key => lead[key])
+      .map(key => `${STTUGS_LEAD_LABELS[key]}: ${lead[key]}`)
+      .join('\n');
+    const fd = new FormData();
+    fd.append('entry.191654158', lead.type || 'Website lead');
+    fd.append('entry.1925679811', details);
+    fd.append('entry.878160977', lead.email || '');
+    request = fetch(config.legacyFormUrl, { method: 'POST', mode: 'no-cors', body: fd, signal: controller.signal });
+  }
+
+  return request.finally(() => clearTimeout(timer));
+}
+
+function sttugsLeadErrorMessage(err) {
+  if (err && err.name === 'AbortError') {
+    return 'The request timed out. Please check your connection and try again.';
+  }
+  if (err instanceof TypeError) {
+    return 'We couldn’t reach our server. Please check your connection and try again.';
+  }
+  return 'We couldn’t send your request. Please try again in a moment.';
+}
+
+function appendSttugsFallbackEmail(el, subject) {
+  const email = STTUGS_LEAD_CONFIG.fallbackEmail;
+  if (!email) return;
+  const link = document.createElement('a');
+  link.href = `mailto:${email}?subject=${encodeURIComponent(subject)}`;
+  link.textContent = email;
+  el.append(' You can also email us at ', link, '.');
+}
+
+window.STTUGS_LEADS = Object.freeze({
+  config: STTUGS_LEAD_CONFIG,
+  submit: submitSttugsLead,
+  errorMessage: sttugsLeadErrorMessage,
+  appendFallbackEmail: appendSttugsFallbackEmail,
+});
+
+
+/* ============================================================
    SHARED NAV BEHAVIOR + CONTACT MODAL
    -----------------------------------------------------------
    The shared nav and footer are generated into each HTML page.
-   This initializes the nav and injects the contact modal when
-   needed (idempotent — safe to call multiple times).
+   This initializes the nav and injects the contact modal
+   (idempotent — safe to call multiple times).
 ============================================================ */
+const STTUGS_ROLE_OPTIONS = [
+  'FBO / line service',
+  'Hangar or facilities manager',
+  'Owner / executive',
+  'Airport authority',
+  'Flight department / aircraft operator',
+  'Other',
+];
+
+function sttugsContactField({ name, label, type = 'text', required = false, attrs = '', full = false }) {
+  const id = `sttugs-${name}`;
+  const optional = required ? '' : ' <span class="sttugs-field-optional">(optional)</span>';
+  const common = `id="${id}" name="${name}" ${attrs}${required ? ' required' : ''}`;
+  let control;
+  if (type === 'textarea') {
+    control = `<textarea class="sttugs-textarea" ${common}></textarea>`;
+  } else if (type === 'select') {
+    const options = STTUGS_ROLE_OPTIONS.map(o => `<option>${o}</option>`).join('');
+    control = `<select class="sttugs-text-field sttugs-select" ${common}><option value="">Select your role</option>${options}</select>`;
+  } else {
+    control = `<input class="sttugs-text-field" type="${type}" ${common}/>`;
+  }
+  return `
+              <div class="sttugs-field${full ? ' sttugs-field-full' : ''}">
+                <label class="sttugs-field-label" for="${id}">${label}${optional}</label>
+                ${control}
+                <p class="sttugs-field-error" id="${id}-error" hidden></p>
+              </div>`;
+}
+
 function initSharedComponents() {
   const navHeader = document.getElementById('sttugs-nav-header');
   if (navHeader) initSharedNavBehavior(navHeader);
 
-  /* ── Contact Modal HTML (inject once, only on pages that don't
-            have their own Webflow-style .modal_wrap-contact) ── */
-  const hasLegacyModal = !!document.querySelector('.modal_wrap-contact');
-  if (!hasLegacyModal && !document.getElementById('sttugs-shared-modal')) {
+  if (!document.getElementById('sttugs-shared-modal')) {
     const modalWrap = document.createElement('div');
     modalWrap.id = 'sttugs-shared-modal';
     modalWrap.innerHTML = `
       <div class="sttugs-modal-overlay" id="sttugs-modal-overlay"></div>
-      <div class="sttugs-modal-wrap" id="sttugs-modal-wrap" role="dialog" aria-modal="true" aria-labelledby="sttugs-modal-title">
-        <button class="sttugs-modal-close" id="sttugs-modal-close" aria-label="Close">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <div class="sttugs-modal-wrap" id="sttugs-modal-wrap" role="dialog" aria-modal="true" aria-labelledby="sttugs-modal-title" aria-describedby="sttugs-modal-intro">
+        <button type="button" class="sttugs-modal-close" id="sttugs-modal-close" aria-label="Close">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
             <path d="M1 1L13 13M13 1L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </button>
         <div class="sttugs-modal-inner">
-          <div class="sttugs-modal-title" id="sttugs-modal-title">Schedule a Demo</div>
+          <h2 class="sttugs-modal-title" id="sttugs-modal-title">Schedule a Demo</h2>
+          <p class="sttugs-modal-intro" id="sttugs-modal-intro">Tell us a little about your operation and we’ll follow up to set up a walkthrough.</p>
           <div class="sttugs-modal-divider"></div>
-          <form id="sttugs-contact-form" class="sttugs-modal-form">
-            <div>
-              <label class="sttugs-field-label" for="sttugs-email">Your email</label>
-              <input class="sttugs-text-field" type="email" id="sttugs-email" name="email" placeholder="you@example.com" required/>
+          <form id="sttugs-contact-form" class="sttugs-modal-form" novalidate>
+            <div class="sttugs-field-grid">${[
+              sttugsContactField({ name: 'name', label: 'Full name', required: true, attrs: 'autocomplete="name" maxlength="100"' }),
+              sttugsContactField({ name: 'email', label: 'Work email', type: 'email', required: true, attrs: 'autocomplete="email" maxlength="150" placeholder="you@company.com"' }),
+              sttugsContactField({ name: 'company', label: 'Company / FBO', required: true, attrs: 'autocomplete="organization" maxlength="120"' }),
+              sttugsContactField({ name: 'airport', label: 'Airport code', attrs: 'maxlength="4" autocapitalize="characters" spellcheck="false" placeholder="e.g. KBDL"' }),
+              sttugsContactField({ name: 'role', label: 'Your role', type: 'select', required: true }),
+              sttugsContactField({ name: 'phone', label: 'Phone', type: 'tel', attrs: 'autocomplete="tel" maxlength="30"' }),
+              sttugsContactField({ name: 'hangar', label: 'Hangar size or aircraft count', full: true, attrs: 'maxlength="120" placeholder="e.g. 40,000 sq ft, 25 based aircraft"' }),
+              sttugsContactField({ name: 'message', label: 'What would you like to see?', type: 'textarea', full: true, attrs: 'maxlength="2000" placeholder="Current stacking process, timeline, questions…"' }),
+            ].join('')}
             </div>
-            <div>
-              <label class="sttugs-field-label" for="sttugs-message">Message</label>
-              <textarea class="sttugs-textarea" id="sttugs-message" name="message" placeholder="Tell us about your operation..." required></textarea>
+            <div class="sttugs-hp" aria-hidden="true">
+              <label for="sttugs-website">Website</label>
+              <input type="text" id="sttugs-website" name="website" tabindex="-1" autocomplete="off"/>
             </div>
-            <button type="submit" class="sttugs-submit">Send Message</button>
+            <input type="hidden" name="plan" id="sttugs-plan"/>
+            <input type="hidden" name="page" id="sttugs-page"/>
+            <div class="sttugs-form-status" id="sttugs-form-status" role="status" aria-live="polite"></div>
+            <button type="submit" class="sttugs-submit">Send Request</button>
           </form>
-          <div class="sttugs-modal-success" id="sttugs-modal-success">
-            <div class="sttugs-success-big">Thank you!</div>
-            <div class="sttugs-success-small">We'll be in touch shortly.</div>
+          <div class="sttugs-modal-success" id="sttugs-modal-success" hidden>
+            <h2 class="sttugs-success-big" id="sttugs-success-title" tabindex="-1">Thank you!</h2>
+            <p class="sttugs-success-small" id="sttugs-success-text">We’ll be in touch shortly.</p>
+            <button type="button" class="sttugs-submit sttugs-success-close" id="sttugs-success-close">Close</button>
           </div>
         </div>
       </div>
@@ -324,51 +457,206 @@ function initSharedContactModal() {
   const closeBtn = document.getElementById('sttugs-modal-close');
   const form     = document.getElementById('sttugs-contact-form');
   const success  = document.getElementById('sttugs-modal-success');
-  if (!overlay || !modal) return;
+  if (!overlay || !modal || !form || modal.dataset.ready) return;
+  modal.dataset.ready = 'true';
 
-  function openModal() {
+  const status     = document.getElementById('sttugs-form-status');
+  const submitBtn  = form.querySelector('button[type=submit]');
+  const honeypot   = document.getElementById('sttugs-website');
+  const successTitle = document.getElementById('sttugs-success-title');
+  const successText  = document.getElementById('sttugs-success-text');
+  let returnFocus = null;
+  let startedAt = 0;
+  let sending = false;
+
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const validators = {
+    name:    v => v ? '' : 'Enter your name.',
+    email:   v => !v ? 'Enter your email address.' : EMAIL_RE.test(v) ? '' : 'Enter a valid email address, like you@company.com.',
+    company: v => v ? '' : 'Enter your company or FBO name.',
+    airport: v => !v || /^[A-Z0-9]{3,4}$/i.test(v) ? '' : 'Enter a 3–4 character airport code, like KBDL or BDL.',
+    role:    v => v ? '' : 'Select your role.',
+    phone:   v => !v || v.replace(/\D/g, '').length >= 7 ? '' : 'Enter a phone number with at least 7 digits, or leave it blank.',
+  };
+
+  function setFieldError(field, message) {
+    const error = document.getElementById(`${field.id}-error`);
+    field.setAttribute('aria-invalid', message ? 'true' : 'false');
+    if (message) field.setAttribute('aria-describedby', error.id);
+    else field.removeAttribute('aria-describedby');
+    error.textContent = message;
+    error.hidden = !message;
+  }
+
+  function validateField(field) {
+    const check = validators[field.name];
+    const message = check ? check(field.value.trim()) : '';
+    setFieldError(field, message);
+    return !message;
+  }
+
+  function setStatus(state, message) {
+    status.dataset.state = state || '';
+    status.textContent = message || '';
+  }
+
+  function showForm() {
+    form.hidden = false;
+    success.hidden = true;
+  }
+
+  function contextFor(trigger) {
+    const params = new URLSearchParams(window.location.search);
+    const plan = (trigger && trigger.dataset.plan) || params.get('plan') || '';
+    const where = !trigger ? '' :
+      trigger.closest('footer') ? 'footer' :
+      trigger.closest('#sttugs-nav-header') ? 'nav' : 'page';
+    const path = window.location.pathname.replace(/^.*\//, '') || 'index.html';
+    return { plan: plan.slice(0, 100), page: where ? `${path} (${where})` : path };
+  }
+
+  function focusables() {
+    return Array.from(modal.querySelectorAll(
+      'a[href], button:not([disabled]), input:not([type=hidden]):not([tabindex="-1"]), select, textarea, [tabindex]:not([tabindex="-1"])'
+    )).filter(el => el.offsetParent !== null);
+  }
+
+  function openModal(trigger) {
+    if (modal.classList.contains('active')) return;
+    returnFocus = trigger || document.activeElement;
+    // After a successful send, start fresh. Otherwise keep what the visitor typed.
+    if (!success.hidden) {
+      form.reset();
+      form.querySelectorAll('[aria-invalid]').forEach(el => setFieldError(el, ''));
+      setStatus('', '');
+      showForm();
+      startedAt = 0;
+    }
+    const context = contextFor(trigger);
+    document.getElementById('sttugs-plan').value = context.plan;
+    document.getElementById('sttugs-page').value = context.page;
+    if (!startedAt) startedAt = Date.now();
+
     overlay.classList.add('active');
     modal.classList.add('active');
     document.body.classList.add('scroll-locked');
-    if (form)    form.style.display = '';
-    if (success) success.classList.remove('visible');
+    modal.scrollTop = 0;
+    const first = form.hidden ? successTitle : document.getElementById('sttugs-name');
+    if (first) first.focus();
   }
+
   function closeModal() {
+    if (!modal.classList.contains('active')) return;
     overlay.classList.remove('active');
     modal.classList.remove('active');
     document.body.classList.remove('scroll-locked');
+    // The mobile menu closes when its CTA is used, so return focus to the menu button.
+    let target = returnFocus;
+    if (target && target.closest && target.closest('#sttugs-nav-mobile')) {
+      target = document.getElementById('sttugs-nav-hamburger') || target;
+    }
+    if (target && typeof target.focus === 'function') target.focus();
+    returnFocus = null;
   }
 
-  // All [data-open-contact] triggers — re-query so newly injected footer links are found
-  document.querySelectorAll('[data-open-contact]').forEach(el =>
-    el.addEventListener('click', e => { e.preventDefault(); openModal(); })
-  );
+  function showSuccess(name, email) {
+    const first = name.split(/\s+/)[0];
+    successTitle.textContent = first ? `Thank you, ${first}!` : 'Thank you!';
+    successText.textContent = `We received your request and will follow up at ${email} shortly.`;
+    setStatus('', '');
+    form.hidden = true;
+    success.hidden = false;
+    successTitle.focus();
+  }
+
+  showForm();
+
+  // Delegated so links added after load (e.g. by other scripts) also open the modal.
+  document.addEventListener('click', e => {
+    const trigger = e.target.closest('[data-open-contact]');
+    if (!trigger) return;
+    e.preventDefault();
+    openModal(trigger);
+  });
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  document.getElementById('sttugs-success-close').addEventListener('click', closeModal);
   overlay.addEventListener('click', closeModal);
+
+  // Keep Tab / Shift+Tab inside the dialog while it is open.
+  modal.addEventListener('keydown', e => {
+    if (e.key !== 'Tab') return;
+    const items = focusables();
+    if (!items.length) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (e.shiftKey && (document.activeElement === first || !modal.contains(document.activeElement))) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-  if (form) {
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      const email = document.getElementById('sttugs-email')?.value.trim() || '';
-      const message = document.getElementById('sttugs-message')?.value.trim() || '';
-      // Google Form endpoint (matches other form handlers)
-      const gformUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSeESQcxH3hDUXmJm-tc7mCYc3_EB9Ef9Iv3A_ha_a9wWfpoYg/formResponse';
-      const fd = new FormData();
-      // Map modal fields to the Google Form entry IDs used elsewhere in the site
-      fd.append('entry.191654158', 'Contact Form Submission');
-      fd.append('entry.1925679811', message);
-      fd.append('entry.878160977', email);
-      // Hide form immediately for UX, show success when request completes
-      form.style.display = 'none';
-      fetch(gformUrl, { method: 'POST', mode: 'no-cors', body: fd })
-        .finally(() => {
-          if (success) success.classList.add('visible');
-          const btn = form.querySelector('button[type=submit]'); if (btn) btn.disabled = true;
-        });
-    });
-  }
+  form.addEventListener('input', e => {
+    if (e.target.getAttribute('aria-invalid') === 'true') validateField(e.target);
+  });
+  form.addEventListener('focusout', e => {
+    const field = e.target;
+    if (field.name === 'airport') field.value = field.value.trim().toUpperCase();
+    if (field.value && validators[field.name]) validateField(field);
+  });
 
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    if (sending) return;
+
+    const invalid = Object.keys(validators)
+      .map(name => form.elements[name])
+      .filter(field => !validateField(field));
+    if (invalid.length) {
+      setStatus('error', invalid.length === 1
+        ? 'Please fix the highlighted field.'
+        : `Please fix the ${invalid.length} highlighted fields.`);
+      invalid[0].focus();
+      return;
+    }
+
+    const data = Object.fromEntries(
+      Array.from(new FormData(form).entries()).map(([key, value]) => [key, String(value).trim()])
+    );
+
+    // Hidden honeypot: only bots fill it. Pretend success and send nothing.
+    if (honeypot.value) {
+      showSuccess(data.name, data.email);
+      return;
+    }
+    delete data.website;
+    const elapsed = Date.now() - startedAt;
+    if (elapsed < STTUGS_LEAD_CONFIG.minFillMs) {
+      setStatus('error', 'That was quick! Please check your details, then send again.');
+      return;
+    }
+
+    sending = true;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+    form.setAttribute('aria-busy', 'true');
+    setStatus('pending', 'Sending your request…');
+    try {
+      await submitSttugsLead({ type: 'Demo request', ...data, elapsed });
+      showSuccess(data.name, data.email);
+    } catch (err) {
+      setStatus('error', sttugsLeadErrorMessage(err));
+      appendSttugsFallbackEmail(status, 'Starlight Hangars demo request');
+    } finally {
+      sending = false;
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send Request';
+      form.removeAttribute('aria-busy');
+    }
+  });
 }
 
 /* ============================================================
