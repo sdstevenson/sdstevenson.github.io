@@ -17,7 +17,7 @@
  *      (Sheets + send email as you). It adds the header row and sends a test email.
  *   5. Deploy → New deployment → type "Web app".
  *      Execute as: Me. Who has access: Anyone. Click Deploy.
- *   6. Copy the Web app URL (ends in /exec) into STTUGS_LEAD_CONFIG.endpoint
+ *   6. Copy the Web app URL (ends in /exec) into STARLIGHT_LEAD_CONFIG.endpoint
  *      in assets/site.js.
  *
  * After editing this script, publish the change with Deploy → Manage deployments →
@@ -26,7 +26,7 @@
 
 const SHEET_NAME = 'Leads';
 const NOTIFY_EMAIL = '';
-const MIN_FILL_MS = 3000;   // matches STTUGS_LEAD_CONFIG.minFillMs in assets/site.js
+const MIN_FILL_MS = 3000;   // matches STARLIGHT_LEAD_CONFIG.minFillMs in assets/site.js
 const MAX_FIELD_LENGTH = 2000;
 
 // [request parameter, column header]

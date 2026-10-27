@@ -13,12 +13,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 PARTIALS = ROOT / "scripts" / "partials"
-NAV_START = "<!-- sttugs-shared-nav:start -->"
-NAV_END = "<!-- sttugs-shared-nav:end -->"
-FOOTER_START = "<!-- sttugs-shared-footer:start -->"
-FOOTER_END = "<!-- sttugs-shared-footer:end -->"
-CSS_START = "<!-- sttugs-shared-css:start -->"
-CSS_END = "<!-- sttugs-shared-css:end -->"
+NAV_START = "<!-- starlight-shared-nav:start -->"
+NAV_END = "<!-- starlight-shared-nav:end -->"
+FOOTER_START = "<!-- starlight-shared-footer:start -->"
+FOOTER_END = "<!-- starlight-shared-footer:end -->"
+CSS_START = "<!-- starlight-shared-css:start -->"
+CSS_END = "<!-- starlight-shared-css:end -->"
 
 
 class CanonicalParser(HTMLParser):
@@ -47,7 +47,7 @@ def replace_block(source: str, start: str, end: str, value: str) -> str:
 def generate(source: str, nav: str, footer: str) -> str:
     text = source.replace("\r\n", "\n")
 
-    nav_template = f'<header id="sttugs-nav-header">\n{nav}</header>'
+    nav_template = f'<header id="starlight-nav-header">\n{nav}</header>'
     nav_replacement = replace_block(text, NAV_START, NAV_END, nav_template)
     if nav_replacement:
         text = nav_replacement
@@ -56,7 +56,7 @@ def generate(source: str, nav: str, footer: str) -> str:
         if header and not re.search(r"\bclass\s*=\s*([\"'])[^\"']*\bhome\b", header.group(0), re.I):
             text = text[: header.start()] + f"{NAV_START}\n{nav_template}\n{NAV_END}" + text[header.end() :]
 
-    footer_template = f'<footer data-bg-type="dark" class="sttugs-footer">\n{footer}</footer>'
+    footer_template = f'<footer data-bg-type="dark" class="starlight-footer">\n{footer}</footer>'
     footer_replacement = replace_block(text, FOOTER_START, FOOTER_END, footer_template)
     if footer_replacement:
         text = footer_replacement
@@ -65,7 +65,7 @@ def generate(source: str, nav: str, footer: str) -> str:
         if footer_match:
             text = text[: footer_match.start()] + f"{FOOTER_START}\n{footer_template}\n{FOOTER_END}" + text[footer_match.end() :]
 
-    css_link = '<link rel="stylesheet" href="assets/shared.css" />'
+    css_link = '<link rel="stylesheet" href="assets/shared.css?v=20261027-2" />'
     css_replacement = replace_block(text, CSS_START, CSS_END, css_link)
     if css_replacement:
         text = css_replacement
