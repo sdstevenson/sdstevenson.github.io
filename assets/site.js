@@ -272,13 +272,14 @@ function initSharedNavBehavior(navHeader) {
    leads through submitSttugsLead().
 
    endpoint: the Google Apps Script web app URL (/exec) from
-   scripts/apps-script/leads.gs. It answers with JSON, so the
+   scripts/apps-script/leads.gs, bound to the "06 Website Leads"
+   sheet in Drive (02 Outreach). It answers with JSON, so the
    forms can show a real success or error message.
    While it is empty, leads go to the legacy Google Form. That
    request uses no-cors, so only network failures are visible.
 ============================================================ */
 const STTUGS_LEAD_CONFIG = {
-  endpoint: '',
+  endpoint: 'https://script.google.com/macros/s/AKfycbzSEcFErRWW_2QhX6dk4BJoszFCDYV-rr04mYynaqVpjOcL32vyET8I8i3ZIvtc4-Evgg/exec',
   legacyFormUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSeESQcxH3hDUXmJm-tc7mCYc3_EB9Ef9Iv3A_ha_a9wWfpoYg/formResponse',
   fallbackEmail: '',   // offered as a mailto link when sending fails
   minFillMs: 3000,     // faster submissions are treated as bots
