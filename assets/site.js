@@ -155,8 +155,6 @@ function initSharedNavBehavior(navHeader) {
   const mobile        = document.getElementById('starlight-nav-mobile');
   const mobileOverlay = document.getElementById('starlight-nav-overlay');
   const closeBtn      = document.getElementById('starlight-nav-mobile-close');
-  const mobPlatToggle = document.getElementById('starlight-mobile-platform-toggle');
-  const mobPlatSub    = document.getElementById('starlight-mobile-platform-sub');
 
   // ── Desktop: click Platform to open/close dropdown ──
   if (dropTrigger && platformItem) {
@@ -188,11 +186,6 @@ function initSharedNavBehavior(navHeader) {
   if (hamburger)     hamburger.addEventListener('click', openMobileMenu);
   if (closeBtn)      closeBtn.addEventListener('click', closeMobileMenu);
   if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobileMenu);
-
-  // ── Mobile: Platform sub-menu accordion ──
-  if (mobPlatToggle && mobPlatSub) {
-    mobPlatToggle.addEventListener('click', () => mobPlatSub.classList.toggle('open'));
-  }
 
   // Close mobile menu when a contact CTA is clicked
   if (mobile) {
