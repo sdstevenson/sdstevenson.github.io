@@ -160,27 +160,6 @@ section, header, footer { position: relative; }
   transform: translateY(calc(var(--thickness) * -1 + var(--gap) * -1)) rotate(calc(var(--rotate) * 1deg));
 }
 
-/* ── Modal ── */
-input::placeholder, textarea::placeholder {
-  font-size: 18px !important; line-height: 23px !important; color: #94a3b8 !important;
-}
-.modal_overlay-info, .modal_overlay-contact {
-  opacity: 0; visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0s 0.3s;
-}
-.modal_overlay-info.active, .modal_overlay-contact.active {
-  opacity: 0.8; visibility: visible;
-  transition: opacity 0.3s ease, visibility 0s; pointer-events: auto;
-}
-.modal_wrap-info, .modal_wrap-contact {
-  opacity: 0; visibility: hidden; margin-top: 20px;
-  transition: opacity 0.3s ease, margin-top 0.3s ease, visibility 0s 0.3s;
-}
-.modal_wrap-info.active, .modal_wrap-contact.active {
-  visibility: visible; opacity: 1; margin-top: 0;
-  transition: opacity 0.3s ease, margin-top 0.3s ease, visibility 0s;
-}
-
 /* ── Responsive: tablet (≤ 991px) ── */
 @media screen and (max-width: 991px) {
   .u-text-heading    { font-size: 40px; line-height: 42px; }
