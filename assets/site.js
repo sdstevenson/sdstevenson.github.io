@@ -10,7 +10,7 @@
    SHARED ROI DEFAULTS
    Update these values to keep the calculator and ROI claims in sync.
 ============================================================ */
-const STTUGS_ROI_DEFAULTS = Object.freeze({
+const STARLIGHT_ROI_DEFAULTS = Object.freeze({
   hangarSqft: 40000,
   utilizationBoost: 5,
   tenantRate: 3.5,
@@ -19,7 +19,7 @@ const STTUGS_ROI_DEFAULTS = Object.freeze({
   hoursPerDay: 4,
 });
 
-function calculateSttugsRoi(values = STTUGS_ROI_DEFAULTS) {
+function calculateStarlightRoi(values = STARLIGHT_ROI_DEFAULTS) {
   const annualLabor =
     values.peoplePerStack * values.wagePerHour * values.hoursPerDay * 365;
   const annualRevenue =
@@ -40,9 +40,9 @@ function calculateSttugsRoi(values = STTUGS_ROI_DEFAULTS) {
   };
 }
 
-window.STTUGS_ROI = Object.freeze({
-  defaults: STTUGS_ROI_DEFAULTS,
-  calculate: calculateSttugsRoi,
+window.STARLIGHT_ROI = Object.freeze({
+  defaults: STARLIGHT_ROI_DEFAULTS,
+  calculate: calculateStarlightRoi,
 });
 
 /* Register GSAP plugins */
@@ -82,8 +82,8 @@ function formatRoiNumber(value, maximumFractionDigits = 1) {
 }
 
 function initRoiDefaults() {
-  const defaults = STTUGS_ROI_DEFAULTS;
-  const results = calculateSttugsRoi(defaults);
+  const defaults = STARLIGHT_ROI_DEFAULTS;
+  const results = calculateStarlightRoi(defaults);
   const inputDefaults = {
     hangarSqft: defaults.hangarSqft,
     hangarSqftInput: defaults.hangarSqft,
@@ -149,14 +149,14 @@ function initRoiDefaults() {
 function initSharedNavBehavior(navHeader) {
   if (!navHeader || navHeader.dataset.navInitialized === 'true') return;
   navHeader.dataset.navInitialized = 'true';
-  const platformItem  = document.getElementById('sttugs-platform-item');
+  const platformItem  = document.getElementById('starlight-platform-item');
   const dropTrigger   = platformItem && platformItem.querySelector('.snav-dropdown-trigger');
-  const hamburger     = document.getElementById('sttugs-nav-hamburger');
-  const mobile        = document.getElementById('sttugs-nav-mobile');
-  const mobileOverlay = document.getElementById('sttugs-nav-overlay');
-  const closeBtn      = document.getElementById('sttugs-nav-mobile-close');
-  const mobPlatToggle = document.getElementById('sttugs-mobile-platform-toggle');
-  const mobPlatSub    = document.getElementById('sttugs-mobile-platform-sub');
+  const hamburger     = document.getElementById('starlight-nav-hamburger');
+  const mobile        = document.getElementById('starlight-nav-mobile');
+  const mobileOverlay = document.getElementById('starlight-nav-overlay');
+  const closeBtn      = document.getElementById('starlight-nav-mobile-close');
+  const mobPlatToggle = document.getElementById('starlight-mobile-platform-toggle');
+  const mobPlatSub    = document.getElementById('starlight-mobile-platform-sub');
 
   // ── Desktop: click Platform to open/close dropdown ──
   if (dropTrigger && platformItem) {
@@ -269,7 +269,7 @@ function initSharedNavBehavior(navHeader) {
    LEAD SUBMISSION
    -----------------------------------------------------------
    The "Schedule a Demo" modal and the ROI report form both send
-   leads through submitSttugsLead().
+   leads through submitStarlightLead().
 
    endpoint: the Google Apps Script web app URL (/exec) from
    scripts/apps-script/leads.gs, bound to the "06 Website Leads"
@@ -278,7 +278,7 @@ function initSharedNavBehavior(navHeader) {
    While it is empty, leads go to the legacy Google Form. That
    request uses no-cors, so only network failures are visible.
 ============================================================ */
-const STTUGS_LEAD_CONFIG = {
+const STARLIGHT_LEAD_CONFIG = {
   endpoint: 'https://script.google.com/macros/s/AKfycbzSEcFErRWW_2QhX6dk4BJoszFCDYV-rr04mYynaqVpjOcL32vyET8I8i3ZIvtc4-Evgg/exec',
   legacyFormUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSeESQcxH3hDUXmJm-tc7mCYc3_EB9Ef9Iv3A_ha_a9wWfpoYg/formResponse',
   fallbackEmail: '',   // offered as a mailto link when sending fails
@@ -286,7 +286,7 @@ const STTUGS_LEAD_CONFIG = {
   timeoutMs: 20000,
 };
 
-const STTUGS_LEAD_LABELS = {
+const STARLIGHT_LEAD_LABELS = {
   name: 'Name',
   company: 'Company / FBO',
   airport: 'Airport',
@@ -298,8 +298,8 @@ const STTUGS_LEAD_LABELS = {
   page: 'Page',
 };
 
-function submitSttugsLead(lead) {
-  const config = STTUGS_LEAD_CONFIG;
+function submitStarlightLead(lead) {
+  const config = STARLIGHT_LEAD_CONFIG;
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), config.timeoutMs);
   let request;
@@ -319,9 +319,9 @@ function submitSttugsLead(lead) {
         return data;
       });
   } else {
-    const details = Object.keys(STTUGS_LEAD_LABELS)
+    const details = Object.keys(STARLIGHT_LEAD_LABELS)
       .filter(key => lead[key])
-      .map(key => `${STTUGS_LEAD_LABELS[key]}: ${lead[key]}`)
+      .map(key => `${STARLIGHT_LEAD_LABELS[key]}: ${lead[key]}`)
       .join('\n');
     const fd = new FormData();
     fd.append('entry.191654158', lead.type || 'Website lead');
@@ -333,7 +333,7 @@ function submitSttugsLead(lead) {
   return request.finally(() => clearTimeout(timer));
 }
 
-function sttugsLeadErrorMessage(err) {
+function starlightLeadErrorMessage(err) {
   if (err && err.name === 'AbortError') {
     return 'The request timed out. Please check your connection and try again.';
   }
@@ -343,8 +343,8 @@ function sttugsLeadErrorMessage(err) {
   return 'We couldn’t send your request. Please try again in a moment.';
 }
 
-function appendSttugsFallbackEmail(el, subject) {
-  const email = STTUGS_LEAD_CONFIG.fallbackEmail;
+function appendStarlightFallbackEmail(el, subject) {
+  const email = STARLIGHT_LEAD_CONFIG.fallbackEmail;
   if (!email) return;
   const link = document.createElement('a');
   link.href = `mailto:${email}?subject=${encodeURIComponent(subject)}`;
@@ -352,11 +352,11 @@ function appendSttugsFallbackEmail(el, subject) {
   el.append(' You can also email us at ', link, '.');
 }
 
-window.STTUGS_LEADS = Object.freeze({
-  config: STTUGS_LEAD_CONFIG,
-  submit: submitSttugsLead,
-  errorMessage: sttugsLeadErrorMessage,
-  appendFallbackEmail: appendSttugsFallbackEmail,
+window.STARLIGHT_LEADS = Object.freeze({
+  config: STARLIGHT_LEAD_CONFIG,
+  submit: submitStarlightLead,
+  errorMessage: starlightLeadErrorMessage,
+  appendFallbackEmail: appendStarlightFallbackEmail,
 });
 
 
@@ -367,7 +367,7 @@ window.STTUGS_LEADS = Object.freeze({
    This initializes the nav and injects the contact modal
    (idempotent — safe to call multiple times).
 ============================================================ */
-const STTUGS_ROLE_OPTIONS = [
+const STARLIGHT_ROLE_OPTIONS = [
   'FBO / line service',
   'Hangar or facilities manager',
   'Owner / executive',
@@ -376,71 +376,71 @@ const STTUGS_ROLE_OPTIONS = [
   'Other',
 ];
 
-function sttugsContactField({ name, label, type = 'text', required = false, attrs = '', full = false }) {
-  const id = `sttugs-${name}`;
-  const optional = required ? '' : ' <span class="sttugs-field-optional">(optional)</span>';
+function starlightContactField({ name, label, type = 'text', required = false, attrs = '', full = false }) {
+  const id = `starlight-${name}`;
+  const optional = required ? '' : ' <span class="starlight-field-optional">(optional)</span>';
   const common = `id="${id}" name="${name}" ${attrs}${required ? ' required' : ''}`;
   let control;
   if (type === 'textarea') {
-    control = `<textarea class="sttugs-textarea" ${common}></textarea>`;
+    control = `<textarea class="starlight-textarea" ${common}></textarea>`;
   } else if (type === 'select') {
-    const options = STTUGS_ROLE_OPTIONS.map(o => `<option>${o}</option>`).join('');
-    control = `<select class="sttugs-text-field sttugs-select" ${common}><option value="">Select your role</option>${options}</select>`;
+    const options = STARLIGHT_ROLE_OPTIONS.map(o => `<option>${o}</option>`).join('');
+    control = `<select class="starlight-text-field starlight-select" ${common}><option value="">Select your role</option>${options}</select>`;
   } else {
-    control = `<input class="sttugs-text-field" type="${type}" ${common}/>`;
+    control = `<input class="starlight-text-field" type="${type}" ${common}/>`;
   }
   return `
-              <div class="sttugs-field${full ? ' sttugs-field-full' : ''}">
-                <label class="sttugs-field-label" for="${id}">${label}${optional}</label>
+              <div class="starlight-field${full ? ' starlight-field-full' : ''}">
+                <label class="starlight-field-label" for="${id}">${label}${optional}</label>
                 ${control}
-                <p class="sttugs-field-error" id="${id}-error" hidden></p>
+                <p class="starlight-field-error" id="${id}-error" hidden></p>
               </div>`;
 }
 
 function initSharedComponents() {
-  const navHeader = document.getElementById('sttugs-nav-header');
+  const navHeader = document.getElementById('starlight-nav-header');
   if (navHeader) initSharedNavBehavior(navHeader);
 
-  if (!document.getElementById('sttugs-shared-modal')) {
+  if (!document.getElementById('starlight-shared-modal')) {
     const modalWrap = document.createElement('div');
-    modalWrap.id = 'sttugs-shared-modal';
+    modalWrap.id = 'starlight-shared-modal';
     modalWrap.innerHTML = `
-      <div class="sttugs-modal-overlay" id="sttugs-modal-overlay"></div>
-      <div class="sttugs-modal-wrap" id="sttugs-modal-wrap" role="dialog" aria-modal="true" aria-labelledby="sttugs-modal-title" aria-describedby="sttugs-modal-intro">
-        <button type="button" class="sttugs-modal-close" id="sttugs-modal-close" aria-label="Close">
+      <div class="starlight-modal-overlay" id="starlight-modal-overlay"></div>
+      <div class="starlight-modal-wrap" id="starlight-modal-wrap" role="dialog" aria-modal="true" aria-labelledby="starlight-modal-title" aria-describedby="starlight-modal-intro">
+        <button type="button" class="starlight-modal-close" id="starlight-modal-close" aria-label="Close">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
             <path d="M1 1L13 13M13 1L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </button>
-        <div class="sttugs-modal-inner">
-          <h2 class="sttugs-modal-title" id="sttugs-modal-title">Schedule a Demo</h2>
-          <p class="sttugs-modal-intro" id="sttugs-modal-intro">Tell us a little about your operation and we’ll follow up to set up a walkthrough.</p>
-          <div class="sttugs-modal-divider"></div>
-          <form id="sttugs-contact-form" class="sttugs-modal-form" novalidate>
-            <div class="sttugs-field-grid">${[
-              sttugsContactField({ name: 'name', label: 'Full name', required: true, attrs: 'autocomplete="name" maxlength="100"' }),
-              sttugsContactField({ name: 'email', label: 'Work email', type: 'email', required: true, attrs: 'autocomplete="email" maxlength="150" placeholder="you@company.com"' }),
-              sttugsContactField({ name: 'company', label: 'Company / FBO', required: true, attrs: 'autocomplete="organization" maxlength="120"' }),
-              sttugsContactField({ name: 'airport', label: 'Airport code', attrs: 'maxlength="4" autocapitalize="characters" spellcheck="false" placeholder="e.g. KBDL"' }),
-              sttugsContactField({ name: 'role', label: 'Your role', type: 'select', required: true }),
-              sttugsContactField({ name: 'phone', label: 'Phone', type: 'tel', attrs: 'autocomplete="tel" maxlength="30"' }),
-              sttugsContactField({ name: 'hangar', label: 'Hangar size or aircraft count', full: true, attrs: 'maxlength="120" placeholder="e.g. 40,000 sq ft, 25 based aircraft"' }),
-              sttugsContactField({ name: 'message', label: 'What would you like to see?', type: 'textarea', full: true, attrs: 'maxlength="2000" placeholder="Current stacking process, timeline, questions…"' }),
+        <div class="starlight-modal-inner">
+          <h2 class="starlight-modal-title" id="starlight-modal-title">Schedule a Demo</h2>
+          <p class="starlight-modal-intro" id="starlight-modal-intro">Tell us a little about your operation and we’ll follow up to set up a walkthrough.</p>
+          <div class="starlight-modal-divider"></div>
+          <form id="starlight-contact-form" class="starlight-modal-form" novalidate>
+            <div class="starlight-field-grid">${[
+              starlightContactField({ name: 'name', label: 'Full name', required: true, attrs: 'autocomplete="name" maxlength="100"' }),
+              starlightContactField({ name: 'email', label: 'Work email', type: 'email', required: true, attrs: 'autocomplete="email" maxlength="150" placeholder="you@company.com"' }),
+              starlightContactField({ name: 'company', label: 'Company / FBO', required: true, attrs: 'autocomplete="organization" maxlength="120"' }),
+              starlightContactField({ name: 'airport', label: 'Airport code', attrs: 'maxlength="4" autocapitalize="characters" spellcheck="false" placeholder="e.g. KBDL"' }),
+              starlightContactField({ name: 'role', label: 'Your role', type: 'select', required: true }),
+              starlightContactField({ name: 'phone', label: 'Phone', type: 'tel', attrs: 'autocomplete="tel" maxlength="30"' }),
+              starlightContactField({ name: 'hangar', label: 'Hangar size or aircraft count', full: true, attrs: 'maxlength="120" placeholder="e.g. 40,000 sq ft, 25 based aircraft"' }),
+              starlightContactField({ name: 'message', label: 'What would you like to see?', type: 'textarea', full: true, attrs: 'maxlength="2000" placeholder="Current stacking process, timeline, questions…"' }),
             ].join('')}
             </div>
-            <div class="sttugs-hp" aria-hidden="true">
-              <label for="sttugs-website">Website</label>
-              <input type="text" id="sttugs-website" name="website" tabindex="-1" autocomplete="off"/>
+            <div class="starlight-hp" aria-hidden="true">
+              <label for="starlight-website">Website</label>
+              <input type="text" id="starlight-website" name="website" tabindex="-1" autocomplete="off"/>
             </div>
-            <input type="hidden" name="plan" id="sttugs-plan"/>
-            <input type="hidden" name="page" id="sttugs-page"/>
-            <div class="sttugs-form-status" id="sttugs-form-status" role="status" aria-live="polite"></div>
-            <button type="submit" class="sttugs-submit">Send Request</button>
+            <input type="hidden" name="plan" id="starlight-plan"/>
+            <input type="hidden" name="page" id="starlight-page"/>
+            <div class="starlight-form-status" id="starlight-form-status" role="status" aria-live="polite"></div>
+            <button type="submit" class="starlight-submit">Send Request</button>
           </form>
-          <div class="sttugs-modal-success" id="sttugs-modal-success" hidden>
-            <h2 class="sttugs-success-big" id="sttugs-success-title" tabindex="-1">Thank you!</h2>
-            <p class="sttugs-success-small" id="sttugs-success-text">We’ll be in touch shortly.</p>
-            <button type="button" class="sttugs-submit sttugs-success-close" id="sttugs-success-close">Close</button>
+          <div class="starlight-modal-success" id="starlight-modal-success" hidden>
+            <h2 class="starlight-success-big" id="starlight-success-title" tabindex="-1">Thank you!</h2>
+            <p class="starlight-success-small" id="starlight-success-text">We’ll be in touch shortly.</p>
+            <button type="button" class="starlight-submit starlight-success-close" id="starlight-success-close">Close</button>
           </div>
         </div>
       </div>
@@ -453,19 +453,19 @@ function initSharedComponents() {
 
 
 function initSharedContactModal() {
-  const overlay  = document.getElementById('sttugs-modal-overlay');
-  const modal    = document.getElementById('sttugs-modal-wrap');
-  const closeBtn = document.getElementById('sttugs-modal-close');
-  const form     = document.getElementById('sttugs-contact-form');
-  const success  = document.getElementById('sttugs-modal-success');
+  const overlay  = document.getElementById('starlight-modal-overlay');
+  const modal    = document.getElementById('starlight-modal-wrap');
+  const closeBtn = document.getElementById('starlight-modal-close');
+  const form     = document.getElementById('starlight-contact-form');
+  const success  = document.getElementById('starlight-modal-success');
   if (!overlay || !modal || !form || modal.dataset.ready) return;
   modal.dataset.ready = 'true';
 
-  const status     = document.getElementById('sttugs-form-status');
+  const status     = document.getElementById('starlight-form-status');
   const submitBtn  = form.querySelector('button[type=submit]');
-  const honeypot   = document.getElementById('sttugs-website');
-  const successTitle = document.getElementById('sttugs-success-title');
-  const successText  = document.getElementById('sttugs-success-text');
+  const honeypot   = document.getElementById('starlight-website');
+  const successTitle = document.getElementById('starlight-success-title');
+  const successText  = document.getElementById('starlight-success-text');
   let returnFocus = null;
   let startedAt = 0;
   let sending = false;
@@ -511,7 +511,7 @@ function initSharedContactModal() {
     const plan = (trigger && trigger.dataset.plan) || params.get('plan') || '';
     const where = !trigger ? '' :
       trigger.closest('footer') ? 'footer' :
-      trigger.closest('#sttugs-nav-header') ? 'nav' : 'page';
+      trigger.closest('#starlight-nav-header') ? 'nav' : 'page';
     const path = window.location.pathname.replace(/^.*\//, '') || 'index.html';
     return { plan: plan.slice(0, 100), page: where ? `${path} (${where})` : path };
   }
@@ -534,15 +534,15 @@ function initSharedContactModal() {
       startedAt = 0;
     }
     const context = contextFor(trigger);
-    document.getElementById('sttugs-plan').value = context.plan;
-    document.getElementById('sttugs-page').value = context.page;
+    document.getElementById('starlight-plan').value = context.plan;
+    document.getElementById('starlight-page').value = context.page;
     if (!startedAt) startedAt = Date.now();
 
     overlay.classList.add('active');
     modal.classList.add('active');
     document.body.classList.add('scroll-locked');
     modal.scrollTop = 0;
-    const first = form.hidden ? successTitle : document.getElementById('sttugs-name');
+    const first = form.hidden ? successTitle : document.getElementById('starlight-name');
     if (first) first.focus();
   }
 
@@ -553,8 +553,8 @@ function initSharedContactModal() {
     document.body.classList.remove('scroll-locked');
     // The mobile menu closes when its CTA is used, so return focus to the menu button.
     let target = returnFocus;
-    if (target && target.closest && target.closest('#sttugs-nav-mobile')) {
-      target = document.getElementById('sttugs-nav-hamburger') || target;
+    if (target && target.closest && target.closest('#starlight-nav-mobile')) {
+      target = document.getElementById('starlight-nav-hamburger') || target;
     }
     if (target && typeof target.focus === 'function') target.focus();
     returnFocus = null;
@@ -580,7 +580,7 @@ function initSharedContactModal() {
     openModal(trigger);
   });
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
-  document.getElementById('sttugs-success-close').addEventListener('click', closeModal);
+  document.getElementById('starlight-success-close').addEventListener('click', closeModal);
   overlay.addEventListener('click', closeModal);
 
   // Keep Tab / Shift+Tab inside the dialog while it is open.
@@ -635,7 +635,7 @@ function initSharedContactModal() {
     }
     delete data.website;
     const elapsed = Date.now() - startedAt;
-    if (elapsed < STTUGS_LEAD_CONFIG.minFillMs) {
+    if (elapsed < STARLIGHT_LEAD_CONFIG.minFillMs) {
       setStatus('error', 'That was quick! Please check your details, then send again.');
       return;
     }
@@ -646,11 +646,11 @@ function initSharedContactModal() {
     form.setAttribute('aria-busy', 'true');
     setStatus('pending', 'Sending your request…');
     try {
-      await submitSttugsLead({ type: 'Demo request', ...data, elapsed });
+      await submitStarlightLead({ type: 'Demo request', ...data, elapsed });
       showSuccess(data.name, data.email);
     } catch (err) {
-      setStatus('error', sttugsLeadErrorMessage(err));
-      appendSttugsFallbackEmail(status, 'Starlight Hangars demo request');
+      setStatus('error', starlightLeadErrorMessage(err));
+      appendStarlightFallbackEmail(status, 'Starlight Hangars demo request');
     } finally {
       sending = false;
       submitBtn.disabled = false;
@@ -665,24 +665,24 @@ function initSharedContactModal() {
    Clicking a screenshot opens it full-size in an overlay.
 ============================================================ */
 function initStageLightbox() {
-  if (document.getElementById('sttugs-stage-lightbox')) return;
+  if (document.getElementById('starlight-stage-lightbox')) return;
 
   const lb = document.createElement('div');
-  lb.id = 'sttugs-stage-lightbox';
+  lb.id = 'starlight-stage-lightbox';
   lb.className = 'stage-lightbox';
   lb.setAttribute('role', 'dialog');
   lb.setAttribute('aria-modal', 'true');
   lb.setAttribute('aria-label', 'Enlarged product media');
   lb.innerHTML = `
-    <button class="stage-lightbox-close" id="sttugs-stage-lightbox-close" aria-label="Close">&times;</button>
-    <img id="sttugs-stage-lightbox-img" src="" alt="" />
-    <video id="sttugs-stage-lightbox-video" muted loop playsinline></video>
+    <button class="stage-lightbox-close" id="starlight-stage-lightbox-close" aria-label="Close">&times;</button>
+    <img id="starlight-stage-lightbox-img" src="" alt="" />
+    <video id="starlight-stage-lightbox-video" muted loop playsinline></video>
   `;
   document.body.appendChild(lb);
 
-  const img = document.getElementById('sttugs-stage-lightbox-img');
-  const vid = document.getElementById('sttugs-stage-lightbox-video');
-  const closeButton = document.getElementById('sttugs-stage-lightbox-close');
+  const img = document.getElementById('starlight-stage-lightbox-img');
+  const vid = document.getElementById('starlight-stage-lightbox-video');
+  const closeButton = document.getElementById('starlight-stage-lightbox-close');
   let scrollY = 0;
   let bodyOverflow = '';
   let trigger = null;
@@ -713,7 +713,7 @@ function initStageLightbox() {
     if (isVideo) showVideo(src); else showImage(src, alt);
     lb.classList.add('open');
     document.body.style.overflow = 'hidden';
-    document.dispatchEvent(new CustomEvent('sttugs:lightbox-open'));
+    document.dispatchEvent(new CustomEvent('starlight:lightbox-open'));
     closeButton.focus();
   }
 
@@ -725,7 +725,7 @@ function initStageLightbox() {
     vid.removeAttribute('src');
     vid.load();
     img.removeAttribute('src');
-    document.dispatchEvent(new CustomEvent('sttugs:lightbox-close'));
+    document.dispatchEvent(new CustomEvent('starlight:lightbox-close'));
     window.scrollTo(0, scrollY);
     if (trigger && trigger.isConnected) trigger.focus();
     trigger = null;
@@ -832,11 +832,11 @@ function initStageVideoManager() {
   window.addEventListener('scroll', schedule, { passive: true });
   window.addEventListener('resize', schedule);
 
-  document.addEventListener('sttugs:lightbox-open', () => {
+  document.addEventListener('starlight:lightbox-open', () => {
     lightboxOpen = true;
     pauseAll();
   });
-  document.addEventListener('sttugs:lightbox-close', () => {
+  document.addEventListener('starlight:lightbox-close', () => {
     lightboxOpen = false;
     refresh();
   });

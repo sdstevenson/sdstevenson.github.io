@@ -58,8 +58,8 @@
 .brand_mark_outer { fill: var(--logo-outer-color); }
 .brand_mark_inner { fill: var(--logo-inner-color); }
 .mission_logo {
-  --logo-outer-color: var(--sttugs-white);
-  --logo-inner-color: var(--sttugs-navy);
+  --logo-outer-color: var(--starlight-white);
+  --logo-inner-color: var(--starlight-navy);
   display: block;
   width: 280px; height: auto;
 }
@@ -104,27 +104,27 @@ section, header, footer { position: relative; }
 
 /* ── Page colour tokens ── */
 :root {
-  --sttugs-navy:        #071424;
-  --sttugs-navy-mid:    #0E2336;
-  --sttugs-blue:        #4F7186;
-  --sttugs-blue-dark:   #3B5A6D;
-  --sttugs-accent:      #B8C2CB;
-  --sttugs-accent-hov:  #7D93A2;
-  --sttugs-muted:       #8392A0;
-  --sttugs-white:       #FFFFFF;
-  --sttugs-light-bg:    #F6F8FA;
-  --sttugs-card:        rgba(255,255,255,0.06);
-  --sttugs-card-border: rgba(255,255,255,0.12);
+  --starlight-navy:        #071424;
+  --starlight-navy-mid:    #0E2336;
+  --starlight-blue:        #4F7186;
+  --starlight-blue-dark:   #3B5A6D;
+  --starlight-accent:      #B8C2CB;
+  --starlight-accent-hov:  #7D93A2;
+  --starlight-muted:       #8392A0;
+  --starlight-white:       #FFFFFF;
+  --starlight-light-bg:    #F6F8FA;
+  --starlight-card:        rgba(255,255,255,0.06);
+  --starlight-card-border: rgba(255,255,255,0.12);
 }
 
 /* ── Mission section (dark) ── */
-.mission_page_wrap { background: var(--sttugs-navy) !important; padding: 120px 40px 80px; }
-.mission_heading { color: var(--sttugs-white) !important; border-bottom-color: rgba(255,255,255,.25); }
+.mission_page_wrap { background: var(--starlight-navy) !important; padding: 120px 40px 80px; }
+.mission_heading { color: var(--starlight-white) !important; border-bottom-color: rgba(255,255,255,.25); }
 .mission_contain .mission_paragraph { color: rgba(255,255,255,0.75) !important; font-size: 18px; line-height: 1.75; }
 
 /* ── Team / Story section (light) ── */
 .story_wrap {
-  background: var(--sttugs-light-bg) !important;
+  background: var(--starlight-light-bg) !important;
 }
 .story_layout {
   max-width: 1512px !important;
@@ -133,7 +133,7 @@ section, header, footer { position: relative; }
   padding: 5rem 40px !important;
 }
 .story_heading {
-  color: var(--sttugs-navy) !important;
+  color: var(--starlight-navy) !important;
   border-bottom-color: rgba(7,20,36,.2);
 }
 @media (max-width: 840px) {
@@ -143,8 +143,8 @@ section, header, footer { position: relative; }
   .mission_contain, .team_copy { width: 100%; max-width: 640px; justify-self: center; }
 }
 
-.team_copy .team_name { color: var(--sttugs-navy) !important; font-size: 24px; font-weight: 600; line-height: 1.3; }
-.team_position { color: var(--sttugs-blue) !important; margin: .5rem 0 1.5rem; font-size: 16px; }
+.team_copy .team_name { color: var(--starlight-navy) !important; font-size: 24px; font-weight: 600; line-height: 1.3; }
+.team_position { color: var(--starlight-blue) !important; margin: .5rem 0 1.5rem; font-size: 16px; }
 .team_description { color: #536171 !important; line-height: 1.7; }
 .team_image { display: block; width: 100%; max-width: 420px; border-radius: 8px; object-fit: cover; aspect-ratio: 1 / 1; }
 
