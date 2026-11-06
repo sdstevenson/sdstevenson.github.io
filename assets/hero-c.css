@@ -1,0 +1,53 @@
+/* Product page hero: outcome headline, product demo, and its caption on one continuous navy block. */
+:root { --site-nav-h: 86px; }
+
+[id] { scroll-margin-top: calc(var(--site-nav-h) + 12px); }
+
+/* ── Hero ── */
+.hero-c { background: var(--navy); text-align: center; padding: calc(var(--site-nav-h) + 4.5rem) 2rem 0; position: relative; z-index: 2; }
+.hero-c-eyebrow {
+  display: inline-flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.6rem;
+  font-size: 0.75rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-faint);
+  margin: 0 0 1.1rem;
+}
+.hero-c-status {
+  display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.34rem 0.65rem 0.26rem; border-radius: 999px;
+  font-size: 0.65rem; font-weight: 800; letter-spacing: 0.09em; line-height: 1.3;
+  background: rgba(183,202,214,0.12); color: var(--blue-faint);
+}
+.hero-c-status::before { content: ""; width: 0.4rem; height: 0.4rem; border-radius: 50%; background: currentColor; }
+.hero-c-status--testing { background: rgba(227,163,61,0.16); color: #f0c27a; }
+.hero-c h1 {
+  font-size: clamp(2.2rem, 4.8vw, 3.6rem); font-weight: 800; line-height: 1.1; color: #fff;
+  max-width: 46rem; margin: 0 auto 1.1rem;
+}
+.hero-c-lead { font-size: 1.0625rem; line-height: 1.7; color: var(--blue-faint); max-width: 36rem; margin: 0 auto 1.75rem; }
+.hero-c-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.75rem; }
+.hero-c-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0.85rem 1.5rem; border-radius: 999px; font-weight: 700; font-size: 0.95rem; line-height: 1;
+  transition: background 0.2s;
+}
+.hero-c-btn--primary { background: var(--blue); color: #fff; }
+.hero-c-btn--primary:hover { background: var(--blue-dark); }
+.hero-c-btn--ghost { color: #fff; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.28); }
+.hero-c-btn--ghost:hover { box-shadow: inset 0 0 0 1px rgba(255,255,255,0.55); }
+
+/* The product sits half in the hero, half in the next section */
+.hero-c-peek {
+  max-width: 1100px; margin: 3rem auto 0; position: relative; z-index: 3; text-align: left;
+}
+.hero-c-peek .stage-media-slot { border: 0; box-shadow: 0 18px 48px rgba(7,20,36,0.22), 0 0 0 1px rgba(183,202,214,0.18); }
+.hero-c-peek .tow, .hero-c-peek .tv { box-shadow: 0 18px 48px rgba(7,20,36,0.22), 0 0 0 1px rgba(183,202,214,0.18); border-radius: 14px; }
+.hero-c-peek .moves { box-shadow: 0 18px 48px rgba(7,20,36,0.22), 0 0 0 1px rgba(183,202,214,0.18); }
+.section-light.hero-c-after { background: var(--navy); padding-top: 1.5rem; padding-bottom: 3.5rem; }
+.hero-c-caption { max-width: 44rem; margin: 0 auto; text-align: center; font-size: 0.9rem; line-height: 1.6; color: var(--blue-faint); }
+
+/* No product visual (System & Installation): plain hero, same typography */
+.hero-c--plain { padding-bottom: 4.5rem; }
+
+@media (max-width: 700px) {
+  .hero-c { padding: calc(var(--site-nav-h) + 3.25rem) 1.25rem 0; }
+  .hero-c--plain { padding-bottom: 3.5rem; }
+  .hero-c-peek { margin-top: 2.25rem; }
+}

@@ -13,6 +13,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="assets/styles.css?v=20261018-1"/>
   <link rel="stylesheet" href="assets/stages.css"/>
+  <link rel="stylesheet" href="assets/hero-c.css?v=20261106-8"/>
+  <link rel="stylesheet" href="assets/hangar3d/hangar3d.css?v=20261106-7"/>
+  <link rel="stylesheet" href="assets/tracking/tracking-viewer.css?v=20261106-7"/>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DGHZZ8BDEZ"></script>
   <script>
@@ -24,13 +27,13 @@
   </script>
 
   <!-- Search and sharing metadata -->
-  <meta name="description" content="Explore Starlight Hangars&#x27; in-development aircraft tracking and collision-risk alert roadmap."/>
-  <link rel="canonical" href="https://starlighthangars.com/collision-prevention.html"/>
+  <meta name="description" content="Hangar rash prevention is in testing, ready December 2026: aircraft tracking and proximity alerts to help crews reduce hangar rash risk during tows."/>
+  <link rel="canonical" href="https://starlighthangars.com/collision-prevention"/>
   <meta property="og:site_name" content="Starlight Hangars"/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:title" content="Hangar Rash Prevention &amp; Aircraft Tracking | Starlight Hangars"/>
-  <meta property="og:description" content="Explore Starlight Hangars&#x27; in-development aircraft tracking and collision-risk alert roadmap."/>
-  <meta property="og:url" content="https://starlighthangars.com/collision-prevention.html"/>
+  <meta property="og:description" content="Hangar rash prevention is in testing, ready December 2026: aircraft tracking and proximity alerts to help crews reduce hangar rash risk during tows."/>
+  <meta property="og:url" content="https://starlighthangars.com/collision-prevention"/>
   <meta property="og:type" content="website"/>
   <meta property="og:image" content="https://starlighthangars.com/assets/social/starlight-home.jpg"/>
   <meta property="og:image:width" content="1200"/>
@@ -38,7 +41,7 @@
   <meta property="og:image:alt" content="Aircraft parked beside hangars at sunset"/>
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="Hangar Rash Prevention &amp; Aircraft Tracking | Starlight Hangars"/>
-  <meta name="twitter:description" content="Explore Starlight Hangars&#x27; in-development aircraft tracking and collision-risk alert roadmap."/>
+  <meta name="twitter:description" content="Hangar rash prevention is in testing, ready December 2026: aircraft tracking and proximity alerts to help crews reduce hangar rash risk during tows."/>
   <meta name="twitter:image" content="https://starlighthangars.com/assets/social/starlight-home.jpg"/>
   <meta name="twitter:image:alt" content="Aircraft parked beside hangars at sunset"/>
   <script type="application/ld+json">
@@ -47,10 +50,10 @@
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": "https://starlighthangars.com/collision-prevention.html#webpage",
-      "url": "https://starlighthangars.com/collision-prevention.html",
+      "@id": "https://starlighthangars.com/collision-prevention#webpage",
+      "url": "https://starlighthangars.com/collision-prevention",
       "name": "Hangar Rash Prevention & Aircraft Tracking | Starlight Hangars",
-      "description": "Explore Starlight Hangars' in-development aircraft tracking and collision-risk alert roadmap.",
+      "description": "Hangar rash prevention is in testing, ready December 2026: aircraft tracking and proximity alerts to help crews reduce hangar rash risk during tows.",
       "inLanguage": "en-US",
       "isPartOf": {
         "@id": "https://starlighthangars.com/#website"
@@ -73,13 +76,13 @@
     <nav class="snav">
       <div class="snav-inner">
         <div class="snav-logo">
-          <a href="index.html" class="snav-logo-link" aria-label="Starlight Hangars home">
+          <a href="/" class="snav-logo-link" aria-label="Starlight Hangars home">
             <img class="snav-logo-mark" src="assets/starlight_logo_notext.svg" alt="Starlight Hangars logo" aria-hidden="true"/>
             <span class="snav-logo-text">Starlight Hangars</span>
           </a>
         </div>
         <ul class="snav-links" role="list">
-          <li class="snav-item"><a href="index.html" class="snav-link snav-home-link">Home</a></li>
+          <li class="snav-item"><a href="/" class="snav-link snav-home-link">Home</a></li>
           <li class="snav-item snav-item--dropdown" id="starlight-platform-item">
             <button class="snav-link snav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
               How it works
@@ -88,27 +91,22 @@
               </svg>
             </button>
             <div class="snav-dropdown">
-              <a href="index.html#how-it-works" class="snav-dropdown-item">Overview</a>
+              <a href="/#how-it-works" class="snav-dropdown-item">Overview</a>
 
-              <div class="snav-dropdown-section-label">Plan</div>
-              <a href="calendar.html" class="snav-dropdown-item">Calendar View</a>
-              <a href="auto-stack.html" class="snav-dropdown-item">Auto-Stack</a>
-
-              <div class="snav-dropdown-section-label">Verify</div>
-              <a href="path-planning.html" class="snav-dropdown-item">Paths</a>
-              <a href="collision-prevention.html" class="snav-dropdown-item">Collision Prevention</a>
-
-              <div class="snav-dropdown-section-label">Execute</div>
-              <a href="tug-integration.html" class="snav-dropdown-item">Tug Integration</a>
+              <div class="snav-dropdown-section-label">Your day</div>
+              <a href="calendar" class="snav-dropdown-item">Verify Schedule</a>
+              <a href="auto-stack" class="snav-dropdown-item">Auto-Stack &amp; Tow Playback</a>
+              <a href="collision-prevention" class="snav-dropdown-item">Hangar Rash Prevention</a>
+              <a href="tug-integration" class="snav-dropdown-item">Autonomous Tugs</a>
 
               <div class="snav-dropdown-section-label">Record</div>
-              <a href="audit-log.html" class="snav-dropdown-item">Audit Log</a>
+              <a href="audit-log" class="snav-dropdown-item">Audit Log</a>
             </div>
           </li>
-          <li class="snav-item"><a href="hardware-and-infrastructure.html" class="snav-link snav-system-link">System &amp; Installation</a></li>
-          <li class="snav-item"><a href="about.html" class="snav-link snav-about-link">About</a></li>
-          <li class="snav-item"><a href="updates.html" class="snav-link snav-updates-link">Updates</a></li>
-          <li class="snav-item"><a href="roi.html" class="snav-link snav-roi-link">ROI Calculator</a></li>
+          <li class="snav-item"><a href="hardware-and-infrastructure" class="snav-link snav-system-link">System &amp; Installation</a></li>
+          <li class="snav-item"><a href="about" class="snav-link snav-about-link">About</a></li>
+          <li class="snav-item"><a href="updates" class="snav-link snav-updates-link">Updates</a></li>
+          <li class="snav-item"><a href="savings-calculator" class="snav-link snav-roi-link">Savings Calculator</a></li>
           <li class="snav-item"><a href="#" data-open-contact class="snav-link snav-cta">Schedule a Demo</a></li>
         </ul>
         <button class="snav-hamburger" id="starlight-nav-hamburger" aria-label="Open menu">
@@ -124,71 +122,56 @@
         </svg>
       </button>
       <ul class="snav-mobile-links">
-        <li><a href="index.html" class="snav-mobile-link snav-home-link">Home</a></li>
+        <li><a href="/" class="snav-mobile-link snav-home-link">Home</a></li>
         <li>
           <div class="snav-mobile-platform-label">How it works</div>
           <div class="snav-mobile-sub open">
-            <a href="index.html#how-it-works">Overview</a>
+            <a href="/#how-it-works">Overview</a>
 
-            <div class="snav-mobile-section-label">Plan</div>
-            <a href="calendar.html">Calendar View</a>
-            <a href="auto-stack.html">Auto-Stack</a>
-
-            <div class="snav-mobile-section-label">Verify</div>
-            <a href="path-planning.html">Paths</a>
-            <a href="collision-prevention.html">Collision Prevention</a>
-
-            <div class="snav-mobile-section-label">Execute</div>
-            <a href="tug-integration.html">Tug Integration</a>
+            <div class="snav-mobile-section-label">Your day</div>
+            <a href="calendar">Verify Schedule</a>
+            <a href="auto-stack">Auto-Stack &amp; Tow Playback</a>
+            <a href="collision-prevention">Hangar Rash Prevention</a>
+            <a href="tug-integration">Autonomous Tugs</a>
 
             <div class="snav-mobile-section-label">Record</div>
-            <a href="audit-log.html">Audit Log</a>
+            <a href="audit-log">Audit Log</a>
           </div>
         </li>
-        <li><a href="hardware-and-infrastructure.html" class="snav-mobile-link snav-system-link">System &amp; Installation</a></li>
-        <li><a href="about.html" class="snav-mobile-link snav-about-link">About</a></li>
-        <li><a href="updates.html" class="snav-mobile-link snav-updates-link">Updates</a></li>
-        <li><a href="roi.html" class="snav-mobile-link snav-roi-link">ROI Calculator</a></li>
+        <li><a href="hardware-and-infrastructure" class="snav-mobile-link snav-system-link">System &amp; Installation</a></li>
+        <li><a href="about" class="snav-mobile-link snav-about-link">About</a></li>
+        <li><a href="updates" class="snav-mobile-link snav-updates-link">Updates</a></li>
+        <li><a href="savings-calculator" class="snav-mobile-link snav-roi-link">Savings Calculator</a></li>
       </ul>
       <a href="#" data-open-contact class="snav-mobile-cta">Schedule a Demo</a>
     </div></header>
 <!-- starlight-shared-nav:end -->
 
   <!-- HERO -->
-  <section class="detail-hero">
-    <div class="detail-hero-icon">
-      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
-      </svg>
+  <section class="hero-c" id="overview">
+    <p class="hero-c-eyebrow">Hangar Rash Prevention <span class="hero-c-status hero-c-status--testing">In testing &middot; Ready December 2026</span></p>
+    <h1>Track every aircraft in real time</h1>
+    <p class="hero-c-lead">Aircraft tracking and proximity alerts, now in testing, are designed to give crews an extra set of eyes and help reduce hangar rash risk while aircraft are towed.</p>
+    <div class="hero-c-actions"><a href="#" data-open-contact class="hero-c-btn hero-c-btn--primary">Schedule a Demo</a><a href="savings-calculator" class="hero-c-btn hero-c-btn--ghost">Savings Calculator</a></div>
+    <div class="hero-c-peek" id="demo">
+      <div class="tv" data-tracking-viewer>
+        <button type="button" class="tv-launch" data-tracking-launch>
+          <img src="assets/screens/4-hangar-rash-poster.jpg" alt="" loading="lazy"/>
+          <span class="tv-launch_label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>Play the recording</span>
+        </button>
+      </div>
     </div>
-    <h1>Hangar Rash Prevention</h1>
-    <p>Aircraft tracking and proximity-risk alerts are being developed to give crews more awareness and help them reduce hangar-rash risk while aircraft move through the hangar.</p>
-    <div class="availability-badge">
-      <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-      In development
-    </div>
-    <!-- <a href="index.html#platform" class="back-link">← Back to Platform</a> -->
   </section>
 
-  <!-- SCREENSHOT -->
-  <section class="section-light">
-    <div class="section-inner">
-      <h2 class="section-heading light">Track every aircraft in real time</h2>
-      <p class="section-subheading light">Track aircraft movement and identify proximity risks.</p>
-      <figure class="stage-media" data-stage="4-collision-prevention">
-        <div class="stage-media-slot">
-          <video src="assets/screens/4-collision-prevention.mp4" poster="assets/screens/4-collision-prevention-poster.jpg" aria-label="Hangar rash prevention demo" muted loop playsinline></video>
-        </div>
-        <figcaption>Hangar rash prevention — development demo of aircraft tracking.</figcaption>
-      </figure>
-    </div>
+  <section class="section-light hero-c-after">
+    <div class="section-inner"><p class="hero-c-caption">Six cameras installed in the hangar show what is happening on the left. On the right, the 3D viewer replicates it and highlights potential collision points.</p></div>
   </section>
 
   <!-- HOW THIS HELPS YOU — light -->
-  <section class="section-light">
+  <section class="section-light" id="savings">
     <div class="section-inner">
       <h2 class="section-heading light">Potential Annual Labor Savings: <span class="span_accent" data-roi-profit="collision">$45,990</span></h2>
-      <p class="section-subheading light" data-roi-assumptions>Estimated ROI using a 40,000 sq. ft. hangar, 5% utilization boost, $3.50/sq. ft. monthly tenant rate, 4 hours spent stacking per day, $35 per labor hour, and 3 crew members.</p>
+      <p class="section-subheading light" data-roi-assumptions>Estimated savings using a 40,000 sq. ft. hangar, 5% utilization boost, $3.50/sq. ft. monthly tenant rate, 4 hours spent stacking per day, $35 per labor hour, and 3 crew members.</p>
       <div class="benefit-grid">
         <div class="benefit-card">
           <div class="benefit-check">
@@ -207,9 +190,9 @@
   </section>
 
   <!-- HOW IT WORKS -->
-  <section class="section-light">
+  <section class="section-light" id="capabilities">
     <div class="section-inner">
-      <h2 class="section-heading">Capabilities in Development</h2>
+      <h2 class="section-heading">Capabilities in Testing</h2>
       <div class="feature-grid">
         <div class="feature-card">
           <div class="feature-icon">
@@ -223,8 +206,8 @@
               <path d="m13.41 10.59 5.66-5.66"/>
             </svg>
           </div>
-          <h3>Multi-Camera Array</h3>
-          <p>Camera placement will be tailored to your hangar layout to support aircraft tracking across monitored areas.</p>
+          <h3>Multi-Sensor Array</h3>
+          <p>Sensor placement will be tailored to your hangar layout to support aircraft tracking across monitored areas.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">
@@ -232,8 +215,8 @@
               <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>
             </svg>
           </div>
-          <h3>Real-Time Processing</h3>
-          <p>We are developing continuous camera processing to track aircraft positions and evaluate proximity risks.</p>
+          <h3>Real-Time Tracking</h3>
+          <p>We are developing continuous sensor processing to track aircraft positions and evaluate proximity risks.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">
@@ -261,14 +244,14 @@
   </section>
 
   <!-- FAQ -->
-  <section class="faq-section">
+  <section class="faq-section" id="faq">
     <div class="section-inner">
       <h2 class="section-heading" style="text-align:center; margin-bottom:0.5rem;">Frequently Asked Questions</h2>
-      <p class="section-subheading" style="max-width:560px; margin:0 auto 3rem; text-align:center;">Everything you need to know about our collision detection system.</p>
+      <p class="section-subheading" style="max-width:560px; margin:0 auto 3rem; text-align:center;">Everything you need to know about our hangar rash prevention system.</p>
       <div class="faq-list" id="faq-list">
         <div class="faq-item">
           <button class="faq-question">How do you ensure accuracy? <span class="faq-icon">+</span></button>
-          <div class="faq-answer"><div class="faq-answer-inner">The system is in development. Tracking accuracy and alert performance need to be validated for the aircraft, camera coverage, and operating conditions at each installation.</div></div>
+          <div class="faq-answer"><div class="faq-answer-inner">The system is in testing. Tracking accuracy and alert performance need to be validated for the aircraft, camera coverage, and operating conditions at each installation.</div></div>
         </div>
         <div class="faq-item">
           <button class="faq-question">How are users alerted of potential collisions? <span class="faq-icon">+</span></button>
@@ -284,7 +267,7 @@
         </div> -->
         <div class="faq-item">
           <button class="faq-question">What sensors do you use? <span class="faq-icon">+</span></button>
-          <div class="faq-answer"><div class="faq-answer-inner">The planned camera array will monitor aircraft positions within the configured coverage area. Camera placement and coverage will be assessed for your hangar.</div></div>
+          <div class="faq-answer"><div class="faq-answer-inner">The planned sensor array will monitor aircraft positions within the configured coverage area. Sensor placement and coverage will be assessed for your hangar.</div></div>
         </div>
         <!-- <div class="faq-item">
           <button class="faq-question">How many sensors are needed to eliminate blind spots? <span class="faq-icon">+</span></button>
@@ -325,7 +308,7 @@
 <footer data-bg-type="dark" class="starlight-footer">
       <div class="starlight-footer_container">
         <div class="starlight-footer_left">
-          <a href="index.html" class="starlight-footer_brand">
+          <a href="/" class="starlight-footer_brand">
             <img class="starlight-footer-logo" src="assets/starlight_logo_notext.svg" alt="Starlight Hangars logo" aria-hidden="true"/>
             <span class="starlight-site_name">Starlight Hangars</span>
           </a>
@@ -335,17 +318,16 @@
         </div>
         <div class="starlight-footer_right">
           <nav class="starlight-footer_nav">
-            <a href="index.html#how-it-works" class="starlight-footer_link">How it works</a>
-            <a href="calendar.html" class="starlight-footer_link">Calendar View</a>
-            <a href="auto-stack.html" class="starlight-footer_link">Auto-Stack</a>
-            <a href="path-planning.html" class="starlight-footer_link">Paths</a>
-            <a href="collision-prevention.html" class="starlight-footer_link">Collision Prevention</a>
-            <a href="tug-integration.html" class="starlight-footer_link">Tug Integration</a>
-            <a href="audit-log.html" class="starlight-footer_link">Audit Log</a>
-            <a href="hardware-and-infrastructure.html" class="starlight-footer_link">System &amp; Installation</a>
-            <a href="roi.html" class="starlight-footer_link">ROI Calculator</a>
-            <a href="about.html" class="starlight-footer_link">About</a>
-            <a href="updates.html" class="starlight-footer_link">Updates</a>
+            <a href="/#how-it-works" class="starlight-footer_link">How it works</a>
+            <a href="calendar" class="starlight-footer_link">Verify Schedule</a>
+            <a href="auto-stack" class="starlight-footer_link">Auto-Stack &amp; Tow Playback</a>
+            <a href="collision-prevention" class="starlight-footer_link">Hangar Rash Prevention</a>
+            <a href="tug-integration" class="starlight-footer_link">Autonomous Tugs</a>
+            <a href="audit-log" class="starlight-footer_link">Audit Log</a>
+            <a href="hardware-and-infrastructure" class="starlight-footer_link">System &amp; Installation</a>
+            <a href="savings-calculator" class="starlight-footer_link">Savings Calculator</a>
+            <a href="about" class="starlight-footer_link">About</a>
+            <a href="updates" class="starlight-footer_link">Updates</a>
             <a href="#" data-open-contact class="starlight-footer_link">Contact</a>
           </nav>
         </div>
@@ -357,7 +339,7 @@
   <script src="https://cdn.prod.website-files.com/gsap/3.14.2/ScrollTrigger.min.js"></script>
   <script src="https://cdn.prod.website-files.com/gsap/3.14.2/DrawSVGPlugin.min.js"></script>
   <script src="https://cdn.prod.website-files.com/gsap/3.14.2/ScrollSmoother.min.js"></script>
-  <script src="./assets/site.js?v=20261027-3"></script>
+  <script src="./assets/site.js?v=20261106-1"></script>
   <script>
     // FAQ accordion
     document.querySelectorAll('.faq-question').forEach(btn => {
@@ -388,5 +370,31 @@
       });
     }
   </script>
+<script type="module">
+  // The demo (about 4 MB of video, model and scripts) loads when the section nears the screen, or on a click.
+  var launch = document.querySelector('[data-tracking-launch]');
+  if (launch) {
+    var root = launch.closest('[data-tracking-viewer]');
+    var started = false;
+    var start = function () {
+      if (started) return;
+      started = true;
+      import('./assets/tracking/js/tracking-viewer.js?v=20261106-7')
+        .then(function (m) { return m.mountTrackingViewer(root); })
+        .catch(function (error) {
+          console.error(error);
+          root.className = 'tv is-loading';
+          root.innerHTML = '<p class="tv-status">The recording could not be loaded in this browser.</p>';
+        });
+    };
+    launch.addEventListener('click', start);
+    if ('IntersectionObserver' in window) {
+      var near = new IntersectionObserver(function (entries) {
+        if (entries.some(function (entry) { return entry.isIntersecting; })) { near.disconnect(); start(); }
+      }, { rootMargin: '400px 0px' });
+      near.observe(root);
+    }
+  }
+</script>
 </body>
 </html>

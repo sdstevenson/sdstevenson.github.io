@@ -1,0 +1,86 @@
+/* Shared look of the Starlight hangar 3D viewers (tracking replay and tow playback).
+   One place for the colour tokens, radii, scene stage and playback controls: change a token here and both viewers follow.
+   The 3D scene itself takes its colours from js/HangarPalette.js (the SDK palette); the --h3d-sdk-* tokens below mirror it
+   for the HTML drawn around the scene. */
+
+:root {
+  /* site card */
+  --h3d-navy: var(--navy, #071424);
+  --h3d-blue: var(--blue, #4F7186);
+  --h3d-mist: #B7CAD6;
+  --h3d-muted: #5c6a7a;
+  --h3d-line: rgba(7, 20, 36, .08);
+  --h3d-ok: #2f7a52;
+  --h3d-radius-card: 14px;
+  --h3d-radius: 10px;
+  --h3d-radius-sm: 6px;
+  --h3d-radius-pill: 999px;
+  --h3d-shadow-card: 0 18px 50px rgba(7, 20, 36, .14);
+  --h3d-shadow-float: 0 6px 20px rgba(7, 20, 36, .22);
+  /* SDK scene (HangarPalette.scene3d / label / tug) */
+  --h3d-scene-bg: #1E2228;
+  --h3d-sdk-floor: #30353E;
+  --h3d-sdk-wall: #F2EBDD;
+  --h3d-sdk-door: #627CF5;
+  --h3d-sdk-amber: #D98B1D;
+  --h3d-sdk-active: #22d3ee;
+  --h3d-pill: rgba(32, 36, 44, .88);
+  --h3d-pill-ink: #fff;
+  --h3d-pill-muted: #C9CED6;
+  --h3d-font: Inter, ui-sans-serif, system-ui, sans-serif;
+  /* playback controls on a light surface; .h3d-on-dark swaps them */
+  --h3d-ctl-bg: #f5f7f9;
+  --h3d-ctl-hover: #e8edf2;
+  --h3d-ctl-ink: var(--h3d-navy);
+  --h3d-ctl-ring: rgba(7, 20, 36, .1);
+  --h3d-primary-bg: var(--h3d-navy);
+  --h3d-primary-hover: #0E2336;
+  --h3d-primary-ink: #fff;
+  --h3d-track: #dde4ea;
+  --h3d-fill: var(--h3d-navy);
+  --h3d-focus: var(--h3d-blue);
+}
+.h3d-on-dark {
+  --h3d-ctl-bg: transparent;
+  --h3d-ctl-hover: rgba(183, 202, 214, .16);
+  --h3d-ctl-ink: #fff;
+  --h3d-ctl-ring: rgba(183, 202, 214, .5);
+  --h3d-primary-bg: #fff;
+  --h3d-primary-hover: #e8eef3;
+  --h3d-primary-ink: var(--h3d-navy);
+  --h3d-track: rgba(183, 202, 214, .3);
+  --h3d-fill: var(--h3d-mist);
+  --h3d-focus: var(--h3d-mist);
+}
+
+/* ---- scene stage ---- */
+.h3d-stage { position: relative; overflow: hidden; background: var(--h3d-scene-bg); }
+.h3d-scene-frame { position: absolute; left: 0; top: 0; }
+.h3d-scene { position: absolute; inset: 0; }
+.h3d-scene canvas { display: block; width: 100%; height: 100%; outline: none; touch-action: none; }
+.h3d-hint { position: absolute; left: .6rem; bottom: .6rem; margin: 0; padding: .3rem .6rem; border-radius: var(--h3d-radius-sm); background: var(--h3d-pill); color: #f8fafc; font-size: .72rem; pointer-events: none; }
+.h3d-status { margin: 0; padding: 1.5rem; color: var(--h3d-mist); font-size: .95rem; text-align: center; }
+.h3d-status-overlay { position: absolute; left: .6rem; right: .6rem; top: .6rem; padding: .5rem .75rem; border-radius: var(--h3d-radius-sm); background: var(--h3d-pill); color: #f8fafc; font-size: .82rem; text-align: left; }
+.h3d-status-overlay.is-error { background: rgba(127, 29, 29, .94); }
+
+/* label pills drawn over the scene, in the SDK's tail-number pill style */
+.h3d-pill { border-radius: var(--h3d-radius); background: var(--h3d-pill); color: var(--h3d-pill-ink); box-shadow: var(--h3d-shadow-float); }
+
+/* ---- controls ---- */
+.h3d-btn { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; width: 2.4rem; height: 2.4rem; padding: 0; border: 0; border-radius: 50%; background: var(--h3d-ctl-bg); box-shadow: inset 0 0 0 1px var(--h3d-ctl-ring); color: var(--h3d-ctl-ink); font: inherit; cursor: pointer; }
+.h3d-btn:hover:not(:disabled) { background: var(--h3d-ctl-hover); }
+.h3d-btn:disabled { opacity: .4; cursor: not-allowed; }
+.h3d-btn svg { width: 1.05rem; height: 1.05rem; fill: currentColor; }
+.h3d-btn-primary { width: 2.9rem; height: 2.9rem; background: var(--h3d-primary-bg); box-shadow: none; color: var(--h3d-primary-ink); }
+.h3d-btn-primary:hover:not(:disabled) { background: var(--h3d-primary-hover); }
+.h3d-btn-pill { width: auto; min-width: 2.6rem; height: auto; padding: .45rem .8rem; border-radius: var(--h3d-radius-pill); font-size: .8rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.h3d-cta { display: inline-flex; align-items: center; gap: .6rem; padding: .85rem 1.35rem; border: 0; border-radius: var(--h3d-radius-pill); background: #fff; color: var(--h3d-navy); font: inherit; font-size: 1rem; font-weight: 800; white-space: nowrap; cursor: pointer; box-shadow: 0 10px 30px rgba(7, 20, 36, .3); }
+.h3d-cta svg { width: 1.1rem; height: 1.1rem; fill: currentColor; }
+.h3d-btn:focus-visible, .h3d-cta:focus-visible, .h3d-range:focus-visible { outline: 3px solid var(--h3d-focus); outline-offset: 2px; }
+
+.h3d-range { flex: 1 1 auto; min-width: 0; height: 1.2rem; margin: 0; background: transparent; cursor: pointer; -webkit-appearance: none; appearance: none; --p: 0%; }
+.h3d-range::-webkit-slider-runnable-track { height: 6px; border-radius: 3px; background: linear-gradient(to right, var(--h3d-fill) var(--p), var(--h3d-track) var(--p)); }
+.h3d-range::-moz-range-track { height: 6px; border-radius: 3px; background: var(--h3d-track); }
+.h3d-range::-moz-range-progress { height: 6px; border-radius: 3px; background: var(--h3d-fill); }
+.h3d-range::-webkit-slider-thumb { -webkit-appearance: none; width: 1rem; height: 1rem; margin-top: -5px; border: 2px solid #fff; border-radius: 50%; background: var(--h3d-fill); box-shadow: 0 1px 4px rgba(7, 20, 36, .4); }
+.h3d-range::-moz-range-thumb { width: .8rem; height: .8rem; border: 2px solid #fff; border-radius: 50%; background: var(--h3d-fill); box-shadow: 0 1px 4px rgba(7, 20, 36, .4); }

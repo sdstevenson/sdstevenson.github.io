@@ -134,7 +134,7 @@ function initRoiDefaults() {
   });
   document.querySelectorAll('[data-roi-assumptions]').forEach((element) => {
     element.textContent =
-      `Estimated ROI using a ${formatRoiNumber(defaults.hangarSqft, 0)} sq. ft. hangar, ` +
+      `Estimated savings using a ${formatRoiNumber(defaults.hangarSqft, 0)} sq. ft. hangar, ` +
       `${formatRoiNumber(defaults.utilizationBoost)}% utilization boost, ` +
       `${formatRoiRate(defaults.tenantRate)}/sq. ft. monthly tenant rate, ` +
       `${formatRoiNumber(defaults.hoursPerDay)} hours spent stacking per day, ` +
@@ -204,12 +204,14 @@ function initSharedNavBehavior(navHeader) {
 
   // ── Highlight active page in nav ──
   function highlightCurrentPage() {
-    const filename = window.location.pathname.split('/').pop() || 'index.html';
+    // Pages are served without .html, so compare plain page names (the home page is 'index').
+    const pageName = value => (String(value || '').split(/[?#]/)[0].split('/').pop() || 'index').replace(/\.html$/, '');
+    const filename = pageName(window.location.pathname);
     let isOnPlatformPage = false;
 
     // Desktop: dropdown items
     document.querySelectorAll('.snav-dropdown-item').forEach(a => {
-      if (a.getAttribute('href') === filename) {
+      if (pageName(a.getAttribute('href')) === filename) {
         a.classList.add('snav-active');
         isOnPlatformPage = true;
       }
@@ -222,16 +224,16 @@ function initSharedNavBehavior(navHeader) {
 
     // Mobile: platform sub-links
     document.querySelectorAll('.snav-mobile-sub a').forEach(a => {
-      if (a.getAttribute('href') === filename) a.classList.add('snav-active');
+      if (pageName(a.getAttribute('href')) === filename) a.classList.add('snav-active');
     });
 
     // About page
-    if (filename === 'about.html') {
+    if (filename === 'about') {
       document.querySelectorAll('.snav-about-link').forEach(a => a.classList.add('snav-active'));
     }
 
     // ROI page
-    if (filename === 'roi.html') {
+    if (filename === 'savings-calculator') {
       document.querySelectorAll('.snav-roi-link').forEach(a => a.classList.add('snav-active'));
     }
 
@@ -239,17 +241,17 @@ function initSharedNavBehavior(navHeader) {
     if (document.body.dataset.navSection === 'updates') {
       document.querySelectorAll('.snav-updates-link').forEach(a => {
         a.classList.add('snav-active');
-        a.setAttribute('aria-current', filename === 'updates.html' ? 'page' : 'true');
+        a.setAttribute('aria-current', filename === 'updates' ? 'page' : 'true');
       });
     }
 
     // System & Installation page
-    if (filename === 'hardware-and-infrastructure.html') {
+    if (filename === 'hardware-and-infrastructure') {
       document.querySelectorAll('.snav-system-link').forEach(a => a.classList.add('snav-active'));
     }
 
     // Home link (detail pages showing Home)
-    if (filename === '' || filename === 'index.html') {
+    if (filename === 'index') {
       document.querySelectorAll('.snav-home-link').forEach(a => a.classList.add('snav-active'));
     }
   }

@@ -22,12 +22,12 @@
 
   <!-- Search and sharing metadata -->
   <meta name="description" content="Meet Starlight Hangars and founder Samir Stevenson, building hardware and software for aircraft hangar planning and automation."/>
-  <link rel="canonical" href="https://starlighthangars.com/about.html"/>
+  <link rel="canonical" href="https://starlighthangars.com/about"/>
   <meta property="og:site_name" content="Starlight Hangars"/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:title" content="About Starlight Hangars | Hangar Planning &amp; Automation"/>
   <meta property="og:description" content="Meet Starlight Hangars and founder Samir Stevenson, building hardware and software for aircraft hangar planning and automation."/>
-  <meta property="og:url" content="https://starlighthangars.com/about.html"/>
+  <meta property="og:url" content="https://starlighthangars.com/about"/>
   <meta property="og:type" content="website"/>
   <meta property="og:image" content="https://starlighthangars.com/assets/social/starlight-home.jpg"/>
   <meta property="og:image:width" content="1200"/>
@@ -44,8 +44,8 @@
   "@graph": [
     {
       "@type": "AboutPage",
-      "@id": "https://starlighthangars.com/about.html#webpage",
-      "url": "https://starlighthangars.com/about.html",
+      "@id": "https://starlighthangars.com/about#webpage",
+      "url": "https://starlighthangars.com/about",
       "name": "About Starlight Hangars | Hangar Planning & Automation",
       "description": "Meet Starlight Hangars and founder Samir Stevenson, building hardware and software for aircraft hangar planning and automation.",
       "inLanguage": "en-US",
@@ -56,13 +56,13 @@
         "@id": "https://starlighthangars.com/#organization"
       },
       "mainEntity": {
-        "@id": "https://starlighthangars.com/about.html#samir-stevenson"
+        "@id": "https://starlighthangars.com/about#samir-stevenson"
       }
     },
     {
       "@type": "Person",
-      "@id": "https://starlighthangars.com/about.html#samir-stevenson",
-      "url": "https://starlighthangars.com/about.html#samir-stevenson",
+      "@id": "https://starlighthangars.com/about#samir-stevenson",
+      "url": "https://starlighthangars.com/about#samir-stevenson",
       "name": "Samir Stevenson",
       "jobTitle": "Founder",
       "image": "https://starlighthangars.com/assets/post_solo.jpg",
@@ -87,13 +87,13 @@
     <nav class="snav">
       <div class="snav-inner">
         <div class="snav-logo">
-          <a href="index.html" class="snav-logo-link" aria-label="Starlight Hangars home">
+          <a href="/" class="snav-logo-link" aria-label="Starlight Hangars home">
             <img class="snav-logo-mark" src="assets/starlight_logo_notext.svg" alt="Starlight Hangars logo" aria-hidden="true"/>
             <span class="snav-logo-text">Starlight Hangars</span>
           </a>
         </div>
         <ul class="snav-links" role="list">
-          <li class="snav-item"><a href="index.html" class="snav-link snav-home-link">Home</a></li>
+          <li class="snav-item"><a href="/" class="snav-link snav-home-link">Home</a></li>
           <li class="snav-item snav-item--dropdown" id="starlight-platform-item">
             <button class="snav-link snav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
               How it works
@@ -102,27 +102,22 @@
               </svg>
             </button>
             <div class="snav-dropdown">
-              <a href="index.html#how-it-works" class="snav-dropdown-item">Overview</a>
+              <a href="/#how-it-works" class="snav-dropdown-item">Overview</a>
 
-              <div class="snav-dropdown-section-label">Plan</div>
-              <a href="calendar.html" class="snav-dropdown-item">Calendar View</a>
-              <a href="auto-stack.html" class="snav-dropdown-item">Auto-Stack</a>
-
-              <div class="snav-dropdown-section-label">Verify</div>
-              <a href="path-planning.html" class="snav-dropdown-item">Paths</a>
-              <a href="collision-prevention.html" class="snav-dropdown-item">Collision Prevention</a>
-
-              <div class="snav-dropdown-section-label">Execute</div>
-              <a href="tug-integration.html" class="snav-dropdown-item">Tug Integration</a>
+              <div class="snav-dropdown-section-label">Your day</div>
+              <a href="calendar" class="snav-dropdown-item">Verify Schedule</a>
+              <a href="auto-stack" class="snav-dropdown-item">Auto-Stack &amp; Tow Playback</a>
+              <a href="collision-prevention" class="snav-dropdown-item">Hangar Rash Prevention</a>
+              <a href="tug-integration" class="snav-dropdown-item">Autonomous Tugs</a>
 
               <div class="snav-dropdown-section-label">Record</div>
-              <a href="audit-log.html" class="snav-dropdown-item">Audit Log</a>
+              <a href="audit-log" class="snav-dropdown-item">Audit Log</a>
             </div>
           </li>
-          <li class="snav-item"><a href="hardware-and-infrastructure.html" class="snav-link snav-system-link">System &amp; Installation</a></li>
-          <li class="snav-item"><a href="about.html" class="snav-link snav-about-link">About</a></li>
-          <li class="snav-item"><a href="updates.html" class="snav-link snav-updates-link">Updates</a></li>
-          <li class="snav-item"><a href="roi.html" class="snav-link snav-roi-link">ROI Calculator</a></li>
+          <li class="snav-item"><a href="hardware-and-infrastructure" class="snav-link snav-system-link">System &amp; Installation</a></li>
+          <li class="snav-item"><a href="about" class="snav-link snav-about-link">About</a></li>
+          <li class="snav-item"><a href="updates" class="snav-link snav-updates-link">Updates</a></li>
+          <li class="snav-item"><a href="savings-calculator" class="snav-link snav-roi-link">Savings Calculator</a></li>
           <li class="snav-item"><a href="#" data-open-contact class="snav-link snav-cta">Schedule a Demo</a></li>
         </ul>
         <button class="snav-hamburger" id="starlight-nav-hamburger" aria-label="Open menu">
@@ -138,31 +133,26 @@
         </svg>
       </button>
       <ul class="snav-mobile-links">
-        <li><a href="index.html" class="snav-mobile-link snav-home-link">Home</a></li>
+        <li><a href="/" class="snav-mobile-link snav-home-link">Home</a></li>
         <li>
           <div class="snav-mobile-platform-label">How it works</div>
           <div class="snav-mobile-sub open">
-            <a href="index.html#how-it-works">Overview</a>
+            <a href="/#how-it-works">Overview</a>
 
-            <div class="snav-mobile-section-label">Plan</div>
-            <a href="calendar.html">Calendar View</a>
-            <a href="auto-stack.html">Auto-Stack</a>
-
-            <div class="snav-mobile-section-label">Verify</div>
-            <a href="path-planning.html">Paths</a>
-            <a href="collision-prevention.html">Collision Prevention</a>
-
-            <div class="snav-mobile-section-label">Execute</div>
-            <a href="tug-integration.html">Tug Integration</a>
+            <div class="snav-mobile-section-label">Your day</div>
+            <a href="calendar">Verify Schedule</a>
+            <a href="auto-stack">Auto-Stack &amp; Tow Playback</a>
+            <a href="collision-prevention">Hangar Rash Prevention</a>
+            <a href="tug-integration">Autonomous Tugs</a>
 
             <div class="snav-mobile-section-label">Record</div>
-            <a href="audit-log.html">Audit Log</a>
+            <a href="audit-log">Audit Log</a>
           </div>
         </li>
-        <li><a href="hardware-and-infrastructure.html" class="snav-mobile-link snav-system-link">System &amp; Installation</a></li>
-        <li><a href="about.html" class="snav-mobile-link snav-about-link">About</a></li>
-        <li><a href="updates.html" class="snav-mobile-link snav-updates-link">Updates</a></li>
-        <li><a href="roi.html" class="snav-mobile-link snav-roi-link">ROI Calculator</a></li>
+        <li><a href="hardware-and-infrastructure" class="snav-mobile-link snav-system-link">System &amp; Installation</a></li>
+        <li><a href="about" class="snav-mobile-link snav-about-link">About</a></li>
+        <li><a href="updates" class="snav-mobile-link snav-updates-link">Updates</a></li>
+        <li><a href="savings-calculator" class="snav-mobile-link snav-roi-link">Savings Calculator</a></li>
       </ul>
       <a href="#" data-open-contact class="snav-mobile-cta">Schedule a Demo</a>
     </div></header>
@@ -184,7 +174,7 @@
         <h1 class="mission_heading about_section-heading">Our Mission</h1>
         <p class="mission_paragraph u-text-body-1">
           Our mission is to make hangar operations easier to plan, coordinate, and carry out through connected hardware and software. We work directly with operators to understand their daily challenges and develop tools around how their hangars run.<br/><br/>
-          Today, that means planning aircraft layouts and tow paths around flight schedules. We’re developing camera-based aircraft tracking to help reduce towing workload and collision risk. Our longer-term goal is autonomous aircraft movement: hardware and tug systems that carry out planned moves without human intervention.
+          Today, that means planning aircraft layouts and tow paths around flight schedules. Camera-based aircraft tracking is now in testing, to help reduce towing workload and hangar rash risk. Our longer-term goal is autonomous aircraft movement: hardware and tug systems that carry out planned moves without human intervention.
         </p>
       </div>
     </div>
@@ -221,7 +211,7 @@
 <footer data-bg-type="dark" class="starlight-footer">
       <div class="starlight-footer_container">
         <div class="starlight-footer_left">
-          <a href="index.html" class="starlight-footer_brand">
+          <a href="/" class="starlight-footer_brand">
             <img class="starlight-footer-logo" src="assets/starlight_logo_notext.svg" alt="Starlight Hangars logo" aria-hidden="true"/>
             <span class="starlight-site_name">Starlight Hangars</span>
           </a>
@@ -231,17 +221,16 @@
         </div>
         <div class="starlight-footer_right">
           <nav class="starlight-footer_nav">
-            <a href="index.html#how-it-works" class="starlight-footer_link">How it works</a>
-            <a href="calendar.html" class="starlight-footer_link">Calendar View</a>
-            <a href="auto-stack.html" class="starlight-footer_link">Auto-Stack</a>
-            <a href="path-planning.html" class="starlight-footer_link">Paths</a>
-            <a href="collision-prevention.html" class="starlight-footer_link">Collision Prevention</a>
-            <a href="tug-integration.html" class="starlight-footer_link">Tug Integration</a>
-            <a href="audit-log.html" class="starlight-footer_link">Audit Log</a>
-            <a href="hardware-and-infrastructure.html" class="starlight-footer_link">System &amp; Installation</a>
-            <a href="roi.html" class="starlight-footer_link">ROI Calculator</a>
-            <a href="about.html" class="starlight-footer_link">About</a>
-            <a href="updates.html" class="starlight-footer_link">Updates</a>
+            <a href="/#how-it-works" class="starlight-footer_link">How it works</a>
+            <a href="calendar" class="starlight-footer_link">Verify Schedule</a>
+            <a href="auto-stack" class="starlight-footer_link">Auto-Stack &amp; Tow Playback</a>
+            <a href="collision-prevention" class="starlight-footer_link">Hangar Rash Prevention</a>
+            <a href="tug-integration" class="starlight-footer_link">Autonomous Tugs</a>
+            <a href="audit-log" class="starlight-footer_link">Audit Log</a>
+            <a href="hardware-and-infrastructure" class="starlight-footer_link">System &amp; Installation</a>
+            <a href="savings-calculator" class="starlight-footer_link">Savings Calculator</a>
+            <a href="about" class="starlight-footer_link">About</a>
+            <a href="updates" class="starlight-footer_link">Updates</a>
             <a href="#" data-open-contact class="starlight-footer_link">Contact</a>
           </nav>
         </div>
@@ -253,6 +242,6 @@
 <script src="https://cdn.prod.website-files.com/gsap/3.14.2/ScrollTrigger.min.js"></script>
 <script src="https://cdn.prod.website-files.com/gsap/3.14.2/DrawSVGPlugin.min.js"></script>
 <script src="https://cdn.prod.website-files.com/gsap/3.14.2/ScrollSmoother.min.js"></script>
-<script src="./assets/site.js?v=20261027-3"></script>
+<script src="./assets/site.js?v=20261106-1"></script>
 
 </div></body></html>

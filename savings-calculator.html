@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>Hangar Space &amp; Labor ROI Calculator | Starlight Hangars</title>
+  <title>Savings Calculator | Starlight Hangars</title>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <link rel="icon" href="./favicon/favicon.ico?v=20261027" sizes="48x48"/>
   <link rel="icon" href="./favicon/favicon.svg?v=20261027" type="image/svg+xml"/>
@@ -141,6 +141,33 @@
       .roi-result { padding: 1.5rem; }
       .roi-result-top { grid-template-columns: 1fr; }
     }
+
+    /* ── Match the rest of the site ── */
+    .roi-card { border-radius: 14px; border: 1px solid rgba(7,20,36,0.08); box-shadow: 0 8px 32px rgba(7,20,36,0.06); }
+    .roi-result { background: var(--navy); border-radius: 14px; box-shadow: inset 0 0 0 1px rgba(183,202,214,0.14); }
+    .roi-result-label, .roi-breakdown-label { color: var(--blue-faint); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; }
+    .roi-result-item--minor .roi-result-label { color: var(--blue-faint); }
+    .roi-result-value { letter-spacing: -0.02em; }
+    .roi-result-sub, .roi-breakdown-formula { color: rgba(255,255,255,0.6); }
+    .roi-result-item--minor .roi-result-sub { color: rgba(255,255,255,0.6); }
+    .roi-breakdown-list { gap: 0.9rem; border-top: 1px solid rgba(183,202,214,0.18); }
+    .roi-breakdown-val { color: #fff; }
+    .roi-breakdown-label { display: inline-flex; align-items: center; gap: 0.5rem; }
+    .roi-development-label {
+      display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.28rem 0.55rem 0.2rem; border: 0; border-radius: 999px;
+      font-size: 0.6rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1; vertical-align: middle;
+    }
+    .roi-development-label::before { content: ""; width: 0.36rem; height: 0.36rem; border-radius: 50%; background: currentColor; }
+    .roi-development-label--testing { background: rgba(227,163,61,0.16); color: #f0c27a; }
+    .roi-development-label--dev { background: rgba(183,202,214,0.12); color: var(--blue-faint); }
+    .roi-group-label { color: var(--blue); font-weight: 800; letter-spacing: 0.12em; }
+    .roi-row-label { font-weight: 600; }
+    .roi-numbox { border-radius: 999px; padding: 0.4rem 0.75rem; }
+    .roi-row input[type="range"]::-webkit-slider-thumb { background: #fff; border: 3px solid var(--blue); width: 20px; height: 20px; box-sizing: border-box; }
+    .roi-row input[type="range"]::-moz-range-thumb { background: #fff; border: 3px solid var(--blue); width: 20px; height: 20px; box-sizing: border-box; }
+    .roi-submit, .roi-email-wrap input[type="email"] { border-radius: 999px; }
+    .roi-submit { padding: 0.75rem 1.6rem; }
+    .roi-email-wrap input[type="email"] { padding: 0.75rem 1.1rem; }
   </style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DGHZZ8BDEZ"></script>
@@ -153,19 +180,19 @@
 
   <!-- Search and sharing metadata -->
   <meta name="description" content="Estimate potential annual revenue and labor savings using your hangar’s assumptions."/>
-  <link rel="canonical" href="https://starlighthangars.com/roi.html"/>
+  <link rel="canonical" href="https://starlighthangars.com/savings-calculator"/>
   <meta property="og:site_name" content="Starlight Hangars"/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:title" content="Hangar Space &amp; Labor ROI Calculator | Starlight Hangars"/>
+  <meta property="og:title" content="Savings Calculator | Starlight Hangars"/>
   <meta property="og:description" content="Estimate potential annual revenue and labor savings using your hangar’s assumptions."/>
-  <meta property="og:url" content="https://starlighthangars.com/roi.html"/>
+  <meta property="og:url" content="https://starlighthangars.com/savings-calculator"/>
   <meta property="og:type" content="website"/>
   <meta property="og:image" content="https://starlighthangars.com/assets/social/starlight-home.jpg"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
   <meta property="og:image:alt" content="Aircraft parked beside hangars at sunset"/>
   <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:title" content="Hangar Space &amp; Labor ROI Calculator | Starlight Hangars"/>
+  <meta name="twitter:title" content="Savings Calculator | Starlight Hangars"/>
   <meta name="twitter:description" content="Estimate potential annual revenue and labor savings using your hangar’s assumptions."/>
   <meta name="twitter:image" content="https://starlighthangars.com/assets/social/starlight-home.jpg"/>
   <meta name="twitter:image:alt" content="Aircraft parked beside hangars at sunset"/>
@@ -175,9 +202,9 @@
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": "https://starlighthangars.com/roi.html#webpage",
-      "url": "https://starlighthangars.com/roi.html",
-      "name": "Hangar Space & Labor ROI Calculator | Starlight Hangars",
+      "@id": "https://starlighthangars.com/savings-calculator#webpage",
+      "url": "https://starlighthangars.com/savings-calculator",
+      "name": "Savings Calculator | Starlight Hangars",
       "description": "Estimate potential annual revenue and labor savings using your hangar’s assumptions.",
       "inLanguage": "en-US",
       "isPartOf": {
@@ -202,13 +229,13 @@
     <nav class="snav">
       <div class="snav-inner">
         <div class="snav-logo">
-          <a href="index.html" class="snav-logo-link" aria-label="Starlight Hangars home">
+          <a href="/" class="snav-logo-link" aria-label="Starlight Hangars home">
             <img class="snav-logo-mark" src="assets/starlight_logo_notext.svg" alt="Starlight Hangars logo" aria-hidden="true"/>
             <span class="snav-logo-text">Starlight Hangars</span>
           </a>
         </div>
         <ul class="snav-links" role="list">
-          <li class="snav-item"><a href="index.html" class="snav-link snav-home-link">Home</a></li>
+          <li class="snav-item"><a href="/" class="snav-link snav-home-link">Home</a></li>
           <li class="snav-item snav-item--dropdown" id="starlight-platform-item">
             <button class="snav-link snav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
               How it works
@@ -217,27 +244,22 @@
               </svg>
             </button>
             <div class="snav-dropdown">
-              <a href="index.html#how-it-works" class="snav-dropdown-item">Overview</a>
+              <a href="/#how-it-works" class="snav-dropdown-item">Overview</a>
 
-              <div class="snav-dropdown-section-label">Plan</div>
-              <a href="calendar.html" class="snav-dropdown-item">Calendar View</a>
-              <a href="auto-stack.html" class="snav-dropdown-item">Auto-Stack</a>
-
-              <div class="snav-dropdown-section-label">Verify</div>
-              <a href="path-planning.html" class="snav-dropdown-item">Paths</a>
-              <a href="collision-prevention.html" class="snav-dropdown-item">Collision Prevention</a>
-
-              <div class="snav-dropdown-section-label">Execute</div>
-              <a href="tug-integration.html" class="snav-dropdown-item">Tug Integration</a>
+              <div class="snav-dropdown-section-label">Your day</div>
+              <a href="calendar" class="snav-dropdown-item">Verify Schedule</a>
+              <a href="auto-stack" class="snav-dropdown-item">Auto-Stack &amp; Tow Playback</a>
+              <a href="collision-prevention" class="snav-dropdown-item">Hangar Rash Prevention</a>
+              <a href="tug-integration" class="snav-dropdown-item">Autonomous Tugs</a>
 
               <div class="snav-dropdown-section-label">Record</div>
-              <a href="audit-log.html" class="snav-dropdown-item">Audit Log</a>
+              <a href="audit-log" class="snav-dropdown-item">Audit Log</a>
             </div>
           </li>
-          <li class="snav-item"><a href="hardware-and-infrastructure.html" class="snav-link snav-system-link">System &amp; Installation</a></li>
-          <li class="snav-item"><a href="about.html" class="snav-link snav-about-link">About</a></li>
-          <li class="snav-item"><a href="updates.html" class="snav-link snav-updates-link">Updates</a></li>
-          <li class="snav-item"><a href="roi.html" class="snav-link snav-roi-link">ROI Calculator</a></li>
+          <li class="snav-item"><a href="hardware-and-infrastructure" class="snav-link snav-system-link">System &amp; Installation</a></li>
+          <li class="snav-item"><a href="about" class="snav-link snav-about-link">About</a></li>
+          <li class="snav-item"><a href="updates" class="snav-link snav-updates-link">Updates</a></li>
+          <li class="snav-item"><a href="savings-calculator" class="snav-link snav-roi-link">Savings Calculator</a></li>
           <li class="snav-item"><a href="#" data-open-contact class="snav-link snav-cta">Schedule a Demo</a></li>
         </ul>
         <button class="snav-hamburger" id="starlight-nav-hamburger" aria-label="Open menu">
@@ -253,31 +275,26 @@
         </svg>
       </button>
       <ul class="snav-mobile-links">
-        <li><a href="index.html" class="snav-mobile-link snav-home-link">Home</a></li>
+        <li><a href="/" class="snav-mobile-link snav-home-link">Home</a></li>
         <li>
           <div class="snav-mobile-platform-label">How it works</div>
           <div class="snav-mobile-sub open">
-            <a href="index.html#how-it-works">Overview</a>
+            <a href="/#how-it-works">Overview</a>
 
-            <div class="snav-mobile-section-label">Plan</div>
-            <a href="calendar.html">Calendar View</a>
-            <a href="auto-stack.html">Auto-Stack</a>
-
-            <div class="snav-mobile-section-label">Verify</div>
-            <a href="path-planning.html">Paths</a>
-            <a href="collision-prevention.html">Collision Prevention</a>
-
-            <div class="snav-mobile-section-label">Execute</div>
-            <a href="tug-integration.html">Tug Integration</a>
+            <div class="snav-mobile-section-label">Your day</div>
+            <a href="calendar">Verify Schedule</a>
+            <a href="auto-stack">Auto-Stack &amp; Tow Playback</a>
+            <a href="collision-prevention">Hangar Rash Prevention</a>
+            <a href="tug-integration">Autonomous Tugs</a>
 
             <div class="snav-mobile-section-label">Record</div>
-            <a href="audit-log.html">Audit Log</a>
+            <a href="audit-log">Audit Log</a>
           </div>
         </li>
-        <li><a href="hardware-and-infrastructure.html" class="snav-mobile-link snav-system-link">System &amp; Installation</a></li>
-        <li><a href="about.html" class="snav-mobile-link snav-about-link">About</a></li>
-        <li><a href="updates.html" class="snav-mobile-link snav-updates-link">Updates</a></li>
-        <li><a href="roi.html" class="snav-mobile-link snav-roi-link">ROI Calculator</a></li>
+        <li><a href="hardware-and-infrastructure" class="snav-mobile-link snav-system-link">System &amp; Installation</a></li>
+        <li><a href="about" class="snav-mobile-link snav-about-link">About</a></li>
+        <li><a href="updates" class="snav-mobile-link snav-updates-link">Updates</a></li>
+        <li><a href="savings-calculator" class="snav-mobile-link snav-roi-link">Savings Calculator</a></li>
       </ul>
       <a href="#" data-open-contact class="snav-mobile-cta">Schedule a Demo</a>
     </div></header>
@@ -291,8 +308,8 @@
         <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
       </svg>
     </div>
-    <h1>ROI Calculator</h1>
-    <p>Estimate potential annual revenue and labor savings using your hangar’s assumptions.</p>
+    <h1>Savings Calculator</h1>
+    <p>Estimate how Starlight Hangars could save your operation money by increasing usable space, making stacking more efficient, and saving labor time.</p>
   </section>
 
   <!-- CALCULATOR -->
@@ -334,14 +351,14 @@
             </div>
           </div>
           <div class="roi-breakdown-item">
-            <span class="roi-breakdown-label">Hangar Rash Prevention <span class="roi-development-label">In development</span></span>
+            <span class="roi-breakdown-label">Hangar Rash Prevention <span class="roi-development-label roi-development-label--testing">In testing</span></span>
             <div class="roi-breakdown-line">
               <span class="roi-breakdown-val" id="collisionPlanningSaving">$0</span>
               <span class="roi-breakdown-formula" id="collisionPlanningFormula">30% of annual stacking labor</span>
             </div>
           </div>
           <div class="roi-breakdown-item">
-            <span class="roi-breakdown-label">Tug Automation <span class="roi-development-label">In development</span></span>
+            <span class="roi-breakdown-label">Autonomous Tugs <span class="roi-development-label roi-development-label--dev">In development</span></span>
             <div class="roi-breakdown-line">
               <span class="roi-breakdown-val" id="autonomousTugsSaving">$0</span>
               <span class="roi-breakdown-formula" id="autonomousTugsFormula">45% of annual stacking labor</span>
@@ -402,7 +419,7 @@
 
       <!-- Email form -->
       <div class="roi-form-wrap">
-        <p>Want a detailed breakdown of your ROI calculation?</p>
+        <p>Want a detailed breakdown of your savings calculation?</p>
         <form id="roiDownloadForm" class="roi-form" novalidate>
           <div class="roi-email-wrap">
             <label for="roi-email" class="roi-visually-hidden">Email address</label>
@@ -447,7 +464,7 @@
             </svg>
           </div>
           <h3>Potential Labor Savings</h3>
-          <p>The annual stacking labor baseline = crew count × hourly wage × stacking hours per day × 365. It is allocated by fixed shares: Auto-Stack 5%, Tow Paths 20%, Hangar Rash Prevention 30%, and Tug Automation 45%.</p>
+          <p>The annual stacking labor baseline = crew count × hourly wage × stacking hours per day × 365. It is allocated by fixed shares: Auto-Stack 5%, Tow Paths 20%, Hangar Rash Prevention 30%, and Autonomous Tugs 45%.</p>
         </div>
 
         <div class="feature-card">
@@ -476,7 +493,7 @@
 <footer data-bg-type="dark" class="starlight-footer">
       <div class="starlight-footer_container">
         <div class="starlight-footer_left">
-          <a href="index.html" class="starlight-footer_brand">
+          <a href="/" class="starlight-footer_brand">
             <img class="starlight-footer-logo" src="assets/starlight_logo_notext.svg" alt="Starlight Hangars logo" aria-hidden="true"/>
             <span class="starlight-site_name">Starlight Hangars</span>
           </a>
@@ -486,17 +503,16 @@
         </div>
         <div class="starlight-footer_right">
           <nav class="starlight-footer_nav">
-            <a href="index.html#how-it-works" class="starlight-footer_link">How it works</a>
-            <a href="calendar.html" class="starlight-footer_link">Calendar View</a>
-            <a href="auto-stack.html" class="starlight-footer_link">Auto-Stack</a>
-            <a href="path-planning.html" class="starlight-footer_link">Paths</a>
-            <a href="collision-prevention.html" class="starlight-footer_link">Collision Prevention</a>
-            <a href="tug-integration.html" class="starlight-footer_link">Tug Integration</a>
-            <a href="audit-log.html" class="starlight-footer_link">Audit Log</a>
-            <a href="hardware-and-infrastructure.html" class="starlight-footer_link">System &amp; Installation</a>
-            <a href="roi.html" class="starlight-footer_link">ROI Calculator</a>
-            <a href="about.html" class="starlight-footer_link">About</a>
-            <a href="updates.html" class="starlight-footer_link">Updates</a>
+            <a href="/#how-it-works" class="starlight-footer_link">How it works</a>
+            <a href="calendar" class="starlight-footer_link">Verify Schedule</a>
+            <a href="auto-stack" class="starlight-footer_link">Auto-Stack &amp; Tow Playback</a>
+            <a href="collision-prevention" class="starlight-footer_link">Hangar Rash Prevention</a>
+            <a href="tug-integration" class="starlight-footer_link">Autonomous Tugs</a>
+            <a href="audit-log" class="starlight-footer_link">Audit Log</a>
+            <a href="hardware-and-infrastructure" class="starlight-footer_link">System &amp; Installation</a>
+            <a href="savings-calculator" class="starlight-footer_link">Savings Calculator</a>
+            <a href="about" class="starlight-footer_link">About</a>
+            <a href="updates" class="starlight-footer_link">Updates</a>
             <a href="#" data-open-contact class="starlight-footer_link">Contact</a>
           </nav>
         </div>
@@ -505,7 +521,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="./assets/site.js?v=20261027-3"></script>
+  <script src="./assets/site.js?v=20261106-1"></script>
   <script>
     // ── ROI Calculator ──────────────────────────────────────────────
     function fmtDollars(n) {
@@ -605,7 +621,7 @@
         statusEl.textContent = message;
       }
       function succeed() {
-        showStatus('success', "Thanks! We'll be in touch with your ROI report.");
+        showStatus('success', "Thanks! We'll be in touch with your savings report.");
         submitBtn.disabled = true;
       }
 
@@ -640,12 +656,12 @@
           type: 'ROI report request',
           email,
           message:
-            `Potential annual benefit: ${roiValue}, Auto-Stack: ${digitalTwinSaving}, Hangar Rash Prevention: ${collisionPlanningSaving}, Tow Paths: ${towPathSaving}, Tug Automation: ${autonomousTugsSaving}, Full-system labor: ${laborSaving}, Potential annual revenue: ${revenueGain}
+            `Potential annual benefit: ${roiValue}, Auto-Stack: ${digitalTwinSaving}, Hangar Rash Prevention: ${collisionPlanningSaving}, Tow Paths: ${towPathSaving}, Autonomous Tugs: ${autonomousTugsSaving}, Full-system labor: ${laborSaving}, Potential annual revenue: ${revenueGain}
 ` +
             `Inputs: ${sqft} sq ft, ${boost}% boost, $${tenant}/sq ft/mo, ${people} people, $${wage}/hr, ${hours} hrs/day`,
           hangar: `${sqft} sq ft`,
           plan: new URLSearchParams(window.location.search).get('plan') || '',
-          page: 'roi.html (calculator)',
+          page: 'savings-calculator.html (calculator)',
           elapsed,
         });
         succeed();

@@ -1,0 +1,115 @@
+/* Interactive tow playback: 3D scene and playback bar on the left, the crew checklist on the right (same look as the moves list).
+   Colours, radii and the scene stage, buttons and slider come from ../hangar3d/hangar3d.css (the --h3d-* tokens). */
+.towv { --towv-navy: var(--h3d-navy); --towv-blue: var(--h3d-blue); --towv-muted: var(--h3d-muted);
+  display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); max-width: 1180px; margin: 0 auto; overflow: hidden; border-radius: var(--h3d-radius-card); background: #fff; box-shadow: var(--h3d-shadow-card); color: var(--towv-navy); text-align: left; }
+.towv button { font: inherit; }
+.towv_main { min-width: 0; display: flex; flex-direction: column; }
+.towv_stage { aspect-ratio: 4 / 3; }
+.towv_scene { position: absolute; inset: 0; }
+
+.towv_hud { position: absolute; left: .75rem; top: .75rem; max-width: calc(100% - 7rem); pointer-events: none; }
+.towv_tail { display: flex; align-items: baseline; flex-wrap: wrap; gap: .1rem .6rem; width: fit-content; max-width: 100%; margin: 0; padding: .45rem .8rem; font-family: var(--h3d-font); }
+.towv_tail strong { font-size: 1.15rem; font-weight: 800; letter-spacing: .01em; }
+.towv_tail span { color: var(--h3d-pill-muted); font-size: .8rem; font-weight: 700; }
+.towv_what { display: grid; width: fit-content; max-width: 100%; margin: .4rem 0 0; padding: .4rem .8rem; font-family: var(--h3d-font); font-size: .82rem; font-weight: 700; line-height: 1.35; }
+.towv_what small { color: var(--h3d-pill-muted); font-size: .76rem; font-weight: 600; }
+.towv_hint { left: .75rem; bottom: .75rem; }
+.towv_start { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+.towv_start[hidden] { display: none; }
+
+/* playback bar */
+.towv_bar { display: grid; gap: .55rem; padding: .85rem 1.1rem .9rem; border-top: 1px solid rgba(7,20,36,.08); }
+.towv_row1 { display: flex; align-items: center; gap: .75rem 1.1rem; min-width: 0; }
+.towv_buttons { display: flex; flex: 0 0 auto; align-items: center; gap: .45rem; }
+.towv_step { display: grid; min-width: 0; margin: 0 0 0 auto; text-align: right; }
+.towv_step strong { color: var(--towv-muted); font-size: .68rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.towv_step span { overflow: hidden; font-size: .88rem; font-weight: 800; text-overflow: ellipsis; white-space: nowrap; }
+
+/* scrubber across the whole sequence, with a tick where each tow starts */
+.towv_scrub { position: relative; height: 1.7rem; }
+.towv_ticks { position: absolute; left: 0; right: 0; top: 0; height: .5rem; pointer-events: none; }
+.towv_tick { position: absolute; top: 0; bottom: 0; left: calc(.5rem + (100% - 1rem) * var(--i)); width: 2px; margin-left: -1px; border-radius: 1px; background: rgba(7,20,36,.28); }
+.towv_scrub input { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; }
+.towv .towv_item:focus-visible, .towv .towv_check input:focus-visible { outline: 3px solid var(--h3d-focus); outline-offset: 2px; }
+
+/* crew checklist */
+.towv_side { position: relative; min-width: 0; border-left: 1px solid rgba(7,20,36,.08); }
+.towv_head { position: absolute; top: 0; left: 0; right: 0; z-index: 1; display: flex; justify-content: space-between; gap: 1rem; margin: 0; padding: 1.25rem 1.5rem .75rem; background: linear-gradient(#fff 75%, rgba(255,255,255,0)); color: var(--towv-muted); font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.towv_head b { font-weight: 800; font-variant-numeric: tabular-nums; }
+.towv_list { position: absolute; inset: 0; display: grid; align-content: start; gap: .45rem; margin: 0; padding: 3.4rem 1.5rem 1.25rem; overflow-y: auto; list-style: none; overscroll-behavior: contain; }
+.towv_row { display: grid; grid-template-columns: 1.5rem minmax(0, 1fr); align-items: center; gap: .6rem; padding: .15rem .75rem .15rem .7rem; border-radius: 10px; background: #f5f7f9; box-shadow: inset 0 0 0 1px rgba(7,20,36,.07); transition: background .15s, box-shadow .15s; }
+.towv_row:hover { background: #edf1f5; }
+.towv_check { position: relative; display: flex; align-items: center; justify-content: center; width: 1.5rem; height: 1.5rem; cursor: pointer; }
+.towv_check input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.towv_check span { display: flex; align-items: center; justify-content: center; width: 1.2rem; height: 1.2rem; border-radius: 50%; background: #fff; box-shadow: inset 0 0 0 2px #b9c4cf; color: transparent; pointer-events: none; transition: background .15s, box-shadow .15s; }
+.towv_check span svg { width: .85rem; height: .85rem; }
+.towv_row.is-done .towv_check span { background: #2f7a52; box-shadow: none; color: #fff; }
+.towv_check input:focus-visible + span { outline: 3px solid #4F7186; outline-offset: 2px; }
+.towv_item { display: grid; grid-template-columns: 1.9rem minmax(0, 1fr) auto; align-items: center; gap: .7rem; width: 100%; padding: .4rem 0; border: 0; background: none; color: inherit; text-align: left; cursor: pointer; }
+.towv_item i { display: flex; align-items: center; justify-content: center; width: 1.9rem; height: 1.9rem; border-radius: 50%; }
+.towv_item i svg { width: 1.1rem; height: 1.1rem; }
+.towv_item i { background: #e3f3ea; color: #2f7a52; }
+.towv_item span { overflow: hidden; font-size: .9rem; font-weight: 800; text-overflow: ellipsis; white-space: nowrap; }
+.towv_item em { color: var(--towv-muted); font-size: .82rem; font-style: normal; font-weight: 700; font-variant-numeric: tabular-nums; }
+.towv_row.is-done .towv_item span { color: #6b7a89; }
+.towv_row.is-active { background: var(--towv-navy); box-shadow: none; }
+.towv_row.is-active .towv_item { color: #fff; }
+.towv_row.is-active .towv_item span { color: #fff; }
+.towv_row.is-active .towv_item em { color: #B7CAD6; }
+.towv_row.is-active .towv_item i { background: #fff; }
+.towv_row.is-active .towv_check span { background: rgba(255,255,255,.12); box-shadow: inset 0 0 0 2px rgba(255,255,255,.55); }
+.towv_row.is-active.is-done .towv_check span { background: #2f7a52; box-shadow: none; }
+
+@media (max-width: 760px) {
+  .towv { grid-template-columns: minmax(0, 1fr); }
+  .towv_stage { aspect-ratio: 1 / 1; }
+  .towv_side { height: 17rem; border-left: 0; border-top: 1px solid rgba(7,20,36,.08); }
+  .towv_bar { padding: .75rem 1rem .85rem; }
+  .towv_row1 { flex-wrap: wrap; justify-content: space-between; }
+  .towv_step { flex: 1 1 8rem; }
+  .towv_hud { inset: 0; max-width: none; }
+  .towv_tail { position: absolute; left: .75rem; top: .75rem; max-width: calc(100% - 7.5rem); }
+  .towv_tail strong { font-size: 1rem; }
+  .towv_what { position: absolute; left: .75rem; bottom: .75rem; max-width: calc(100% - 9.5rem); margin: 0; font-size: .74rem; }
+  .towv_hint { display: none; }
+  .towv_list, .towv_head { padding-left: 1rem; padding-right: 1rem; }
+}
+@media (prefers-reduced-motion: reduce) { .towv_row, .towv_check span { transition: none; } }
+
+/* Preview mode (mountTowViewer(root, { interactive: false }), the homepage showcase): fills its slide, shows the same scene, bar and
+   checklist without any controls, and takes no pointer events so the slide's link stays clickable. */
+.towv-preview { position: absolute; inset: 0; grid-template-columns: minmax(0, 1fr) clamp(11rem, 31%, 16rem); max-width: none; margin: 0; border-radius: 0; box-shadow: none; pointer-events: none; user-select: none; }
+.towv-preview .towv_main { height: 100%; min-height: 0; }
+.towv-preview .towv_stage { flex: 1 1 auto; min-height: 0; aspect-ratio: auto; }
+.towv-preview .towv_hud { left: .6rem; top: .6rem; max-width: calc(100% - 1.2rem); }
+.towv-preview .towv_tail { padding: .35rem .7rem; }
+.towv-preview .towv_tail strong { font-size: 1rem; }
+.towv-preview .towv_what { padding: .3rem .7rem; font-size: .74rem; }
+.towv-preview .towv_what small { display: none; }
+.towv-preview .towv_bar { gap: .2rem; padding: .55rem 1rem .6rem; }
+.towv-preview .towv_step { margin: 0; text-align: left; grid-template-columns: auto 1fr; align-items: baseline; gap: 0 .6rem; }
+.towv-preview .towv_scrub { height: .9rem; }
+.towv-preview .towv_ticks { height: 100%; }
+.towv-preview .towv_tick { left: calc(100% * var(--i)); margin-left: 0; background: rgba(7,20,36,.22); }
+.towv_track { position: absolute; left: 0; right: 0; bottom: 0; height: 6px; border-radius: 3px; background: linear-gradient(to right, var(--h3d-fill) var(--p, 0%), var(--h3d-track) var(--p, 0%)); }
+.towv-preview .towv_side { height: auto; }
+.towv-preview .towv_head { padding: .9rem 1rem .5rem; font-size: .64rem; }
+.towv-preview .towv_list { gap: .3rem; padding: 2.5rem 1rem .8rem; overflow: hidden; }
+.towv-preview .towv_row { padding: .05rem .6rem .05rem .55rem; }
+.towv-preview .towv_item { padding: .25rem 0; gap: .55rem; }
+.towv-preview .towv_item i { width: 1.6rem; height: 1.6rem; }
+.towv-preview .towv_item i svg { width: .95rem; height: .95rem; }
+.towv-preview .towv_item span { font-size: .8rem; }
+.towv-preview .towv_item em { display: none; }
+.towv-preview .towv_item { grid-template-columns: 1.6rem minmax(0, 1fr); }
+.towv-preview .towv_head { white-space: nowrap; }
+@media (max-width: 700px) {
+  .towv-preview { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) 8.75rem; }
+  .towv-preview .towv_side { border-left: 0; border-top: 1px solid rgba(7,20,36,.08); }
+  .towv-preview .towv_hud { inset: 0; max-width: none; }
+  .towv-preview .towv_tail { position: absolute; left: .6rem; top: .6rem; max-width: calc(100% - 1.2rem); }
+  .towv-preview .towv_what { display: none; }
+  .towv-preview .towv_bar { padding: .45rem 1rem .5rem; }
+  .towv-preview .towv_head { padding: .6rem 1rem .4rem; }
+  .towv-preview .towv_list { padding: 2rem 1rem .6rem; }
+}

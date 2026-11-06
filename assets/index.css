@@ -24,163 +24,8 @@ body{-moz-osx-font-smoothing:grayscale}section,header,footer{position:relative}.
   .roi_example { transition: none; }
 }
 
-/* ============================================================
-   HOW IT WORKS — numbered timeline
-   Six steps on one spine, split by availability: a solid line for
-   what ships today, dashed for what is still being built. Replaces
-   the six-card overview grid, which shrank every screenshot to a
-   third of the row and lost the sense of one connected workflow.
-============================================================ */
-.timeline_wrap { position: relative; padding: 7rem 0 7.5rem; background: #f5f7f9; overflow: hidden; }
-.timeline_wrap::before { /* faint grid, echoes the hero */
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg, rgba(7,20,36,0.035) 1px, transparent 1px),
-    linear-gradient(rgba(7,20,36,0.028) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: radial-gradient(120% 70% at 50% 0%, black, transparent);
-  pointer-events: none;
-}
-.timeline_wrap > .home_container { position: relative; z-index: 1; }
-
-/* --muted (#657586) is 4.4:1 on #f5f7f9, just under AA for body copy.
-   Two steps darker clears 4.5:1 and still reads as the same grey. */
-.timeline_wrap .section_intro > p, .timeline_copy > p { color: #5c6a7a; }
-
-.timeline_divider {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin: 4rem 0 2.5rem;
-  color: var(--blue);
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-.timeline_divider::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(7,20,36,0.18), transparent); }
-.timeline_divider:first-of-type { margin-top: 3.5rem; }
-
-.timeline_list { list-style: none; margin: 0; padding: 0; }
-.timeline_step {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  align-items: center;
-  padding: 0 0 3rem 3.25rem;
-}
-.timeline_list-next .timeline_step:last-child { padding-bottom: 0; }
-.timeline_step::before { /* spine */
-  content: "";
-  position: absolute;
-  left: 19px;
-  top: 0;
-  bottom: 0;
-  width: 0;
-  border-left: 2px solid rgba(7,20,36,0.15);
-}
-.timeline_step-next::before { border-left-style: dashed; }
-.timeline_list-live .timeline_step:first-child::before { top: 22px; }
-.timeline_list-next .timeline_step:last-child::before { bottom: auto; height: 22px; }
-
-.timeline_node {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 40px; height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 3px solid #f5f7f9; /* punches a gap in the spine */
-  border-radius: 50%;
-  background: var(--blue);
-  color: #fff;
-  font-size: 0.82rem;
-  font-weight: 800;
-  box-shadow: 0 0 0 1px rgba(7,20,36,0.14);
-}
-.timeline_step-next .timeline_node { background: #fff; color: var(--blue); }
-
-.timeline_product { margin-bottom: 0.6rem; color: var(--blue); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; }
-.timeline_copy h3 { color: var(--navy); font-size: clamp(1.55rem, 2.5vw, 2.1rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; }
-.timeline_copy > p { max-width: 46ch; margin-top: 0.9rem; line-height: 1.75; }
-.timeline_foot { display: flex; align-items: center; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
-.timeline_foot a { color: var(--blue); font-size: 0.92rem; font-weight: 700; }
-.timeline_foot a:hover { color: var(--navy); }
-.timeline_media { margin: 0; min-width: 0; }
-
-/* Two columns from tablet up. The track reversal and the order swap both
-   have to stay inside the query: :nth-child is (0,2,0) and would otherwise
-   beat the single-column rule and leave alternating rows at half width. */
-@media (min-width: 901px) {
-  .timeline_step { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 3.5rem; padding: 0 0 4rem 4.5rem; }
-  .timeline_step:nth-child(even) { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); }
-  .timeline_step:nth-child(even) .timeline_copy { order: 2; }
-  .timeline_step:nth-child(even) .timeline_media { order: 1; }
-}
-
-/* "Tap to enlarge" cue - phone only, where even a full-width screenshot is
-   too small to read detail in. Declared before the media query that turns
-   it on, or the later rule at equal specificity keeps it hidden. */
-.timeline_hint { display: none; align-items: center; gap: 0.4rem; padding: 0.7rem 1.25rem 0; color: var(--blue); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; }
-.timeline_hint svg { width: 14px; height: 14px; flex: 0 0 auto; }
-
-/* The spine indents each step by 3.25rem, which left the screenshots at
-   281px of a 375px screen. Cancel the indent so they take the full width. */
-@media (max-width: 900px) {
-  .timeline_wrap { padding: 5rem 0; }
-  .timeline_step::before { left: 15px; }
-  .timeline_node { width: 32px; height: 32px; font-size: 0.72rem; }
-  .timeline_media { margin-left: -3.25rem; }
-}
-
-/* Below 700px .home_container is exactly `100% - 2.5rem`, so a known
-   1.25rem gutter sits either side: cancel that too and the screenshots run
-   edge to edge. Nothing is cropped at any width - each slot carries its
-   source's own ratio, so the frame changes shape per step rather than the
-   image losing its edges. */
-@media (max-width: 700px) {
-  .timeline_media { margin-inline: -4.5rem -1.25rem; }
-  .timeline_media .screen_frame { border-radius: 0; border-left: 0; border-right: 0; }
-  .timeline_hint { display: flex; }
-}
-
-/* ── Screenshot frame ── */
-.screen_frame { position: relative; overflow: hidden; border: 1px solid rgba(7,20,36,0.12); border-radius: 14px; background: var(--navy); box-shadow: 0 22px 60px rgba(7,20,36,0.14); }
-.screen_frame_bar { height: 38px; display: flex; align-items: center; gap: 7px; padding: 0 16px; background: #10283c; border-bottom: 1px solid rgba(255,255,255,0.07); }
-.screen_frame_bar i { width: 8px; height: 8px; flex: 0 0 auto; border-radius: 50%; background: #4f7186; }
-.screen_frame_bar strong { margin-left: 8px; color: #b7cad6; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
-
-/* Neutralise the stages.css placeholder styling inside a frame. Each slot
-   sets --screen-ratio to its source's native ratio, so nothing ever crops. */
-.screen_frame .stage-media-slot {
-  position: relative;
-  display: block;
-  width: 100%;
-  aspect-ratio: var(--screen-ratio, 16 / 9);
-  min-height: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: #071424;
-  cursor: zoom-in;
-}
-.screen_frame .stage-media-slot img,
-.screen_frame .stage-media-slot video { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 0; object-fit: cover; }
-.screen_frame .stage-media-slot:focus-visible { outline: 3px solid var(--blue-faint); outline-offset: -3px; }
-/* Belt and braces: if an asset is ever swapped for one with a different
-   ratio, it letterboxes against the slot background rather than losing its
-   edges on the screen with the least room to spare. */
-@media (max-width: 700px) {
-  .screen_frame .stage-media-slot img,
-  .screen_frame .stage-media-slot video { object-fit: contain; }
-}
-
 /* ── Availability pill ── */
-.status_pill { display: inline-flex; align-items: center; gap: 0.4rem; width: max-content; padding: 0.3rem 0.65rem; border-radius: 999px; font-size: 0.65rem; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; }
+.status_pill { display: inline-flex; align-items: center; gap: 0.4rem; width: max-content; padding: 0.34rem 0.65rem 0.26rem; border-radius: 999px; font-size: 0.65rem; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; }
 .status_pill::before { content: ""; width: 0.4rem; height: 0.4rem; border-radius: 50%; background: currentColor; }
 /* On #f5f7f9 the neutral fill is nearly the section colour, so the light
    pills carry a hairline to read as pills rather than as tinted text. */
@@ -198,7 +43,7 @@ body{-moz-osx-font-smoothing:grayscale}section,header,footer{position:relative}.
 .outcomes_grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin: 3rem 0 0; }
 .outcome_card { padding: 2rem; border: 1px solid rgba(183,202,214,0.18); border-radius: 14px; background: rgba(255,255,255,0.03); box-shadow: none; }
 /* Keep the number and status aligned to the card's content edges. */
-.outcome_card-heading { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 1rem; width: 100%; }
+.outcome_card-heading { min-height: 1.6rem; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 1rem; width: 100%; }
 .outcome_card-heading > .status_pill { justify-self: end; margin: 0; }
 .outcome_card-number { display: block; color: var(--blue-faint); font-size: 0.72rem; font-weight: 800; line-height: 1; letter-spacing: 0.15em; }
 .outcome_card h3 { margin: 0.75rem 0; color: #fff; font-size: 1.3rem; }
@@ -209,3 +54,151 @@ body{-moz-osx-font-smoothing:grayscale}section,header,footer{position:relative}.
   .outcomes_grid { grid-template-columns: 1fr; }
   .outcome_card { padding: 1.5rem; }
 }
+
+/* ── Screen frame (browser-style bar around each showcase screen) ── */
+.screen_frame { position: relative; overflow: hidden; border: 1px solid rgba(7,20,36,0.12); border-radius: 14px; background: var(--navy); box-shadow: 0 22px 60px rgba(7,20,36,0.14); }
+.screen_frame_bar { height: 38px; display: flex; align-items: center; gap: 7px; padding: 0 16px; background: #10283c; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.screen_frame_bar i { width: 8px; height: 8px; flex: 0 0 auto; border-radius: 50%; background: #4f7186; }
+.screen_frame_bar strong { margin-left: 8px; color: #b7cad6; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* ============================================================
+   HOW IT WORKS — "Your day" showcase
+   Five steps in one tabbed viewer. Tabs and the progress bar swap the
+   screen and copy; each slide and link opens that step's own page.
+============================================================ */
+.showcase_wrap { position: relative; padding: 5.5rem 0 6rem; background: #f5f7f9; overflow: hidden; }
+.showcase_wrap::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,20,36,0.035) 1px, transparent 1px), linear-gradient(rgba(7,20,36,0.028) 1px, transparent 1px); background-size: 72px 72px; mask-image: radial-gradient(120% 70% at 50% 0%, black, transparent); pointer-events: none; }
+.showcase_wrap > .home_container { position: relative; z-index: 1; }
+.showcase_wrap .section_intro { margin-bottom: 2.75rem; }
+.showcase_wrap .section_intro > p { color: #5c6a7a; font-size: 1.15rem; max-width: 52ch; }
+
+.showcase { display: grid; grid-template-columns: minmax(250px, 0.78fr) minmax(0, 2fr); grid-template-areas: "tabs stage" "tabs panels"; gap: 1.5rem 2.25rem; align-items: start; }
+.showcase_tabs { grid-area: tabs; display: flex; flex-direction: column; gap: 0.5rem; }
+.showcase_stage { grid-area: stage; min-width: 0; }
+.showcase_panels { grid-area: panels; min-width: 0; }
+
+/* Tabs */
+.showcase_tab { position: relative; display: grid; grid-template-columns: 2.4rem minmax(0, 1fr); gap: 0.9rem; align-items: center; width: 100%; padding: 0.95rem 1.1rem; border: 1px solid transparent; border-radius: 12px; background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer; overflow: hidden; transition: background .2s, border-color .2s, box-shadow .2s; }
+.showcase_tab:hover { background: rgba(255,255,255,0.7); }
+.showcase_tab:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.showcase_tab[aria-selected="true"] { background: #fff; border-color: rgba(7,20,36,0.1); box-shadow: 0 10px 30px rgba(7,20,36,0.09); }
+.showcase_num { display: flex; align-items: center; justify-content: center; width: 2.4rem; height: 2.4rem; border-radius: 50%; background: #fff; color: var(--blue); font-size: 0.78rem; font-weight: 800; box-shadow: inset 0 0 0 1px rgba(7,20,36,0.16); transition: background .2s, color .2s; }
+.showcase_tab[aria-selected="true"] .showcase_num { background: var(--blue); color: #fff; box-shadow: none; }
+.showcase_tab_text { display: grid; gap: 0.15rem; min-width: 0; }
+.showcase_moment { color: #5c6a7a; font-size: 0.66rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
+.showcase_tab_title { color: var(--navy); font-size: 1.02rem; font-weight: 800; letter-spacing: -0.01em; line-height: 1.25; }
+.showcase_tab_status { display: inline-flex; align-items: center; gap: 0.35rem; width: max-content; max-width: 100%; margin-top: 0.3rem; padding: 0.22rem 0.55rem 0.14rem; border-radius: 999px; font-size: 0.6rem; font-weight: 800; letter-spacing: 0.08em; line-height: 1.3; text-transform: uppercase; }
+.showcase_tab_status::before { content: ""; width: 0.36rem; height: 0.36rem; border-radius: 50%; background: currentColor; flex: 0 0 auto; }
+.showcase_tab_status-testing { background: #fbefd5; color: #7a4f00; }
+.showcase_tab_status-dev { background: #fff; color: var(--blue); box-shadow: inset 0 0 0 1px rgba(7,20,36,0.12); }
+
+/* Auto-advance progress, drawn along the bottom of the active tab */
+.showcase_progress { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: transparent; }
+.showcase_progress::after { content: ""; display: block; height: 100%; background: var(--blue); transform: scaleX(0); transform-origin: left; }
+.showcase_tab[aria-selected="true"] .showcase_progress::after { animation: showcase_fill var(--showcase-dur, 8s) linear forwards; }
+.showcase.is-manual .showcase_progress::after, .showcase.is-static .showcase_progress::after { animation: none; }
+.showcase.is-paused .showcase_progress::after { animation-play-state: paused; }
+@keyframes showcase_fill { to { transform: scaleX(1); } }
+
+/* Stage: every slide stacked, only the active one visible */
+.showcase_screen { position: relative; aspect-ratio: 16 / 9; background: #071424; }
+.showcase_slide { position: absolute; inset: 0; display: block; background: var(--slide-bg, #071424); opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility 0s linear .35s; cursor: pointer; }
+.showcase_slide.is-active { opacity: 1; visibility: visible; transition: opacity .35s ease, visibility 0s; }
+.showcase_slide:focus-visible { outline: 3px solid var(--blue-faint); outline-offset: -3px; }
+.showcase_slide img, .showcase_slide video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.showcase_slide-contain img { object-fit: contain; }
+.showcase_slide-shot { --slide-bg: #f5f7f9; }
+.showcase_slide-calendar { --slide-bg: #fff; }
+.showcase_slide-tow { --slide-bg: #fff; }
+.showcase_tow { position: absolute; inset: 0; }
+.showcase_tow > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+/* Clickable moves viewer fills the slide */
+.showcase_slide-calendar { cursor: default; }
+.showcase_slide-calendar .moves { position: absolute; inset: 0; max-width: none; margin: 0; border-radius: 0; box-shadow: none; }
+.showcase_slide-calendar .moves_map { aspect-ratio: auto; }
+.showcase_slide-calendar .showcase_cue { pointer-events: auto; text-decoration: none; }
+/* Hover cue so the picture reads as clickable */
+.showcase_cue { position: absolute; right: 1rem; bottom: 1rem; z-index: 2; padding: 0.5rem 0.9rem; border-radius: 999px; background: rgba(7,20,36,0.88); color: #fff; font-size: 0.78rem; font-weight: 700; opacity: 0; transform: translateY(4px); transition: opacity .2s, transform .2s; pointer-events: none; }
+.showcase_slide:hover .showcase_cue, .showcase_slide:focus-visible .showcase_cue { opacity: 1; transform: none; }
+.showcase_slide-calendar .showcase_cue { bottom: auto; top: 1rem; }
+
+/* Copy under the stage */
+.showcase_panel[hidden] { display: none; }
+.showcase_panel h3 { margin: 0; color: var(--navy); font-size: clamp(1.4rem, 2.2vw, 1.85rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; }
+.showcase_panel_head { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem 1rem; }
+.showcase_panel p { max-width: 62ch; margin: 0.7rem 0 0; color: #5c6a7a; line-height: 1.7; }
+.showcase_chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0 0; padding: 0; list-style: none; }
+.showcase_chips li { display: inline-flex; align-items: center; padding: 0.4rem 0.75rem 0.3rem 0.6rem; line-height: 1.3; border-radius: 999px; background: #fff; color: var(--navy); font-size: 0.82rem; font-weight: 700; box-shadow: inset 0 0 0 1px rgba(7,20,36,0.1); }
+.showcase_chips li::before { content: "✓"; margin-right: 0.4rem; color: var(--blue); font-weight: 800; line-height: 1; }
+.showcase_panel-next .showcase_chips li::before { color: var(--blue); }
+.showcase_links { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin-top: 1.1rem; }
+.showcase_links a { color: var(--blue); font-size: 0.95rem; font-weight: 700; }
+.showcase_links a:hover { color: var(--navy); }
+.showcase_links a.quiet { color: #5c6a7a; font-weight: 600; }
+.status_pill-testing { background: #fbefd5; color: #7a4f00; box-shadow: inset 0 0 0 1px rgba(122,79,0,0.16); }
+.status_pill-testing-dark { background: rgba(227,163,61,0.16); color: #f0c27a; }
+.status_pill { max-width: 100%; white-space: normal; line-height: 1.3; }
+
+.day_cta { display: flex; align-items: center; justify-content: space-between; gap: 2rem; margin-top: 3.5rem; padding: 2rem 2.25rem; border-radius: 16px; background: var(--navy); color: #fff; }
+.day_cta p { margin: 0; font-size: clamp(1.15rem, 2vw, 1.5rem); font-weight: 700; letter-spacing: -0.01em; }
+
+/* Tablet and phone: tabs become a swipeable row above the stage */
+@media (max-width: 900px) {
+  .showcase_wrap { padding: 4rem 0 4.5rem; }
+  .showcase { grid-template-columns: minmax(0, 1fr); grid-template-areas: "tabs" "stage" "panels"; gap: 1.1rem; }
+  .showcase_tabs { flex-direction: row; gap: 0.5rem; margin: 0 -1.25rem; padding: 0.25rem 1.25rem 0.5rem; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none; }
+  .showcase_tabs::-webkit-scrollbar { display: none; }
+  .showcase_tab { flex: 0 0 auto; width: auto; max-width: 15.5rem; grid-template-columns: 2rem minmax(0, 1fr); gap: 0.6rem; padding: 0.65rem 0.85rem; scroll-snap-align: start; background: rgba(255,255,255,0.6); border-color: rgba(7,20,36,0.08); }
+  .showcase_num { width: 2rem; height: 2rem; font-size: 0.7rem; }
+  .showcase_tab_title { font-size: 0.9rem; white-space: nowrap; }
+  .showcase_tab_status { display: none; }
+  .day_cta { flex-direction: column; align-items: stretch; margin-top: 2.5rem; padding: 1.5rem; }
+  .day_cta .hero_button { width: 100%; }
+}
+@media (max-width: 700px) {
+  /* edge-to-edge stage on phones, like the full-flow mockup */
+  .showcase_stage { margin-inline: -1.25rem; }
+  .showcase_stage .screen_frame { border-radius: 0; border-left: 0; border-right: 0; }
+  .showcase_cue { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .showcase_slide, .showcase_slide.is-active { transition: none; }
+  .showcase_cue { transition: none; }
+}
+
+/* "Syncs with" strip: a slow marquee of scheduling-software logos (calendar slide) */
+.sources { margin-top: 1rem; }
+.showcase_panel .sources { max-width: none; margin-top: 1.25rem; padding: 0.9rem 1.25rem 0.8rem; border-radius: 14px; background: #fff; box-shadow: inset 0 0 0 1px rgba(7,20,36,0.08), 0 8px 24px rgba(7,20,36,0.06); }
+.sources_label { margin: 0 0 0.6rem; color: #5c6a7a; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+.sources_viewport {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+}
+.sources_track { display: flex; gap: 0.75rem; width: max-content; margin: 0; padding: 0.25rem 0; list-style: none; animation: sources_scroll 50s linear infinite; }
+.sources_viewport:hover .sources_track { animation-play-state: paused; }
+.sources_logo {
+  flex: 0 0 auto;
+  display: flex; align-items: center; justify-content: center;
+  min-width: 9.5rem; height: 2.9rem; padding: 0 1.4rem;
+  border: 1px solid rgba(7,20,36,0.12); border-radius: 10px; background: #fff;
+  color: #3d5163; font-size: 0.92rem; font-weight: 800; letter-spacing: -0.01em; white-space: nowrap;
+  box-shadow: 0 1px 2px rgba(7,20,36,0.04);
+}
+/* 6 items per half = 3 repeats of the set; moving by half the track loops seamlessly. */
+@keyframes sources_scroll { to { transform: translateX(calc(-50% - 0.375rem)); } }
+@media (prefers-reduced-motion: reduce) {
+  .sources_track { animation: none; flex-wrap: wrap; width: auto; }
+  .sources_track > li:nth-child(n+6) { display: none; }
+  .sources_viewport { mask-image: none; -webkit-mask-image: none; }
+}
+
+/* Phones: stack the map above the moves list, and give slide 1 more height */
+@media (max-width: 700px) {
+  .showcase_slide-calendar .moves { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) 11rem; }
+  .showcase_slide-calendar .moves_side { height: auto; }
+  .showcase_screen:has(.showcase_slide-calendar.is-active), .showcase_screen:has(.showcase_slide-tow.is-active) { aspect-ratio: 4 / 5; }
+}
+
+.showcase_slide-calendar .moves_map { background: #2a2f37; }
+.showcase_slide-calendar .moves_map img { inset: 1.25rem; width: calc(100% - 2.5rem); height: calc(100% - 2.5rem); border-radius: 8px; object-fit: contain; }

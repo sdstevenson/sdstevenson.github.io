@@ -13,10 +13,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
   <link rel="dns-prefetch" href="https://www.googletagmanager.com"/>
   <link rel="stylesheet" href="assets/styles.css?v=20261018-1"/>
-  <!-- stages.css before index.css: the page sheet has to win over the shared
-       .stage-media placeholder rules, same order every other page uses. -->
   <link rel="stylesheet" href="assets/stages.css"/>
-  <link rel="stylesheet" href="assets/index.css?v=20261017-2"/>
+  <link rel="stylesheet" href="assets/moves.css?v=20261106-1"/>
+  <link rel="stylesheet" href="assets/index.css?v=20261106-15"/>
   <link rel="stylesheet" href="assets/partners.css"/>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DGHZZ8BDEZ"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-DGHZZ8BDEZ');</script>
@@ -69,9 +68,9 @@
       "description": "Aircraft hangar planning software and automation for aviation ground operations.",
       "founder": {
         "@type": "Person",
-        "@id": "https://starlighthangars.com/about.html#samir-stevenson",
+        "@id": "https://starlighthangars.com/about#samir-stevenson",
         "name": "Samir Stevenson",
-        "url": "https://starlighthangars.com/about.html#samir-stevenson"
+        "url": "https://starlighthangars.com/about#samir-stevenson"
       }
     },
     {
@@ -98,13 +97,13 @@
     <nav class="snav">
       <div class="snav-inner">
         <div class="snav-logo">
-          <a href="index.html" class="snav-logo-link" aria-label="Starlight Hangars home">
+          <a href="/" class="snav-logo-link" aria-label="Starlight Hangars home">
             <img class="snav-logo-mark" src="assets/starlight_logo_notext.svg" alt="Starlight Hangars logo" aria-hidden="true"/>
             <span class="snav-logo-text">Starlight Hangars</span>
           </a>
         </div>
         <ul class="snav-links" role="list">
-          <li class="snav-item"><a href="index.html" class="snav-link snav-home-link">Home</a></li>
+          <li class="snav-item"><a href="/" class="snav-link snav-home-link">Home</a></li>
           <li class="snav-item snav-item--dropdown" id="starlight-platform-item">
             <button class="snav-link snav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
               How it works
@@ -113,27 +112,22 @@
               </svg>
             </button>
             <div class="snav-dropdown">
-              <a href="index.html#how-it-works" class="snav-dropdown-item">Overview</a>
+              <a href="/#how-it-works" class="snav-dropdown-item">Overview</a>
 
-              <div class="snav-dropdown-section-label">Plan</div>
-              <a href="calendar.html" class="snav-dropdown-item">Calendar View</a>
-              <a href="auto-stack.html" class="snav-dropdown-item">Auto-Stack</a>
-
-              <div class="snav-dropdown-section-label">Verify</div>
-              <a href="path-planning.html" class="snav-dropdown-item">Paths</a>
-              <a href="collision-prevention.html" class="snav-dropdown-item">Collision Prevention</a>
-
-              <div class="snav-dropdown-section-label">Execute</div>
-              <a href="tug-integration.html" class="snav-dropdown-item">Tug Integration</a>
+              <div class="snav-dropdown-section-label">Your day</div>
+              <a href="calendar" class="snav-dropdown-item">Verify Schedule</a>
+              <a href="auto-stack" class="snav-dropdown-item">Auto-Stack &amp; Tow Playback</a>
+              <a href="collision-prevention" class="snav-dropdown-item">Hangar Rash Prevention</a>
+              <a href="tug-integration" class="snav-dropdown-item">Autonomous Tugs</a>
 
               <div class="snav-dropdown-section-label">Record</div>
-              <a href="audit-log.html" class="snav-dropdown-item">Audit Log</a>
+              <a href="audit-log" class="snav-dropdown-item">Audit Log</a>
             </div>
           </li>
-          <li class="snav-item"><a href="hardware-and-infrastructure.html" class="snav-link snav-system-link">System &amp; Installation</a></li>
-          <li class="snav-item"><a href="about.html" class="snav-link snav-about-link">About</a></li>
-          <li class="snav-item"><a href="updates.html" class="snav-link snav-updates-link">Updates</a></li>
-          <li class="snav-item"><a href="roi.html" class="snav-link snav-roi-link">ROI Calculator</a></li>
+          <li class="snav-item"><a href="hardware-and-infrastructure" class="snav-link snav-system-link">System &amp; Installation</a></li>
+          <li class="snav-item"><a href="about" class="snav-link snav-about-link">About</a></li>
+          <li class="snav-item"><a href="updates" class="snav-link snav-updates-link">Updates</a></li>
+          <li class="snav-item"><a href="savings-calculator" class="snav-link snav-roi-link">Savings Calculator</a></li>
           <li class="snav-item"><a href="#" data-open-contact class="snav-link snav-cta">Schedule a Demo</a></li>
         </ul>
         <button class="snav-hamburger" id="starlight-nav-hamburger" aria-label="Open menu">
@@ -149,31 +143,26 @@
         </svg>
       </button>
       <ul class="snav-mobile-links">
-        <li><a href="index.html" class="snav-mobile-link snav-home-link">Home</a></li>
+        <li><a href="/" class="snav-mobile-link snav-home-link">Home</a></li>
         <li>
           <div class="snav-mobile-platform-label">How it works</div>
           <div class="snav-mobile-sub open">
-            <a href="index.html#how-it-works">Overview</a>
+            <a href="/#how-it-works">Overview</a>
 
-            <div class="snav-mobile-section-label">Plan</div>
-            <a href="calendar.html">Calendar View</a>
-            <a href="auto-stack.html">Auto-Stack</a>
-
-            <div class="snav-mobile-section-label">Verify</div>
-            <a href="path-planning.html">Paths</a>
-            <a href="collision-prevention.html">Collision Prevention</a>
-
-            <div class="snav-mobile-section-label">Execute</div>
-            <a href="tug-integration.html">Tug Integration</a>
+            <div class="snav-mobile-section-label">Your day</div>
+            <a href="calendar">Verify Schedule</a>
+            <a href="auto-stack">Auto-Stack &amp; Tow Playback</a>
+            <a href="collision-prevention">Hangar Rash Prevention</a>
+            <a href="tug-integration">Autonomous Tugs</a>
 
             <div class="snav-mobile-section-label">Record</div>
-            <a href="audit-log.html">Audit Log</a>
+            <a href="audit-log">Audit Log</a>
           </div>
         </li>
-        <li><a href="hardware-and-infrastructure.html" class="snav-mobile-link snav-system-link">System &amp; Installation</a></li>
-        <li><a href="about.html" class="snav-mobile-link snav-about-link">About</a></li>
-        <li><a href="updates.html" class="snav-mobile-link snav-updates-link">Updates</a></li>
-        <li><a href="roi.html" class="snav-mobile-link snav-roi-link">ROI Calculator</a></li>
+        <li><a href="hardware-and-infrastructure" class="snav-mobile-link snav-system-link">System &amp; Installation</a></li>
+        <li><a href="about" class="snav-mobile-link snav-about-link">About</a></li>
+        <li><a href="updates" class="snav-mobile-link snav-updates-link">Updates</a></li>
+        <li><a href="savings-calculator" class="snav-mobile-link snav-roi-link">Savings Calculator</a></li>
       </ul>
       <a href="#" data-open-contact class="snav-mobile-cta">Schedule a Demo</a>
     </div></header>
@@ -192,164 +181,165 @@
           <div class="partner_band-copy">
             <strong>Mike Goulian Aviation</strong>
             <p>Starlight Hangars is installed.<br/>Testing and refinement underway.</p>
-            <a class="partner_band-link" href="mike-goulian-aviation-pilot-installation.html">Read the update <span aria-hidden="true">↗</span></a>
+            <a class="partner_band-link" href="mike-goulian-aviation-pilot-installation">Read the update <span aria-hidden="true">↗</span></a>
           </div>
         </section>
       </div>
       <a href="#how-it-works" class="hero_scroll" aria-label="Scroll to how it works"><span>Explore</span><svg class="hero_scroll_icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>
     </section>
 
-    <!-- HOW IT WORKS — six numbered steps on one spine, split into what
-         runs today and what is being built. -->
-    <section class="timeline_wrap" id="how-it-works" data-bg-type="light">
+    <!-- YOUR DAY, COMPACT — five steps in one tabbed viewer. Tabs/auto-advance swap the
+         screen and copy; every slide and link goes to that step's own page. -->
+    <section class="showcase_wrap" id="how-it-works" data-bg-type="light">
       <div class="home_container">
         <div class="section_intro">
-          <h2 class="section_heading">Complete support from scheduling to stacking.</h2>
+          <h2 class="section_heading">Your morning, simplified.</h2>
+          <p>Verify the schedule. Starlight handles the layout, the moves, and the tow paths.</p>
         </div>
 
-        <div class="timeline_divider">Running today</div>
+        <div class="showcase is-paused" data-showcase style="--showcase-dur: 8s">
+          <div class="showcase_tabs" role="tablist" aria-label="Your day with Starlight">
+      <button type="button" role="tab" class="showcase_tab" id="tab-1" aria-controls="panel-1" aria-selected="true" tabindex="0" data-frame="Schedule &amp; layout">
+        <span class="showcase_num">01</span>
+        <span class="showcase_tab_text"><span class="showcase_moment">Start of day</span><span class="showcase_tab_title">Verify and view your schedule</span></span>
+        <span class="showcase_progress" aria-hidden="true"></span>
+      </button>
+      <button type="button" role="tab" class="showcase_tab" id="tab-2" aria-controls="panel-2" aria-selected="false" tabindex="-1" data-frame="Tow playback">
+        <span class="showcase_num">02</span>
+        <span class="showcase_tab_text"><span class="showcase_moment">Throughout the day</span><span class="showcase_tab_title">View exact stacks and tows</span></span>
+        <span class="showcase_progress" aria-hidden="true"></span>
+      </button>
+      <button type="button" role="tab" class="showcase_tab" id="tab-3" aria-controls="panel-3" aria-selected="false" tabindex="-1" data-frame="Hangar rash prevention">
+        <span class="showcase_num">03</span>
+        <span class="showcase_tab_text"><span class="showcase_moment">During the tow</span><span class="showcase_tab_title">Hangar rash prevention</span><span class="showcase_tab_status showcase_tab_status-testing">In testing · Dec 2026</span></span>
+        <span class="showcase_progress" aria-hidden="true"></span>
+      </button>
+      <button type="button" role="tab" class="showcase_tab" id="tab-4" aria-controls="panel-4" aria-selected="false" tabindex="-1" data-frame="Autonomous tugs">
+        <span class="showcase_num">04</span>
+        <span class="showcase_tab_text"><span class="showcase_moment">Coming next</span><span class="showcase_tab_title">Autonomous tugs</span><span class="showcase_tab_status showcase_tab_status-dev">In development · June 2027</span></span>
+        <span class="showcase_progress" aria-hidden="true"></span>
+      </button>
+      <button type="button" role="tab" class="showcase_tab" id="tab-5" aria-controls="panel-5" aria-selected="false" tabindex="-1" data-frame="Audit log">
+        <span class="showcase_num">05</span>
+        <span class="showcase_tab_text"><span class="showcase_moment">After the fact</span><span class="showcase_tab_title">Audit log</span></span>
+        <span class="showcase_progress" aria-hidden="true"></span>
+      </button>
+          </div>
 
-        <ol class="timeline_list timeline_list-live">
-
-          <li class="timeline_step">
-            <div class="timeline_node">01</div>
-            <div class="timeline_copy">
-              <div class="timeline_product">Calendar view</div>
-              <h3>Know what the hangar needs next</h3>
-              <p>Arrivals and departures live in one shared calendar, imported from the tools you already run. No more three versions of today’s plan.</p>
-              <div class="timeline_foot">
-                <a href="calendar.html">Explore the calendar →</a>
-                <span class="status_pill status_pill-live">Available now</span>
+          <div class="showcase_stage">
+            <div class="screen_frame">
+              <div class="screen_frame_bar"><i></i><i></i><i></i><strong data-frame-title>Schedule &amp; layout</strong></div>
+              <div class="showcase_screen">
+          <div class="showcase_slide showcase_slide-calendar is-active" data-slide>
+              <div class="moves" data-moves role="group" aria-label="Friday's moves: select one to see the hangar layout after it">
+                <div class="moves_map">
+                  <img src="assets/screens/moves/0700.jpg" alt="Hangar layout at 07:00" class="is-active" data-time="07:00"/>
+                  <img src="assets/screens/moves/0715.jpg" alt="Hangar layout at 07:15" loading="lazy" data-time="07:15"/>
+                  <img src="assets/screens/moves/0730.jpg" alt="Hangar layout at 07:30" loading="lazy" data-time="07:30"/>
+                  <img src="assets/screens/moves/0745.jpg" alt="Hangar layout at 07:45" loading="lazy" data-time="07:45"/>
+                  <img src="assets/screens/moves/0800.jpg" alt="Hangar layout at 08:00" loading="lazy" data-time="08:00"/>
+                  <img src="assets/screens/moves/0815.jpg" alt="Hangar layout at 08:15" loading="lazy" data-time="08:15"/>
+                  <img src="assets/screens/moves/0830.jpg" alt="Hangar layout at 08:30" loading="lazy" data-time="08:30"/>
+                  <img src="assets/screens/moves/0900.jpg" alt="Hangar layout at 09:00" loading="lazy" data-time="09:00"/>
+                  <img src="assets/screens/moves/1000.jpg" alt="Hangar layout at 10:00" loading="lazy" data-time="10:00"/>
+                  <img src="assets/screens/moves/1100.jpg" alt="Hangar layout at 11:00" loading="lazy" data-time="11:00"/>
+                  <img src="assets/screens/moves/1130.jpg" alt="Hangar layout at 11:30" loading="lazy" data-time="11:30"/>
+                  <img src="assets/screens/moves/1200.jpg" alt="Hangar layout at 12:00" loading="lazy" data-time="12:00"/>
+                  <img src="assets/screens/moves/1230.jpg" alt="Hangar layout at 12:30" loading="lazy" data-time="12:30"/>
+                  <img src="assets/screens/moves/1300.jpg" alt="Hangar layout at 13:00" loading="lazy" data-time="13:00"/>
+                  <img src="assets/screens/moves/1330.jpg" alt="Hangar layout at 13:30" loading="lazy" data-time="13:30"/>
+                  <img src="assets/screens/moves/1400.jpg" alt="Hangar layout at 14:00" loading="lazy" data-time="14:00"/>
+                </div>
+                <div class="moves_side">
+                  <p class="moves_head">Friday&rsquo;s moves</p>
+                  <ul class="moves_list">
+                    <li><button type="button" class="moves_item is-out is-active" data-index="0" aria-pressed="true"><i aria-hidden="true">&#8599;</i><span>N59JS, N70RC departs</span><em>07:00</em></button></li>
+                    <li><button type="button" class="moves_item is-out" data-index="1" aria-pressed="false"><i aria-hidden="true">&#8599;</i><span>N777XV departs</span><em>07:15</em></button></li>
+                    <li><button type="button" class="moves_item is-out" data-index="2" aria-pressed="false"><i aria-hidden="true">&#8599;</i><span>N4602S departs</span><em>07:30</em></button></li>
+                    <li><button type="button" class="moves_item is-out" data-index="3" aria-pressed="false"><i aria-hidden="true">&#8599;</i><span>N45LJ, N89TW departs</span><em>07:45</em></button></li>
+                    <li><button type="button" class="moves_item is-out" data-index="4" aria-pressed="false"><i aria-hidden="true">&#8599;</i><span>N1137J, N73619 departs</span><em>08:00</em></button></li>
+                    <li><button type="button" class="moves_item is-out" data-index="5" aria-pressed="false"><i aria-hidden="true">&#8599;</i><span>N853DY departs</span><em>08:15</em></button></li>
+                    <li><button type="button" class="moves_item is-out" data-index="6" aria-pressed="false"><i aria-hidden="true">&#8599;</i><span>N12PE, N368BL, N6502 departs</span><em>08:30</em></button></li>
+                    <li><button type="button" class="moves_item is-out" data-index="7" aria-pressed="false"><i aria-hidden="true">&#8599;</i><span>N208KT departs</span><em>09:00</em></button></li>
+                    <li><button type="button" class="moves_item is-out" data-index="8" aria-pressed="false"><i aria-hidden="true">&#8599;</i><span>N700HJ departs</span><em>10:00</em></button></li>
+                    <li><button type="button" class="moves_item is-in" data-index="9" aria-pressed="false"><i aria-hidden="true">&#8601;</i><span>N70RC arrives</span><em>11:00</em></button></li>
+                    <li><button type="button" class="moves_item is-in" data-index="10" aria-pressed="false"><i aria-hidden="true">&#8601;</i><span>N4602S arrives</span><em>11:30</em></button></li>
+                    <li><button type="button" class="moves_item is-in" data-index="11" aria-pressed="false"><i aria-hidden="true">&#8601;</i><span>N1137J, N73619 arrives</span><em>12:00</em></button></li>
+                    <li><button type="button" class="moves_item is-in" data-index="12" aria-pressed="false"><i aria-hidden="true">&#8601;</i><span>N6502 arrives</span><em>12:30</em></button></li>
+                    <li><button type="button" class="moves_item is-in" data-index="13" aria-pressed="false"><i aria-hidden="true">&#8601;</i><span>N45LJ arrives</span><em>13:00</em></button></li>
+                    <li><button type="button" class="moves_item is-in" data-index="14" aria-pressed="false"><i aria-hidden="true">&#8601;</i><span>N59JS arrives</span><em>13:30</em></button></li>
+                    <li><button type="button" class="moves_item is-in" data-index="15" aria-pressed="false"><i aria-hidden="true">&#8601;</i><span>N12PE arrives</span><em>14:00</em></button></li>
+                  </ul>
+                </div>
+              </div>
+                    <a class="showcase_cue" href="calendar">Explore the calendar &rarr;</a>
+          </div>
+          <a class="showcase_slide showcase_slide-tow" data-slide href="auto-stack#tow-playback" aria-label="Explore tow playback: aircraft towed into the hangar one by one, with the crew checklist ticking along">
+            <div class="showcase_tow" data-tow-preview aria-hidden="true">
+              <img src="assets/screens/2-tow-stack-poster.jpg" alt="" loading="lazy"/>
+            </div>
+            <span class="showcase_cue">Click for details →</span>
+          </a>
+          <a class="showcase_slide" data-slide href="collision-prevention" aria-label="Explore hangar rash prevention">
+            <video src="assets/screens/4-hangar-rash.mp4" poster="assets/screens/4-hangar-rash-poster.jpg" muted loop playsinline preload="none"></video>
+            <span class="showcase_cue">Click for details →</span>
+          </a>
+          <a class="showcase_slide showcase_slide-contain" data-slide href="tug-integration" aria-label="Explore autonomous tugs">
+            <img src="assets/screens/5-autonomous-tugs.png" loading="lazy" alt="Concept image for autonomous tug integration"/>
+            <span class="showcase_cue">Click for details →</span>
+          </a>
+          <a class="showcase_slide showcase_slide-contain showcase_slide-shot" data-slide href="audit-log" aria-label="Explore the audit log">
+            <img src="assets/screens/6-audit-log.webp" loading="lazy" alt="Starlight audit log: footage from seven hangar cameras beside a list of recorded motion events"/>
+            <span class="showcase_cue">Click for details &rarr;</span>
+          </a>
               </div>
             </div>
-            <figure class="timeline_media stage-media" data-stage="1-calendar">
-              <div class="screen_frame">
-                <div class="screen_frame_bar"><i></i><i></i><i></i><strong>Calendar</strong></div>
-                <button type="button" class="stage-media-slot media-open-button" data-media-open style="--screen-ratio: 1479/558" aria-label="Enlarge the calendar screenshot">
-                  <img src="assets/screens/1-calendar.jpg" loading="lazy" alt="Calendar view showing scheduled aircraft arrivals and departures"/>
-                </button>
-              </div>
-              <div class="timeline_hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg>Tap to enlarge</div>
-            </figure>
-          </li>
+          </div>
 
-          <li class="timeline_step">
-            <div class="timeline_node">02</div>
-            <div class="timeline_copy">
-              <div class="timeline_product">Auto-Stack</div>
-              <h3>Stop solving hangar tetris by hand</h3>
-              <p>Auto-Stack builds the layout in seconds, weighing departure times and the priority you assign each aircraft, then hands you a plan to review.</p>
-              <div class="timeline_foot">
-                <a href="auto-stack.html">Explore Auto-Stack →</a>
-                <span class="status_pill status_pill-live">Available now</span>
-              </div>
+          <div class="showcase_panels">
+      <div role="tabpanel" class="showcase_panel" id="panel-1" aria-labelledby="tab-1">
+        <div class="showcase_panel_head"><h3>Verify your schedule and see your hangar layout throughout the day</h3></div>
+        <p>Confirm today’s arrivals and departures, pulled in from the scheduling software you already use. Starlight then works out the best layout and moves for the day.</p>
+        <ul class="showcase_chips"><li>Synchronizes automatically with your scheduling software</li><li>Layout built based on your schedule</li><li>Every move listed, in order</li></ul>
+        <div class="sources" role="group" aria-label="Scheduling software Starlight Hangars syncs with: Flight Schedule Pro, AerScheduler, FlightBridge, Leon, FL3XX">
+            <p class="sources_label">Syncs automatically with your scheduling software</p>
+            <div class="sources_viewport" aria-hidden="true">
+              <ul class="sources_track"><li class="sources_logo">Flight Schedule Pro</li><li class="sources_logo">AerScheduler</li><li class="sources_logo">FlightBridge</li><li class="sources_logo">Leon</li><li class="sources_logo">FL3XX</li><li class="sources_logo">Flight Schedule Pro</li><li class="sources_logo">AerScheduler</li><li class="sources_logo">FlightBridge</li><li class="sources_logo">Leon</li><li class="sources_logo">FL3XX</li><li class="sources_logo">Flight Schedule Pro</li><li class="sources_logo">AerScheduler</li><li class="sources_logo">FlightBridge</li><li class="sources_logo">Leon</li><li class="sources_logo">FL3XX</li><li class="sources_logo">Flight Schedule Pro</li><li class="sources_logo">AerScheduler</li><li class="sources_logo">FlightBridge</li><li class="sources_logo">Leon</li><li class="sources_logo">FL3XX</li></ul>
             </div>
-            <figure class="timeline_media stage-media" data-stage="2-auto-stack">
-              <div class="screen_frame">
-                <div class="screen_frame_bar"><i></i><i></i><i></i><strong>Auto-Stack</strong></div>
-                <button type="button" class="stage-media-slot media-open-button" data-media-open aria-label="Enlarge the Auto-Stack planning video">
-                  <video src="assets/screens/2-auto-stack.mp4" poster="assets/screens/2-auto-stack-poster.jpg" muted loop playsinline preload="metadata"></video>
-                </button>
-              </div>
-              <div class="timeline_hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg>Tap to enlarge</div>
-            </figure>
-          </li>
+          </div>
+        <div class="showcase_links"><a href="calendar">How the calendar works →</a><a class="quiet" href="auto-stack">How Auto-Stack works</a></div>
+      </div>
+      <div role="tabpanel" class="showcase_panel" id="panel-2" aria-labelledby="tab-2" hidden>
+        <div class="showcase_panel_head"><h3>See exactly how to stack your hangar</h3></div>
+        <p>Starlight builds your hangar layout in minutes, not hours, then shows exactly how to tow each aircraft into place. Layouts and tow paths are optimized to maximize hangar space and minimize time spent towing, placing aircraft leaving soon at the front of the hangar and aircraft staying for a while at the back.</p>
+        <ul class="showcase_chips"><li>Stacking plans in minutes</li><li>A reviewed tow path for every aircraft</li><li>Optimized for space and time</li></ul>
+        <div class="showcase_links"><a href="auto-stack#tow-playback">How tow playback works →</a><a class="quiet" href="auto-stack">How Auto-Stack works</a></div>
+      </div>
+      <div role="tabpanel" class="showcase_panel showcase_panel-next" id="panel-3" aria-labelledby="tab-3" hidden>
+        <div class="showcase_panel_head"><h3>An extra set of eyes on every tow</h3><span class="status_pill status_pill-testing">In testing · Ready December 2026</span></div>
+        <p>As aircraft are towed into the hangar, Starlight tracks them and alerts the crew to tight clearances, helping reduce the risk of hangar rash.</p>
+        <ul class="showcase_chips"><li>Live aircraft tracking</li><li>Proximity alerts for the crew</li><li>Every move recorded</li></ul>
+        <div class="showcase_links"><a href="collision-prevention">How hangar rash prevention works →</a></div>
+      </div>
+      <div role="tabpanel" class="showcase_panel showcase_panel-next" id="panel-4" aria-labelledby="tab-4" hidden>
+        <div class="showcase_panel_head"><h3>Let autonomous tugs do the towing</h3><span class="status_pill status_pill-next">In development · June 2027</span></div>
+        <p>Retrofit the tugs you already own and hand them the approved plan, so the same reviewed paths get driven without a wing-walker on every move.</p>
+        <ul class="showcase_chips"><li>Full hangar operation works from the same crew plan</li><li>Fewer people needed per move</li></ul>
+        <div class="showcase_links"><a href="tug-integration">How autonomous tugs work →</a></div>
+      </div>
+      <div role="tabpanel" class="showcase_panel" id="panel-5" aria-labelledby="tab-5" hidden>
+        <div class="showcase_panel_head"><h3>Investigate any incident</h3></div>
+        <p>Starlight records hangar video when an aircraft is moved or when you record an event manually. Review any event that happened and get multiple camera views to understand exactly what happened in the case of an incident.</p>
+        <ul class="showcase_chips"><li>Recorded when aircraft move, or manually</li><li>Multiple camera views of every event</li><li>Review and export any event</li></ul>
+        <div class="showcase_links"><a href="audit-log">How the audit log works →</a></div>
+      </div>
+          </div>
+        </div>
 
-          <li class="timeline_step">
-            <div class="timeline_node">03</div>
-            <div class="timeline_copy">
-              <div class="timeline_product">Tow paths</div>
-              <h3>Settle the moves before the first tow</h3>
-              <p>Every aircraft gets a reviewed route and a place in the movement order, so the sequence is agreed on before anyone hooks up a tug.</p>
-              <div class="timeline_foot">
-                <a href="path-planning.html">Explore tow paths →</a>
-                <span class="status_pill status_pill-live">Available now</span>
-              </div>
-            </div>
-            <figure class="timeline_media stage-media" data-stage="3-path-planning">
-              <div class="screen_frame">
-                <div class="screen_frame_bar"><i></i><i></i><i></i><strong>Tow paths</strong></div>
-                <button type="button" class="stage-media-slot media-open-button" data-media-open aria-label="Enlarge the tow-path video">
-                  <video src="assets/screens/3-path-planning.mp4" poster="assets/screens/3-path-planning-poster.jpg" muted loop playsinline preload="metadata"></video>
-                </button>
-              </div>
-              <div class="timeline_hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg>Tap to enlarge</div>
-            </figure>
-          </li>
-
-          <li class="timeline_step">
-            <div class="timeline_node">04</div>
-            <div class="timeline_copy">
-              <div class="timeline_product">Audit log</div>
-              <h3>Show exactly what happened, and when</h3>
-              <p>Recorded video events are time-stamped, leaving a history you can share with a customer, a tenant, or an insurer.</p>
-              <div class="timeline_foot">
-                <a href="audit-log.html">Explore the audit log →</a>
-                <span class="status_pill status_pill-live">Available now</span>
-              </div>
-            </div>
-            <figure class="timeline_media stage-media" data-stage="6-audit-log">
-              <div class="screen_frame">
-                <div class="screen_frame_bar"><i></i><i></i><i></i><strong>Audit log</strong></div>
-                <button type="button" class="stage-media-slot media-open-button" data-media-open aria-label="Enlarge the audit log concept illustration">
-                  <img src="assets/screens/6-audit-log.svg" loading="lazy" alt="Concept illustration of hangar video event history"/>
-                </button>
-              </div>
-              <div class="timeline_hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg>Tap to enlarge</div>
-            </figure>
-          </li>
-
-        </ol>
-
-        <div class="timeline_divider">Being built now</div>
-
-        <ol class="timeline_list timeline_list-next">
-
-          <li class="timeline_step timeline_step-next">
-            <div class="timeline_node">05</div>
-            <div class="timeline_copy">
-              <div class="timeline_product">Hangar rash prevention</div>
-              <h3>Catch a wingtip before it catches you</h3>
-              <p>Live aircraft tracking and proximity alerts while aircraft are in motion, with mixed and wing-over-wing stacking accounted for.</p>
-              <div class="timeline_foot">
-                <a href="collision-prevention.html">Explore collision prevention →</a>
-                <span class="status_pill status_pill-next">In development</span>
-              </div>
-            </div>
-            <figure class="timeline_media stage-media" data-stage="4-collision-prevention">
-              <div class="screen_frame">
-                <div class="screen_frame_bar"><i></i><i></i><i></i><strong>Hangar rash prevention</strong></div>
-                <button type="button" class="stage-media-slot media-open-button" data-media-open aria-label="Enlarge the hangar rash prevention video">
-                  <video src="assets/screens/4-collision-prevention.mp4" poster="assets/screens/4-collision-prevention-poster.jpg" muted loop playsinline preload="none"></video>
-                </button>
-              </div>
-              <div class="timeline_hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg>Tap to enlarge</div>
-            </figure>
-          </li>
-
-          <li class="timeline_step timeline_step-next">
-            <div class="timeline_node">06</div>
-            <div class="timeline_copy">
-              <div class="timeline_product">Tug integration</div>
-              <h3>Take the crew out of the tow loop</h3>
-              <p>Retrofit the tugs you already own and hand them an approved plan, so the same reviewed paths and clearances get driven without a wing-walker on every move.</p>
-              <div class="timeline_foot">
-                <a href="tug-integration.html">Explore tug integration →</a>
-                <span class="status_pill status_pill-next">In development</span>
-              </div>
-            </div>
-            <figure class="timeline_media stage-media" data-stage="5-tug-integration">
-              <div class="screen_frame">
-                <div class="screen_frame_bar"><i></i><i></i><i></i><strong>Tug integration</strong></div>
-                <button type="button" class="stage-media-slot media-open-button" data-media-open style="--screen-ratio: 3/2" aria-label="Enlarge the tug automation concept image">
-                  <img src="assets/screens/5-autonomous-tugs.png" loading="lazy" alt="Concept image for autonomous tug integration"/>
-                </button>
-              </div>
-              <div class="timeline_hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg>Tap to enlarge</div>
-            </figure>
-          </li>
-
-        </ol>
+        <div class="day_cta">
+          <p>See it with your own hangar and schedule.</p>
+          <a href="#" data-open-contact class="hero_button hero_button-primary">Schedule a Demo</a>
+        </div>
       </div>
     </section>
 
@@ -357,35 +347,35 @@
     <section class="outcomes_wrap" id="outcomes" data-bg-type="dark">
       <div class="home_container">
         <div class="section_intro section_intro-light">
-          <h2 class="section_heading">Made for the work your hangar does every day.</h2>
+          <h2 class="section_heading">Made for the work you do every day.</h2>
         </div>
         <div class="outcomes_grid">
           <article class="outcome_card">
-            <div class="outcome_card-heading"><span class="outcome_card-number">01</span><span class="status_pill status_pill-live">Available now</span></div>
+            <div class="outcome_card-heading"><span class="outcome_card-number">01</span></div>
             <h3>Spend less time stacking</h3>
             <p>Schedule-aware layouts help crews reduce unnecessary aircraft moves and repeated full-hangar shuffles.</p>
           </article>
           <article class="outcome_card">
-            <div class="outcome_card-heading"><span class="outcome_card-number">02</span><span class="status_pill status_pill-live">Available now</span></div>
+            <div class="outcome_card-heading"><span class="outcome_card-number">02</span></div>
             <h3>Fit more aircraft safely</h3>
             <p>Better placement makes more of the available floor space usable for additional aircraft and potential rental revenue.</p>
           </article>
           <article class="outcome_card">
-            <div class="outcome_card-heading"><span class="outcome_card-number">03</span><span class="status_pill status_pill-next-dark">In development</span></div>
+            <div class="outcome_card-heading"><span class="outcome_card-number">03</span><span class="status_pill status_pill-testing-dark">In testing · Dec 2026</span></div>
             <h3>Reduce hangar rash risk</h3>
-            <p>Aircraft tracking and proximity-risk alerts help crews prevent collisions while aircraft move.</p>
+            <p>Aircraft tracking and proximity alerts help crews reduce hangar rash risk while aircraft move.</p>
           </article>
           <article class="outcome_card">
             <div class="outcome_card-heading"><span class="outcome_card-number">04</span><span class="status_pill status_pill-next-dark">In development</span></div>
             <h3>Free your staff for higher-value work</h3>
-            <p>Future tug automation can reduce the manual towing and coordination required from your crew.</p>
+            <p>Autonomous tugs can reduce the manual towing and coordination required from your crew.</p>
           </article>
         </div>
       </div>
     </section>
 
     <section class="roi_wrap" data-bg-type="light">
-      <div class="home_container roi_grid"><div class="roi_copy"><h2 class="section_heading">Put your hangar assumptions into the calculator.</h2><p>Estimate how additional usable space and reduced stacking labor could affect annual operations. Results depend on your inputs and represent estimated benefit before costs.</p><a href="roi.html" class="text_link">Open the ROI calculator →</a></div><a href="roi.html" class="roi_example" aria-label="View or change ROI calculator assumptions"><span>Potential annual benefit before costs</span><strong data-roi-profit="planning">$91,665</strong><div class="roi_breakdown"><p><b data-roi-revenue>$84,000</b>Annual revenue potential</p><p><b data-roi-planning-labor>$7,665</b>Potential planning labor savings</p></div><small data-roi-assumptions>Estimated ROI using a 40,000 sq. ft. hangar, 5% utilization boost, $3.50/sq. ft. monthly tenant rate, 4 hours spent stacking per day, $35 per labor hour, and 3 crew members.</small><span class="roi_action">View/change assumptions →</span></a></div>
+      <div class="home_container roi_grid"><div class="roi_copy"><h2 class="section_heading">Calculate your potential savings.</h2><p>Estimate how Starlight Hangars could save your operation money by increasing usable space, making stacking more efficient, and saving labor time. Results depend on your inputs and represent estimated benefit before costs.</p><a href="savings-calculator" class="text_link">Open the savings calculator →</a></div><a href="savings-calculator" class="roi_example" aria-label="View or change savings calculator assumptions"><span>Potential annual benefit before costs</span><strong data-roi-profit="planning">$91,665</strong><div class="roi_breakdown"><p><b data-roi-revenue>$84,000</b>Annual revenue potential</p><p><b data-roi-planning-labor>$7,665</b>Potential planning labor savings</p></div><small data-roi-assumptions>Estimated savings using a 40,000 sq. ft. hangar, 5% utilization boost, $3.50/sq. ft. monthly tenant rate, 4 hours spent stacking per day, $35 per labor hour, and 3 crew members.</small><span class="roi_action">View/change assumptions →</span></a></div>
     </section>
 
     <section class="buyer_wrap" data-bg-type="dark">
@@ -396,7 +386,7 @@
 <footer data-bg-type="dark" class="starlight-footer">
       <div class="starlight-footer_container">
         <div class="starlight-footer_left">
-          <a href="index.html" class="starlight-footer_brand">
+          <a href="/" class="starlight-footer_brand">
             <img class="starlight-footer-logo" src="assets/starlight_logo_notext.svg" alt="Starlight Hangars logo" aria-hidden="true"/>
             <span class="starlight-site_name">Starlight Hangars</span>
           </a>
@@ -406,17 +396,16 @@
         </div>
         <div class="starlight-footer_right">
           <nav class="starlight-footer_nav">
-            <a href="index.html#how-it-works" class="starlight-footer_link">How it works</a>
-            <a href="calendar.html" class="starlight-footer_link">Calendar View</a>
-            <a href="auto-stack.html" class="starlight-footer_link">Auto-Stack</a>
-            <a href="path-planning.html" class="starlight-footer_link">Paths</a>
-            <a href="collision-prevention.html" class="starlight-footer_link">Collision Prevention</a>
-            <a href="tug-integration.html" class="starlight-footer_link">Tug Integration</a>
-            <a href="audit-log.html" class="starlight-footer_link">Audit Log</a>
-            <a href="hardware-and-infrastructure.html" class="starlight-footer_link">System &amp; Installation</a>
-            <a href="roi.html" class="starlight-footer_link">ROI Calculator</a>
-            <a href="about.html" class="starlight-footer_link">About</a>
-            <a href="updates.html" class="starlight-footer_link">Updates</a>
+            <a href="/#how-it-works" class="starlight-footer_link">How it works</a>
+            <a href="calendar" class="starlight-footer_link">Verify Schedule</a>
+            <a href="auto-stack" class="starlight-footer_link">Auto-Stack &amp; Tow Playback</a>
+            <a href="collision-prevention" class="starlight-footer_link">Hangar Rash Prevention</a>
+            <a href="tug-integration" class="starlight-footer_link">Autonomous Tugs</a>
+            <a href="audit-log" class="starlight-footer_link">Audit Log</a>
+            <a href="hardware-and-infrastructure" class="starlight-footer_link">System &amp; Installation</a>
+            <a href="savings-calculator" class="starlight-footer_link">Savings Calculator</a>
+            <a href="about" class="starlight-footer_link">About</a>
+            <a href="updates" class="starlight-footer_link">Updates</a>
             <a href="#" data-open-contact class="starlight-footer_link">Contact</a>
           </nav>
         </div>
@@ -424,6 +413,8 @@
 <!-- starlight-shared-footer:end -->
   </main>
 </div>
-<script defer src="./assets/site.js?v=20261027-3"></script>
+<script defer src="./assets/site.js?v=20261106-1"></script>
+<script defer src="./assets/moves.js?v=20261106-1"></script>
+<script defer src="./assets/showcase.js?v=20261106-4"></script>
 </body>
 </html>
