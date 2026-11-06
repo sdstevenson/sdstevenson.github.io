@@ -3,7 +3,7 @@
    exported from the Starlight tracking demo. The playback controller and 3D scene are the app's own modules;
    this file only supplies the data, the controls, and the stand-in for the app's host callbacks. */
 import { loadScene, loadStyles, createSceneHost, modelUrl } from '../../hangar3d/js/hangar3d.js?v=20261106-7';
-import * as playback from './TrackingDemoPlayback.js';
+import * as playback from './TrackingDemoPlayback.js?v=20261106-8';
 
 const DOT = { High: '#E5485D', Medium: '#f5c542', Low: '#f5c542', None: '#4CC38A' };
 const UNKNOWN_DOT = '#c8ccd0';

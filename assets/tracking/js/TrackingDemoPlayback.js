@@ -253,6 +253,17 @@ export async function create(host, dotNet, demo, generation) {
     publish(state);
     const operation = state.operation;
     try {
+        // Phone browsers ignore preload="auto" and stay at metadata-only until a play is requested, which would
+        // leave the wait below pending. A muted inline play that is paused at once pulls in the first frame.
+        for (const video of videos) {
+            if (video.readyState < 2) {
+                const prime = () => video.play().then(() => { if (!state.playing && !state.starting) video.pause(); }, () => {
+                    // Low Power Mode and data saver block even muted autoplay until a tap.
+                    if (video.readyState < 2) host.addEventListener('pointerdown', prime, { once: true });
+                });
+                prime();
+            }
+        }
         await Promise.all(videos.map(video => waitForMedia(state, video, () => video.readyState >= 2, operation)));
         if (!isCurrent(state, operation)) throw new Error(state.error || 'Playback load canceled.');
         for (const video of videos) {
