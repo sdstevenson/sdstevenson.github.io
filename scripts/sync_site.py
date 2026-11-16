@@ -65,7 +65,7 @@ def generate(source: str, nav: str, footer: str) -> str:
         if footer_match:
             text = text[: footer_match.start()] + f"{FOOTER_START}\n{footer_template}\n{FOOTER_END}" + text[footer_match.end() :]
 
-    css_link = '<link rel="stylesheet" href="assets/shared.css?v=20261027-2" />'
+    css_link = '<link rel="stylesheet" href="assets/shared.css?v=20261116-2" />'
     css_replacement = replace_block(text, CSS_START, CSS_END, css_link)
     if css_replacement:
         text = css_replacement

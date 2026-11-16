@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Aircraft Owner View | Starlight Hangars</title>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <link rel="icon" href="./favicon/favicon.ico?v=20261027" sizes="48x48"/>
+  <link rel="icon" href="./favicon/favicon.svg?v=20261027" type="image/svg+xml"/>
+  <link rel="icon" href="./favicon/favicon-96x96.png?v=20261027" type="image/png" sizes="96x96"/>
+  <link rel="apple-touch-icon" href="./favicon/apple-touch-icon.png?v=20261027"/>
+  <link rel="manifest" href="./favicon/site.webmanifest?v=20261027"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/styles.css?v=20261018-1"/>
+  <link rel="stylesheet" href="assets/stages.css?v=20261106-1"/>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DGHZZ8BDEZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-DGHZZ8BDEZ');
+  </script>
+
+  <!-- Search and sharing metadata -->
+  <meta name="description" content="Aircraft owners can see where their aircraft is in your hangar, get notified when it moves, replay every past move, and see what is planned next, from anywhere."/>
+  <link rel="canonical" href="https://starlighthangars.com/aircraft-owners"/>
+  <meta property="og:site_name" content="Starlight Hangars"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:title" content="Aircraft Owner View | Starlight Hangars"/>
+  <meta property="og:description" content="Aircraft owners can see where their aircraft is in your hangar, get notified when it moves, replay every past move, and see what is planned next, from anywhere."/>
+  <meta property="og:url" content="https://starlighthangars.com/aircraft-owners"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="https://starlighthangars.com/assets/social/starlight-home.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:image:alt" content="Aircraft parked beside hangars at sunset"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Aircraft Owner View | Starlight Hangars"/>
+  <meta name="twitter:description" content="Aircraft owners can see where their aircraft is in your hangar, get notified when it moves, replay every past move, and see what is planned next, from anywhere."/>
+  <meta name="twitter:image" content="https://starlighthangars.com/assets/social/starlight-home.jpg"/>
+  <meta name="twitter:image:alt" content="Aircraft parked beside hangars at sunset"/>
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://starlighthangars.com/aircraft-owners#webpage",
+      "url": "https://starlighthangars.com/aircraft-owners",
+      "name": "Aircraft Owner View | Starlight Hangars",
+      "description": "Aircraft owners can see where their aircraft is in your hangar, get notified when it moves, replay every past move, and see what is planned next, from anywhere.",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@id": "https://starlighthangars.com/#website"
+      },
+      "about": {
+        "@id": "https://starlighthangars.com/#organization"
+      }
+    }
+  ]
+}
+  </script>
+<!-- starlight-shared-css:start -->
+<link rel="stylesheet" href="assets/shared.css?v=20261116-2" />
+<!-- starlight-shared-css:end -->
+  <link rel="stylesheet" href="assets/hero-c.css?v=20261106-8"/>
+  <link rel="stylesheet" href="assets/owners.css?v=20261116-2"/>
+</head>
+<body>
+
+  <!-- starlight-shared-nav:start -->
+<header id="starlight-nav-header">
+    <nav class="snav">
+      <div class="snav-inner">
+        <div class="snav-logo">
+          <a href="/" class="snav-logo-link" aria-label="Starlight Hangars home">
+            <img class="snav-logo-mark" src="assets/starlight_logo_notext.svg" alt="Starlight Hangars logo" aria-hidden="true"/>
+            <span class="snav-logo-text">Starlight Hangars</span>
+          </a>
+        </div>
+        <ul class="snav-links" role="list">
+          <li class="snav-item"><a href="/" class="snav-link snav-home-link">Home</a></li>
+          <li class="snav-item snav-item--dropdown" id="starlight-platform-item">
+            <button class="snav-link snav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+              How it works
+              <svg class="snav-chevron" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="snav-dropdown">
+              <a href="/#how-it-works" class="snav-dropdown-item">Overview</a>
+
+              <div class="snav-dropdown-section-label">Your day</div>
+              <a href="calendar" class="snav-dropdown-item">Verify Schedule</a>
+              <a href="auto-stack" class="snav-dropdown-item">Auto-Stack &amp; Tow Playback</a>
+              <a href="collision-prevention" class="snav-dropdown-item">Hangar Rash Prevention</a>
+              <a href="tug-integration" class="snav-dropdown-item">Autonomous Tugs</a>
+
+              <div class="snav-dropdown-section-label">Record</div>
+              <a href="audit-log" class="snav-dropdown-item">Audit Log</a>
+
+              <div class="snav-dropdown-section-label">For your owners</div>
+              <a href="aircraft-owners" class="snav-dropdown-item">Owner View</a>
+            </div>
+          </li>
+          <li class="snav-item"><a href="hardware-and-infrastructure" class="snav-link snav-system-link">System &amp; Installation</a></li>
+          <li class="snav-item"><a href="about" class="snav-link snav-about-link">About</a></li>
+          <li class="snav-item"><a href="updates" class="snav-link snav-updates-link">Updates</a></li>
+          <li class="snav-item"><a href="savings-calculator" class="snav-link snav-roi-link">Savings Calculator</a></li>
+          <li class="snav-item"><a href="#" data-open-contact class="snav-link snav-cta">Schedule a Demo</a></li>
+        </ul>
+        <button class="snav-hamburger" id="starlight-nav-hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+    <div class="snav-mobile-overlay" id="starlight-nav-overlay"></div>
+    <div class="snav-mobile" id="starlight-nav-mobile">
+      <button class="snav-mobile-close" id="starlight-nav-mobile-close" aria-label="Close menu">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M1 1L13 13M13 1L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <ul class="snav-mobile-links">
+        <li><a href="/" class="snav-mobile-link snav-home-link">Home</a></li>
+        <li>
+          <div class="snav-mobile-platform-label">How it works</div>
+          <div class="snav-mobile-sub open">
+            <a href="/#how-it-works">Overview</a>
+
+            <div class="snav-mobile-section-label">Your day</div>
+            <a href="calendar">Verify Schedule</a>
+            <a href="auto-stack">Auto-Stack &amp; Tow Playback</a>
+            <a href="collision-prevention">Hangar Rash Prevention</a>
+            <a href="tug-integration">Autonomous Tugs</a>
+
+            <div class="snav-mobile-section-label">Record</div>
+            <a href="audit-log">Audit Log</a>
+
+            <div class="snav-mobile-section-label">For your owners</div>
+            <a href="aircraft-owners">Owner View</a>
+          </div>
+        </li>
+        <li><a href="hardware-and-infrastructure" class="snav-mobile-link snav-system-link">System &amp; Installation</a></li>
+        <li><a href="about" class="snav-mobile-link snav-about-link">About</a></li>
+        <li><a href="updates" class="snav-mobile-link snav-updates-link">Updates</a></li>
+        <li><a href="savings-calculator" class="snav-mobile-link snav-roi-link">Savings Calculator</a></li>
+      </ul>
+      <a href="#" data-open-contact class="snav-mobile-cta">Schedule a Demo</a>
+    </div></header>
+<!-- starlight-shared-nav:end -->
+
+  <!-- HERO -->
+  <section class="hero-c" id="overview">
+    <p class="hero-c-eyebrow">Owner View <span class="hero-c-status">Available now</span></p>
+    <h1>Give owners a view of their aircraft from anywhere</h1>
+    <p class="hero-c-lead">Owners can see where their aircraft is in your hangar, get notified when it moves, replay every past move, and see what&rsquo;s planned next. They get peace of mind, and one more reason to stay or sign with you.</p>
+    <div class="hero-c-actions"><a href="#" data-open-contact class="hero-c-btn hero-c-btn--primary">Schedule a Demo</a><a href="savings-calculator" class="hero-c-btn hero-c-btn--ghost">Savings Calculator</a></div>
+    <div class="hero-c-peek" id="demo">
+      <div class="owner-demo" role="img" aria-label="Example owner view: N59JS shown parked in row 3 of the hangar, with a notification that it was moved, its recent move history with playbacks, and its next planned move">
+        <div class="owner-phone" aria-hidden="true">
+          <div class="owner-phone-screen">
+            <div class="owner-phone-status"><span>13:42</span><span>Fri</span></div>
+            <div class="owner-phone-head">
+              <p class="owner-phone-tail">N59JS</p>
+              <p class="owner-phone-type">Cirrus SR22</p>
+              <span class="owner-phone-state">In the hangar &middot; Row 3</span>
+            </div>
+            <svg class="owner-map" viewBox="0 0 240 170" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <symbol id="owner-ac" viewBox="0 0 40 40"><path d="M20 2C21.4 2 22.2 3.4 22.2 5.4V15L38 22V25.4L22.2 21.6V30L27 33.4V36.2L20 34.4L13 36.2V33.4L17.8 30V21.6L2 25.4V22L17.8 15V5.4C17.8 3.4 18.6 2 20 2Z"/></symbol>
+              </defs>
+              <path d="M14 158V12H226V158" fill="none" stroke="#5c6a7a" stroke-width="2"/>
+              <path d="M14 158H44M196 158H226" stroke="#5c6a7a" stroke-width="2"/>
+              <text x="120" y="166" fill="#8696a6" font-size="7" font-weight="700" text-anchor="middle" font-family="Inter, sans-serif" letter-spacing="1.5">HANGAR DOOR</text>
+              <g fill="#5c6a7a">
+                <use href="#owner-ac" x="30" y="20" width="44" height="44" transform="rotate(180 52 42)"/>
+                <use href="#owner-ac" x="98" y="18" width="44" height="44" transform="rotate(180 120 40)"/>
+                <use href="#owner-ac" x="166" y="20" width="44" height="44" transform="rotate(180 188 42)"/>
+                <use href="#owner-ac" x="132" y="66" width="42" height="42" transform="rotate(180 153 87)"/>
+                <use href="#owner-ac" x="40" y="108" width="40" height="40" transform="rotate(180 60 128)"/>
+                <use href="#owner-ac" x="160" y="110" width="40" height="40" transform="rotate(180 180 130)"/>
+              </g>
+              <path d="M88 108C92 124 104 132 112 140" fill="none" stroke="#B7CAD6" stroke-width="1.6" stroke-dasharray="3 3"/>
+              <circle cx="66" cy="87" r="27" fill="#4F7186" fill-opacity="0.28"/>
+              <use href="#owner-ac" x="46" y="67" width="40" height="40" fill="#8fc0e0" transform="rotate(180 66 87)"/>
+              <rect x="44" y="59" width="44" height="13" rx="6.5" fill="#fff"/>
+              <text x="66" y="68.5" fill="#071424" font-size="8" font-weight="800" text-anchor="middle" font-family="Inter, sans-serif">N59JS</text>
+            </svg>
+            <div class="owner-phone-next">
+              <p class="owner-phone-label">Next planned move</p>
+              <p>Sat 08:20 &middot; Brought to the front for its 08:45 departure</p>
+            </div>
+          </div>
+        </div>
+        <div class="owner-side" aria-hidden="true">
+          <div class="owner-toast">
+            <span class="owner-toast-icon"><svg viewBox="75 25 250 250" xmlns="http://www.w3.org/2000/svg"><path d="M200 30C200 95 245 150 315 150C245 150 200 205 200 270C200 205 155 150 85 150C155 150 200 95 200 30Z" fill="#fff"/><path d="M200 115C200 138 215 150 235 150C215 150 200 162 200 185C200 162 185 150 165 150C185 150 200 138 200 115Z" fill="#071424"/></svg></span>
+            <p><strong>N59JS was moved <span>13:34</span></strong>Towed into the hangar and parked in Row 3.</p>
+          </div>
+          <div class="owner-history">
+            <p class="owner-phone-label">Move history</p>
+            <ol>
+              <li class="is-next"><time>Sat 08:20</time><span>To the front for departure</span><em class="owner-tag">Planned</em></li>
+              <li><time>13:34</time><span>Towed in to Row 3</span><b class="owner-play"><svg viewBox="0 0 10 10"><path d="M2 1l7 4-7 4z" fill="currentColor"/></svg>Playback</b></li>
+              <li><time>06:48</time><span>Brought out for 07:00 departure</span><b class="owner-play"><svg viewBox="0 0 10 10"><path d="M2 1l7 4-7 4z" fill="currentColor"/></svg>Playback</b></li>
+              <li><time>Thu 16:10</time><span>Moved to make room for an arrival</span><b class="owner-play"><svg viewBox="0 0 10 10"><path d="M2 1l7 4-7 4z" fill="currentColor"/></svg>Playback</b></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-light hero-c-after">
+    <div class="section-inner"><p class="hero-c-caption">Each owner sees only their own aircraft: where it is now, every move it has made, and every move planned for it.</p></div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="section-white" id="why">
+    <div class="section-inner">
+      <h2 class="section-heading light">Why it matters</h2>
+      <p class="section-subheading light">Owners who can see their aircraft is safe have one more reason to stay or sign with you.</p>
+      <div class="benefit-grid">
+        <div class="benefit-card">
+          <div class="benefit-check">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+          </div>
+          <p><strong>Build owner confidence</strong> — Owners always know where their aircraft is and whether it has been moved.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-check">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+          </div>
+          <p><strong>Stand out from other FBOs</strong> — Offer owners a level of visibility into their aircraft that most hangars can&rsquo;t.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-check">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+          </div>
+          <p><strong>Fewer calls to your desk</strong> — Location, history, and upcoming moves answer most owner questions before they&rsquo;re asked.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPABILITIES -->
+  <section class="section-light" id="features">
+    <div class="section-inner">
+      <h2 class="section-heading light">Key Features</h2>
+      <p class="section-subheading light">Everything an owner wants to know about their aircraft, from anywhere.</p>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h3>See where it is</h3>
+          <p>See exactly where the aircraft is parked in the hangar, from anywhere, on a phone, tablet, or computer.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+          </div>
+          <h3>Notified when it moves</h3>
+          <p>Owners get a notification as soon as their aircraft is moved.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+          </div>
+          <h3>Replay every past move</h3>
+          <p>A dated history of every move, each with a playback showing exactly where and how the aircraft was moved.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4"/><path d="M16 2v4"/><path d="M3 10h18"/><path d="m10 15 2 2 3-4"/></svg>
+          </div>
+          <h3>See what&rsquo;s planned next</h3>
+          <p>Upcoming moves come straight from your schedule, including when the aircraft will be brought out for a departure.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <h3>Only their aircraft</h3>
+          <p>Each owner sees their own aircraft and nothing else. Other owners&rsquo; aircraft stay private.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section" id="faq">
+    <div class="section-inner">
+      <h2 class="section-heading" style="text-align:center; margin-bottom:0.5rem;">Frequently Asked Questions</h2>
+      <p class="section-subheading" style="max-width:560px; margin:0 auto 3rem; text-align:center;">Answers about what owners can see and how they stay informed.</p>
+      <div class="faq-list" id="faq-list">
+        <div class="faq-item">
+          <button class="faq-question">Can owners see other aircraft in the hangar? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">No. Each owner sees only their own aircraft: its location, its moves, and its playbacks.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Where can owners check on their aircraft? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">From anywhere, on a phone, tablet, or computer.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">How do owners know when their aircraft is moved? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Owners get a notification as soon as their aircraft is moved, and the move is added to its history.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Can owners see how their aircraft was moved? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Yes. Every move has a playback showing exactly where and how their aircraft moved. See the <a href="audit-log">audit log</a> for how moves are recorded.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Where do planned moves come from? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Planned moves come from your <a href="calendar">schedule</a> and <a href="auto-stack">stacking plan</a>, so owners see the same plan your crew is working from.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Does anything get attached to the aircraft? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">No. Nothing touches or gets mounted to the aircraft. The entire system is installed once, in the hangar. See <a href="hardware-and-infrastructure">System &amp; Installation</a>.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-strip">
+    <h2>Give your owners peace of mind.</h2>
+    <p>Schedule a demo to see exactly what your owners would see.</p>
+    <a href="#" data-open-contact class="btn-primary">Schedule a Demo</a>
+  </div>
+
+  <!-- starlight-shared-footer:start -->
+<footer data-bg-type="dark" class="starlight-footer">
+      <div class="starlight-footer_container">
+        <div class="starlight-footer_left">
+          <a href="/" class="starlight-footer_brand">
+            <img class="starlight-footer-logo" src="assets/starlight_logo_notext.svg" alt="Starlight Hangars logo" aria-hidden="true"/>
+            <span class="starlight-site_name">Starlight Hangars</span>
+          </a>
+          <div class="starlight-copyright">
+            © Starlight Hangars. Patent Pending.
+          </div>
+        </div>
+        <div class="starlight-footer_right">
+          <nav class="starlight-footer_nav">
+            <a href="/#how-it-works" class="starlight-footer_link">How it works</a>
+            <a href="calendar" class="starlight-footer_link">Verify Schedule</a>
+            <a href="auto-stack" class="starlight-footer_link">Auto-Stack &amp; Tow Playback</a>
+            <a href="collision-prevention" class="starlight-footer_link">Hangar Rash Prevention</a>
+            <a href="tug-integration" class="starlight-footer_link">Autonomous Tugs</a>
+            <a href="audit-log" class="starlight-footer_link">Audit Log</a>
+            <a href="aircraft-owners" class="starlight-footer_link">Owner View</a>
+            <a href="hardware-and-infrastructure" class="starlight-footer_link">System &amp; Installation</a>
+            <a href="savings-calculator" class="starlight-footer_link">Savings Calculator</a>
+            <a href="about" class="starlight-footer_link">About</a>
+            <a href="updates" class="starlight-footer_link">Updates</a>
+            <a href="#" data-open-contact class="starlight-footer_link">Contact</a>
+          </nav>
+        </div>
+      </div></footer>
+<!-- starlight-shared-footer:end -->
+
+  <script src="https://cdn.prod.website-files.com/gsap/3.14.2/gsap.min.js"></script>
+  <script src="https://cdn.prod.website-files.com/gsap/3.14.2/ScrollTrigger.min.js"></script>
+  <script src="./assets/site.js?v=20261106-1"></script>
+  <script>
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const answer = item.querySelector('.faq-answer');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(o => { o.classList.remove('open'); o.querySelector('.faq-answer').style.height = '0'; });
+        if (!isOpen) { item.classList.add('open'); answer.style.height = answer.querySelector('.faq-answer-inner').offsetHeight + 'px'; }
+      });
+    });
+  </script>
+  <script>
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.utils.toArray('.feature-card, .benefit-card').forEach((el, i) => {
+        gsap.from(el, { scrollTrigger: { trigger: el, start: 'top 88%' }, opacity: 0, y: 24, duration: 0.55, ease: 'power2.out', delay: (i % 4) * 0.08 });
+      });
+    }
+  </script>
+</body>
+</html>

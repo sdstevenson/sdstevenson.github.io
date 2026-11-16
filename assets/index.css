@@ -202,3 +202,9 @@ body{-moz-osx-font-smoothing:grayscale}section,header,footer{position:relative}.
 
 .showcase_slide-calendar .moves_map { background: #2a2f37; }
 .showcase_slide-calendar .moves_map img { inset: 1.25rem; width: calc(100% - 2.5rem); height: calc(100% - 2.5rem); border-radius: 8px; object-fit: contain; }
+
+/* Half-width desktop windows: tighten the tabs so status pills such as "In development · June 2027" fit */
+@media (min-width: 901px) and (max-width: 1100px) {
+  .showcase_tab { gap: 0.6rem; padding: 0.85rem 0.8rem; }
+  .showcase_tab_status { letter-spacing: 0.03em; }
+}

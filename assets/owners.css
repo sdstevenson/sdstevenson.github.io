@@ -1,0 +1,94 @@
+/* Owner View hero: a phone showing one owner's aircraft, beside its move notifications and history. */
+.owner-demo {
+  display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 2rem; align-items: center;
+  max-width: 900px; margin: 0 auto; padding: 2rem; border-radius: 18px;
+  background: var(--navy-mid); box-shadow: 0 18px 48px rgba(7,20,36,0.22), 0 0 0 1px rgba(183,202,214,0.18);
+}
+
+/* Phone */
+.owner-phone {
+  position: relative; width: 100%; max-width: 300px; margin: 0 auto; padding: 0.7rem;
+  border-radius: 2.4rem; background: #02080f; box-shadow: 0 0 0 1px rgba(183,202,214,0.22), 0 20px 40px rgba(0,0,0,0.35);
+}
+.owner-phone-screen { overflow: hidden; border-radius: 1.85rem; background: #f5f7f9; color: var(--navy); }
+.owner-phone-status { display: flex; justify-content: space-between; padding: 0.7rem 1.3rem 0.3rem; font-size: 0.68rem; font-weight: 700; }
+.owner-phone-head { padding: 0.35rem 1.1rem 0.8rem; }
+.owner-phone-tail { margin: 0; font-size: 1.25rem; font-weight: 800; line-height: 1.2; }
+.owner-phone-type { margin: 0.1rem 0 0; font-size: 0.75rem; color: var(--muted); }
+.owner-phone-state {
+  display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 0.55rem; padding: 0.25rem 0.55rem;
+  border-radius: 999px; background: #e3f3ea; color: #2f7a52; font-size: 0.68rem; font-weight: 800;
+}
+.owner-phone-state::before { content: ""; width: 0.4rem; height: 0.4rem; border-radius: 50%; background: currentColor; }
+.owner-map { display: block; width: 100%; height: auto; background: #1f2530; }
+.owner-phone-next { margin: 0.8rem; padding: 0.7rem 0.8rem; border-radius: 12px; background: #fff; box-shadow: inset 0 0 0 1px rgba(7,20,36,0.07); }
+.owner-phone-label { margin: 0 0 0.2rem; font-size: 0.62rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.owner-phone-next p:last-child { margin: 0; font-size: 0.82rem; font-weight: 700; line-height: 1.4; }
+
+/* Notification and history beside the phone */
+.owner-side { display: grid; gap: 1rem; min-width: 0; }
+.owner-toast {
+  display: grid; grid-template-columns: 2.2rem minmax(0, 1fr); gap: 0.75rem; align-items: center;
+  padding: 0.85rem 1rem; border-radius: 16px; background: rgba(255,255,255,0.96); color: var(--navy);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.2);
+}
+.owner-toast-icon { display: flex; align-items: center; justify-content: center; width: 2.2rem; height: 2.2rem; border-radius: 10px; background: var(--navy); }
+.owner-toast-icon svg { display: block; width: 1.3rem; height: 1.3rem; }
+.owner-toast p { margin: 0; font-size: 0.85rem; line-height: 1.4; }
+.owner-toast strong { display: flex; justify-content: space-between; gap: 0.5rem; font-size: 0.78rem; }
+.owner-toast strong span { color: var(--muted); font-weight: 600; }
+.owner-history { padding: 1rem 1.1rem; border-radius: 16px; background: rgba(255,255,255,0.05); box-shadow: inset 0 0 0 1px rgba(183,202,214,0.16); }
+.owner-history .owner-phone-label { color: var(--blue-faint); margin-bottom: 0.6rem; }
+.owner-history ol { display: grid; gap: 0.55rem; margin: 0; padding: 0; list-style: none; }
+.owner-history li {
+  display: grid; grid-template-columns: 3.4rem minmax(0, 1fr) auto; gap: 0.75rem; align-items: center;
+  padding: 0.55rem 0.7rem; border-radius: 10px; background: rgba(255,255,255,0.06); color: #fff; font-size: 0.85rem;
+}
+.owner-history time { color: var(--blue-faint); font-size: 0.78rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.owner-history li span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; }
+.owner-history li.is-next { background: transparent; box-shadow: inset 0 0 0 1px rgba(183,202,214,0.3); }
+.owner-history li.is-next span { color: var(--blue-faint); }
+.owner-play {
+  display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.25rem 0.55rem; border-radius: 999px;
+  background: rgba(183,202,214,0.16); color: #fff; font-size: 0.7rem; font-weight: 800; white-space: nowrap;
+}
+.owner-play svg { width: 0.6rem; height: 0.6rem; }
+.owner-tag { color: var(--blue-faint); font-size: 0.7rem; font-weight: 800; white-space: nowrap; }
+
+@media (max-width: 760px) {
+  .owner-demo { grid-template-columns: minmax(0, 1fr); padding: 1.25rem; gap: 1.25rem; }
+  .owner-phone { max-width: 270px; }
+}
+
+/* Homepage showcase slide: the same owner view laid out landscape to fill the 16:9 screen */
+.showcase_slide-owner { --slide-bg: #0E2336; cursor: pointer; }
+.showcase_slide-owner .owner-demo {
+  position: absolute; inset: 0; max-width: none; margin: 0; border-radius: 0; box-shadow: none;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 4%; align-items: stretch; padding: 4.5% 5%;
+}
+.owner-slide-map { display: flex; flex-direction: column; min-height: 0; overflow: hidden; border-radius: 12px; background: #f5f7f9; color: var(--navy); }
+.owner-slide-map .owner-phone-head { display: flex; flex-wrap: wrap; align-items: center; gap: 0.2rem 0.6rem; padding: 0.7rem 0.9rem; }
+.owner-slide-map .owner-phone-tail { font-size: 1rem; }
+.owner-slide-map .owner-phone-type { margin: 0; }
+.owner-slide-map .owner-phone-state { margin: 0 0 0 auto; }
+.owner-slide-map .owner-map { flex: 1 1 auto; min-height: 0; width: 100%; height: 100%; }
+.showcase_slide-owner .owner-side { align-content: center; gap: 0.75rem; }
+.showcase_slide-owner .owner-history { padding: 0.8rem 0.9rem; }
+.showcase_slide-owner .owner-history li { padding: 0.45rem 0.6rem; font-size: 0.8rem; }
+.showcase_slide-owner .owner-toast { padding: 0.7rem 0.85rem; }
+@media (max-width: 1100px) {
+  .showcase_slide-owner .owner-history li:nth-child(n+4) { display: none; }
+}
+@media (max-width: 700px) {
+  .showcase_screen:has(.showcase_slide-owner.is-active) { aspect-ratio: 4 / 5; }
+  .showcase_slide-owner .owner-demo { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; padding: 1rem; gap: 0.75rem; }
+  .showcase_slide-owner .owner-history { display: none; }
+}
+.owner-history li span { white-space: normal; line-height: 1.3; }
+.showcase_slide-owner .owner-history li { grid-template-columns: 2.9rem minmax(0, 1fr) auto; gap: 0.55rem; }
+@media (max-width: 760px) {
+  .owner-play { font-size: 0; gap: 0; padding: 0.4rem; }
+  .owner-play svg { width: 0.65rem; height: 0.65rem; }
+  .owner-history { padding: 0.9rem; }
+  .owner-history li { grid-template-columns: 3rem minmax(0, 1fr) auto; gap: 0.6rem; }
+}

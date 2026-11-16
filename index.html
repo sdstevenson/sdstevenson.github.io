@@ -14,8 +14,9 @@
   <link rel="dns-prefetch" href="https://www.googletagmanager.com"/>
   <link rel="stylesheet" href="assets/styles.css?v=20261018-1"/>
   <link rel="stylesheet" href="assets/stages.css"/>
-  <link rel="stylesheet" href="assets/moves.css?v=20261106-1"/>
-  <link rel="stylesheet" href="assets/index.css?v=20261106-15"/>
+  <link rel="stylesheet" href="assets/moves.css?v=20261116-2"/>
+  <link rel="stylesheet" href="assets/index.css?v=20261116-3"/>
+  <link rel="stylesheet" href="assets/owners.css?v=20261116-2"/>
   <link rel="stylesheet" href="assets/partners.css"/>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DGHZZ8BDEZ"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-DGHZZ8BDEZ');</script>
@@ -87,7 +88,7 @@
 }
   </script>
 <!-- starlight-shared-css:start -->
-<link rel="stylesheet" href="assets/shared.css?v=20261027-2" />
+<link rel="stylesheet" href="assets/shared.css?v=20261116-2" />
 <!-- starlight-shared-css:end -->
 </head>
 <body>
@@ -122,6 +123,9 @@
 
               <div class="snav-dropdown-section-label">Record</div>
               <a href="audit-log" class="snav-dropdown-item">Audit Log</a>
+
+              <div class="snav-dropdown-section-label">For your owners</div>
+              <a href="aircraft-owners" class="snav-dropdown-item">Owner View</a>
             </div>
           </li>
           <li class="snav-item"><a href="hardware-and-infrastructure" class="snav-link snav-system-link">System &amp; Installation</a></li>
@@ -157,6 +161,9 @@
 
             <div class="snav-mobile-section-label">Record</div>
             <a href="audit-log">Audit Log</a>
+
+            <div class="snav-mobile-section-label">For your owners</div>
+            <a href="aircraft-owners">Owner View</a>
           </div>
         </li>
         <li><a href="hardware-and-infrastructure" class="snav-mobile-link snav-system-link">System &amp; Installation</a></li>
@@ -171,7 +178,7 @@
     <section class="hero_wrap" data-bg-type="dark">
       <div class="hero_content">
         <h1 class="hero_title">Spend less time stacking aircraft. Make more of your hangar space.</h1>
-        <p class="hero_subtitle">Plan around arrivals and departures, reduce aircraft moves, and fit more aircraft to increase your hangar’s revenue potential.</p>
+        <p class="hero_subtitle">Plan around every arrival and departure, grow your hangar’s revenue, and show owners their aircraft is safe.</p>
         <div class="hero_actions"><a href="#" data-open-contact class="hero_button hero_button-primary">Schedule a Demo</a><a href="#how-it-works" class="hero_button hero_button-secondary">See How It Works</a></div>
         <section class="partner_band" id="partners" aria-labelledby="partners-title">
           <h2 class="partner_band-title" id="partners-title">Our partners</h2>
@@ -188,7 +195,7 @@
       <a href="#how-it-works" class="hero_scroll" aria-label="Scroll to how it works"><span>Explore</span><svg class="hero_scroll_icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>
     </section>
 
-    <!-- YOUR DAY, COMPACT — five steps in one tabbed viewer. Tabs/auto-advance swap the
+    <!-- YOUR DAY, COMPACT — six steps in one tabbed viewer. Tabs/auto-advance swap the
          screen and copy; every slide and link goes to that step's own page. -->
     <section class="showcase_wrap" id="how-it-works" data-bg-type="light">
       <div class="home_container">
@@ -221,7 +228,12 @@
       </button>
       <button type="button" role="tab" class="showcase_tab" id="tab-5" aria-controls="panel-5" aria-selected="false" tabindex="-1" data-frame="Audit log">
         <span class="showcase_num">05</span>
-        <span class="showcase_tab_text"><span class="showcase_moment">After the fact</span><span class="showcase_tab_title">Audit log</span></span>
+        <span class="showcase_tab_text"><span class="showcase_moment">After the fact</span><span class="showcase_tab_title">Audit log &amp; move playback</span></span>
+        <span class="showcase_progress" aria-hidden="true"></span>
+      </button>
+      <button type="button" role="tab" class="showcase_tab" id="tab-6" aria-controls="panel-6" aria-selected="false" tabindex="-1" data-frame="Owner view">
+        <span class="showcase_num">06</span>
+        <span class="showcase_tab_text"><span class="showcase_moment">Anytime, anywhere</span><span class="showcase_tab_title">A live view for owners</span></span>
         <span class="showcase_progress" aria-hidden="true"></span>
       </button>
           </div>
@@ -266,9 +278,9 @@
                     <li><button type="button" class="moves_item is-in" data-index="10" aria-pressed="false"><i aria-hidden="true">&#8601;</i><span>N4602S arrives</span><em>11:30</em></button></li>
                     <li><button type="button" class="moves_item is-in" data-index="11" aria-pressed="false"><i aria-hidden="true">&#8601;</i><span>N1137J, N73619 arrives</span><em>12:00</em></button></li>
                     <li><button type="button" class="moves_item is-in" data-index="12" aria-pressed="false"><i aria-hidden="true">&#8601;</i><span>N6502 arrives</span><em>12:30</em></button></li>
-                    <li><button type="button" class="moves_item is-in" data-index="13" aria-pressed="false"><i aria-hidden="true">&#8601;</i><span>N45LJ arrives</span><em>13:00</em></button></li>
+                    <li><button type="button" class="moves_item is-in" data-index="13" aria-pressed="false"><i aria-hidden="true">&#8601;</i><span>N45LJ arrives</span><em class="moves_time-updated" title="Updated by ADS-B: 20 min early">12:40</em></button></li>
                     <li><button type="button" class="moves_item is-in" data-index="14" aria-pressed="false"><i aria-hidden="true">&#8601;</i><span>N59JS arrives</span><em>13:30</em></button></li>
-                    <li><button type="button" class="moves_item is-in" data-index="15" aria-pressed="false"><i aria-hidden="true">&#8601;</i><span>N12PE arrives</span><em>14:00</em></button></li>
+                    <li><button type="button" class="moves_item is-in" data-index="15" aria-pressed="false"><i aria-hidden="true">&#8601;</i><span>N12PE arrives</span><em class="moves_time-updated" title="Updated by ADS-B: 20 min late">14:20</em></button></li>
                   </ul>
                 </div>
               </div>
@@ -292,6 +304,50 @@
             <img src="assets/screens/6-audit-log.webp" loading="lazy" alt="Starlight audit log: footage from seven hangar cameras beside a list of recorded motion events"/>
             <span class="showcase_cue">Click for details &rarr;</span>
           </a>
+          <a class="showcase_slide showcase_slide-owner" data-slide href="aircraft-owners" aria-label="Explore Owner View: an owner sees where their aircraft is parked, a notification that it was moved, and its move history">
+            <div class="owner-demo" aria-hidden="true">
+              <div class="owner-slide-map">
+                <div class="owner-phone-head"><p class="owner-phone-tail">N59JS</p><p class="owner-phone-type">Cirrus SR22</p><span class="owner-phone-state">In the hangar &middot; Row 3</span></div>
+                <svg class="owner-map" viewBox="0 0 240 170" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <symbol id="owner-ac-home" viewBox="0 0 40 40"><path d="M20 2C21.4 2 22.2 3.4 22.2 5.4V15L38 22V25.4L22.2 21.6V30L27 33.4V36.2L20 34.4L13 36.2V33.4L17.8 30V21.6L2 25.4V22L17.8 15V5.4C17.8 3.4 18.6 2 20 2Z"/></symbol>
+              </defs>
+              <path d="M14 158V12H226V158" fill="none" stroke="#5c6a7a" stroke-width="2"/>
+              <path d="M14 158H44M196 158H226" stroke="#5c6a7a" stroke-width="2"/>
+              <text x="120" y="166" fill="#8696a6" font-size="7" font-weight="700" text-anchor="middle" font-family="Inter, sans-serif" letter-spacing="1.5">HANGAR DOOR</text>
+              <g fill="#5c6a7a">
+                <use href="#owner-ac-home" x="30" y="20" width="44" height="44" transform="rotate(180 52 42)"/>
+                <use href="#owner-ac-home" x="98" y="18" width="44" height="44" transform="rotate(180 120 40)"/>
+                <use href="#owner-ac-home" x="166" y="20" width="44" height="44" transform="rotate(180 188 42)"/>
+                <use href="#owner-ac-home" x="132" y="66" width="42" height="42" transform="rotate(180 153 87)"/>
+                <use href="#owner-ac-home" x="40" y="108" width="40" height="40" transform="rotate(180 60 128)"/>
+                <use href="#owner-ac-home" x="160" y="110" width="40" height="40" transform="rotate(180 180 130)"/>
+              </g>
+              <path d="M88 108C92 124 104 132 112 140" fill="none" stroke="#B7CAD6" stroke-width="1.6" stroke-dasharray="3 3"/>
+              <circle cx="66" cy="87" r="27" fill="#4F7186" fill-opacity="0.28"/>
+              <use href="#owner-ac-home" x="46" y="67" width="40" height="40" fill="#8fc0e0" transform="rotate(180 66 87)"/>
+              <rect x="44" y="59" width="44" height="13" rx="6.5" fill="#fff"/>
+              <text x="66" y="68.5" fill="#071424" font-size="8" font-weight="800" text-anchor="middle" font-family="Inter, sans-serif">N59JS</text>
+            </svg>
+              </div>
+              <div class="owner-side">
+                <div class="owner-toast">
+                  <span class="owner-toast-icon"><svg viewBox="75 25 250 250" xmlns="http://www.w3.org/2000/svg"><path d="M200 30C200 95 245 150 315 150C245 150 200 205 200 270C200 205 155 150 85 150C155 150 200 95 200 30Z" fill="#fff"/><path d="M200 115C200 138 215 150 235 150C215 150 200 162 200 185C200 162 185 150 165 150C185 150 200 138 200 115Z" fill="#071424"/></svg></span>
+                  <p><strong>N59JS was moved <span>13:34</span></strong>Towed into the hangar and parked in Row 3.</p>
+                </div>
+                <div class="owner-history">
+                  <p class="owner-phone-label">Move history</p>
+                  <ol>
+                    <li class="is-next"><time>Sat 08:20</time><span>To the front for departure</span><em class="owner-tag">Planned</em></li>
+                    <li><time>13:34</time><span>Towed in to Row 3</span><b class="owner-play"><svg viewBox="0 0 10 10"><path d="M2 1l7 4-7 4z" fill="currentColor"/></svg>Playback</b></li>
+                    <li><time>06:48</time><span>Brought out for departure</span><b class="owner-play"><svg viewBox="0 0 10 10"><path d="M2 1l7 4-7 4z" fill="currentColor"/></svg>Playback</b></li>
+                    <li><time>Thu 16:10</time><span>Moved to make room</span><b class="owner-play"><svg viewBox="0 0 10 10"><path d="M2 1l7 4-7 4z" fill="currentColor"/></svg>Playback</b></li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+            <span class="showcase_cue">Click for details &rarr;</span>
+          </a>
               </div>
             </div>
           </div>
@@ -299,8 +355,8 @@
           <div class="showcase_panels">
       <div role="tabpanel" class="showcase_panel" id="panel-1" aria-labelledby="tab-1">
         <div class="showcase_panel_head"><h3>Verify your schedule and see your hangar layout throughout the day</h3></div>
-        <p>Confirm today’s arrivals and departures, pulled in from the scheduling software you already use. Starlight then works out the best layout and moves for the day.</p>
-        <ul class="showcase_chips"><li>Synchronizes automatically with your scheduling software</li><li>Layout built based on your schedule</li><li>Every move listed, in order</li></ul>
+        <p>Confirm today’s arrivals and departures, pulled in from the scheduling software you already use. Starlight works out the best layout and moves for the day, and when live ADS-B data shows a flight running early or late, the schedule and plan update to match.</p>
+        <ul class="showcase_chips"><li>Synchronizes automatically with your scheduling software</li><li>Arrival times updated by live ADS-B</li><li>Layout built based on your schedule</li><li>Every move listed, in order</li></ul>
         <div class="sources" role="group" aria-label="Scheduling software Starlight Hangars syncs with: Flight Schedule Pro, AerScheduler, FlightBridge, Leon, FL3XX">
             <p class="sources_label">Syncs automatically with your scheduling software</p>
             <div class="sources_viewport" aria-hidden="true">
@@ -317,21 +373,27 @@
       </div>
       <div role="tabpanel" class="showcase_panel showcase_panel-next" id="panel-3" aria-labelledby="tab-3" hidden>
         <div class="showcase_panel_head"><h3>An extra set of eyes on every tow</h3><span class="status_pill status_pill-testing">In testing · Ready December 2026</span></div>
-        <p>As aircraft are towed into the hangar, Starlight tracks them and alerts the crew to tight clearances, helping reduce the risk of hangar rash.</p>
-        <ul class="showcase_chips"><li>Live aircraft tracking</li><li>Proximity alerts for the crew</li><li>Every move recorded</li></ul>
+        <p>As aircraft are towed into the hangar, Starlight tracks them and alerts the crew through hangar speakers and lights when clearances get too tight. You set the thresholds, so it only goes off when it matters.</p>
+        <ul class="showcase_chips"><li>Live aircraft tracking</li><li>Alerts only when needed</li><li>Speakers and lights in the hangar</li><li>Nothing mounted on the aircraft</li></ul>
         <div class="showcase_links"><a href="collision-prevention">How hangar rash prevention works →</a></div>
       </div>
       <div role="tabpanel" class="showcase_panel showcase_panel-next" id="panel-4" aria-labelledby="tab-4" hidden>
         <div class="showcase_panel_head"><h3>Let autonomous tugs do the towing</h3><span class="status_pill status_pill-next">In development · June 2027</span></div>
-        <p>Retrofit the tugs you already own and hand them the approved plan, so the same reviewed paths get driven without a wing-walker on every move.</p>
-        <ul class="showcase_chips"><li>Full hangar operation works from the same crew plan</li><li>Fewer people needed per move</li></ul>
+        <p>Retrofit the tugs you already own and hand them the approved plan, so the same reviewed paths get driven fully autonomously. When your crew tows manually, an automatic brake stops the tug before the aircraft makes contact.</p>
+        <ul class="showcase_chips"><li>Fully autonomous moves from the same crew plan</li><li>Automatic braking during manual towing</li><li>Fewer people needed per move</li></ul>
         <div class="showcase_links"><a href="tug-integration">How autonomous tugs work →</a></div>
       </div>
       <div role="tabpanel" class="showcase_panel" id="panel-5" aria-labelledby="tab-5" hidden>
-        <div class="showcase_panel_head"><h3>Investigate any incident</h3></div>
-        <p>Starlight records hangar video when an aircraft is moved or when you record an event manually. Review any recorded event and get multiple camera views to understand exactly what happened during an incident.</p>
-        <ul class="showcase_chips"><li>Recorded when aircraft move, or manually</li><li>Multiple camera views of every event</li><li>Review and export any event</li></ul>
+        <div class="showcase_panel_head"><h3>Replay any move, exactly as it happened</h3></div>
+        <p>Starlight stores a playback of every aircraft move, alongside hangar video recorded when motion is detected or an aircraft is moved. If an incident happens, play it back and see exactly where each aircraft moved and how it moved. Close calls are tracked too, building a hangar safety score you can share with insurers and customers.</p>
+        <ul class="showcase_chips"><li>A playback of every move</li><li>Close calls tracked</li><li>A safety score to share</li></ul>
         <div class="showcase_links"><a href="audit-log">How the audit log works →</a></div>
+      </div>
+      <div role="tabpanel" class="showcase_panel" id="panel-6" aria-labelledby="tab-6" hidden>
+        <div class="showcase_panel_head"><h3>Give owners a live view of their aircraft</h3></div>
+        <p>Aircraft owners can see where their aircraft is in your hangar, get notified when it moves, replay every past move, and see what&rsquo;s planned next. Peace of mind for them, and one more reason to stay or sign with you.</p>
+        <ul class="showcase_chips"><li>Live location in the hangar</li><li>Notified when it moves</li><li>Past and planned moves</li><li>Only their own aircraft</li></ul>
+        <div class="showcase_links"><a href="aircraft-owners">How Owner View works →</a></div>
       </div>
           </div>
         </div>
@@ -363,12 +425,22 @@
           <article class="outcome_card">
             <div class="outcome_card-heading"><span class="outcome_card-number">03</span><span class="status_pill status_pill-testing-dark">In testing · Dec 2026</span></div>
             <h3>Reduce hangar rash risk</h3>
-            <p>Aircraft tracking and proximity alerts help crews reduce hangar rash risk while aircraft move.</p>
+            <p>Aircraft tracking and proximity alerts help crews reduce hangar rash risk while aircraft move. Alerts only go off when it matters, and nothing is ever mounted on the aircraft.</p>
           </article>
           <article class="outcome_card">
             <div class="outcome_card-heading"><span class="outcome_card-number">04</span><span class="status_pill status_pill-next-dark">In development</span></div>
             <h3>Free your staff for higher-value work</h3>
             <p>Autonomous tugs can reduce the manual towing and coordination required from your crew.</p>
+          </article>
+          <article class="outcome_card">
+            <div class="outcome_card-heading"><span class="outcome_card-number">05</span></div>
+            <h3>Give owners peace of mind</h3>
+            <p>Owners can see where their aircraft is, get notified when it moves, and replay every move, giving them one more reason to stay or sign with you.</p>
+          </article>
+          <article class="outcome_card">
+            <div class="outcome_card-heading"><span class="outcome_card-number">06</span></div>
+            <h3>Know exactly what happened</h3>
+            <p>Every move is stored as a playback, so if an incident happens you can see exactly where each aircraft moved and how.</p>
           </article>
         </div>
       </div>
@@ -379,7 +451,7 @@
     </section>
 
     <section class="buyer_wrap" data-bg-type="dark">
-      <div class="home_container buyer_grid"><div><h2 class="section_heading">See what a plan could look like for your operation.</h2></div><div class="buyer_questions"><p>How much time does your crew spend stacking aircraft?</p><p>Could a schedule-aware layout make more floor space usable?</p><p>Which movements create the most friction during the day?</p></div></div>
+      <div class="home_container buyer_grid"><div><h2 class="section_heading">See what a plan could look like for your operation.</h2></div><div class="buyer_questions"><p>How much time does your crew spend stacking aircraft?</p><p>Could a schedule-aware layout make more floor space usable?</p><p>Which movements create the most friction during the day?</p><p>Would owners feel more confident if they could see their aircraft anytime?</p></div></div>
       <div class="home_container closing_cta"><p>Bring your hangar footprint and operating schedule. We’ll walk through the planning workflow with you.</p><a href="#" data-open-contact class="hero_button hero_button-primary">Schedule a Demo</a></div>
     </section>
     <!-- starlight-shared-footer:start -->
@@ -402,6 +474,7 @@
             <a href="collision-prevention" class="starlight-footer_link">Hangar Rash Prevention</a>
             <a href="tug-integration" class="starlight-footer_link">Autonomous Tugs</a>
             <a href="audit-log" class="starlight-footer_link">Audit Log</a>
+            <a href="aircraft-owners" class="starlight-footer_link">Owner View</a>
             <a href="hardware-and-infrastructure" class="starlight-footer_link">System &amp; Installation</a>
             <a href="savings-calculator" class="starlight-footer_link">Savings Calculator</a>
             <a href="about" class="starlight-footer_link">About</a>
@@ -414,7 +487,7 @@
   </main>
 </div>
 <script defer src="./assets/site.js?v=20261106-1"></script>
-<script defer src="./assets/moves.js?v=20261106-1"></script>
+<script defer src="./assets/moves.js?v=20261116-1"></script>
 <script defer src="./assets/showcase.js?v=20261106-4"></script>
 </body>
 </html>

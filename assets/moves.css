@@ -23,3 +23,13 @@
   .moves_side { height: 17rem; }
 }
 @media (prefers-reduced-motion: reduce) { .moves_map img { transition: none; } }
+/* Arrival time corrected by live ADS-B data: planned time struck through, updated time and reason beneath */
+.moves_item em.moves_adsb { text-align: right; line-height: 1.25; }
+.moves_adsb s { margin-right: 0.2rem; color: #8696a6; font-weight: 600; }
+.moves_adsb small { display: block; margin-top: 0.1rem; color: #a5640a; font-size: 0.66rem; font-weight: 800; white-space: nowrap; }
+.moves_item.is-active .moves_adsb s { color: #8696a6; }
+.moves_item.is-active .moves_adsb small { color: #f0c27a; }
+
+/* Homepage list (no room for the ADS-B note): the updated arrival time is highlighted amber instead */
+.moves_item em.moves_time-updated { padding: 0.12rem 0.45rem; border-radius: 6px; background: #fbefd5; color: #7a4f00; }
+.moves_item.is-active em.moves_time-updated { background: rgba(240,194,122,0.2); color: #f0c27a; }

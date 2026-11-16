@@ -64,7 +64,7 @@
 }
   </script>
 <!-- starlight-shared-css:start -->
-<link rel="stylesheet" href="assets/shared.css?v=20261027-2" />
+<link rel="stylesheet" href="assets/shared.css?v=20261116-2" />
 <!-- starlight-shared-css:end -->
 </head>
 <body>
@@ -99,6 +99,9 @@
 
               <div class="snav-dropdown-section-label">Record</div>
               <a href="audit-log" class="snav-dropdown-item">Audit Log</a>
+
+              <div class="snav-dropdown-section-label">For your owners</div>
+              <a href="aircraft-owners" class="snav-dropdown-item">Owner View</a>
             </div>
           </li>
           <li class="snav-item"><a href="hardware-and-infrastructure" class="snav-link snav-system-link">System &amp; Installation</a></li>
@@ -134,6 +137,9 @@
 
             <div class="snav-mobile-section-label">Record</div>
             <a href="audit-log">Audit Log</a>
+
+            <div class="snav-mobile-section-label">For your owners</div>
+            <a href="aircraft-owners">Owner View</a>
           </div>
         </li>
         <li><a href="hardware-and-infrastructure" class="snav-mobile-link snav-system-link">System &amp; Installation</a></li>
@@ -149,7 +155,7 @@
   <section class="hero-c" id="overview">
     <p class="hero-c-eyebrow">Autonomous Tugs <span class="hero-c-status">In development &middot; June 2027</span></p>
     <h1>From approved plan to automated movement</h1>
-    <p class="hero-c-lead">We are developing tug automation to carry out approved aircraft moves and free your crew for higher-value work.</p>
+    <p class="hero-c-lead">We are developing tug automation that carries out approved moves on its own and parks each aircraft with precision, making the most of your hangar space. Tugs can also be operated manually, and are equipped with an auto-brake system that stops them if aircraft get too close.</p>
     <div class="hero-c-actions"><a href="#" data-open-contact class="hero-c-btn hero-c-btn--primary">Schedule a Demo</a><a href="savings-calculator" class="hero-c-btn hero-c-btn--ghost">Savings Calculator</a></div>
     <div class="hero-c-peek" id="demo">
       <figure class="stage-media" data-stage="5-tug-integration">
@@ -181,6 +187,12 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
           </div>
           <p>Reduce time spent towing so your crew can focus on servicing aircraft and supporting customers.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-check">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+          </div>
+          <p><strong>Park with precision</strong> — Autonomous tugs place each aircraft exactly where the plan puts it, so tight layouts hold and more of your hangar space stays usable.</p>
         </div>
       </div>
     </div>
@@ -217,8 +229,8 @@
           <div class="feature-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 4v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z"/><polyline points="10 12 11.5 13.5 14.5 10.5"/></svg>
           </div>
-          <h3>Safety controls</h3>
-          <p>Develop stop controls and coordination with hangar rash prevention alongside tug automation.</p>
+          <h3>Automatic braking</h3>
+          <p>Stop the tug before contact, in both autonomous and manual towing, using the clearances you configure.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">
@@ -243,11 +255,15 @@
         </div>
         <div class="faq-item">
           <button class="faq-question">Can operators switch between manual and autonomous modes? <span class="faq-icon">+</span></button>
-          <div class="faq-answer"><div class="faq-answer-inner">Manual operation and operator takeover are planned. The controls will depend on the tug and its integration.</div></div>
+          <div class="faq-answer"><div class="faq-answer-inner">Yes. The tug can run fully autonomously, and operators can take over and tow manually at any time. Automatic braking stays on in manual mode. The controls will depend on the tug and its integration.</div></div>
         </div>
         <div class="faq-item">
           <button class="faq-question">What safety controls are planned? <span class="faq-icon">+</span></button>
-          <div class="faq-answer"><div class="faq-answer-inner">Stop controls and coordination with hangar rash prevention are being developed. The final control setup will depend on the tug and validation of the integrated system.</div></div>
+          <div class="faq-answer"><div class="faq-answer-inner">Automatic braking stops the tug before the aircraft makes contact, during both autonomous and manual towing. It works with <a href="collision-prevention">hangar rash prevention</a>, so it only steps in at the clearances you set rather than braking constantly. Operators also have stop controls. The final setup will depend on the tug and validation of the integrated system.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Does anything get mounted on the aircraft? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">No. The retrofit goes on the tug, and the sensors are installed once in the hangar. Nothing gets mounted to the aircraft.</div></div>
         </div>
         <div class="faq-item">
           <button class="faq-question">Will it work with my aircraft? <span class="faq-icon">+</span></button>
@@ -288,6 +304,7 @@
             <a href="collision-prevention" class="starlight-footer_link">Hangar Rash Prevention</a>
             <a href="tug-integration" class="starlight-footer_link">Autonomous Tugs</a>
             <a href="audit-log" class="starlight-footer_link">Audit Log</a>
+            <a href="aircraft-owners" class="starlight-footer_link">Owner View</a>
             <a href="hardware-and-infrastructure" class="starlight-footer_link">System &amp; Installation</a>
             <a href="savings-calculator" class="starlight-footer_link">Savings Calculator</a>
             <a href="about" class="starlight-footer_link">About</a>

@@ -14,6 +14,10 @@
       });
     }
 
+    // data-moves-start="end" opens the list scrolled to its last moves (the arrivals, with their ADS-B updates).
+    var list = root.querySelector('.moves_list');
+    if (list && root.getAttribute('data-moves-start') === 'end') list.scrollTop = list.scrollHeight;
+
     buttons.forEach(function (button, index) {
       button.addEventListener('click', function () { show(index); });
     });

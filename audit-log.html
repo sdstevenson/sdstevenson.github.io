@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>Hangar Video Event Log | Starlight Hangars</title>
+  <title>Hangar Audit Log and Move Playback | Starlight Hangars</title>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <link rel="icon" href="./favicon/favicon.ico?v=20261027" sizes="48x48"/>
   <link rel="icon" href="./favicon/favicon.svg?v=20261027" type="image/svg+xml"/>
@@ -24,12 +24,12 @@
   </script>
 
   <!-- Search and sharing metadata -->
-  <meta name="description" content="Record hangar video when an aircraft is moved or when you record an event manually. Review any event and get multiple camera views to understand exactly what happened."/>
+  <meta name="description" content="Starlight stores a playback of every aircraft move, plus hangar video recorded when motion is detected or an aircraft is moved. If an incident happens, replay exactly what happened."/>
   <link rel="canonical" href="https://starlighthangars.com/audit-log"/>
   <meta property="og:site_name" content="Starlight Hangars"/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:title" content="Hangar Video Event Log | Starlight Hangars"/>
-  <meta property="og:description" content="Record hangar video when an aircraft is moved or when you record an event manually. Review any event and get multiple camera views to understand exactly what happened."/>
+  <meta property="og:title" content="Hangar Audit Log and Move Playback | Starlight Hangars"/>
+  <meta property="og:description" content="Starlight stores a playback of every aircraft move, plus hangar video recorded when motion is detected or an aircraft is moved. If an incident happens, replay exactly what happened."/>
   <meta property="og:url" content="https://starlighthangars.com/audit-log"/>
   <meta property="og:type" content="website"/>
   <meta property="og:image" content="https://starlighthangars.com/assets/social/starlight-home.jpg"/>
@@ -37,8 +37,8 @@
   <meta property="og:image:height" content="630"/>
   <meta property="og:image:alt" content="Aircraft parked beside hangars at sunset"/>
   <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:title" content="Hangar Video Event Log | Starlight Hangars"/>
-  <meta name="twitter:description" content="Record hangar video when an aircraft is moved or when you record an event manually. Review any event and get multiple camera views to understand exactly what happened."/>
+  <meta name="twitter:title" content="Hangar Audit Log and Move Playback | Starlight Hangars"/>
+  <meta name="twitter:description" content="Starlight stores a playback of every aircraft move, plus hangar video recorded when motion is detected or an aircraft is moved. If an incident happens, replay exactly what happened."/>
   <meta name="twitter:image" content="https://starlighthangars.com/assets/social/starlight-home.jpg"/>
   <meta name="twitter:image:alt" content="Aircraft parked beside hangars at sunset"/>
   <script type="application/ld+json">
@@ -49,8 +49,8 @@
       "@type": "WebPage",
       "@id": "https://starlighthangars.com/audit-log#webpage",
       "url": "https://starlighthangars.com/audit-log",
-      "name": "Hangar Video Event Log | Starlight Hangars",
-      "description": "Record hangar video when an aircraft is moved or when you record an event manually. Review any event and get multiple camera views to understand exactly what happened.",
+      "name": "Hangar Audit Log and Move Playback | Starlight Hangars",
+      "description": "Starlight stores a playback of every aircraft move, plus hangar video recorded when motion is detected or an aircraft is moved. If an incident happens, replay exactly what happened.",
       "inLanguage": "en-US",
       "isPartOf": {
         "@id": "https://starlighthangars.com/#website"
@@ -63,7 +63,7 @@
 }
   </script>
 <!-- starlight-shared-css:start -->
-<link rel="stylesheet" href="assets/shared.css?v=20261027-2" />
+<link rel="stylesheet" href="assets/shared.css?v=20261116-2" />
 <!-- starlight-shared-css:end -->
   <link rel="stylesheet" href="assets/hero-c.css?v=20261106-8"/>
 </head>
@@ -99,6 +99,9 @@
 
               <div class="snav-dropdown-section-label">Record</div>
               <a href="audit-log" class="snav-dropdown-item">Audit Log</a>
+
+              <div class="snav-dropdown-section-label">For your owners</div>
+              <a href="aircraft-owners" class="snav-dropdown-item">Owner View</a>
             </div>
           </li>
           <li class="snav-item"><a href="hardware-and-infrastructure" class="snav-link snav-system-link">System &amp; Installation</a></li>
@@ -134,6 +137,9 @@
 
             <div class="snav-mobile-section-label">Record</div>
             <a href="audit-log">Audit Log</a>
+
+            <div class="snav-mobile-section-label">For your owners</div>
+            <a href="aircraft-owners">Owner View</a>
           </div>
         </li>
         <li><a href="hardware-and-infrastructure" class="snav-mobile-link snav-system-link">System &amp; Installation</a></li>
@@ -148,8 +154,8 @@
   <!-- HERO -->
   <section class="hero-c" id="overview">
     <p class="hero-c-eyebrow">Audit Log <span class="hero-c-status">Available now</span></p>
-    <h1>See exactly what happened in your hangar</h1>
-    <p class="hero-c-lead">Starlight records hangar video when an aircraft is moved or when you record an event manually. Review any event and get multiple camera views to understand exactly what happened.</p>
+    <h1>Replay any move, exactly as it happened</h1>
+    <p class="hero-c-lead">Starlight stores a playback of every aircraft move, alongside hangar video recorded when motion is detected or an aircraft is moved. If an incident happens, play it back and see exactly where each aircraft moved and how it moved, from multiple camera views.</p>
     <div class="hero-c-actions"><a href="#" data-open-contact class="hero-c-btn hero-c-btn--primary">Schedule a Demo</a><a href="savings-calculator" class="hero-c-btn hero-c-btn--ghost">Savings Calculator</a></div>
     <div class="hero-c-peek" id="demo">
       <figure class="stage-media" data-stage="6-audit-log">
@@ -161,26 +167,26 @@
   </section>
 
   <section class="section-light hero-c-after">
-    <div class="section-inner"><p class="hero-c-caption">Footage is retained and tagged as motion or an aircraft moving, so you can easily review every event in your hangar.</p></div>
+    <div class="section-inner"><p class="hero-c-caption">Footage is tagged as motion or an aircraft moving, and every move is saved as a playback, so you can review any event in your hangar from anywhere.</p></div>
   </section>
 
   <!-- BENEFITS -->
   <section class="section-white" id="why">
     <div class="section-inner">
       <h2 class="section-heading light">Why it matters</h2>
-      <p class="section-subheading light">A video record to support reviews and follow-up.</p>
+      <p class="section-subheading light">A complete record of every move, for reviews, owners, and insurers.</p>
       <div class="benefit-grid">
         <div class="benefit-card">
           <div class="benefit-check">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
           </div>
-          <p><strong>Review what happened</strong> — Use recorded video to look back at activity in your hangar.</p>
+          <p><strong>Know exactly what happened</strong> — If an incident happens, replay the move and see where each aircraft went and how it got there.</p>
         </div>
         <div class="benefit-card">
           <div class="benefit-check">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
           </div>
-          <p><strong>Share events easily</strong> — Export video events for internal reviews or discussions with your insurer.</p>
+          <p><strong>Share events easily</strong> — Export events for internal reviews or discussions with your insurer.</p>
         </div>
         <div class="benefit-card">
           <div class="benefit-check">
@@ -196,21 +202,21 @@
   <section class="section-light" id="features">
     <div class="section-inner">
       <h2 class="section-heading light">Key Features</h2>
-      <p class="section-subheading light">Record, review, export, and retain hangar video events.</p>
+      <p class="section-subheading light">Record, replay, export, and retain every move in your hangar.</p>
       <div class="feature-grid">
         <div class="feature-card">
           <div class="feature-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           </div>
-          <h3>Recorded when aircraft move</h3>
-          <p>Record video events automatically when an aircraft is moved, or record one manually.</p>
+          <h3>A playback of every move</h3>
+          <p>Every aircraft move is stored as a playback showing exactly where each aircraft moved and how it moved.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m7 10 4 4 6-8"/></svg>
           </div>
-          <h3>Manual event recording</h3>
-          <p>Start a video event manually when you want to capture activity.</p>
+          <h3>Recorded on motion and aircraft moves</h3>
+          <p>Video is recorded automatically when motion is detected or an aircraft is moved. You can also start a recording manually.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">
@@ -226,6 +232,20 @@
           <h3>User-chosen retention</h3>
           <p>Retain recorded events for as long as you choose.</p>
         </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+          </div>
+          <h3>Review from anywhere</h3>
+          <p>Review events and playbacks from anywhere, on a phone, tablet, or computer.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <h3>Prove your safety</h3>
+          <p>Close calls are tracked and build a safety score for your hangar that you can share with insurers and customers, giving owners one more reason to sign with you.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -234,11 +254,15 @@
   <section class="faq-section" id="faq">
     <div class="section-inner">
       <h2 class="section-heading" style="text-align:center; margin-bottom:0.5rem;">Frequently Asked Questions</h2>
-      <p class="section-subheading" style="max-width:560px; margin:0 auto 3rem; text-align:center;">Answers about video recording, exports, and retention.</p>
+      <p class="section-subheading" style="max-width:560px; margin:0 auto 3rem; text-align:center;">Answers about move playback, video recording, exports, and retention.</p>
       <div class="faq-list" id="faq-list">
         <div class="faq-item">
           <button class="faq-question">What triggers a recording? <span class="faq-icon">+</span></button>
-          <div class="faq-answer"><div class="faq-answer-inner">Video events are recorded when an aircraft is moved or when a user records an event manually.</div></div>
+          <div class="faq-answer"><div class="faq-answer-inner">Video is recorded automatically when motion is detected or an aircraft is moved, and a user can also record an event manually. Every aircraft move is also stored as a playback.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">What does a move playback show? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Exactly where each aircraft moved and how it moved, from start to finish. If an incident happens, you can play it back alongside the camera footage and see exactly what happened.</div></div>
         </div>
         <div class="faq-item">
           <button class="faq-question">Can I export recorded events? <span class="faq-icon">+</span></button>
@@ -249,8 +273,20 @@
           <div class="faq-answer"><div class="faq-answer-inner">You choose how long recorded events are retained.</div></div>
         </div>
         <div class="faq-item">
+          <button class="faq-question">What counts as a close call? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Any time aircraft get closer than the clearance you configure. Each close call is logged with its playback, so you can see exactly what happened.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Who can I share my hangar safety score with? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Anyone you choose. Share it with your insurer to support a review, or with current and prospective customers to show them how safely your hangar operates.</div></div>
+        </div>
+        <div class="faq-item">
           <button class="faq-question">Can I share recordings with my insurer? <span class="faq-icon">+</span></button>
           <div class="faq-answer"><div class="faq-answer-inner">Yes. You can export events to share with your insurer as supporting information for a review.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Can I review events from anywhere? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><div class="faq-answer-inner">Yes. Events and playbacks can be reviewed from anywhere, on a phone, tablet, or computer. Aircraft owners can also replay the moves of their own aircraft with <a href="aircraft-owners">Owner View</a>.</div></div>
         </div>
       </div>
     </div>
@@ -258,8 +294,8 @@
 
   <!-- CTA -->
   <div class="cta-strip">
-    <h2>See your hangar video history in action.</h2>
-    <p>Schedule a demo to see event recording, review, and export.</p>
+    <h2>See your hangar history in action.</h2>
+    <p>Schedule a demo to see move playback, video events, and exports.</p>
     <a href="#" data-open-contact class="btn-primary">Schedule a Demo</a>
   </div>
 
@@ -283,6 +319,7 @@
             <a href="collision-prevention" class="starlight-footer_link">Hangar Rash Prevention</a>
             <a href="tug-integration" class="starlight-footer_link">Autonomous Tugs</a>
             <a href="audit-log" class="starlight-footer_link">Audit Log</a>
+            <a href="aircraft-owners" class="starlight-footer_link">Owner View</a>
             <a href="hardware-and-infrastructure" class="starlight-footer_link">System &amp; Installation</a>
             <a href="savings-calculator" class="starlight-footer_link">Savings Calculator</a>
             <a href="about" class="starlight-footer_link">About</a>

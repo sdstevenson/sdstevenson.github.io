@@ -438,3 +438,23 @@
         .snav-hamburger { display: flex; }
         .snav-inner { padding: 1rem 1.25rem; }
       }
+
+/* Links: no browser blue/purple, visited or not. :where() keeps this at zero specificity, so every
+   styled link (nav, buttons, cards) keeps its own color. Author color rules also cover :visited. */
+:where(a) { color: inherit; }
+
+/* Inline text links inside body copy and FAQ answers: inherit the text color, thin underline. */
+:is(p, .faq-answer-inner) a:not([class]) {
+  font-weight: 600;
+  text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em;
+  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+}
+:is(p, .faq-answer-inner) a:not([class]):hover { text-decoration-color: currentColor; }
+
+/* Feature status inside body copy, e.g. "In development · June 2027" (light sections) */
+.status-tag {
+  display: inline-flex; align-items: center; gap: 0.35rem; margin: 0 0.15rem; padding: 0.2rem 0.55rem 0.14rem;
+  border-radius: 999px; background: #fff; color: #4F7186; box-shadow: inset 0 0 0 1px rgba(7,20,36,0.12);
+  font-size: 0.62rem; font-weight: 800; letter-spacing: 0.08em; line-height: 1.3; text-transform: uppercase; vertical-align: 0.12em; white-space: nowrap;
+}
+.status-tag::before { content: ""; width: 0.36rem; height: 0.36rem; border-radius: 50%; background: currentColor; }
