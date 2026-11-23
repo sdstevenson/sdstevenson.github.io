@@ -276,7 +276,7 @@ function initSharedNavBehavior(navHeader) {
 const STARLIGHT_LEAD_CONFIG = {
   endpoint: 'https://script.google.com/macros/s/AKfycbzSEcFErRWW_2QhX6dk4BJoszFCDYV-rr04mYynaqVpjOcL32vyET8I8i3ZIvtc4-Evgg/exec',
   legacyFormUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSeESQcxH3hDUXmJm-tc7mCYc3_EB9Ef9Iv3A_ha_a9wWfpoYg/formResponse',
-  fallbackEmail: '',   // offered as a mailto link when sending fails
+  fallbackEmail: 'info@starlighthangars.com',   // offered as a mailto link when sending fails
   minFillMs: 3000,     // faster submissions are treated as bots
   timeoutMs: 20000,
 };
@@ -410,6 +410,7 @@ function initSharedComponents() {
         <div class="starlight-modal-inner">
           <h2 class="starlight-modal-title" id="starlight-modal-title">Schedule a Demo</h2>
           <p class="starlight-modal-intro" id="starlight-modal-intro">Tell us a little about your operation and we’ll follow up to set up a walkthrough.</p>
+          <p class="starlight-modal-alt">Prefer email? <a href="mailto:${STARLIGHT_LEAD_CONFIG.fallbackEmail}?subject=Starlight%20Hangars%20demo%20request">${STARLIGHT_LEAD_CONFIG.fallbackEmail}</a></p>
           <div class="starlight-modal-divider"></div>
           <form id="starlight-contact-form" class="starlight-modal-form" novalidate>
             <div class="starlight-field-grid">${[

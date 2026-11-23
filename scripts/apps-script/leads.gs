@@ -25,7 +25,7 @@
  */
 
 const SHEET_NAME = 'Leads';
-const NOTIFY_EMAIL = '';
+const NOTIFY_EMAIL = 'info@starlighthangars.com';
 const MIN_FILL_MS = 3000;   // matches STARLIGHT_LEAD_CONFIG.minFillMs in assets/site.js
 const MAX_FIELD_LENGTH = 2000;
 

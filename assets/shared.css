@@ -83,6 +83,8 @@
         line-height: 1.5;
         color: #4A5A6A;
       }
+      .starlight-modal-alt { margin: -0.5rem 0 1.25rem; font-size: 0.875rem; color: #4A5A6A; }
+      .starlight-modal-alt a { color: inherit; font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
       .starlight-modal-divider { height: 1px; background: rgba(7,20,36,0.1); margin: 0 0 1.25rem; }
       .starlight-modal-form { display: flex; flex-direction: column; gap: 1.1rem; }
       .starlight-modal-form[hidden], .starlight-modal-success[hidden], .starlight-field-error[hidden] { display: none; }
